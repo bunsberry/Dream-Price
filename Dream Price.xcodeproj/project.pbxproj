@@ -73,10 +73,6 @@
 		841BDAB924BCC3570096BF68 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8447A83224BCCAE8005F448B /* BudgetVC.swift */,
-				8447A83424BCCB04005F448B /* ProjectsVC.swift */,
-				8447A83624BCCB18005F448B /* HistoryVC.swift */,
-				8447A83824BCCB27005F448B /* DreamsVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -84,6 +80,10 @@
 		841BDABA24BCC35C0096BF68 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				8447A83224BCCAE8005F448B /* BudgetVC.swift */,
+				8447A83424BCCB04005F448B /* ProjectsVC.swift */,
+				8447A83624BCCB18005F448B /* HistoryVC.swift */,
+				8447A83824BCCB27005F448B /* DreamsVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
