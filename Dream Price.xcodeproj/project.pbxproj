@@ -3,27 +3,43 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		841BDABF24BCC4330096BF68 /* Projects.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 841BDABE24BCC4330096BF68 /* Projects.storyboard */; };
+		841BDAC124BCC7970096BF68 /* History.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 841BDAC024BCC7970096BF68 /* History.storyboard */; };
+		841BDAC324BCC8260096BF68 /* Dreams.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 841BDAC224BCC8260096BF68 /* Dreams.storyboard */; };
 		843688BB24BCC0A500793B2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843688BA24BCC0A500793B2B /* AppDelegate.swift */; };
 		843688BD24BCC0A500793B2B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843688BC24BCC0A500793B2B /* SceneDelegate.swift */; };
-		843688BF24BCC0A500793B2B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843688BE24BCC0A500793B2B /* ViewController.swift */; };
 		843688C224BCC0A500793B2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 843688C024BCC0A500793B2B /* Main.storyboard */; };
 		843688C424BCC0A800793B2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 843688C324BCC0A800793B2B /* Assets.xcassets */; };
 		843688C724BCC0A800793B2B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 843688C524BCC0A800793B2B /* LaunchScreen.storyboard */; };
+		8447A83324BCCAE8005F448B /* BudgetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8447A83224BCCAE8005F448B /* BudgetVC.swift */; };
+		8447A83524BCCB04005F448B /* ProjectsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8447A83424BCCB04005F448B /* ProjectsVC.swift */; };
+		8447A83724BCCB18005F448B /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8447A83624BCCB18005F448B /* HistoryVC.swift */; };
+		8447A83924BCCB27005F448B /* DreamsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8447A83824BCCB27005F448B /* DreamsVC.swift */; };
+		A8B42966B8E95C52767D58D5 /* Pods_Dream_Price.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C95879CF6685A037493194E /* Pods_Dream_Price.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6C95879CF6685A037493194E /* Pods_Dream_Price.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dream_Price.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		841BDABE24BCC4330096BF68 /* Projects.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Projects.storyboard; sourceTree = "<group>"; };
+		841BDAC024BCC7970096BF68 /* History.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = History.storyboard; sourceTree = "<group>"; };
+		841BDAC224BCC8260096BF68 /* Dreams.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Dreams.storyboard; sourceTree = "<group>"; };
 		843688B724BCC0A500793B2B /* Dream Price.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dream Price.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		843688BA24BCC0A500793B2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		843688BC24BCC0A500793B2B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		843688BE24BCC0A500793B2B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		843688C124BCC0A500793B2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		843688C324BCC0A800793B2B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		843688C624BCC0A800793B2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		843688C824BCC0A800793B2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8447A83224BCCAE8005F448B /* BudgetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetVC.swift; sourceTree = "<group>"; };
+		8447A83424BCCB04005F448B /* ProjectsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsVC.swift; sourceTree = "<group>"; };
+		8447A83624BCCB18005F448B /* HistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
+		8447A83824BCCB27005F448B /* DreamsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DreamsVC.swift; sourceTree = "<group>"; };
+		DA964BD56361E3E20F7A72E2 /* Pods-Dream Price.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dream Price.release.xcconfig"; path = "Target Support Files/Pods-Dream Price/Pods-Dream Price.release.xcconfig"; sourceTree = "<group>"; };
+		EF6C68EB6CEB36E0454ABD8C /* Pods-Dream Price.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dream Price.debug.xcconfig"; path = "Target Support Files/Pods-Dream Price/Pods-Dream Price.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +47,75 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8B42966B8E95C52767D58D5 /* Pods_Dream_Price.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		626B7057FC512E5F1D86E694 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EF6C68EB6CEB36E0454ABD8C /* Pods-Dream Price.debug.xcconfig */,
+				DA964BD56361E3E20F7A72E2 /* Pods-Dream Price.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		841BDAB824BCC3500096BF68 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		841BDAB924BCC3570096BF68 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8447A83224BCCAE8005F448B /* BudgetVC.swift */,
+				8447A83424BCCB04005F448B /* ProjectsVC.swift */,
+				8447A83624BCCB18005F448B /* HistoryVC.swift */,
+				8447A83824BCCB27005F448B /* DreamsVC.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		841BDABA24BCC35C0096BF68 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		841BDABB24BCC3620096BF68 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		841BDABC24BCC37A0096BF68 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
+		841BDABD24BCC3BF0096BF68 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
 		843688AE24BCC0A500793B2B = {
 			isa = PBXGroup;
 			children = (
 				843688B924BCC0A500793B2B /* Dream Price */,
 				843688B824BCC0A500793B2B /* Products */,
+				626B7057FC512E5F1D86E694 /* Pods */,
+				FBC4D99E871B5FD8E3C67E18 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +130,31 @@
 		843688B924BCC0A500793B2B /* Dream Price */ = {
 			isa = PBXGroup;
 			children = (
+				841BDABD24BCC3BF0096BF68 /* Other */,
+				841BDABC24BCC37A0096BF68 /* Realm */,
+				841BDABB24BCC3620096BF68 /* Extensions */,
+				841BDABA24BCC35C0096BF68 /* Controller */,
+				841BDAB924BCC3570096BF68 /* View */,
+				841BDAB824BCC3500096BF68 /* Model */,
 				843688BA24BCC0A500793B2B /* AppDelegate.swift */,
 				843688BC24BCC0A500793B2B /* SceneDelegate.swift */,
-				843688BE24BCC0A500793B2B /* ViewController.swift */,
 				843688C024BCC0A500793B2B /* Main.storyboard */,
+				841BDAC224BCC8260096BF68 /* Dreams.storyboard */,
+				841BDAC024BCC7970096BF68 /* History.storyboard */,
+				841BDABE24BCC4330096BF68 /* Projects.storyboard */,
 				843688C324BCC0A800793B2B /* Assets.xcassets */,
 				843688C524BCC0A800793B2B /* LaunchScreen.storyboard */,
 				843688C824BCC0A800793B2B /* Info.plist */,
 			);
 			path = "Dream Price";
+			sourceTree = "<group>";
+		};
+		FBC4D99E871B5FD8E3C67E18 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6C95879CF6685A037493194E /* Pods_Dream_Price.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +164,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 843688CB24BCC0A800793B2B /* Build configuration list for PBXNativeTarget "Dream Price" */;
 			buildPhases = (
+				31B03A55F9735D88C7462D35 /* [CP] Check Pods Manifest.lock */,
 				843688B324BCC0A500793B2B /* Sources */,
 				843688B424BCC0A500793B2B /* Frameworks */,
 				843688B524BCC0A500793B2B /* Resources */,
+				5EA8CF4677DC2CD7C7E0366C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -127,19 +219,67 @@
 				843688C724BCC0A800793B2B /* LaunchScreen.storyboard in Resources */,
 				843688C424BCC0A800793B2B /* Assets.xcassets in Resources */,
 				843688C224BCC0A500793B2B /* Main.storyboard in Resources */,
+				841BDAC124BCC7970096BF68 /* History.storyboard in Resources */,
+				841BDAC324BCC8260096BF68 /* Dreams.storyboard in Resources */,
+				841BDABF24BCC4330096BF68 /* Projects.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		31B03A55F9735D88C7462D35 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Dream Price-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5EA8CF4677DC2CD7C7E0366C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Dream Price/Pods-Dream Price-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Dream Price/Pods-Dream Price-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Dream Price/Pods-Dream Price-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		843688B324BCC0A500793B2B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				843688BF24BCC0A500793B2B /* ViewController.swift in Sources */,
 				843688BB24BCC0A500793B2B /* AppDelegate.swift in Sources */,
+				8447A83724BCCB18005F448B /* HistoryVC.swift in Sources */,
+				8447A83924BCCB27005F448B /* DreamsVC.swift in Sources */,
 				843688BD24BCC0A500793B2B /* SceneDelegate.swift in Sources */,
+				8447A83524BCCB04005F448B /* ProjectsVC.swift in Sources */,
+				8447A83324BCCAE8005F448B /* BudgetVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,7 +356,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -271,7 +411,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -283,6 +423,7 @@
 		};
 		843688CC24BCC0A800793B2B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EF6C68EB6CEB36E0454ABD8C /* Pods-Dream Price.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -302,6 +443,7 @@
 		};
 		843688CD24BCC0A800793B2B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DA964BD56361E3E20F7A72E2 /* Pods-Dream Price.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
