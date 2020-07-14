@@ -7,7 +7,11 @@
 
 import UIKit
 
-class BudgetPVC: UIPageViewController {
+protocol CategoriesDelegate {
+    func updateCategories(transaction: String)
+}
+
+class BudgetPVC: UIPageViewController, TransportDelegate {
     
     let pagesData: [BudgetItem] = [
         BudgetItem(type: .project, balance: 25, name: "Проект 1"),
@@ -15,6 +19,8 @@ class BudgetPVC: UIPageViewController {
         BudgetItem(type: .personal, balance: 25680, name: "Личный Счёт"),
         BudgetItem(type: .dream, balance: 23000, name: "Мечта")
     ]
+    
+    var categoriesDelegate: CategoriesDelegate?
     
     var currentIndex: Int = 0
     var starterIndex: Int = 0
@@ -30,6 +36,8 @@ class BudgetPVC: UIPageViewController {
         self.dataSource = self
         self.delegate = self
         
+        BudgetItemDataVC.delegate = self
+        
         for (index, page) in pagesData.enumerated() {
             if page.type == .personal {
                 starterIndex = index
@@ -39,6 +47,10 @@ class BudgetPVC: UIPageViewController {
         if let vc = self.pageViewController(for: starterIndex) {
             self.setViewControllers([vc], direction: .forward, animated: true, completion: nil)
         }
+    }
+    
+    func transport(string: String) {
+        categoriesDelegate?.updateCategories(transaction: string)
     }
     
     func pageViewController(for index: Int) -> BudgetItemDataVC? {

@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol TransportDelegate {
+    func transport(string: String)
+}
+
 class BudgetItemDataVC: UIViewController {
 
     @IBOutlet weak var balanceLabel: UILabel!
@@ -16,7 +20,9 @@ class BudgetItemDataVC: UIViewController {
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var budgetItemNameLabel: UILabel!
     
-    public static var transactionSymbol = "-"
+    public static var currentTransaction = "-"
+    
+    public static var delegate: TransportDelegate?
     
     var balanceLabelText: String?
     var nameLabelText: String?
@@ -42,28 +48,34 @@ class BudgetItemDataVC: UIViewController {
         
         gradient.cornerRadius = 15
         gradient.locations = [0.0 , 1.0]
-        gradient.startPoint = CGPoint(x: 0.0, y: 0.0)
-        gradient.endPoint = CGPoint(x: 0.0, y: 1.0)
+        gradient.startPoint = CGPoint(x: 0.6, y: 0.0)
+        gradient.endPoint = CGPoint(x: 0.4, y: 1.0)
         gradient.frame = CGRect(x: 0.0,
                                 y: 0.0,
-                                width: self.budgetItemView.frame.size.width,
-                                height: self.budgetItemView.frame.size.height)
+                                width: self.view.frame.size.width * 0.75,
+                                height: self.view.frame.size.width * 0.75 / 2)
 
         self.budgetItemView.layer.insertSublayer(gradient, at: 0)
         
-        
+        self.budgetItemView.layer.shadowColor = UIColor.secondaryLabel.cgColor
+        self.budgetItemView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        self.budgetItemView.layer.shadowRadius = CGFloat(12)
+        self.budgetItemView.layer.shadowOpacity = 0.25
         
     }
     
     @IBAction func changeTransaction(_ sender: Any) {
         
         if changeTransactionButton.title(for: .normal) == "-" {
-            BudgetItemDataVC.transactionSymbol = "+"
+            BudgetItemDataVC.currentTransaction = "+"
         } else {
-            BudgetItemDataVC.transactionSymbol = "-"
+            BudgetItemDataVC.currentTransaction = "-"
         }
         
-        changeTransactionButton.setTitle(BudgetItemDataVC.transactionSymbol, for: .normal)
+        print("Changed transaction to: \(BudgetItemDataVC.currentTransaction)")
+        
+        changeTransactionButton.setTitle(BudgetItemDataVC.currentTransaction, for: .normal)
+        BudgetItemDataVC.delegate?.transport(string: BudgetItemDataVC.currentTransaction)
     }
     
 }
