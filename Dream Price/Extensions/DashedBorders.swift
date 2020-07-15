@@ -17,11 +17,24 @@ extension UIView {
         shapeLayer.position = CGPoint(x: frameSize.width/2, y: frameSize.height/2)
         shapeLayer.fillColor = UIColor.clear.cgColor
         shapeLayer.strokeColor = color.cgColor
-        shapeLayer.lineWidth = 1
+        shapeLayer.lineWidth = 2
         shapeLayer.lineJoin = CAShapeLayerLineJoin.round
         shapeLayer.lineDashPattern = [6,3]
-        shapeLayer.path = UIBezierPath(roundedRect: shapeRect, cornerRadius: 25).cgPath
+        shapeLayer.path = UIBezierPath(roundedRect: shapeRect, cornerRadius: 0).cgPath
 
         self.layer.addSublayer(shapeLayer)
+    }
+    
+    func addDashedBorder() {
+        let rect = CGRect.init(origin: CGPoint.init(x: 0, y: 0), size: CGSize.init(width: 119, height: 50))
+        
+        let layer = CAShapeLayer.init()
+        let path = UIBezierPath(roundedRect: rect, cornerRadius: 10)
+        layer.path = path.cgPath;
+        layer.strokeColor = UIColor.secondaryLabel.cgColor;
+        layer.lineDashPattern = [6,3];
+        layer.backgroundColor = UIColor.clear.cgColor;
+        layer.fillColor = UIColor.clear.cgColor;
+        self.layer.addSublayer(layer);
     }
 }

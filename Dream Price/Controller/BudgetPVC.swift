@@ -9,9 +9,15 @@ import UIKit
 
 protocol CategoriesDelegate {
     func updateCategories(transaction: String)
+    func deselectWith(number: Float)
 }
 
-class BudgetPVC: UIPageViewController, TransportDelegate {
+protocol KeyboardDelegate {
+    func updateTransaction(action: String)
+    func clearTransaction()
+}
+
+class BudgetPVC: UIPageViewController, TransportDelegate, TransportUpDelegate {
     
     let pagesData: [BudgetItem] = [
         BudgetItem(type: .project, balance: 25, name: "Проект 1"),
@@ -21,6 +27,7 @@ class BudgetPVC: UIPageViewController, TransportDelegate {
     ]
     
     var categoriesDelegate: CategoriesDelegate?
+    public static var keyboardDelegate: KeyboardDelegate?
     
     var currentIndex: Int = 0
     var starterIndex: Int = 0
@@ -37,6 +44,7 @@ class BudgetPVC: UIPageViewController, TransportDelegate {
         self.delegate = self
         
         BudgetItemDataVC.delegate = self
+        BudgetVC.delegateUp = self
         
         for (index, page) in pagesData.enumerated() {
             if page.type == .personal {
@@ -51,6 +59,15 @@ class BudgetPVC: UIPageViewController, TransportDelegate {
     
     func transport(string: String) {
         categoriesDelegate?.updateCategories(transaction: string)
+    }
+    
+    func transportUp(string: String) {
+        print("Transporting Up")
+        BudgetPVC.keyboardDelegate?.updateTransaction(action: string)
+    }
+    
+    func transportPageChanged() {
+        BudgetPVC.keyboardDelegate?.clearTransaction()
     }
     
     func pageViewController(for index: Int) -> BudgetItemDataVC? {
@@ -101,13 +118,15 @@ extension BudgetPVC: UIPageViewControllerDataSource, UIPageViewControllerDelegat
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         let index = ((viewController as? BudgetItemDataVC)?.index ?? 0) - 1
-        
+        transport(string: ((viewController as? BudgetItemDataVC)?.changeTransactionButton.title(for: .normal))!)
+        transportPageChanged()
         return self.pageViewController(for: index)
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         let index = ((viewController as? BudgetItemDataVC)?.index ?? 0) + 1
-        
+        transport(string: ((viewController as? BudgetItemDataVC)?.changeTransactionButton.title(for: .normal))!)
+        transportPageChanged()
         return self.pageViewController(for: index)
     }
     

@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol TransportUpDelegate {
+    func transportUp(string: String)
+    func transportPageChanged()
+}
+
 class BudgetVC: UIViewController, CategoriesDelegate {
     
     let categories: [Category] = [
@@ -21,6 +26,8 @@ class BudgetVC: UIViewController, CategoriesDelegate {
     var categoriesShown: [Category] = []
 
     public static var currentTransaction: String = "-"
+    
+    public static var delegateUp: TransportUpDelegate?
     
     @IBOutlet weak var budgetsViewContainer: UIView!
     @IBOutlet weak var categoriesCollectionView: UICollectionView!
@@ -38,8 +45,6 @@ class BudgetVC: UIViewController, CategoriesDelegate {
     }
     
     func updateCategories(transaction: String) {
-        print("Started updating categories")
-        
         categoriesShown.removeAll()
         
         switch transaction {
@@ -61,7 +66,44 @@ class BudgetVC: UIViewController, CategoriesDelegate {
         }
         
         categoriesCollectionView.reloadData()
-        print("Categories Reloaded")
     }
+    
+}
 
+// Buttons Interaction
+
+extension BudgetVC {
+    
+    @IBAction func numberOneButton(_ sender: Any) { sendAction(action: "1") }
+    
+    @IBAction func numberTwoButton(_ sender: Any) { sendAction(action: "2") }
+    
+    @IBAction func numberThreeButton(_ sender: Any) { sendAction(action: "3") }
+    
+    @IBAction func numberFourButton(_ sender: Any) { sendAction(action: "4") }
+    
+    @IBAction func numberFiveButton(_ sender: Any) { sendAction(action: "5") }
+    
+    @IBAction func numberSixButton(_ sender: Any) { sendAction(action: "6") }
+    
+    @IBAction func numberSevenButton(_ sender: Any) { sendAction(action: "7") }
+    
+    @IBAction func numberEightButton(_ sender: Any) { sendAction(action: "8") }
+    
+    @IBAction func numberNineButton(_ sender: Any) { sendAction(action: "9") }
+    
+    @IBAction func deleteButton(_ sender: Any) { sendAction(action: "-") }
+    
+    @IBAction func numberZeroButton(_ sender: Any) { sendAction(action: "0") }
+    
+    @IBAction func doneButton(_ sender: Any) { sendAction(action: "+") }
+    
+    func sendAction(action: String) {
+        print("Sending Action")
+        BudgetVC.delegateUp?.transportUp(string: action)
+    }
+    
+    func deselectWith(number: Float) {
+        print("Collection view deselected")
+    }
 }

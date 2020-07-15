@@ -22,19 +22,30 @@ extension BudgetVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "category", for: indexPath) as! CategoryCell
         
-        cell.categoryView.layer.borderWidth = 1
-        cell.categoryView.layer.borderColor = UIColor.secondaryLabel.cgColor
-        cell.categoryView.layer.cornerRadius = 25
-        cell.titleLabel.text = categoriesShown[indexPath.row].title
-        cell.titleLabel.textColor = UIColor.secondaryLabel
-        
-        if categoriesShown[indexPath.row].type == .budget {
-            cell.categoryView.layer.cornerRadius = 10
+        if categoriesShown[indexPath.row].type == .manage {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "manageCategories", for: indexPath) as! ManageCategoriesCell
+            
+            cell.manageView.addDashedBorder(color: UIColor.secondaryLabel)
+            cell.manageButton.setTitleColor(UIColor.secondaryLabel, for: .normal)
+            
+            return cell
+            
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "category", for: indexPath) as! CategoryCell
+            
+            cell.categoryView.layer.borderWidth = 1
+            cell.categoryView.layer.borderColor = UIColor.secondaryLabel.cgColor
+            cell.categoryView.layer.cornerRadius = 25
+            cell.titleLabel.text = categoriesShown[indexPath.row].title
+            cell.titleLabel.textColor = UIColor.secondaryLabel
+            
+            if categoriesShown[indexPath.row].type == .budget {
+                cell.categoryView.layer.cornerRadius = 10
+            }
+            
+            return cell
         }
-        
-        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

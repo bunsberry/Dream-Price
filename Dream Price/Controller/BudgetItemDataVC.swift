@@ -11,7 +11,7 @@ protocol TransportDelegate {
     func transport(string: String)
 }
 
-class BudgetItemDataVC: UIViewController {
+class BudgetItemDataVC: UIViewController, KeyboardDelegate {
 
     @IBOutlet weak var balanceLabel: UILabel!
     @IBOutlet weak var budgetItemView: UIView!
@@ -31,6 +31,8 @@ class BudgetItemDataVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        BudgetPVC.keyboardDelegate = self
         
         changeTransactionButton.setTitle("-", for: .normal)
         self.balanceLabel.text = balanceLabelText
@@ -64,6 +66,55 @@ class BudgetItemDataVC: UIViewController {
         
     }
     
+    func clearTransaction() {
+        transactionLabel.text! = "0"
+        transactionLabel.font = transactionLabel.font.withSize(64)
+    }
+    
+    func updateTransaction(action: String) {
+        print("Updating transaction")
+        switch action {
+        case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9":
+            if transactionLabel.text?.count == 7 { return }
+            
+            if transactionLabel.text == "0" {
+                transactionLabel.text! = action
+            } else {
+                transactionLabel.text! += action
+            }
+        case "-":
+            if transactionLabel.text?.count == 1 {
+                transactionLabel.text =  "0"
+            } else {
+                transactionLabel.text!.removeLast()
+            }
+        case "+":
+            if transactionLabel.text == "0" {
+                return
+            } else {
+                transactionLabel.text! = "0"
+                print("Transaction sent")
+            }
+        default:
+            print("Transaction switch failed")
+        }
+        
+        switch transactionLabel.text?.count {
+        case 1, 2, 3:
+            transactionLabel.font = transactionLabel.font.withSize(64)
+        case 4:
+            transactionLabel.font = transactionLabel.font.withSize(56)
+        case 5:
+            transactionLabel.font = transactionLabel.font.withSize(48)
+        case 6:
+            transactionLabel.font = transactionLabel.font.withSize(42)
+        case 7:
+            transactionLabel.font = transactionLabel.font.withSize(36)
+        default:
+            transactionLabel.font = transactionLabel.font.withSize(64)
+        }
+    }
+    
     @IBAction func changeTransaction(_ sender: Any) {
         
         if changeTransactionButton.title(for: .normal) == "-" {
@@ -71,9 +122,7 @@ class BudgetItemDataVC: UIViewController {
         } else {
             BudgetItemDataVC.currentTransaction = "-"
         }
-        
-        print("Changed transaction to: \(BudgetItemDataVC.currentTransaction)")
-        
+                
         changeTransactionButton.setTitle(BudgetItemDataVC.currentTransaction, for: .normal)
         BudgetItemDataVC.delegate?.transport(string: BudgetItemDataVC.currentTransaction)
     }
