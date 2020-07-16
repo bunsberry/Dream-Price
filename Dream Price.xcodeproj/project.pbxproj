@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C50D13E24BF627F00262FC8 /* MainDreamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C50D13D24BF627F00262FC8 /* MainDreamCell.swift */; };
+		3C50D14024BF62A500262FC8 /* DreamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C50D13F24BF62A500262FC8 /* DreamCell.swift */; };
+		3CAEEB0A24BEED6700B3AA73 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4AD6E44DA3BB636CABF6FE90 /* Pods_Dream_Price.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64D15A556168BB4FFD3083D1 /* Pods_Dream_Price.framework */; };
 		841BDABF24BCC4330096BF68 /* Projects.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 841BDABE24BCC4330096BF68 /* Projects.storyboard */; };
 		841BDAC124BCC7970096BF68 /* History.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 841BDAC024BCC7970096BF68 /* History.storyboard */; };
 		841BDAC324BCC8260096BF68 /* Dreams.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 841BDAC224BCC8260096BF68 /* Dreams.storyboard */; };
@@ -19,11 +23,27 @@
 		8447A83524BCCB04005F448B /* ProjectsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8447A83424BCCB04005F448B /* ProjectsVC.swift */; };
 		8447A83724BCCB18005F448B /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8447A83624BCCB18005F448B /* HistoryVC.swift */; };
 		8447A83924BCCB27005F448B /* DreamsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8447A83824BCCB27005F448B /* DreamsVC.swift */; };
-		A8B42966B8E95C52767D58D5 /* Pods_Dream_Price.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C95879CF6685A037493194E /* Pods_Dream_Price.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		3CAEEB0B24BEED6700B3AA73 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3CAEEB0A24BEED6700B3AA73 /* (null) in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		6C95879CF6685A037493194E /* Pods_Dream_Price.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dream_Price.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C50D13D24BF627F00262FC8 /* MainDreamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainDreamCell.swift; path = "Dream Price/View/MainDreamCell.swift"; sourceTree = SOURCE_ROOT; };
+		3C50D13F24BF62A500262FC8 /* DreamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DreamCell.swift; path = "/Users/valeriy/Documents/xcode/Dream-Price/Dream Price/View/DreamCell.swift"; sourceTree = "<absolute>"; };
+		4FE768D486D0025D8B4A2A61 /* Pods-Dream Price.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dream Price.release.xcconfig"; path = "Target Support Files/Pods-Dream Price/Pods-Dream Price.release.xcconfig"; sourceTree = "<group>"; };
+		64D15A556168BB4FFD3083D1 /* Pods_Dream_Price.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dream_Price.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		841BDABE24BCC4330096BF68 /* Projects.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Projects.storyboard; sourceTree = "<group>"; };
 		841BDAC024BCC7970096BF68 /* History.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = History.storyboard; sourceTree = "<group>"; };
 		841BDAC224BCC8260096BF68 /* Dreams.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Dreams.storyboard; sourceTree = "<group>"; };
@@ -38,8 +58,7 @@
 		8447A83424BCCB04005F448B /* ProjectsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsVC.swift; sourceTree = "<group>"; };
 		8447A83624BCCB18005F448B /* HistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
 		8447A83824BCCB27005F448B /* DreamsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DreamsVC.swift; sourceTree = "<group>"; };
-		DA964BD56361E3E20F7A72E2 /* Pods-Dream Price.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dream Price.release.xcconfig"; path = "Target Support Files/Pods-Dream Price/Pods-Dream Price.release.xcconfig"; sourceTree = "<group>"; };
-		EF6C68EB6CEB36E0454ABD8C /* Pods-Dream Price.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dream Price.debug.xcconfig"; path = "Target Support Files/Pods-Dream Price/Pods-Dream Price.debug.xcconfig"; sourceTree = "<group>"; };
+		DFF618B46E3DECA0004150C6 /* Pods-Dream Price.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dream Price.debug.xcconfig"; path = "Target Support Files/Pods-Dream Price/Pods-Dream Price.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,7 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A8B42966B8E95C52767D58D5 /* Pods_Dream_Price.framework in Frameworks */,
+				4AD6E44DA3BB636CABF6FE90 /* Pods_Dream_Price.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,8 +76,8 @@
 		626B7057FC512E5F1D86E694 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				EF6C68EB6CEB36E0454ABD8C /* Pods-Dream Price.debug.xcconfig */,
-				DA964BD56361E3E20F7A72E2 /* Pods-Dream Price.release.xcconfig */,
+				DFF618B46E3DECA0004150C6 /* Pods-Dream Price.debug.xcconfig */,
+				4FE768D486D0025D8B4A2A61 /* Pods-Dream Price.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -73,10 +92,8 @@
 		841BDAB924BCC3570096BF68 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8447A83224BCCAE8005F448B /* BudgetVC.swift */,
-				8447A83424BCCB04005F448B /* ProjectsVC.swift */,
-				8447A83624BCCB18005F448B /* HistoryVC.swift */,
-				8447A83824BCCB27005F448B /* DreamsVC.swift */,
+				3C50D13F24BF62A500262FC8 /* DreamCell.swift */,
+				3C50D13D24BF627F00262FC8 /* MainDreamCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -84,6 +101,10 @@
 		841BDABA24BCC35C0096BF68 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				8447A83224BCCAE8005F448B /* BudgetVC.swift */,
+				8447A83424BCCB04005F448B /* ProjectsVC.swift */,
+				8447A83624BCCB18005F448B /* HistoryVC.swift */,
+				8447A83824BCCB27005F448B /* DreamsVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -102,20 +123,13 @@
 			path = Realm;
 			sourceTree = "<group>";
 		};
-		841BDABD24BCC3BF0096BF68 /* Other */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Other;
-			sourceTree = "<group>";
-		};
 		843688AE24BCC0A500793B2B = {
 			isa = PBXGroup;
 			children = (
 				843688B924BCC0A500793B2B /* Dream Price */,
 				843688B824BCC0A500793B2B /* Products */,
 				626B7057FC512E5F1D86E694 /* Pods */,
-				FBC4D99E871B5FD8E3C67E18 /* Frameworks */,
+				E02F573F1E38C0E148FF24C4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -130,7 +144,6 @@
 		843688B924BCC0A500793B2B /* Dream Price */ = {
 			isa = PBXGroup;
 			children = (
-				841BDABD24BCC3BF0096BF68 /* Other */,
 				841BDABC24BCC37A0096BF68 /* Realm */,
 				841BDABB24BCC3620096BF68 /* Extensions */,
 				841BDABA24BCC35C0096BF68 /* Controller */,
@@ -149,10 +162,10 @@
 			path = "Dream Price";
 			sourceTree = "<group>";
 		};
-		FBC4D99E871B5FD8E3C67E18 /* Frameworks */ = {
+		E02F573F1E38C0E148FF24C4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6C95879CF6685A037493194E /* Pods_Dream_Price.framework */,
+				64D15A556168BB4FFD3083D1 /* Pods_Dream_Price.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -164,11 +177,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 843688CB24BCC0A800793B2B /* Build configuration list for PBXNativeTarget "Dream Price" */;
 			buildPhases = (
-				31B03A55F9735D88C7462D35 /* [CP] Check Pods Manifest.lock */,
+				6710613912583877FA52469E /* [CP] Check Pods Manifest.lock */,
 				843688B324BCC0A500793B2B /* Sources */,
 				843688B424BCC0A500793B2B /* Frameworks */,
 				843688B524BCC0A500793B2B /* Resources */,
-				5EA8CF4677DC2CD7C7E0366C /* [CP] Embed Pods Frameworks */,
+				3CAEEB0B24BEED6700B3AA73 /* Embed Frameworks */,
+				6E8AC9B6681C7BDE138E3BE2 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -228,7 +242,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		31B03A55F9735D88C7462D35 /* [CP] Check Pods Manifest.lock */ = {
+		6710613912583877FA52469E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -250,7 +264,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5EA8CF4677DC2CD7C7E0366C /* [CP] Embed Pods Frameworks */ = {
+		6E8AC9B6681C7BDE138E3BE2 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -277,7 +291,9 @@
 				843688BB24BCC0A500793B2B /* AppDelegate.swift in Sources */,
 				8447A83724BCCB18005F448B /* HistoryVC.swift in Sources */,
 				8447A83924BCCB27005F448B /* DreamsVC.swift in Sources */,
+				3C50D14024BF62A500262FC8 /* DreamCell.swift in Sources */,
 				843688BD24BCC0A500793B2B /* SceneDelegate.swift in Sources */,
+				3C50D13E24BF627F00262FC8 /* MainDreamCell.swift in Sources */,
 				8447A83524BCCB04005F448B /* ProjectsVC.swift in Sources */,
 				8447A83324BCCAE8005F448B /* BudgetVC.swift in Sources */,
 			);
@@ -423,18 +439,18 @@
 		};
 		843688CC24BCC0A800793B2B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EF6C68EB6CEB36E0454ABD8C /* Pods-Dream Price.debug.xcconfig */;
+			baseConfigurationReference = DFF618B46E3DECA0004150C6 /* Pods-Dream Price.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CBSKMU7MH4;
+				DEVELOPMENT_TEAM = KD46MX5HGX;
 				INFOPLIST_FILE = "Dream Price/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "kostya.bunsberry.Dream-Price";
+				PRODUCT_BUNDLE_IDENTIFIER = "noisegain.Dream-Price";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -443,18 +459,18 @@
 		};
 		843688CD24BCC0A800793B2B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DA964BD56361E3E20F7A72E2 /* Pods-Dream Price.release.xcconfig */;
+			baseConfigurationReference = 4FE768D486D0025D8B4A2A61 /* Pods-Dream Price.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CBSKMU7MH4;
+				DEVELOPMENT_TEAM = KD46MX5HGX;
 				INFOPLIST_FILE = "Dream Price/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "kostya.bunsberry.Dream-Price";
+				PRODUCT_BUNDLE_IDENTIFIER = "noisegain.Dream-Price";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

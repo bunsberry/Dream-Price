@@ -52,13 +52,13 @@ class DreamsVC: UIViewController, UICollectionViewDelegate, UICollectionViewData
             
             cell.titleLabel.text = DreamsList[indexPath.row].title
             cell.descriptionLabel.text = DreamsList[indexPath.row].description
-            cell.reqLabel.text = "\(DreamsList[indexPath.row].reqSum)₽"
+            cell.reqLabel.text = "0/\(DreamsList[indexPath.row].reqSum)₽"
             cell.progressView.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
             cell.cellView.layer.cornerRadius = 20
-            cell.cellView.layer.shadowColor = UIColor.black.cgColor
-            cell.cellView.layer.shadowRadius = 1
-            cell.cellView.layer.shadowOffset = CGSize(width: 0, height: 0)
-            cell.cellView.layer.shadowOpacity = 0.6
+            cell.cellView.layer.shadowColor = UIColor.secondaryLabel.cgColor
+            cell.cellView.layer.shadowOffset = CGSize(width: 0, height: 2)
+            cell.cellView.layer.shadowRadius = CGFloat(12)
+            cell.cellView.layer.shadowOpacity = 0.25
             return cell
             
         } else {
@@ -67,7 +67,11 @@ class DreamsVC: UIViewController, UICollectionViewDelegate, UICollectionViewData
             cell.titleLabel.text = DreamsList[indexPath.row].title
             cell.descriptionLabel.text = DreamsList[indexPath.row].description
             cell.reqLabel.text = "\(DreamsList[indexPath.row].reqSum)₽"
-            
+            cell.cellView.layer.cornerRadius = 20
+            cell.cellView.layer.shadowColor = UIColor.secondaryLabel.cgColor
+            cell.cellView.layer.shadowOffset = CGSize(width: 0, height: 2)
+            cell.cellView.layer.shadowRadius = CGFloat(12)
+            cell.cellView.layer.shadowOpacity = 0.25
             return cell
         }
     }
