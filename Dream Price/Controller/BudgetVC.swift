@@ -9,7 +9,6 @@ import UIKit
 
 protocol TransportUpDelegate {
     func transportUp(string: String)
-    func transportPageChanged()
 }
 
 class BudgetVC: UIViewController, CategoriesDelegate {
@@ -70,7 +69,7 @@ class BudgetVC: UIViewController, CategoriesDelegate {
     
 }
 
-// Buttons Interaction
+// MARKS:  Buttons Interaction
 
 extension BudgetVC {
     
@@ -92,18 +91,20 @@ extension BudgetVC {
     
     @IBAction func numberNineButton(_ sender: Any) { sendAction(action: "9") }
     
-    @IBAction func deleteButton(_ sender: Any) { sendAction(action: "-") }
+    @IBAction func deleteButton(_ sender: Any) {
+        // TODO: Button States
+        sendAction(action: "-")
+    }
     
     @IBAction func numberZeroButton(_ sender: Any) { sendAction(action: "0") }
     
-    @IBAction func doneButton(_ sender: Any) { sendAction(action: "+") }
-    
-    func sendAction(action: String) {
-        print("Sending Action")
-        BudgetVC.delegateUp?.transportUp(string: action)
+    @IBAction func doneButton(_ sender: Any) {
+        // TODO: Category Deselect
+        // TODO: Button States
+        sendAction(action: "+")
     }
     
-    func deselectWith(number: Float) {
-        print("Collection view deselected")
+    func sendAction(action: String) {
+        BudgetVC.delegateUp?.transportUp(string: action)
     }
 }

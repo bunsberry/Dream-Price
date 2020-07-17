@@ -9,12 +9,10 @@ import UIKit
 
 protocol CategoriesDelegate {
     func updateCategories(transaction: String)
-    func deselectWith(number: Float)
 }
 
 protocol KeyboardDelegate {
     func updateTransaction(action: String)
-    func clearTransaction()
 }
 
 class BudgetPVC: UIPageViewController, TransportDelegate, TransportUpDelegate {
@@ -27,7 +25,7 @@ class BudgetPVC: UIPageViewController, TransportDelegate, TransportUpDelegate {
     ]
     
     var categoriesDelegate: CategoriesDelegate?
-    public static var keyboardDelegate: KeyboardDelegate?
+    var keyboardDelegate: KeyboardDelegate?
     
     var currentIndex: Int = 0
     var starterIndex: Int = 0
@@ -54,6 +52,7 @@ class BudgetPVC: UIPageViewController, TransportDelegate, TransportUpDelegate {
         
         if let vc = self.pageViewController(for: starterIndex) {
             self.setViewControllers([vc], direction: .forward, animated: true, completion: nil)
+            keyboardDelegate = vc
         }
     }
     
@@ -62,12 +61,7 @@ class BudgetPVC: UIPageViewController, TransportDelegate, TransportUpDelegate {
     }
     
     func transportUp(string: String) {
-        print("Transporting Up")
-        BudgetPVC.keyboardDelegate?.updateTransaction(action: string)
-    }
-    
-    func transportPageChanged() {
-        BudgetPVC.keyboardDelegate?.clearTransaction()
+        keyboardDelegate?.updateTransaction(action: string)
     }
     
     func pageViewController(for index: Int) -> BudgetItemDataVC? {
@@ -76,26 +70,7 @@ class BudgetPVC: UIPageViewController, TransportDelegate, TransportUpDelegate {
         }
         let vc = (storyboard?.instantiateViewController(withIdentifier: "BudgetItemDataVC") as! BudgetItemDataVC)
         
-        let currencyFormatter = NumberFormatter()
-        currencyFormatter.usesGroupingSeparator = true
-        currencyFormatter.numberStyle = .currency
-        currencyFormatter.locale = Locale.init(identifier: "ru_RU")
-        
-        let intSettingIsSet = true
-        if intSettingIsSet {
-            // TODO В зависимости от настроек передается Int или Float
-            let balance: Int = Int(pagesData[index].balance.rounded())
-            currencyFormatter.maximumFractionDigits = 0
-            currencyFormatter.minimumFractionDigits = 0
-            let priceString = currencyFormatter.string(from: NSNumber(value: balance))!
-            vc.balanceLabelText = "Баланс: \(priceString)"
-
-        } else {
-            let balance: Float = pagesData[index].balance
-            let priceString = currencyFormatter.string(from: NSNumber(value: balance))!
-            vc.balanceLabelText = "Баланс: \(priceString)"
-        }
-        
+        vc.balance = pagesData[index].balance
         vc.nameLabelText = pagesData[index].name
         vc.budgetItemType = pagesData[index].type
         vc.index = index
@@ -118,15 +93,23 @@ extension BudgetPVC: UIPageViewControllerDataSource, UIPageViewControllerDelegat
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         let index = ((viewController as? BudgetItemDataVC)?.index ?? 0) - 1
-        transport(string: ((viewController as? BudgetItemDataVC)?.changeTransactionButton.title(for: .normal))!)
-        transportPageChanged()
+        
+        DispatchQueue.main.async {
+            self.keyboardDelegate = viewController as? BudgetItemDataVC
+            self.transport(string: ((viewController as? BudgetItemDataVC)?.changeTransactionButton.title(for: .normal))!)
+        }
+        
         return self.pageViewController(for: index)
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         let index = ((viewController as? BudgetItemDataVC)?.index ?? 0) + 1
-        transport(string: ((viewController as? BudgetItemDataVC)?.changeTransactionButton.title(for: .normal))!)
-        transportPageChanged()
+        
+        DispatchQueue.main.async {
+            self.keyboardDelegate = viewController as? BudgetItemDataVC
+            self.transport(string: ((viewController as? BudgetItemDataVC)?.changeTransactionButton.title(for: .normal))!)
+        }
+        
         return self.pageViewController(for: index)
     }
     

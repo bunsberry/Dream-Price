@@ -24,7 +24,7 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
     
     public static var delegate: TransportDelegate?
     
-    var balanceLabelText: String?
+    var balance: Float = 0
     var nameLabelText: String?
     var budgetItemType: BudgetItemType?
     var index: Int?
@@ -32,11 +32,17 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        BudgetPVC.keyboardDelegate = self
-        
         changeTransactionButton.setTitle("-", for: .normal)
-        self.balanceLabel.text = balanceLabelText
         self.budgetItemNameLabel.text = nameLabelText
+        updateBalance(balanceFloat: balance)
+        
+        if var localeCurrency = Locale.current.currencySymbol {
+            if localeCurrency == "RUB" { localeCurrency = "₽" }
+            currencyLabel.text = " \(localeCurrency)"
+        } else {
+            currencyLabel.text = " $"
+        }
+        
         
         let gradient: CAGradientLayer = CAGradientLayer()
         
@@ -46,7 +52,6 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
         case .dream: gradient.colors = [UIColor(red: 0.506, green: 0.616, blue: 0.898, alpha: 1).cgColor, UIColor(red: 0.443, green: 0.541, blue: 0.792, alpha: 1).cgColor]
         default: break
         }
-
         
         gradient.cornerRadius = 15
         gradient.locations = [0.0 , 1.0]
@@ -66,13 +71,33 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
         
     }
     
-    func clearTransaction() {
-        transactionLabel.text! = "0"
-        transactionLabel.font = transactionLabel.font.withSize(64)
+    func updateBalance(balanceFloat: Float) {
+        let currencyFormatter = NumberFormatter()
+        currencyFormatter.usesGroupingSeparator = true
+        currencyFormatter.numberStyle = .currency
+        let localeCode = Locale.current.currencyCode
+        
+        if localeCode == "RUB" {
+            currencyFormatter.locale = Locale.init(identifier: "ru_RU") }
+        else { currencyFormatter.locale = Locale.current }
+        
+        
+        let intSettingIsSet = true
+        if intSettingIsSet {
+            // TODO: В зависимости от настроек передается Int или Float
+            let balance: Int = Int(balanceFloat)
+            currencyFormatter.maximumFractionDigits = 0
+            currencyFormatter.minimumFractionDigits = 0
+            let priceString = currencyFormatter.string(from: NSNumber(value: balance))!
+            self.balanceLabel.text = "Баланс: \(priceString)"
+
+        } else {
+            let priceString = currencyFormatter.string(from: NSNumber(value: balanceFloat))!
+            self.balanceLabel.text = "Баланс: \(priceString)"
+        }
     }
     
     func updateTransaction(action: String) {
-        print("Updating transaction")
         switch action {
         case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9":
             if transactionLabel.text?.count == 7 { return }
@@ -92,8 +117,16 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
             if transactionLabel.text == "0" {
                 return
             } else {
+                if changeTransactionButton.title(for: .normal) == "-" {
+                    print("Spent \(transactionLabel.text!)")
+                    balance -= Float(transactionLabel.text!)!
+                    updateBalance(balanceFloat: balance)
+                } else {
+                    print("Earned \(transactionLabel.text!)")
+                    balance += Float(transactionLabel.text!)!
+                    updateBalance(balanceFloat: balance)
+                }
                 transactionLabel.text! = "0"
-                print("Transaction sent")
             }
         default:
             print("Transaction switch failed")
