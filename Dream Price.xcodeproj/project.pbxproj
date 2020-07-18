@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3C50D13E24BF627F00262FC8 /* MainDreamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C50D13D24BF627F00262FC8 /* MainDreamCell.swift */; };
-		3C50D14024BF62A500262FC8 /* DreamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C50D13F24BF62A500262FC8 /* DreamCell.swift */; };
 		3CAEEB0A24BEED6700B3AA73 /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4AD6E44DA3BB636CABF6FE90 /* Pods_Dream_Price.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64D15A556168BB4FFD3083D1 /* Pods_Dream_Price.framework */; };
 		841BDABF24BCC4330096BF68 /* Projects.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 841BDABE24BCC4330096BF68 /* Projects.storyboard */; };
@@ -23,6 +21,10 @@
 		8447A83524BCCB04005F448B /* ProjectsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8447A83424BCCB04005F448B /* ProjectsVC.swift */; };
 		8447A83724BCCB18005F448B /* HistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8447A83624BCCB18005F448B /* HistoryVC.swift */; };
 		8447A83924BCCB27005F448B /* DreamsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8447A83824BCCB27005F448B /* DreamsVC.swift */; };
+		8478AD1D24C39E27005906FB /* AddDreamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478AD1C24C39E27005906FB /* AddDreamVC.swift */; };
+		8478AD1F24C39F88005906FB /* EditDreamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8478AD1E24C39F88005906FB /* EditDreamVC.swift */; };
+		8492B93D24C38B9E00B56DEC /* DreamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8492B93C24C38B9E00B56DEC /* DreamCell.swift */; };
+		8492B93F24C38BC500B56DEC /* FocusedDreamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8492B93E24C38BC500B56DEC /* FocusedDreamCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,8 +42,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3C50D13D24BF627F00262FC8 /* MainDreamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainDreamCell.swift; path = "Dream Price/View/MainDreamCell.swift"; sourceTree = SOURCE_ROOT; };
-		3C50D13F24BF62A500262FC8 /* DreamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DreamCell.swift; path = "/Users/valeriy/Documents/xcode/Dream-Price/Dream Price/View/DreamCell.swift"; sourceTree = "<absolute>"; };
 		4FE768D486D0025D8B4A2A61 /* Pods-Dream Price.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dream Price.release.xcconfig"; path = "Target Support Files/Pods-Dream Price/Pods-Dream Price.release.xcconfig"; sourceTree = "<group>"; };
 		64D15A556168BB4FFD3083D1 /* Pods_Dream_Price.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dream_Price.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		841BDABE24BCC4330096BF68 /* Projects.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Projects.storyboard; sourceTree = "<group>"; };
@@ -58,6 +58,10 @@
 		8447A83424BCCB04005F448B /* ProjectsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsVC.swift; sourceTree = "<group>"; };
 		8447A83624BCCB18005F448B /* HistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
 		8447A83824BCCB27005F448B /* DreamsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DreamsVC.swift; sourceTree = "<group>"; };
+		8478AD1C24C39E27005906FB /* AddDreamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDreamVC.swift; sourceTree = "<group>"; };
+		8478AD1E24C39F88005906FB /* EditDreamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDreamVC.swift; sourceTree = "<group>"; };
+		8492B93C24C38B9E00B56DEC /* DreamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DreamCell.swift; sourceTree = "<group>"; };
+		8492B93E24C38BC500B56DEC /* FocusedDreamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusedDreamCell.swift; sourceTree = "<group>"; };
 		DFF618B46E3DECA0004150C6 /* Pods-Dream Price.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dream Price.debug.xcconfig"; path = "Target Support Files/Pods-Dream Price/Pods-Dream Price.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,8 +96,8 @@
 		841BDAB924BCC3570096BF68 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				3C50D13F24BF62A500262FC8 /* DreamCell.swift */,
-				3C50D13D24BF627F00262FC8 /* MainDreamCell.swift */,
+				8492B93C24C38B9E00B56DEC /* DreamCell.swift */,
+				8492B93E24C38BC500B56DEC /* FocusedDreamCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -105,6 +109,8 @@
 				8447A83424BCCB04005F448B /* ProjectsVC.swift */,
 				8447A83624BCCB18005F448B /* HistoryVC.swift */,
 				8447A83824BCCB27005F448B /* DreamsVC.swift */,
+				8478AD1E24C39F88005906FB /* EditDreamVC.swift */,
+				8478AD1C24C39E27005906FB /* AddDreamVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -288,12 +294,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8492B93D24C38B9E00B56DEC /* DreamCell.swift in Sources */,
 				843688BB24BCC0A500793B2B /* AppDelegate.swift in Sources */,
 				8447A83724BCCB18005F448B /* HistoryVC.swift in Sources */,
+				8492B93F24C38BC500B56DEC /* FocusedDreamCell.swift in Sources */,
 				8447A83924BCCB27005F448B /* DreamsVC.swift in Sources */,
-				3C50D14024BF62A500262FC8 /* DreamCell.swift in Sources */,
+				8478AD1D24C39E27005906FB /* AddDreamVC.swift in Sources */,
+				8478AD1F24C39F88005906FB /* EditDreamVC.swift in Sources */,
 				843688BD24BCC0A500793B2B /* SceneDelegate.swift in Sources */,
-				3C50D13E24BF627F00262FC8 /* MainDreamCell.swift in Sources */,
 				8447A83524BCCB04005F448B /* ProjectsVC.swift in Sources */,
 				8447A83324BCCAE8005F448B /* BudgetVC.swift in Sources */,
 			);
@@ -444,13 +452,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = KD46MX5HGX;
+				DEVELOPMENT_TEAM = CBSKMU7MH4;
 				INFOPLIST_FILE = "Dream Price/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "noisegain.Dream-Price";
+				PRODUCT_BUNDLE_IDENTIFIER = "bunsberry.Dream-Price";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -464,13 +472,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = KD46MX5HGX;
+				DEVELOPMENT_TEAM = CBSKMU7MH4;
 				INFOPLIST_FILE = "Dream Price/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "noisegain.Dream-Price";
+				PRODUCT_BUNDLE_IDENTIFIER = "bunsberry.Dream-Price";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
