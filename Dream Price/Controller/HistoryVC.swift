@@ -18,17 +18,9 @@ enum SortingType {
     case monthly
 }
 
-// TODO: Добавить перевод даты в русский язык (locale тупит чет)
-
 private func firstDayOfMonth(date: Date) -> Date {
     let calendar = Calendar.current
     let components = calendar.dateComponents([.year, .month], from: date)
-    return calendar.date(from: components)!
-}
-
-private func dayOfMonth(date: Date) -> Date {
-    let calendar = Calendar.current
-    let components = calendar.dateComponents([.month, .day], from: date)
     return calendar.date(from: components)!
 }
 
@@ -90,7 +82,7 @@ class HistoryVC: UITableViewController {
         let sortButtonImage = UIImage(systemName: "line.horizontal.3.decrease.circle")
         sortButton.setTitle("", for: .normal)
         sortButton.setImage(sortButtonImage?.withTintColor(.label, renderingMode:.alwaysOriginal), for: .normal)
-        sortButton.setImage(sortButtonImage?.withTintColor(.secondaryLabel, renderingMode:.alwaysOriginal), for: .highlighted)
+        sortButton.setImage(sortButtonImage?.withTintColor(.quaternaryLabel, renderingMode:.alwaysOriginal), for: .highlighted)
         sortButton.contentVerticalAlignment = .fill
         sortButton.contentHorizontalAlignment = .fill
         sortButton.addTarget(self, action: #selector(changeSortMethod), for: .touchUpInside)
@@ -165,7 +157,7 @@ class HistoryVC: UITableViewController {
     
     // MARK: TableView Setup
     
-    // TODO: Getting transaction from a database
+    // TODO: Getting transactions from a DB
     
     var transactions = [
         Transaction(date: parseDate("2020-06-17"), number: -233, category: "Продукты"),
@@ -197,12 +189,27 @@ class HistoryVC: UITableViewController {
             let date = section.sectionItem
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MMMM yyyy"
+            
+            if Locale.current.currencyCode == "RUB" {
+                dateFormatter.locale = Locale(identifier: "ru_RU")
+            } else {
+                dateFormatter.locale = Locale.current
+            }
+            
             return dateFormatter.string(from: date)
+            
         case .daily:
             let section = self.sections[section]
             let date = section.sectionItem
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MMM dd"
+            
+            if Locale.current.currencyCode == "RUB" {
+                dateFormatter.locale = Locale(identifier: "ru_RU")
+            } else {
+                dateFormatter.locale = Locale.current
+            }
+            
             return dateFormatter.string(from: date)
         }
     }
@@ -229,23 +236,21 @@ class HistoryVC: UITableViewController {
         
         var priceString: String = ""
         
-        let intSettingIsSet = true
-        if intSettingIsSet {
-            // TODO: В зависимости от настроек передается Int или Float
-            currencyFormatter.maximumFractionDigits = 0
-            currencyFormatter.minimumFractionDigits = 0
-            priceString = currencyFormatter.string(from: NSNumber(value: transaction.number))!
+//        if Settings.shared.isIntSettingSet! {
+        currencyFormatter.maximumFractionDigits = 0
+        currencyFormatter.minimumFractionDigits = 0
+        priceString = currencyFormatter.string(from: NSNumber(value: transaction.number))!
 
-        } else {
-            priceString = currencyFormatter.string(from: NSNumber(value: transaction.number))!
-        }
+//        } else {
+//            priceString = currencyFormatter.string(from: NSNumber(value: transaction.number))!
+//        }
         
         if transaction.number > 0 {
             cell.numberLabel.text = "+\(priceString)"
-            cell.numberLabel.textColor = UIColor(red: 0.792, green: 0.443, blue: 0.443, alpha: 1)
+            cell.numberLabel.textColor = UIColor(red: 0.451, green: 0.792, blue: 0.443, alpha: 1)
         } else {
             cell.numberLabel.text = priceString
-            cell.numberLabel.textColor = UIColor(red: 0.451, green: 0.792, blue: 0.443, alpha: 1)
+            cell.numberLabel.textColor = UIColor(red: 0.792, green: 0.443, blue: 0.443, alpha: 1)
         }
         
         cell.categoryLabel.text = transaction.category

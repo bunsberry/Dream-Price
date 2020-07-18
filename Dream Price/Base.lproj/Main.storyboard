@@ -279,6 +279,8 @@
                     <connections>
                         <outlet property="budgetsViewContainer" destination="tJX-NP-tWc" id="Wwb-LP-8Vy"/>
                         <outlet property="categoriesCollectionView" destination="9n5-yb-l6e" id="U9q-55-OYg"/>
+                        <outlet property="doneButton" destination="lqn-AO-Xd0" id="rom-TE-bGc"/>
+                        <outlet property="removeButton" destination="OkX-JA-pnK" id="9Wd-5v-IAk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -314,7 +316,7 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Mp-gz-bOS">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Mp-gz-bOS">
                                         <rect key="frame" x="134" y="39.5" width="42.5" height="76.5"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="64"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

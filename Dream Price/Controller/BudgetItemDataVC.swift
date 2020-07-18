@@ -8,7 +8,9 @@
 import UIKit
 
 protocol TransportDelegate {
-    func transport(string: String)
+    func transportCurrentState(string: String)
+    func transportTransactionData(number: Float, budgetID: Int)
+    func transportButtons(enabled: Int)
 }
 
 class BudgetItemDataVC: UIViewController, KeyboardDelegate {
@@ -25,9 +27,12 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
     public static var delegate: TransportDelegate?
     
     var balance: Float = 0
-    var nameLabelText: String?
-    var budgetItemType: BudgetItemType?
+    var nameLabelText: String!
+    var budgetItemType: BudgetItemType!
     var index: Int?
+    var id: Int!
+    
+    // MARK: View Setup
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,51 +86,64 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
             currencyFormatter.locale = Locale.init(identifier: "ru_RU") }
         else { currencyFormatter.locale = Locale.current }
         
+//        if Settings.shared.isIntSettingSet! {
         
-        let intSettingIsSet = true
-        if intSettingIsSet {
-            // TODO: В зависимости от настроек передается Int или Float
-            let balance: Int = Int(balanceFloat)
-            currencyFormatter.maximumFractionDigits = 0
-            currencyFormatter.minimumFractionDigits = 0
-            let priceString = currencyFormatter.string(from: NSNumber(value: balance))!
-            self.balanceLabel.text = "Баланс: \(priceString)"
+        let balance: Int = Int(balanceFloat)
+        currencyFormatter.maximumFractionDigits = 0
+        currencyFormatter.minimumFractionDigits = 0
+        let priceString = currencyFormatter.string(from: NSNumber(value: balance))!
+        self.balanceLabel.text = "Баланс: \(priceString)"
 
-        } else {
-            let priceString = currencyFormatter.string(from: NSNumber(value: balanceFloat))!
-            self.balanceLabel.text = "Баланс: \(priceString)"
-        }
+//        } else {
+//            let priceString = currencyFormatter.string(from: NSNumber(value: balanceFloat))!
+//            self.balanceLabel.text = "Баланс: \(priceString)"
+//        }
     }
+    
+    // MARK: Update Balance Label
     
     func updateTransaction(action: String) {
         switch action {
-        case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9":
+        case "0":
+            if transactionLabel.text?.count == 7 { return }
+            
+            if transactionLabel.text == "0" {
+                return
+            } else {
+                transactionLabel.text! += action
+            }
+        case "1", "2", "3", "4", "5", "6", "7", "8", "9":
             if transactionLabel.text?.count == 7 { return }
             
             if transactionLabel.text == "0" {
                 transactionLabel.text! = action
+                BudgetItemDataVC.delegate?.transportButtons(enabled: 1)
             } else {
                 transactionLabel.text! += action
             }
         case "-":
             if transactionLabel.text?.count == 1 {
                 transactionLabel.text =  "0"
+                BudgetItemDataVC.delegate?.transportButtons(enabled: 0)
             } else {
                 transactionLabel.text!.removeLast()
             }
         case "+":
             if transactionLabel.text == "0" {
+                // TODO: Animation of no transaction number
                 return
             } else {
                 if changeTransactionButton.title(for: .normal) == "-" {
-                    print("Spent \(transactionLabel.text!)")
                     balance -= Float(transactionLabel.text!)!
                     updateBalance(balanceFloat: balance)
+                    BudgetItemDataVC.delegate?.transportTransactionData(number: -Float(transactionLabel.text!)!, budgetID: self.id)
                 } else {
-                    print("Earned \(transactionLabel.text!)")
                     balance += Float(transactionLabel.text!)!
                     updateBalance(balanceFloat: balance)
+                    BudgetItemDataVC.delegate?.transportTransactionData(number: Float(transactionLabel.text!)!, budgetID: self.id)
                 }
+                // TODO: Animation of transaction sent
+                BudgetItemDataVC.delegate?.transportButtons(enabled: 0)
                 transactionLabel.text! = "0"
             }
         default:
@@ -148,6 +166,8 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
         }
     }
     
+    // MARK: Transaction Change Button
+    
     @IBAction func changeTransaction(_ sender: Any) {
         
         if changeTransactionButton.title(for: .normal) == "-" {
@@ -157,7 +177,7 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
         }
                 
         changeTransactionButton.setTitle(BudgetItemDataVC.currentTransaction, for: .normal)
-        BudgetItemDataVC.delegate?.transport(string: BudgetItemDataVC.currentTransaction)
+        BudgetItemDataVC.delegate?.transportCurrentState(string: BudgetItemDataVC.currentTransaction)
     }
     
 }

@@ -44,20 +44,21 @@ extension BudgetVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate
                 cell.categoryView.layer.cornerRadius = 10
             }
             
+            cell.categoryType = categoriesShown[indexPath.row].type
+            
             return cell
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as? CategoryCell
-        cell?.titleLabel.textColor = UIColor.label
-        cell?.categoryView.layer.borderColor = UIColor.label.cgColor
+        let cell = collectionView.cellForItem(at: indexPath) as! CategoryCell
+        cell.titleLabel.textColor = UIColor.label
+        cell.categoryView.layer.borderColor = UIColor.label.cgColor
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as? CategoryCell
-        cell?.titleLabel.textColor = UIColor.secondaryLabel
-        cell?.categoryView.layer.borderColor = UIColor.secondaryLabel.cgColor
+        let cell = collectionView.cellForItem(at: indexPath) as! CategoryCell
+        cell.titleLabel.textColor = UIColor.secondaryLabel
+        cell.categoryView.layer.borderColor = UIColor.secondaryLabel.cgColor
     }
-    
 }

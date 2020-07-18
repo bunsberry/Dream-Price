@@ -12,4 +12,5 @@ class CategoryCell: UICollectionViewCell {
     @IBOutlet weak var categoryView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     
+    var categoryType: CategoryType!
 }

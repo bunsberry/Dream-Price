@@ -11,12 +11,14 @@ protocol TransportUpDelegate {
     func transportUp(string: String)
 }
 
-class BudgetVC: UIViewController, CategoriesDelegate {
+class BudgetVC: UIViewController, BudgetDelegate {
+    
+    // TODO: Получение категорий из DB
     
     let categories: [Category] = [
         Category(type: .earning, title: "💼 Работа"),
-        Category(type: .spendind, title: "☕️ Кофе"),
-        Category(type: .spendind, title: "🥑 Продукты"),
+        Category(type: .spending, title: "☕️ Кофе"),
+        Category(type: .spending, title: "🥑 Продукты"),
         Category(type: .budget, title: "📱 Приложуха"),
         Category(type: .budget, title: "🌙 Мечта"),
         Category(type: .manage, title: "Изменить...")
@@ -30,18 +32,38 @@ class BudgetVC: UIViewController, CategoriesDelegate {
     
     @IBOutlet weak var budgetsViewContainer: UIView!
     @IBOutlet weak var categoriesCollectionView: UICollectionView!
+    @IBOutlet weak var removeButton: UIButton!
+    @IBOutlet weak var doneButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        buttonsSetup()
         updateCategories(transaction: "-")
+    }
+    
+    // MARK: Buttons setup
+    
+    func buttonsSetup() {
+        removeButton.imageView?.contentMode = .scaleAspectFit
+        removeButton.setImage(removeButton.image(for: .normal)?.withTintColor(.label, renderingMode:.alwaysOriginal), for: .normal)
+        removeButton.setImage(removeButton.image(for: .normal)?.withTintColor(.quaternaryLabel, renderingMode: .alwaysOriginal), for: .highlighted)
+        
+        doneButton.setImage(doneButton.image(for: .normal)?.withTintColor(.label, renderingMode:.alwaysOriginal), for: .normal)
+        doneButton.setImage(doneButton.image(for: .normal)?.withTintColor(.quaternaryLabel, renderingMode:.alwaysOriginal), for: .highlighted)
+        doneButton.setImage(doneButton.image(for: .normal)?.withTintColor(.secondaryLabel, renderingMode:.alwaysOriginal), for: .disabled)
+        
+        removeButton.isEnabled = false
+        doneButton.isEnabled = false
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? BudgetPVC, segue.identifier == "embedWindow" {
-            vc.categoriesDelegate = self
+            vc.budgetDelegate = self
         }
     }
+    
+    // MARK: Categories Update
     
     func updateCategories(transaction: String) {
         categoriesShown.removeAll()
@@ -56,7 +78,7 @@ class BudgetVC: UIViewController, CategoriesDelegate {
             }
             case "+": do {
                 for el in self.categories {
-                    if el.type != .spendind {
+                    if el.type != .spending {
                         self.categoriesShown.append(el)
                     }
                 }
@@ -69,7 +91,7 @@ class BudgetVC: UIViewController, CategoriesDelegate {
     
 }
 
-// MARKS:  Buttons Interaction
+// MARK:  Buttons Interaction
 
 extension BudgetVC {
     
@@ -92,19 +114,53 @@ extension BudgetVC {
     @IBAction func numberNineButton(_ sender: Any) { sendAction(action: "9") }
     
     @IBAction func deleteButton(_ sender: Any) {
-        // TODO: Button States
         sendAction(action: "-")
     }
     
     @IBAction func numberZeroButton(_ sender: Any) { sendAction(action: "0") }
     
     @IBAction func doneButton(_ sender: Any) {
-        // TODO: Category Deselect
-        // TODO: Button States
         sendAction(action: "+")
+    }
+    
+    // MARK: Delegate protocol
+    
+    func createTransaction(number: Float, budgetID: Int) {
+        
+        // TODO: Transactions are added to DB here
+        
+        if let indexPath = categoriesCollectionView.indexPathsForSelectedItems?.first {
+            
+            let cell = categoriesCollectionView.cellForItem(at: indexPath) as? CategoryCell
+            
+            if cell?.categoryType == CategoryType.spending {
+                print("id-\(budgetID): Spent \(number) on \(cell!.titleLabel.text!)")
+            }
+            else if cell?.categoryType == CategoryType.earning {
+                print("id-\(budgetID): Earned \(number) from \(cell!.titleLabel.text!)")
+            }
+            else if cell?.categoryType == CategoryType.budget {
+                print("id-\(budgetID): Transfered \(number) from/to \(cell!.titleLabel.text!)")
+            }
+            
+        } else {
+            print("id_\(budgetID): \(number) on/from smthng...")
+        }
+        
+        categoriesCollectionView.reloadData()
     }
     
     func sendAction(action: String) {
         BudgetVC.delegateUp?.transportUp(string: action)
+    }
+    
+    func disableButtons() {
+        removeButton.isEnabled = false
+        doneButton.isEnabled = false
+    }
+    
+    func enableButtons() {
+        removeButton.isEnabled = true
+        doneButton.isEnabled = true
     }
 }

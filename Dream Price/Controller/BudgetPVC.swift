@@ -7,8 +7,11 @@
 
 import UIKit
 
-protocol CategoriesDelegate {
+protocol BudgetDelegate {
     func updateCategories(transaction: String)
+    func createTransaction(number: Float, budgetID: Int)
+    func disableButtons()
+    func enableButtons()
 }
 
 protocol KeyboardDelegate {
@@ -17,14 +20,16 @@ protocol KeyboardDelegate {
 
 class BudgetPVC: UIPageViewController, TransportDelegate, TransportUpDelegate {
     
+    // TODO: Getting budgetItems from DB here
+    
     let pagesData: [BudgetItem] = [
-        BudgetItem(type: .project, balance: 25, name: "Проект 1"),
-        BudgetItem(type: .project, balance: 12, name: "Проект"),
-        BudgetItem(type: .personal, balance: 25680, name: "Личный Счёт"),
-        BudgetItem(type: .dream, balance: 23000, name: "Мечта")
+        BudgetItem(id: 3, type: .project, balance: 25, name: "Проект 1"),
+        BudgetItem(id: 2, type: .project, balance: 12, name: "Проект"),
+        BudgetItem(id: 0, type: .personal, balance: 25680, name: "Личный Счёт"),
+        BudgetItem(id: 1, type: .dream, balance: 23000, name: "Мечта")
     ]
     
-    var categoriesDelegate: CategoriesDelegate?
+    var budgetDelegate: BudgetDelegate?
     var keyboardDelegate: KeyboardDelegate?
     
     var currentIndex: Int = 0
@@ -56,13 +61,29 @@ class BudgetPVC: UIPageViewController, TransportDelegate, TransportUpDelegate {
         }
     }
     
-    func transport(string: String) {
-        categoriesDelegate?.updateCategories(transaction: string)
+    // MARK: Delegate protocol
+    
+    func transportCurrentState(string: String) {
+        budgetDelegate?.updateCategories(transaction: string)
+    }
+    
+    func transportTransactionData(number: Float, budgetID: Int) {
+        budgetDelegate?.createTransaction(number: number, budgetID: budgetID)
+    }
+    
+    func transportButtons(enabled: Int) {
+        if enabled == 0 {
+            budgetDelegate?.disableButtons()
+        } else {
+            budgetDelegate?.enableButtons()
+        }
     }
     
     func transportUp(string: String) {
         keyboardDelegate?.updateTransaction(action: string)
     }
+    
+    // MARK: Page View
     
     func pageViewController(for index: Int) -> BudgetItemDataVC? {
         if index < 0 || index >= pagesData.count {
@@ -74,6 +95,8 @@ class BudgetPVC: UIPageViewController, TransportDelegate, TransportUpDelegate {
         vc.nameLabelText = pagesData[index].name
         vc.budgetItemType = pagesData[index].type
         vc.index = index
+        vc.id = pagesData[index].id
+        
         self.currentIndex = index
         
         return vc
@@ -96,7 +119,7 @@ extension BudgetPVC: UIPageViewControllerDataSource, UIPageViewControllerDelegat
         
         DispatchQueue.main.async {
             self.keyboardDelegate = viewController as? BudgetItemDataVC
-            self.transport(string: ((viewController as? BudgetItemDataVC)?.changeTransactionButton.title(for: .normal))!)
+            self.transportCurrentState(string: ((viewController as? BudgetItemDataVC)?.changeTransactionButton.title(for: .normal))!)
         }
         
         return self.pageViewController(for: index)
@@ -107,7 +130,7 @@ extension BudgetPVC: UIPageViewControllerDataSource, UIPageViewControllerDelegat
         
         DispatchQueue.main.async {
             self.keyboardDelegate = viewController as? BudgetItemDataVC
-            self.transport(string: ((viewController as? BudgetItemDataVC)?.changeTransactionButton.title(for: .normal))!)
+            self.transportCurrentState(string: ((viewController as? BudgetItemDataVC)?.changeTransactionButton.title(for: .normal))!)
         }
         
         return self.pageViewController(for: index)

@@ -9,7 +9,7 @@ import Foundation
 
 enum CategoryType {
     case manage
-    case spendind
+    case spending
     case earning
     case budget
 }
