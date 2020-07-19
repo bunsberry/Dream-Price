@@ -12,6 +12,9 @@ class TransactionCell: UITableViewCell {
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
     var date: Date!
+    var id: Int!
+    var desc: String!
+    var number: Float!
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

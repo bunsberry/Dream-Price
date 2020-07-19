@@ -68,10 +68,10 @@
             </objects>
             <point key="canvasLocation" x="970" y="104"/>
         </scene>
-        <!--View Controller-->
+        <!--Edit TransactionVC-->
         <scene sceneID="lr3-xb-Mrr">
             <objects>
-                <viewController id="hTp-3l-Pca" sceneMemberID="viewController">
+                <viewController id="hTp-3l-Pca" customClass="EditTransactionVC" customModule="Dream_Price" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iME-NF-Tja">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -82,9 +82,15 @@
                                     <navigationItem title="Транзакция" id="uwT-h7-vuH">
                                         <barButtonItem key="leftBarButtonItem" title="Отменить" style="done" id="5Im-eN-ykT">
                                             <color key="tintColor" red="0.45098039215686275" green="0.792156862745098" blue="0.44313725490196076" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <connections>
+                                                <action selector="cancel:" destination="hTp-3l-Pca" id="mCW-9K-aiD"/>
+                                            </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Сохранить" style="done" id="pKI-eN-3Po">
                                             <color key="tintColor" red="0.45098039220000002" green="0.79215686269999996" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <connections>
+                                                <action selector="save:" destination="hTp-3l-Pca" id="G5s-N9-Xvh"/>
+                                            </connections>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
@@ -93,38 +99,96 @@
                                 <rect key="frame" x="0.0" y="56" width="414" height="752"/>
                                 <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="transactionCategoryCell" id="KLB-GB-c0n">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="transactionCategoryCell" id="KLB-GB-c0n" customClass="ETCategoryCell" customModule="Dream_Price" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KLB-GB-c0n" id="F4f-hx-fC2">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Продукты" placeholder="Введите категорию" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BYe-0y-J1t">
+                                                    <rect key="frame" x="20" y="0.0" width="394" height="43.5"/>
+                                                    <color key="tintColor" red="0.45098039220000002" green="0.79215686269999996" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="43.5" id="Jq5-WD-7F7"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="BYe-0y-J1t" firstAttribute="leading" secondItem="F4f-hx-fC2" secondAttribute="leading" constant="20" symbolic="YES" id="1eY-rS-YLD"/>
+                                                <constraint firstItem="BYe-0y-J1t" firstAttribute="centerY" secondItem="F4f-hx-fC2" secondAttribute="centerY" id="HeH-TW-GCF"/>
+                                                <constraint firstAttribute="trailing" secondItem="BYe-0y-J1t" secondAttribute="trailing" id="lrg-dz-Tlo"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="textField" destination="BYe-0y-J1t" id="cl7-vJ-NUY"/>
+                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="transactionCostCell" id="wfQ-83-tJT">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="transactionDescriptionCell" id="4u1-BZ-XSY" customClass="ETDescriptionCell" customModule="Dream_Price" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="99" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4u1-BZ-XSY" id="Z8v-2V-6vC">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Добавьте описание для удобства..." minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="PWK-gd-Vpm">
+                                                    <rect key="frame" x="20" y="0.5" width="394" height="43"/>
+                                                    <color key="tintColor" red="0.45098039220000002" green="0.79215686269999996" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="43" id="Pob-MG-gaK"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    <connections>
+                                                        <action selector="desctriptionChanged:" destination="4u1-BZ-XSY" eventType="editingDidEnd" id="6pw-Ab-SuB"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="PWK-gd-Vpm" firstAttribute="leading" secondItem="Z8v-2V-6vC" secondAttribute="leading" constant="20" symbolic="YES" id="O1X-qg-60h"/>
+                                                <constraint firstItem="PWK-gd-Vpm" firstAttribute="centerY" secondItem="Z8v-2V-6vC" secondAttribute="centerY" id="V0b-nR-p9l"/>
+                                                <constraint firstAttribute="trailing" secondItem="PWK-gd-Vpm" secondAttribute="trailing" id="rsS-n1-4fI"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="textField" destination="PWK-gd-Vpm" id="Itd-UA-JhW"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="transactionCostCell" id="wfQ-83-tJT" customClass="ETNumberCell" customModule="Dream_Price" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="142.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wfQ-83-tJT" id="FFQ-ov-abm">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="100 ₽" placeholder="0 ₽" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="0hL-BH-Uej">
-                                                    <rect key="frame" x="20" y="10" width="374" height="23.5"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="100" placeholder="0" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="0hL-BH-Uej">
+                                                    <rect key="frame" x="20" y="0.0" width="394" height="43.5"/>
                                                     <color key="tintColor" red="0.45098039220000002" green="0.79215686269999996" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="43.5" id="Ec7-gV-nct"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                                    <connections>
+                                                        <action selector="textFieldChanged:" destination="wfQ-83-tJT" eventType="editingChanged" id="LPh-99-1jG"/>
+                                                        <action selector="textFieldEnded:" destination="wfQ-83-tJT" eventType="editingDidEnd" id="jjg-YL-rbb"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="0hL-BH-Uej" secondAttribute="bottom" constant="10" id="Cc0-I9-6QS"/>
+                                                <constraint firstItem="0hL-BH-Uej" firstAttribute="centerY" secondItem="FFQ-ov-abm" secondAttribute="centerY" id="YBL-at-O9K"/>
                                                 <constraint firstItem="0hL-BH-Uej" firstAttribute="leading" secondItem="FFQ-ov-abm" secondAttribute="leading" constant="20" symbolic="YES" id="iox-6d-9lm"/>
-                                                <constraint firstItem="0hL-BH-Uej" firstAttribute="top" secondItem="FFQ-ov-abm" secondAttribute="top" constant="10" id="we0-ID-8FZ"/>
-                                                <constraint firstAttribute="trailing" secondItem="0hL-BH-Uej" secondAttribute="trailing" constant="20" symbolic="YES" id="y8O-9B-nxv"/>
+                                                <constraint firstAttribute="trailing" secondItem="0hL-BH-Uej" secondAttribute="trailing" id="jpZ-Lx-oht"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="textField" destination="0hL-BH-Uej" id="Ym6-OH-qXW"/>
+                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="transactionDateCell" id="dEw-Qe-puS">
-                                        <rect key="frame" x="0.0" y="142.5" width="414" height="43.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="transactionDateCell" id="dEw-Qe-puS" customClass="ETDateCell" customModule="Dream_Price" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="186" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dEw-Qe-puS" id="82M-jJ-VUc">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -132,34 +196,44 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="transactionDatePickerCell" id="A65-Md-GMt">
-                                        <rect key="frame" x="0.0" y="186" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="229.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="A65-Md-GMt" id="NZx-H7-55m">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="transactionDescriptionCell" id="4u1-BZ-XSY">
-                                        <rect key="frame" x="0.0" y="229.5" width="414" height="43.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="transactionDeleteCell" id="ykb-jF-co2" customClass="ETDeleteCell" customModule="Dream_Price" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="273" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4u1-BZ-XSY" id="Z8v-2V-6vC">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ykb-jF-co2" id="Psi-xC-w9A">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Добавьте описание для удобства..." minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="PWK-gd-Vpm">
-                                                    <rect key="frame" x="20" y="11" width="374" height="21.5"/>
-                                                    <color key="tintColor" red="0.45098039220000002" green="0.79215686269999996" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                </textField>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bKP-gL-Ha1">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="43.5" id="5dd-xl-KxU"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <state key="normal" title="Удалить транзакцию">
+                                                        <color key="titleColor" systemColor="systemRedColor"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="deleteButtonPressed:" destination="ykb-jF-co2" eventType="touchUpInside" id="BB6-cY-Prj"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="PWK-gd-Vpm" firstAttribute="leading" secondItem="Z8v-2V-6vC" secondAttribute="leading" constant="20" symbolic="YES" id="O1X-qg-60h"/>
-                                                <constraint firstAttribute="bottom" secondItem="PWK-gd-Vpm" secondAttribute="bottom" constant="11" id="gRh-RC-s4H"/>
-                                                <constraint firstAttribute="trailing" secondItem="PWK-gd-Vpm" secondAttribute="trailing" constant="20" symbolic="YES" id="rsS-n1-4fI"/>
-                                                <constraint firstItem="PWK-gd-Vpm" firstAttribute="top" secondItem="Z8v-2V-6vC" secondAttribute="top" constant="11" id="vLP-VQ-zYD"/>
+                                                <constraint firstItem="bKP-gL-Ha1" firstAttribute="leading" secondItem="Psi-xC-w9A" secondAttribute="leading" id="4sf-Lq-uXE"/>
+                                                <constraint firstItem="bKP-gL-Ha1" firstAttribute="top" secondItem="Psi-xC-w9A" secondAttribute="top" id="Gfm-a6-6aW"/>
+                                                <constraint firstAttribute="bottom" secondItem="bKP-gL-Ha1" secondAttribute="bottom" id="TUh-cn-Rst"/>
+                                                <constraint firstAttribute="trailing" secondItem="bKP-gL-Ha1" secondAttribute="trailing" id="yw3-4r-yuR"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="deleteButton" destination="bKP-gL-Ha1" id="5Ej-8A-TgA"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <sections/>
@@ -177,6 +251,10 @@
                             <constraint firstItem="HKR-3i-HlK" firstAttribute="top" secondItem="dzc-dz-UjZ" secondAttribute="bottom" id="xQW-XS-RVQ"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="navigationTitle" destination="uwT-h7-vuH" id="K18-n8-i4J"/>
+                        <outlet property="tableView" destination="HKR-3i-HlK" id="G8M-tM-Yan"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aHJ-ny-z5A" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -215,6 +293,9 @@
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

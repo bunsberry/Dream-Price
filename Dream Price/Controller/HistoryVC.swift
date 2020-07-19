@@ -8,9 +8,11 @@
 import UIKit
 
 struct Transaction {
+    var id: Int
     var date : Date
     var number : Float
     var category : String
+    var description: String
 }
 
 enum SortingType {
@@ -24,7 +26,7 @@ private func firstDayOfMonth(date: Date) -> Date {
     return calendar.date(from: components)!
 }
 
-private func parseDate(_ str : String) -> Date {
+func parseDate(_ str : String) -> Date {
     let dateFormat = DateFormatter()
     dateFormat.dateFormat = "yyyy-MM-dd"
     dateFormat.locale = Locale.current
@@ -160,10 +162,12 @@ class HistoryVC: UITableViewController {
     // TODO: Getting transactions from a DB
     
     var transactions = [
-        Transaction(date: parseDate("2020-06-17"), number: -233, category: "Продукты"),
-        Transaction(date: parseDate("2020-06-15"), number: -224, category: "Продукты"),
-        Transaction(date: parseDate("2020-07-15"), number: 23, category: "Работа")
+        Transaction(id: 0, date: parseDate("2020-06-17"), number: -233, category: "Продукты", description: ""),
+        Transaction(id: 1, date: parseDate("2020-06-15"), number: -224, category: "Продукты", description: ""),
+        Transaction(id: 2, date: parseDate("2020-07-15"), number: 23, category: "Работа", description: "")
     ]
+    
+    var chosenTransaction: Transaction = Transaction(id: 0, date: parseDate("2020-06-17"), number: -233, category: "Продукты", description: "")
     
     var sections = [GroupedSection<Date, Transaction>]()
     
@@ -253,13 +257,30 @@ class HistoryVC: UITableViewController {
             cell.numberLabel.textColor = UIColor(red: 0.792, green: 0.443, blue: 0.443, alpha: 1)
         }
         
+        cell.id = transaction.id
+        cell.desc = transaction.description
+        cell.number = transaction.number
+        cell.date = transaction.date
+        
         cell.categoryLabel.text = transaction.category
         
         return cell
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? EditTransactionVC, segue.identifier == "toTransaction" {
+            vc.data = chosenTransaction
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let cell = tableView.cellForRow(at: indexPath) as! TransactionCell
+        
+        
+        chosenTransaction = Transaction(id: cell.id, date: cell.date, number: cell.number, category: cell.categoryLabel.text!, description: cell.desc)
+        
         performSegue(withIdentifier: "toTransaction", sender: nil)
     }
     
