@@ -397,20 +397,115 @@
                     <view key="view" contentMode="scaleToFill" id="6bi-eG-NrK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Eeh-OU-zSH">
+                                <rect key="frame" x="0.0" y="56" width="414" height="752"/>
+                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="newCategoryCell" id="tS5-Bw-KV3" customClass="NewCategoryCell" customModule="Dream_Price" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tS5-Bw-KV3" id="0Zs-CY-6vV">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Введите новую категорию здесь" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5v9-hL-BBE">
+                                                    <rect key="frame" x="20" y="11" width="374" height="22"/>
+                                                    <color key="tintColor" red="0.45098039220000002" green="0.79215686269999996" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="categoryTyped:" destination="tS5-Bw-KV3" eventType="editingDidEndOnExit" id="X23-A7-JYE"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="5v9-hL-BBE" firstAttribute="centerY" secondItem="0Zs-CY-6vV" secondAttribute="centerY" id="LZH-Da-Uqj"/>
+                                                <constraint firstItem="5v9-hL-BBE" firstAttribute="leading" secondItem="0Zs-CY-6vV" secondAttribute="leading" constant="20" id="Qz2-KI-9c7"/>
+                                                <constraint firstAttribute="trailing" secondItem="5v9-hL-BBE" secondAttribute="trailing" constant="20" id="YQm-NR-E2R"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="newEarningCell" id="URE-Ba-EMz" customClass="NewEarningCell" customModule="Dream_Price" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="99" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="URE-Ba-EMz" id="Cr1-iq-ed4">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Введите новую категорию здесь" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1ub-ef-9B9">
+                                                    <rect key="frame" x="20" y="11" width="374" height="22"/>
+                                                    <color key="tintColor" red="0.45098039220000002" green="0.79215686269999996" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="categoryAdded:" destination="URE-Ba-EMz" eventType="editingDidEnd" id="V6g-38-VY2"/>
+                                                        <action selector="categoryTyped:" destination="URE-Ba-EMz" eventType="editingDidEndOnExit" id="DQj-Ux-jhP"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="1ub-ef-9B9" firstAttribute="leading" secondItem="Cr1-iq-ed4" secondAttribute="leading" constant="20" id="Res-Bz-eF5"/>
+                                                <constraint firstItem="1ub-ef-9B9" firstAttribute="centerY" secondItem="Cr1-iq-ed4" secondAttribute="centerY" id="WrW-0Z-kSZ"/>
+                                                <constraint firstAttribute="trailing" secondItem="1ub-ef-9B9" secondAttribute="trailing" constant="20" id="eTN-28-eia"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" showsReorderControl="YES" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="categoryCell" id="qbY-zK-dZF" customClass="EditableCategoryCell" customModule="Dream_Price" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="142.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qbY-zK-dZF" id="LGW-HK-cFH">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Категория" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vSv-zc-IA0">
+                                                    <rect key="frame" x="20" y="11" width="374" height="22"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="titleChanged:" destination="qbY-zK-dZF" eventType="editingDidEndOnExit" id="ySz-gN-za4"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="vSv-zc-IA0" firstAttribute="leading" secondItem="LGW-HK-cFH" secondAttribute="leading" constant="20" id="Hsz-1B-z7Q"/>
+                                                <constraint firstAttribute="trailing" secondItem="vSv-zc-IA0" secondAttribute="trailing" constant="20" id="f14-FI-waN"/>
+                                                <constraint firstItem="vSv-zc-IA0" firstAttribute="centerY" secondItem="LGW-HK-cFH" secondAttribute="centerY" id="yk3-hL-owQ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="titleTextField" destination="vSv-zc-IA0" id="g63-tc-WSE"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="S4E-E3-kl3"/>
                         <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="S4E-E3-kl3" firstAttribute="bottom" secondItem="Eeh-OU-zSH" secondAttribute="bottom" id="8ub-k5-CfV"/>
+                            <constraint firstItem="Eeh-OU-zSH" firstAttribute="leading" secondItem="S4E-E3-kl3" secondAttribute="leading" id="BKe-Hn-WJy"/>
+                            <constraint firstItem="Eeh-OU-zSH" firstAttribute="top" secondItem="S4E-E3-kl3" secondAttribute="top" id="Yz8-3C-xRR"/>
+                            <constraint firstItem="S4E-E3-kl3" firstAttribute="trailing" secondItem="Eeh-OU-zSH" secondAttribute="trailing" id="mUy-jN-Pie"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Категории" id="Q1L-IR-drN">
                         <barButtonItem key="leftBarButtonItem" title="Отменить" style="done" id="BCM-vk-1CX">
                             <color key="tintColor" red="0.45098039220000002" green="0.79215686269999996" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
-                                <action selector="done:" destination="33M-dd-yws" id="d0u-eV-p3c"/>
+                                <action selector="cancel:" destination="33M-dd-yws" id="D62-4y-9Zq"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Править" style="done" id="gqo-yq-hk5">
                             <color key="tintColor" red="0.45098039220000002" green="0.79215686269999996" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <connections>
+                                <action selector="edit:" destination="33M-dd-yws" id="YPK-xy-4K5"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="Eeh-OU-zSH" id="B9R-8k-JZx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JIF-KW-kuI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
