@@ -7,6 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		56D8D48F24C49BD200C3194D /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8D48E24C49BD200C3194D /* RealmService.swift */; };
+		56D8D49124C49C6B00C3194D /* Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8D49024C49C6B00C3194D /* Base.swift */; };
+		56D8D49324C4D70F00C3194D /* RealmTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8D49224C4D70F00C3194D /* RealmTransaction.swift */; };
+		56D8D49524C4D7E400C3194D /* RealmCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8D49424C4D7E400C3194D /* RealmCategory.swift */; };
+		56D8D49724C4D7F800C3194D /* RealmBudget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8D49624C4D7F800C3194D /* RealmBudget.swift */; };
+		56D8D49924C4DBE400C3194D /* RealmGoal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8D49824C4DBE400C3194D /* RealmGoal.swift */; };
+		56D8D49B24C4E20D00C3194D /* ProjectsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8D49A24C4E20D00C3194D /* ProjectsCell.swift */; };
+		56D8D49D24C4E30200C3194D /* ActionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8D49C24C4E30200C3194D /* ActionsCell.swift */; };
+		56D8D49F24C4E38700C3194D /* ProjectCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8D49E24C4E38700C3194D /* ProjectCVCell.swift */; };
+		56D8D4A124C4E3C700C3194D /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8D4A024C4E3C700C3194D /* DataService.swift */; };
+		56D8D4A324C4E42600C3194D /* RealmAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8D4A224C4E42600C3194D /* RealmAction.swift */; };
+		56D8D4A524C4E4C200C3194D /* RealmProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8D4A424C4E4C200C3194D /* RealmProject.swift */; };
+		56D8D4A724C4E70700C3194D /* AddProjectCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8D4A624C4E70700C3194D /* AddProjectCVCell.swift */; };
 		841BDABF24BCC4330096BF68 /* Projects.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 841BDABE24BCC4330096BF68 /* Projects.storyboard */; };
 		841BDAC124BCC7970096BF68 /* History.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 841BDAC024BCC7970096BF68 /* History.storyboard */; };
 		841BDAC324BCC8260096BF68 /* Dreams.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 841BDAC224BCC8260096BF68 /* Dreams.storyboard */; };
@@ -43,6 +56,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		56D8D48E24C49BD200C3194D /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
+		56D8D49024C49C6B00C3194D /* Base.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Base.swift; sourceTree = "<group>"; };
+		56D8D49224C4D70F00C3194D /* RealmTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RealmTransaction.swift; path = "Dream Price/RealmTransaction.swift"; sourceTree = SOURCE_ROOT; };
+		56D8D49424C4D7E400C3194D /* RealmCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RealmCategory.swift; path = "Dream Price/RealmCategory.swift"; sourceTree = SOURCE_ROOT; };
+		56D8D49624C4D7F800C3194D /* RealmBudget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RealmBudget.swift; path = "Dream Price/RealmBudget.swift"; sourceTree = SOURCE_ROOT; };
+		56D8D49824C4DBE400C3194D /* RealmGoal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RealmGoal.swift; path = "Dream Price/RealmGoal.swift"; sourceTree = SOURCE_ROOT; };
+		56D8D49A24C4E20D00C3194D /* ProjectsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsCell.swift; sourceTree = "<group>"; };
+		56D8D49C24C4E30200C3194D /* ActionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsCell.swift; sourceTree = "<group>"; };
+		56D8D49E24C4E38700C3194D /* ProjectCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCVCell.swift; sourceTree = "<group>"; };
+		56D8D4A024C4E3C700C3194D /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		56D8D4A224C4E42600C3194D /* RealmAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RealmAction.swift; path = "Dream Price/Realm/RealmAction.swift"; sourceTree = SOURCE_ROOT; };
+		56D8D4A424C4E4C200C3194D /* RealmProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RealmProject.swift; path = "Dream Price/Realm/RealmProject.swift"; sourceTree = SOURCE_ROOT; };
+		56D8D4A624C4E70700C3194D /* AddProjectCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProjectCVCell.swift; sourceTree = "<group>"; };
 		6C95879CF6685A037493194E /* Pods_Dream_Price.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dream_Price.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		841BDABE24BCC4330096BF68 /* Projects.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Projects.storyboard; sourceTree = "<group>"; };
 		841BDAC024BCC7970096BF68 /* History.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = History.storyboard; sourceTree = "<group>"; };
@@ -106,6 +132,12 @@
 		841BDAB824BCC3500096BF68 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				56D8D49224C4D70F00C3194D /* RealmTransaction.swift */,
+				56D8D49424C4D7E400C3194D /* RealmCategory.swift */,
+				56D8D49624C4D7F800C3194D /* RealmBudget.swift */,
+				56D8D49824C4DBE400C3194D /* RealmGoal.swift */,
+				56D8D4A224C4E42600C3194D /* RealmAction.swift */,
+				56D8D4A424C4E4C200C3194D /* RealmProject.swift */,
 				8447A83E24BCD9E3005F448B /* BudgetItem.swift */,
 				843D056C24BDFD2200DF7EFF /* Category.swift */,
 				84B35FA224C1FB9E008FD1CE /* GroupedSection.swift */,
@@ -137,6 +169,10 @@
 				8447A83224BCCAE8005F448B /* BudgetVC.swift */,
 				8447A83C24BCD990005F448B /* BudgetPVC.swift */,
 				8447A83424BCCB04005F448B /* ProjectsVC.swift */,
+				56D8D49A24C4E20D00C3194D /* ProjectsCell.swift */,
+				56D8D49C24C4E30200C3194D /* ActionsCell.swift */,
+				56D8D4A624C4E70700C3194D /* AddProjectCVCell.swift */,
+				56D8D49E24C4E38700C3194D /* ProjectCVCell.swift */,
 				8447A83824BCCB27005F448B /* DreamsVC.swift */,
 				8447A84024BCDBDE005F448B /* BudgetItemDataVC.swift */,
 				843D057024BE03C800DF7EFF /* CategoryCollectionVC.swift */,
@@ -158,6 +194,8 @@
 		841BDABC24BCC37A0096BF68 /* Realm */ = {
 			isa = PBXGroup;
 			children = (
+				56D8D48E24C49BD200C3194D /* RealmService.swift */,
+				56D8D4A024C4E3C700C3194D /* DataService.swift */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
@@ -165,6 +203,7 @@
 		841BDABD24BCC3BF0096BF68 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				56D8D49024C49C6B00C3194D /* Base.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -352,6 +391,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56D8D49724C4D7F800C3194D /* RealmBudget.swift in Sources */,
+				56D8D49124C49C6B00C3194D /* Base.swift in Sources */,
+				56D8D49924C4DBE400C3194D /* RealmGoal.swift in Sources */,
+				56D8D49F24C4E38700C3194D /* ProjectCVCell.swift in Sources */,
+				56D8D4A524C4E4C200C3194D /* RealmProject.swift in Sources */,
+				56D8D4A724C4E70700C3194D /* AddProjectCVCell.swift in Sources */,
+				56D8D4A324C4E42600C3194D /* RealmAction.swift in Sources */,
+				56D8D48F24C49BD200C3194D /* RealmService.swift in Sources */,
+				56D8D4A124C4E3C700C3194D /* DataService.swift in Sources */,
 				843D057124BE03C800DF7EFF /* CategoryCollectionVC.swift in Sources */,
 				843B29BB24C49F7B00A7E87A /* ETDeleteCell.swift in Sources */,
 				84B35FA124C1E9AD008FD1CE /* HistoryVC.swift in Sources */,
@@ -365,6 +413,10 @@
 				84E4C73C24BEF882006E3D0A /* ManageCategoriesVC.swift in Sources */,
 				843D057324BE21AA00DF7EFF /* DashedBorders.swift in Sources */,
 				843688BD24BCC0A500793B2B /* SceneDelegate.swift in Sources */,
+				56D8D49324C4D70F00C3194D /* RealmTransaction.swift in Sources */,
+				56D8D49D24C4E30200C3194D /* ActionsCell.swift in Sources */,
+				56D8D49524C4D7E400C3194D /* RealmCategory.swift in Sources */,
+				56D8D49B24C4E20D00C3194D /* ProjectsCell.swift in Sources */,
 				8447A83524BCCB04005F448B /* ProjectsVC.swift in Sources */,
 				8447A83F24BCD9E3005F448B /* BudgetItem.swift in Sources */,
 				8447A83D24BCD990005F448B /* BudgetPVC.swift in Sources */,
