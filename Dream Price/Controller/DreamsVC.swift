@@ -28,18 +28,19 @@ private func parseDate(_ str : String) -> Date {
     return dateFormat.date(from: str)!
 }
 
+var DreamsList: [Dream] = [
+    Dream(type: .focusedDream, title: "Поездка на мальдивы", description: "Солнце, пляж... То что надо!", balance: 50000, goal: 150000, dateAdded: parseDate("2020-06-15")),
+    Dream(type: .dream, title: "iPhone 11", description: "Монобровь это не так уж и плохо!", balance: nil, goal: 89999, dateAdded: parseDate("2020-06-13")),
+    Dream(type: .dream, title: "iPhone 11", description: "Монобровь это не так уж и плохо!", balance: nil, goal: 89999, dateAdded: parseDate("2020-06-13")),
+    Dream(type: .dream, title: "iPhone 11", description: "Монобровь это не так уж и плохо!", balance: nil, goal: 89999, dateAdded: parseDate("2020-06-13"))
+]
 
 
 class DreamsVC: UICollectionViewController {
     
     // TODO: Reading from DB
 
-    public var DreamsList: [Dream] = [
-        Dream(type: .focusedDream, title: "Поездка на мальдивы", description: "Солнце, пляж... То что надо!", balance: 50000, goal: 150000, dateAdded: parseDate("2020-06-15")),
-        Dream(type: .dream, title: "iPhone 11", description: "Монобровь это не так уж и плохо!", balance: nil, goal: 89999, dateAdded: parseDate("2020-06-13")),
-        Dream(type: .dream, title: "iPhone 11", description: "Монобровь это не так уж и плохо!", balance: nil, goal: 89999, dateAdded: parseDate("2020-06-13")),
-        Dream(type: .dream, title: "iPhone 11", description: "Монобровь это не так уж и плохо!", balance: nil, goal: 89999, dateAdded: parseDate("2020-06-13"))
-    ]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -26,7 +26,8 @@ class AddDreamVC: UITableViewController {
     @IBAction func addDream(_ sender: Any) {
         if nameField.text != nil && descriptionField.text != nil && sumField.text != nil {
             let sum = Float(sumField.text!)
-            DreamsVC().DreamsList.append(Dream(type: sw(), title: nameField.text!, description: descriptionField.text!, balance: 0, goal: sum!, dateAdded: Date()))
+            DreamsList.append(Dream(type: sw(), title: nameField.text!, description: descriptionField.text!, balance: 0, goal: sum!, dateAdded: Date()))
         }
+        print(DreamsList)
     }
 }
