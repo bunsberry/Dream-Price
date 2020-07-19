@@ -2,7 +2,7 @@
 //  HistoryVC.swift
 //  Dream Price
 //
-//  Created by Kostya Bunsberry on 17.07.2020.
+//  Created by Kostya Bunsberry on 14.07.2020.
 //
 
 import UIKit
@@ -283,5 +283,4 @@ class HistoryVC: UITableViewController {
         
         performSegue(withIdentifier: "toTransaction", sender: nil)
     }
-    
 }
