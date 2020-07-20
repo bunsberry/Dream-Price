@@ -13,12 +13,12 @@ enum DreamType {
 }
 
 struct Dream {
-    let type: DreamType
-    let title: String
-    let description: String
-    let balance: Float?
-    let goal: Float
-    let dateAdded: Date
+    var type: DreamType
+    var title: String
+    var description: String
+    var balance: Float
+    var goal: Float
+    var dateAdded: Date
 }
 
 private func parseDate(_ str : String) -> Date {
@@ -30,9 +30,7 @@ private func parseDate(_ str : String) -> Date {
 
 var DreamsList: [Dream] = [
     Dream(type: .focusedDream, title: "Поездка на мальдивы", description: "Солнце, пляж... То что надо!", balance: 50000, goal: 150000, dateAdded: parseDate("2020-06-15")),
-    Dream(type: .dream, title: "iPhone 11", description: "Монобровь это не так уж и плохо!", balance: nil, goal: 89999, dateAdded: parseDate("2020-06-13")),
-    Dream(type: .dream, title: "iPhone 11", description: "Монобровь это не так уж и плохо!", balance: nil, goal: 89999, dateAdded: parseDate("2020-06-13")),
-    Dream(type: .dream, title: "iPhone 11", description: "Монобровь это не так уж и плохо!", balance: nil, goal: 89999, dateAdded: parseDate("2020-06-13"))
+    Dream(type: .dream, title: "iPhone 11", description: "Монобровь это не так уж и плохо!", balance: 0, goal: 89999, dateAdded: parseDate("2020-06-13"))
 ]
 
 
@@ -65,15 +63,9 @@ class DreamsVC: UICollectionViewController {
         static let NavBarHeightLargeState: CGFloat = 96.5
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
-        AddDreamVC().instanceofDreamVC = self
-    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         showImage(true)
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        dreamCollection.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -143,18 +135,11 @@ class DreamsVC: UICollectionViewController {
         }
     }
     
-    // MARK: Settings Button Action
+    // MARK: Add Dream Button Action
     
     @objc func addDream(sender: UIButton!) {
-        //let instanceVC = self.storyboard?.instantiateViewController(identifier: "AddDreamVC") as? AddDreamVC
         performSegue(withIdentifier: "toAddDream", sender: nil)
-        /*
-        instanceVC?.addCompletion = { (flag) in
-            if (flag) {
-                self.dreamCollection.reloadData()
-            }
-        }
-        */
+        AddDreamVC.delegate = self
     }
     
     // MARK: Collection View Setup
@@ -165,8 +150,24 @@ class DreamsVC: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        var currency = Locale.current.currencySymbol
-        if Locale.current.currencySymbol == "RUB" { currency = "₽" }
+        let currencyFormatter = NumberFormatter()
+        currencyFormatter.locale = Locale.current
+        currencyFormatter.numberStyle = .currency
+        
+        // TODO: Depends on setting
+        
+        currencyFormatter.minimumFractionDigits = 0
+        currencyFormatter.maximumFractionDigits = 0
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd MMM"
+        dateFormatter.locale = Locale.current
+        dateFormatter.calendar = Locale.current.calendar
+        
+        if Locale.current.currencyCode == "RUB" {
+            dateFormatter.locale = Locale.init(identifier: "ru_RU")
+            currencyFormatter.locale = Locale.init(identifier: "ru_RU")
+        }
         
         if DreamsList[indexPath.row].type == .focusedDream {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "focusedCell", for: indexPath) as! FocusedDreamCell
@@ -176,10 +177,11 @@ class DreamsVC: UICollectionViewController {
             
             // TODO: Formatting balance and date
             
-            cell.balanceLabel.text = "\(DreamsList[indexPath.row].balance ?? 0) \(currency ?? "$")"
-            cell.goalLabel.text = "\(DreamsList[indexPath.row].goal) \(currency ?? "$")"
-            cell.dateLabel.text = ""
-            cell.progressView.progress = DreamsList[indexPath.row].balance! / DreamsList[indexPath.row].goal
+            cell.dateLabel.text = dateFormatter.string(from: DreamsList[indexPath.row].dateAdded)
+            cell.balanceLabel.text = "\(currencyFormatter.string(from: NSNumber(value: DreamsList[indexPath.row].balance)) ?? "0")"
+            cell.goalLabel.text = "\(currencyFormatter.string(from: NSNumber(value: DreamsList[indexPath.row].goal)) ?? "0")"
+            
+            cell.progressView.progress = DreamsList[indexPath.row].balance / DreamsList[indexPath.row].goal
             
             cell.contentView.backgroundColor = UIColor.systemBackground
             cell.contentView.layer.cornerRadius = 5
@@ -199,8 +201,9 @@ class DreamsVC: UICollectionViewController {
             
             cell.titleLabel.text = DreamsList[indexPath.row].title
             cell.descriptionLabel.text = DreamsList[indexPath.row].description
-            cell.priceLabel.text = "\(DreamsList[indexPath.row].goal) \(currency ?? "$")"
-            cell.dateLabel.text = ""
+            
+            cell.dateLabel.text = dateFormatter.string(from: DreamsList[indexPath.row].dateAdded)
+            cell.priceLabel.text = "\(currencyFormatter.string(from: NSNumber(value: DreamsList[indexPath.row].goal)) ?? "0")"
             
             cell.contentView.backgroundColor = UIColor.systemBackground
             cell.contentView.layer.cornerRadius = 5
@@ -224,10 +227,24 @@ class DreamsVC: UICollectionViewController {
         // TODO: Delegate with id and cell data
     }
 }
-/*
-extension DreamsVC: RefreshDataDelegate {
-    func refreshData() {
+
+extension DreamsVC: AddDreamDelegate {
+    func dreamAdded(newDream: Dream) {
+        
+        // TODO: DB dream add
+        
+        var newDream = newDream
+        
+        if newDream.type == .focusedDream {
+            newDream.balance = DreamsList[0].balance
+            DreamsList[0].balance = 0
+            DreamsList[0].type = .dream
+            DreamsList.insert(newDream, at: 0)
+        } else {
+            DreamsList.append(newDream)
+        }
+        
         dreamCollection.reloadData()
     }
 }
-*/
+
