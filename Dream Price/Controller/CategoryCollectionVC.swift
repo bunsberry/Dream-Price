@@ -26,7 +26,10 @@ extension BudgetVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate
         if categoriesShown[indexPath.row].type == .manage {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "manageCategories", for: indexPath) as! ManageCategoriesCell
             
-            cell.manageView.addDashedBorder(color: UIColor.secondaryLabel)
+            cell.manageView.layer.cornerRadius = 4
+            cell.manageView.layer.borderWidth = 1
+            cell.manageView.layer.borderColor = UIColor.secondaryLabel.cgColor
+            
             cell.manageButton.setTitleColor(UIColor.secondaryLabel, for: .normal)
             
             return cell

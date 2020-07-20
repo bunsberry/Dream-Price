@@ -16,12 +16,12 @@ class BudgetVC: UIViewController, BudgetDelegate {
     // TODO: Получение категорий из DB
     
     let categories: [Category] = [
-        Category(id: 0, type: .earning, title: "💼 Работа"),
-        Category(id: 0, type: .spending, title: "☕️ Кофе"),
-        Category(id: 1, type: .spending, title: "🥑 Продукты"),
-        Category(id: 0, type: .budget, title: "📱 Приложуха"),
-        Category(id: 1, type: .budget, title: "🌙 Мечта"),
-        Category(id: 0, type: .manage, title: "Изменить...")
+        Category(id: 0, type: .earning, title: NSLocalizedString("Work", comment: "")),
+        Category(id: 0, type: .spending, title: NSLocalizedString("Coffee", comment: "")),
+        Category(id: 1, type: .spending, title: NSLocalizedString("Groceries", comment: "")),
+        Category(id: 0, type: .budget, title: NSLocalizedString("App", comment: "")),
+        Category(id: 1, type: .budget, title: NSLocalizedString("Dream", comment: "")),
+        Category(id: 0, type: .manage, title: NSLocalizedString("More...", comment: ""))
     ]
     
     var categoriesShown: [Category] = []

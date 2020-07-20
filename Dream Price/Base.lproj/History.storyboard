@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--HistoryVC-->
+        <!--History-->
         <scene sceneID="OQW-it-7zl">
             <objects>
                 <tableViewController id="udX-gq-zzi" customClass="HistoryVC" customModule="Dream_Price" customModuleProvider="target" sceneMemberID="viewController">
@@ -27,14 +27,14 @@
                                     <rect key="frame" x="0.0" y="0.0" width="343" height="64.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+401₽" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R1I-I0-SXr">
-                                            <rect key="frame" x="10" y="20" width="57.5" height="24.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-100$" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R1I-I0-SXr">
+                                            <rect key="frame" x="10" y="20" width="53.5" height="24.5"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                                            <color key="textColor" systemColor="systemGreenColor"/>
+                                            <color key="textColor" systemColor="systemRedColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Продукты" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zKm-XZ-OK7">
-                                            <rect key="frame" x="75.5" y="22" width="79.5" height="20.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Groceries" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zKm-XZ-OK7">
+                                            <rect key="frame" x="71.5" y="22" width="74" height="20.5"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -59,7 +59,7 @@
                             <outlet property="delegate" destination="udX-gq-zzi" id="txP-jN-xYl"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="uAu-vj-eYV"/>
+                    <navigationItem key="navigationItem" title="History" id="uAu-vj-eYV"/>
                     <connections>
                         <segue destination="hTp-3l-Pca" kind="presentation" identifier="toTransaction" id="UxS-Ad-yau"/>
                     </connections>
@@ -79,14 +79,14 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dzc-dz-UjZ">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                                 <items>
-                                    <navigationItem title="Транзакция" id="uwT-h7-vuH">
-                                        <barButtonItem key="leftBarButtonItem" title="Отменить" style="done" id="5Im-eN-ykT">
+                                    <navigationItem title="Transaction" id="uwT-h7-vuH">
+                                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="cancel" id="5Im-eN-ykT">
                                             <color key="tintColor" red="0.45098039215686275" green="0.792156862745098" blue="0.44313725490196076" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <connections>
                                                 <action selector="cancel:" destination="hTp-3l-Pca" id="mCW-9K-aiD"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Сохранить" style="done" id="pKI-eN-3Po">
+                                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="pKI-eN-3Po">
                                             <color key="tintColor" red="0.45098039220000002" green="0.79215686269999996" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <connections>
                                                 <action selector="save:" destination="hTp-3l-Pca" id="G5s-N9-Xvh"/>
@@ -106,7 +106,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Продукты" placeholder="Введите категорию" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BYe-0y-J1t">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Type in transaction category" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BYe-0y-J1t">
                                                     <rect key="frame" x="20" y="0.0" width="394" height="43.5"/>
                                                     <color key="tintColor" red="0.45098039220000002" green="0.79215686269999996" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <constraints>
@@ -133,7 +133,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Добавьте описание для удобства..." minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="PWK-gd-Vpm">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Description..." minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="PWK-gd-Vpm">
                                                     <rect key="frame" x="20" y="0.5" width="394" height="43"/>
                                                     <color key="tintColor" red="0.45098039220000002" green="0.79215686269999996" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <constraints>
@@ -163,7 +163,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="100" placeholder="0" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="0hL-BH-Uej">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="0" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="0hL-BH-Uej">
                                                     <rect key="frame" x="20" y="0.0" width="394" height="43.5"/>
                                                     <color key="tintColor" red="0.45098039220000002" green="0.79215686269999996" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <constraints>
@@ -216,7 +216,7 @@
                                                         <constraint firstAttribute="height" constant="43.5" id="5dd-xl-KxU"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <state key="normal" title="Удалить транзакцию">
+                                                    <state key="normal" title="Delete">
                                                         <color key="titleColor" systemColor="systemRedColor"/>
                                                     </state>
                                                     <connections>
@@ -260,11 +260,11 @@
             </objects>
             <point key="canvasLocation" x="1908" y="101"/>
         </scene>
-        <!--История-->
+        <!--History-->
         <scene sceneID="bzR-5b-xf7">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Fjo-mS-lp6" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="История" image="list.bullet" catalog="system" id="wPI-Qm-4yg"/>
+                    <tabBarItem key="tabBarItem" title="History" image="list.bullet" catalog="system" id="wPI-Qm-4yg"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="MSV-Vf-LNR">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -290,9 +290,6 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGreenColor">
-            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -1,0 +1,41 @@
+/* 
+  Localizable.strings
+  Dream Price
+
+  Created by Kostya Bunsberry on 20.07.2020.
+  
+*/
+
+"Work" = "💼 Work";
+"Coffee" = "☕️ Coffee";
+"Groceries" = "🥑 Groceries";
+"App" = "📱 App";
+"Dream" = "🌙 Dream";
+"More..." = "More...";
+
+"App" = "App";
+"Personal Account" = "Personal Account";
+"Dream" = "Dream";
+"Balance: " = "Balance: ";
+
+"Edit" = "Edit";
+"Done" = "Done";
+"Save" = "Save";
+"Cancel" = "Cancel";
+"Delete" = "Delete";
+
+"Spending" = "Spending";
+"Earning" = "Earning";
+"Spendings" = "Spendings";
+"Earnings" = "Earnings";
+
+"Sort by:" = "Sort by:";
+"Day" = "Day";
+"Month" = "Month";
+
+"Are you sure?" = "Are you sure?";
+
+"Category" = "Category";
+"Description" = "Description";
+"Amount" = "Amount";
+"Date" = "Date";

@@ -80,7 +80,6 @@ class HistoryVC: UITableViewController {
     private func setupNavBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        title = "История"
         let sortButtonImage = UIImage(systemName: "line.horizontal.3.decrease.circle")
         sortButton.setTitle("", for: .normal)
         sortButton.setImage(sortButtonImage?.withTintColor(.label, renderingMode:.alwaysOriginal), for: .normal)
@@ -137,18 +136,18 @@ class HistoryVC: UITableViewController {
     // MARK: Sort Button Action
     
     @objc func changeSortMethod(sender: UIButton!) {
-        let sortMenu = UIAlertController(title: "Сортировать по:", message: nil, preferredStyle: .actionSheet)
+        let sortMenu = UIAlertController(title: NSLocalizedString("Sort by:", comment: ""), message: nil, preferredStyle: .actionSheet)
         
-        let dailyAction = UIAlertAction(title: "Дням", style: .default, handler: {
+        let dailyAction = UIAlertAction(title: NSLocalizedString("Day", comment: ""), style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
             self.sortedBy = .daily
         })
-        let monthAction = UIAlertAction(title: "Месяцам", style: .default, handler: {
+        let monthAction = UIAlertAction(title: NSLocalizedString("Month", comment: ""), style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
             self.sortedBy = .monthly
         })
         
-        let cancelAction = UIAlertAction(title: "Отменить", style: .cancel)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel)
         
         sortMenu.addAction(dailyAction)
         sortMenu.addAction(monthAction)
@@ -162,12 +161,12 @@ class HistoryVC: UITableViewController {
     // TODO: Getting transactions from a DB
     
     var transactions = [
-        Transaction(id: 0, date: parseDate("2020-06-17"), number: -233, category: "Продукты", description: ""),
-        Transaction(id: 1, date: parseDate("2020-06-15"), number: -224, category: "Продукты", description: ""),
-        Transaction(id: 2, date: parseDate("2020-07-15"), number: 23, category: "Работа", description: "")
+        Transaction(id: 0, date: parseDate("2020-06-17"), number: -233, category: NSLocalizedString("Coffee", comment: ""), description: ""),
+        Transaction(id: 1, date: parseDate("2020-06-15"), number: -224, category: NSLocalizedString("Groceries", comment: ""), description: ""),
+        Transaction(id: 2, date: parseDate("2020-07-15"), number: 23, category: NSLocalizedString("Work", comment: ""), description: "")
     ]
     
-    var chosenTransaction: Transaction = Transaction(id: 0, date: parseDate("2020-06-17"), number: -233, category: "Продукты", description: "")
+    var chosenTransaction: Transaction = Transaction(id: 0, date: parseDate("2020-01-01"), number: 0, category: "", description: "")
     
     var sections = [GroupedSection<Date, Transaction>]()
     

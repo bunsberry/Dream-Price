@@ -15,13 +15,15 @@ class ManageCategoriesVC: UIViewController, NewCategoryDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     
+    // TODO: Read categories from DB
+    
     var categories: [Category] = [
-        Category(id: 0, type: .earning, title: "💼 Работа"),
-        Category(id: 1, type: .spending, title: "☕️ Кофе"),
-        Category(id: 2, type: .spending, title: "🥑 Продукты"),
-        Category(id: 3, type: .budget, title: "📱 Приложуха"),
-        Category(id: 4, type: .budget, title: "🌙 Мечта"),
-        Category(id: 5, type: .manage, title: "Изменить...")
+        Category(id: 0, type: .earning, title: NSLocalizedString("Work", comment: "")),
+        Category(id: 0, type: .spending, title: NSLocalizedString("Coffee", comment: "")),
+        Category(id: 1, type: .spending, title: NSLocalizedString("Groceries", comment: "")),
+        Category(id: 0, type: .budget, title: NSLocalizedString("App", comment: "")),
+        Category(id: 1, type: .budget, title: NSLocalizedString("Dream", comment: "")),
+        Category(id: 0, type: .manage, title: NSLocalizedString("More...", comment: ""))
     ] {
         didSet { tableView.reloadData() }
     }
@@ -45,7 +47,12 @@ class ManageCategoriesVC: UIViewController, NewCategoryDelegate {
     
     @IBAction func edit(_ sender: UIBarButtonItem) {
         self.tableView.isEditing = !self.tableView.isEditing
-        sender.title = (self.tableView.isEditing) ? "Готово" : "Править"
+        
+        if sender.title == NSLocalizedString("Edit", comment: "") {
+            sender.title = NSLocalizedString("Done", comment: "")
+        } else {
+            sender.title = NSLocalizedString("Done", comment: "")
+        }
         
         self.tableView.cellForRow(at: IndexPath.init(row: 0, section: 0))?.showsReorderControl = false
         self.tableView.cellForRow(at: IndexPath.init(row: 0, section: 1))?.showsReorderControl = false
@@ -157,9 +164,9 @@ extension ManageCategoriesVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-            return "Траты"
+            return NSLocalizedString("Spendings", comment: "")
         } else {
-            return "Доходы"
+            return NSLocalizedString("Earnings", comment: "")
         }
     }
 }

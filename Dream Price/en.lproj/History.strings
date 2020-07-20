@@ -1,0 +1,30 @@
+
+/* Class = "UITextField"; placeholder = "0"; ObjectID = "0hL-BH-Uej"; */
+"0hL-BH-Uej.placeholder" = "0";
+
+/* Class = "UITextField"; placeholder = "Type in transaction category"; ObjectID = "BYe-0y-J1t"; */
+"BYe-0y-J1t.placeholder" = "Type in transaction category";
+
+/* Class = "UITextField"; placeholder = "Description..."; ObjectID = "PWK-gd-Vpm"; */
+"PWK-gd-Vpm.placeholder" = "Description...";
+
+/* Class = "UILabel"; text = "-100$"; ObjectID = "R1I-I0-SXr"; */
+"R1I-I0-SXr.text" = "-100$";
+
+/* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "bKP-gL-Ha1"; */
+"bKP-gL-Ha1.normalTitle" = "Delete";
+
+/* Class = "UIBarButtonItem"; title = "Сохранить"; ObjectID = "pKI-eN-3Po"; */
+"pKI-eN-3Po.title" = "Save";
+
+/* Class = "UINavigationItem"; title = "History"; ObjectID = "uAu-vj-eYV"; */
+"uAu-vj-eYV.title" = "History";
+
+/* Class = "UINavigationItem"; title = "Transaction"; ObjectID = "uwT-h7-vuH"; */
+"uwT-h7-vuH.title" = "Transaction";
+
+/* Class = "UITabBarItem"; title = "History"; ObjectID = "wPI-Qm-4yg"; */
+"wPI-Qm-4yg.title" = "History";
+
+/* Class = "UILabel"; text = "Groceries"; ObjectID = "zKm-XZ-OK7"; */
+"zKm-XZ-OK7.text" = "Groceries";

@@ -26,9 +26,9 @@ class EditTransactionVC: UIViewController, TransactionDelegate {
         super.viewDidLoad()
         
         if data.number > 0 {
-            navigationTitle.title = "Доход"
+            navigationTitle.title = NSLocalizedString("Earning", comment: "")
         } else {
-            navigationTitle.title = "Расход"
+            navigationTitle.title = NSLocalizedString("Spending", comment: "")
         }
         
         tableView.allowsSelection = false
@@ -50,16 +50,16 @@ class EditTransactionVC: UIViewController, TransactionDelegate {
     }
     
     func deleteTransaction() {
-        let deleteMenu = UIAlertController(title: "Вы уверены?", message: nil, preferredStyle: .actionSheet)
+        let deleteMenu = UIAlertController(title: NSLocalizedString("Are you sure?", comment: ""), message: nil, preferredStyle: .actionSheet)
         
-        let deleteAction = UIAlertAction(title: "Удалить", style: .destructive, handler: {
+        let deleteAction = UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: .destructive, handler: {
             (alert: UIAlertAction!) -> Void in
             // TODO: Deleting from database
             print("Transaction deleted")
             self.dismiss(animated: true, completion: nil)
         })
         
-        let cancelAction = UIAlertAction(title: "Отменить", style: .cancel)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel)
         
         deleteMenu.addAction(deleteAction)
         deleteMenu.addAction(cancelAction)
@@ -98,13 +98,13 @@ extension EditTransactionVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return "Категория"
+            return NSLocalizedString("Category", comment: "")
         case 1:
-            return "Описание"
+            return NSLocalizedString("Description", comment: "")
         case 2:
-            return "Сумма"
+            return NSLocalizedString("Amount", comment: "")
         case 3:
-            return "Дата"
+            return NSLocalizedString("Date", comment: "")
         default:
             return ""
         }

@@ -23,10 +23,9 @@ class BudgetPVC: UIPageViewController, TransportDelegate, TransportUpDelegate {
     // TODO: Getting budgetItems from DB here
     
     let pagesData: [BudgetItem] = [
-        BudgetItem(id: 3, type: .project, balance: 25, name: "Проект 1"),
-        BudgetItem(id: 2, type: .project, balance: 12, name: "Проект"),
-        BudgetItem(id: 0, type: .personal, balance: 25680, name: "Личный Счёт"),
-        BudgetItem(id: 1, type: .dream, balance: 23000, name: "Мечта")
+        BudgetItem(id: 2, type: .project, balance: 12, name: NSLocalizedString("App", comment: "")),
+        BudgetItem(id: 0, type: .personal, balance: 25680, name: NSLocalizedString("Personal Account", comment: "")),
+        BudgetItem(id: 1, type: .dream, balance: 23000, name: NSLocalizedString("Dream", comment: ""))
     ]
     
     var budgetDelegate: BudgetDelegate?

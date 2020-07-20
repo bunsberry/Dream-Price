@@ -92,7 +92,7 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
         currencyFormatter.maximumFractionDigits = 0
         currencyFormatter.minimumFractionDigits = 0
         let priceString = currencyFormatter.string(from: NSNumber(value: balance))!
-        self.balanceLabel.text = "Баланс: \(priceString)"
+        self.balanceLabel.text = NSLocalizedString("Balance: ", comment: "") + priceString
 
 //        } else {
 //            let priceString = currencyFormatter.string(from: NSNumber(value: balanceFloat))!

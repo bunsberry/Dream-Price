@@ -11,7 +11,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Бюджет-->
+        <!--Budget-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="BudgetVC" customModule="Dream_Price" customModuleProvider="target" sceneMemberID="viewController">
@@ -73,17 +73,17 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="manageCategories" id="xhc-O2-in8" customClass="ManageCategoriesCell" customModule="Dream_Price" customModuleProvider="target">
-                                        <rect key="frame" x="96" y="15" width="119" height="50"/>
+                                        <rect key="frame" x="96" y="15" width="96" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="EcC-EU-3wR">
-                                            <rect key="frame" x="0.0" y="0.0" width="119" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="96" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hY0-ox-B1H">
-                                                    <rect key="frame" x="0.0" y="0.0" width="119" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="96" height="50"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <inset key="contentEdgeInsets" minX="24" minY="16" maxX="24" maxY="16"/>
-                                                    <state key="normal" title="Изменить">
+                                                    <state key="normal" title="More...">
                                                         <color key="titleColor" systemColor="labelColor"/>
                                                     </state>
                                                     <connections>
@@ -275,7 +275,7 @@
                             <constraint firstItem="9n5-yb-l6e" firstAttribute="top" secondItem="tJX-NP-tWc" secondAttribute="bottom" id="tT5-T0-wAe"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Бюджет" image="creditcard" catalog="system" id="DPl-dS-Wvm"/>
+                    <tabBarItem key="tabBarItem" title="Budget" image="creditcard" catalog="system" id="DPl-dS-Wvm"/>
                     <connections>
                         <outlet property="budgetsViewContainer" destination="tJX-NP-tWc" id="Wwb-LP-8Vy"/>
                         <outlet property="categoriesCollectionView" destination="9n5-yb-l6e" id="U9q-55-OYg"/>
@@ -295,13 +295,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="302"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Остаток: 25 543 ₽" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TZj-JM-iLx">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance: 25 543 ₽" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TZj-JM-iLx">
                                 <rect key="frame" x="0.0" y="63" width="414" height="20.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Личный Счет" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="54q-tt-1Vc">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Personal Account" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="54q-tt-1Vc">
                                 <rect key="frame" x="0.0" y="262.5" width="414" height="21"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <nil key="textColor"/>
@@ -310,7 +310,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kcN-A1-4iZ">
                                 <rect key="frame" x="52" y="95.5" width="310.5" height="155"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" ₽" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fFd-ek-4zl">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" $" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fFd-ek-4zl">
                                         <rect key="frame" x="176.5" y="74" width="23.5" height="33.5"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -390,7 +390,7 @@
             </objects>
             <point key="canvasLocation" x="2067" y="129"/>
         </scene>
-        <!--Категории-->
+        <!--Categories-->
         <scene sceneID="oAY-CM-eie">
             <objects>
                 <viewController id="33M-dd-yws" customClass="ManageCategoriesVC" customModule="Dream_Price" customModuleProvider="target" sceneMemberID="viewController">
@@ -409,7 +409,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Введите новую категорию здесь" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5v9-hL-BBE">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Type new category here..." adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5v9-hL-BBE">
                                                     <rect key="frame" x="20" y="11" width="374" height="22"/>
                                                     <color key="tintColor" red="0.45098039220000002" green="0.79215686269999996" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -433,7 +433,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Введите новую категорию здесь" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1ub-ef-9B9">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Type new category here..." adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1ub-ef-9B9">
                                                     <rect key="frame" x="20" y="11" width="374" height="22"/>
                                                     <color key="tintColor" red="0.45098039220000002" green="0.79215686269999996" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
@@ -458,7 +458,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Категория" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vSv-zc-IA0">
+                                                <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Category" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vSv-zc-IA0">
                                                     <rect key="frame" x="20" y="11" width="374" height="22"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -489,14 +489,14 @@
                             <constraint firstItem="S4E-E3-kl3" firstAttribute="trailing" secondItem="Eeh-OU-zSH" secondAttribute="trailing" id="mUy-jN-Pie"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Категории" id="Q1L-IR-drN">
-                        <barButtonItem key="leftBarButtonItem" title="Отменить" style="done" id="BCM-vk-1CX">
+                    <navigationItem key="navigationItem" title="Categories" id="Q1L-IR-drN">
+                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="cancel" id="BCM-vk-1CX">
                             <color key="tintColor" red="0.45098039220000002" green="0.79215686269999996" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <action selector="cancel:" destination="33M-dd-yws" id="D62-4y-9Zq"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Править" style="done" id="gqo-yq-hk5">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="edit" id="gqo-yq-hk5">
                             <color key="tintColor" red="0.45098039220000002" green="0.79215686269999996" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <action selector="edit:" destination="33M-dd-yws" id="YPK-xy-4K5"/>
