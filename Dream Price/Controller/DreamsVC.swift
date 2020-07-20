@@ -40,14 +40,17 @@ class DreamsVC: UICollectionViewController {
     
     // TODO: Reading from DB
 
-    
+    @IBOutlet public var dreamCollection: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupNavBar()
     }
-    
+    func reloaddata() {
+        DispatchQueue.main.async {
+            self.dreamCollection.reloadData()
+        }
+    }
     // MARK: Navigation Bar Setup
     
     private var addButton = UIButton()
@@ -62,9 +65,15 @@ class DreamsVC: UICollectionViewController {
         static let NavBarHeightLargeState: CGFloat = 96.5
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
+        AddDreamVC().instanceofDreamVC = self
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         showImage(true)
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        dreamCollection.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -137,7 +146,15 @@ class DreamsVC: UICollectionViewController {
     // MARK: Settings Button Action
     
     @objc func addDream(sender: UIButton!) {
+        //let instanceVC = self.storyboard?.instantiateViewController(identifier: "AddDreamVC") as? AddDreamVC
         performSegue(withIdentifier: "toAddDream", sender: nil)
+        /*
+        instanceVC?.addCompletion = { (flag) in
+            if (flag) {
+                self.dreamCollection.reloadData()
+            }
+        }
+        */
     }
     
     // MARK: Collection View Setup
@@ -207,3 +224,10 @@ class DreamsVC: UICollectionViewController {
         // TODO: Delegate with id and cell data
     }
 }
+/*
+extension DreamsVC: RefreshDataDelegate {
+    func refreshData() {
+        dreamCollection.reloadData()
+    }
+}
+*/

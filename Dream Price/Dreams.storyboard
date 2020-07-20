@@ -164,6 +164,7 @@
                     <navigationItem key="navigationItem" id="yvN-Tt-9Pu"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="dreamCollection" destination="Tcp-oo-Odu" id="P9j-fh-jIL"/>
                         <segue destination="4j8-jl-Qvj" kind="presentation" identifier="toEditDream" id="r2l-hC-32T"/>
                         <segue destination="x7P-Tb-w6X" kind="presentation" identifier="toAddDream" id="Kps-Nw-f7P"/>
                     </connections>
@@ -206,7 +207,7 @@
         <!--Новая мечта-->
         <scene sceneID="51c-Df-gpS">
             <objects>
-                <tableViewController id="FAh-JM-XfC" customClass="AddDreamVC" customModule="Dream_Price" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="AddDreamVC" id="FAh-JM-XfC" customClass="AddDreamVC" customModule="Dream_Price" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="83V-AT-1cI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
