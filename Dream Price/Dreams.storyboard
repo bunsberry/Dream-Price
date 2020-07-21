@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17105.1"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -173,44 +172,13 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="dreamCollection" destination="Tcp-oo-Odu" id="P9j-fh-jIL"/>
-                        <segue destination="4j8-jl-Qvj" kind="presentation" identifier="toEditDream" id="r2l-hC-32T"/>
                         <segue destination="x7P-Tb-w6X" kind="presentation" identifier="toAddDream" id="Kps-Nw-f7P"/>
+                        <segue destination="wek-zc-gcc" kind="presentation" identifier="toEditDream" id="9J2-Sd-T13"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QyK-kB-Snj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="813.04347826086962" y="115.7608695652174"/>
-        </scene>
-        <!--Edit DreamVC-->
-        <scene sceneID="bRN-Rq-aEO">
-            <objects>
-                <viewController id="4j8-jl-Qvj" customClass="EditDreamVC" customModule="Dream_Price" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="H86-j6-lyh">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dP0-8N-aW5">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
-                                <items>
-                                    <navigationItem title="Мечта" id="Y0M-bW-lB7">
-                                        <barButtonItem key="leftBarButtonItem" title="Отменить" id="aIp-ON-I9Z"/>
-                                        <barButtonItem key="rightBarButtonItem" title="Сохранить" id="awB-L0-0fJ"/>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="zbo-ly-LdQ"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="dP0-8N-aW5" firstAttribute="leading" secondItem="zbo-ly-LdQ" secondAttribute="leading" id="2yJ-Ws-FOK"/>
-                            <constraint firstItem="dP0-8N-aW5" firstAttribute="top" secondItem="zbo-ly-LdQ" secondAttribute="top" id="6QE-Py-pbC"/>
-                            <constraint firstAttribute="trailing" secondItem="dP0-8N-aW5" secondAttribute="trailing" id="MkL-zH-omn"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xMQ-Ts-7wg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1641" y="452"/>
         </scene>
         <!--Новая мечта-->
         <scene sceneID="51c-Df-gpS">
@@ -371,6 +339,162 @@
             </objects>
             <point key="canvasLocation" x="3257.971014492754" y="-271.46739130434787"/>
         </scene>
+        <!--Редактировать мечту-->
+        <scene sceneID="0LG-Fy-3Po">
+            <objects>
+                <tableViewController id="D5K-Ax-Hz4" customClass="EditDreamVC" customModule="Dream_Price" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="oRI-xY-3H2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <sections>
+                            <tableViewSection headerTitle="Название" id="8oi-Sl-fTg">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="44" id="bdh-8c-2lK">
+                                        <rect key="frame" x="0.0" y="55.333332061767578" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bdh-8c-2lK" id="wDa-bs-PCi">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Введите название..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HUq-Q1-MaZ">
+                                                    <rect key="frame" x="20" y="0.0" width="394" height="44"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="HUq-Q1-MaZ" firstAttribute="top" secondItem="wDa-bs-PCi" secondAttribute="top" id="7Oz-6C-ouY"/>
+                                                <constraint firstAttribute="trailing" secondItem="HUq-Q1-MaZ" secondAttribute="trailing" id="h4g-rQ-U7e"/>
+                                                <constraint firstItem="HUq-Q1-MaZ" firstAttribute="leading" secondItem="wDa-bs-PCi" secondAttribute="leading" constant="20" id="htX-L6-aSB"/>
+                                                <constraint firstAttribute="bottom" secondItem="HUq-Q1-MaZ" secondAttribute="bottom" id="nT7-Iw-hT1"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Описание" id="W2U-oL-uwu">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="44" id="II6-no-Cka">
+                                        <rect key="frame" x="0.0" y="155.33333206176758" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="II6-no-Cka" id="xfd-IQ-ibz">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Добавьте описание..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xYl-wX-Y99">
+                                                    <rect key="frame" x="20" y="0.0" width="394" height="44"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="xYl-wX-Y99" secondAttribute="bottom" id="0zh-Im-aeF"/>
+                                                <constraint firstItem="xYl-wX-Y99" firstAttribute="top" secondItem="xfd-IQ-ibz" secondAttribute="top" id="Hxx-R0-u0h"/>
+                                                <constraint firstAttribute="trailing" secondItem="xYl-wX-Y99" secondAttribute="trailing" id="LlC-ey-k9u"/>
+                                                <constraint firstItem="xYl-wX-Y99" firstAttribute="leading" secondItem="xfd-IQ-ibz" secondAttribute="leading" constant="20" symbolic="YES" id="VCe-LY-Rsf"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Цель" id="Zaq-co-qFZ">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="44" id="4OO-AV-edo">
+                                        <rect key="frame" x="0.0" y="255.33333206176758" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4OO-AV-edo" id="7N4-7Q-zrA">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Добавьте цель..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bTg-wG-fXj">
+                                                    <rect key="frame" x="20" y="0.0" width="394" height="44"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="bTg-wG-fXj" secondAttribute="bottom" id="Via-Y4-ax0"/>
+                                                <constraint firstItem="bTg-wG-fXj" firstAttribute="top" secondItem="7N4-7Q-zrA" secondAttribute="top" id="nYv-53-Ocu"/>
+                                                <constraint firstAttribute="trailing" secondItem="bTg-wG-fXj" secondAttribute="trailing" id="q4D-vA-44Y"/>
+                                                <constraint firstItem="bTg-wG-fXj" firstAttribute="leading" secondItem="7N4-7Q-zrA" secondAttribute="leading" constant="20" id="uXR-9G-oXt"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Тип" id="vb5-Ol-Wjb">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="44" id="vVk-Cd-bzI">
+                                        <rect key="frame" x="0.0" y="355.33333206176758" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vVk-Cd-bzI" id="bOS-fL-7wS">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="yhg-kK-PJX">
+                                                    <rect key="frame" x="182.66666666666666" y="6.6666666666666679" width="51" height="31.000000000000004"/>
+                                                    <color key="onTintColor" red="0.57630443570000001" green="0.69079530239999998" blue="0.90086412429999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Второстепенная" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eQC-an-f88">
+                                                    <rect key="frame" x="20" y="12" width="154.66666666666666" height="20"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Основная" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ar-Ng-du6">
+                                                    <rect key="frame" x="239.66666666666663" y="12" width="154.33333333333337" height="20"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="0Ar-Ng-du6" firstAttribute="leading" secondItem="yhg-kK-PJX" secondAttribute="trailing" constant="8" id="3gx-Dz-5bG"/>
+                                                <constraint firstItem="0Ar-Ng-du6" firstAttribute="trailing" secondItem="bOS-fL-7wS" secondAttribute="trailingMargin" id="F1j-oz-cqZ"/>
+                                                <constraint firstItem="eQC-an-f88" firstAttribute="leading" secondItem="bOS-fL-7wS" secondAttribute="leadingMargin" id="hKs-yb-pAS"/>
+                                                <constraint firstItem="eQC-an-f88" firstAttribute="centerY" secondItem="bOS-fL-7wS" secondAttribute="centerY" id="nWR-bE-4v6"/>
+                                                <constraint firstItem="yhg-kK-PJX" firstAttribute="centerY" secondItem="bOS-fL-7wS" secondAttribute="centerY" id="sKi-gH-BjT"/>
+                                                <constraint firstItem="0Ar-Ng-du6" firstAttribute="centerY" secondItem="bOS-fL-7wS" secondAttribute="centerY" id="sYB-jR-0ur"/>
+                                                <constraint firstItem="yhg-kK-PJX" firstAttribute="leading" secondItem="eQC-an-f88" secondAttribute="trailing" constant="8" id="sg3-bc-nG0"/>
+                                                <constraint firstItem="yhg-kK-PJX" firstAttribute="centerX" secondItem="bOS-fL-7wS" secondAttribute="centerX" id="wpl-cX-SVd"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="D5K-Ax-Hz4" id="3IA-ah-uCX"/>
+                            <outlet property="delegate" destination="D5K-Ax-Hz4" id="bkB-re-DH2"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Редактировать мечту" id="mnf-QQ-fW5">
+                        <barButtonItem key="backBarButtonItem" title="Назад" id="HQS-dN-Vso"/>
+                        <barButtonItem key="leftBarButtonItem" title="Отменить" id="YAR-VI-yDN">
+                            <color key="tintColor" red="0.50588235290000005" green="0.61568627450000002" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="cancel:" destination="D5K-Ax-Hz4" id="cGQ-rP-UBg"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="compose" id="Dbi-A7-aVT">
+                            <color key="tintColor" red="0.50588235290000005" green="0.61568627450000002" blue="0.8980392157" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="EditDream:" destination="D5K-Ax-Hz4" id="V0X-Xj-tTF"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="descriptionField" destination="xYl-wX-Y99" id="vgR-wm-9d7"/>
+                        <outlet property="mainSwitch" destination="yhg-kK-PJX" id="XBE-h8-0TT"/>
+                        <outlet property="nameField" destination="HUq-Q1-MaZ" id="EAT-gN-gPi"/>
+                        <outlet property="sumFIeld" destination="bTg-wG-fXj" id="Ef5-do-KIk"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PbY-qj-saq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3258" y="588"/>
+        </scene>
         <!--Мечты-->
         <scene sceneID="tBv-ks-R4s">
             <objects>
@@ -409,6 +533,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZkP-Vc-LGu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2350.7246376811595" y="-271.46739130434787"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Pvb-GW-gy7">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wek-zc-gcc" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Ifk-Jz-GbN">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="D5K-Ax-Hz4" kind="relationship" relationship="rootViewController" id="2FD-ft-Z2B"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vi7-j1-SH1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2351" y="588"/>
         </scene>
     </scenes>
     <resources>

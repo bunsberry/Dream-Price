@@ -28,7 +28,7 @@ private func parseDate(_ str : String) -> Date {
     return dateFormat.date(from: str)!
 }
 
-var DreamsList: [Dream] = [
+var dreamsList: [Dream] = [
     Dream(type: .focusedDream, title: "Поездка на мальдивы", description: "Солнце, пляж... То что надо!", balance: 50000, goal: 150000, dateAdded: parseDate("2020-06-15")),
     Dream(type: .dream, title: "iPhone 11", description: "Монобровь это не так уж и плохо!", balance: 0, goal: 89999, dateAdded: parseDate("2020-06-13"))
 ]
@@ -145,7 +145,7 @@ class DreamsVC: UICollectionViewController {
     // MARK: Collection View Setup
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return DreamsList.count
+        return dreamsList.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -169,19 +169,19 @@ class DreamsVC: UICollectionViewController {
             currencyFormatter.locale = Locale.init(identifier: "ru_RU")
         }
         
-        if DreamsList[indexPath.row].type == .focusedDream {
+        if dreamsList[indexPath.row].type == .focusedDream {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "focusedCell", for: indexPath) as! FocusedDreamCell
             
-            cell.titleLabel.text = DreamsList[indexPath.row].title
-            cell.descriptionLabel.text = DreamsList[indexPath.row].description
+            cell.titleLabel.text = dreamsList[indexPath.row].title
+            cell.descriptionLabel.text = dreamsList[indexPath.row].description
             
             // TODO: Formatting balance and date
             
-            cell.dateLabel.text = dateFormatter.string(from: DreamsList[indexPath.row].dateAdded)
-            cell.balanceLabel.text = "\(currencyFormatter.string(from: NSNumber(value: DreamsList[indexPath.row].balance)) ?? "0")"
-            cell.goalLabel.text = "\(currencyFormatter.string(from: NSNumber(value: DreamsList[indexPath.row].goal)) ?? "0")"
+            cell.dateLabel.text = dateFormatter.string(from: dreamsList[indexPath.row].dateAdded)
+            cell.balanceLabel.text = "\(currencyFormatter.string(from: NSNumber(value: dreamsList[indexPath.row].balance)) ?? "0")"
+            cell.goalLabel.text = "\(currencyFormatter.string(from: NSNumber(value: dreamsList[indexPath.row].goal)) ?? "0")"
             
-            cell.progressView.progress = DreamsList[indexPath.row].balance / DreamsList[indexPath.row].goal
+            cell.progressView.progress = dreamsList[indexPath.row].balance / dreamsList[indexPath.row].goal
             
             cell.contentView.backgroundColor = UIColor.systemBackground
             cell.contentView.layer.cornerRadius = 5
@@ -199,11 +199,11 @@ class DreamsVC: UICollectionViewController {
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dreamCell", for: indexPath) as! DreamCell
             
-            cell.titleLabel.text = DreamsList[indexPath.row].title
-            cell.descriptionLabel.text = DreamsList[indexPath.row].description
+            cell.titleLabel.text = dreamsList[indexPath.row].title
+            cell.descriptionLabel.text = dreamsList[indexPath.row].description
             
-            cell.dateLabel.text = dateFormatter.string(from: DreamsList[indexPath.row].dateAdded)
-            cell.priceLabel.text = "\(currencyFormatter.string(from: NSNumber(value: DreamsList[indexPath.row].goal)) ?? "0")"
+            cell.dateLabel.text = dateFormatter.string(from: dreamsList[indexPath.row].dateAdded)
+            cell.priceLabel.text = "\(currencyFormatter.string(from: NSNumber(value: dreamsList[indexPath.row].goal)) ?? "0")"
             
             cell.contentView.backgroundColor = UIColor.systemBackground
             cell.contentView.layer.cornerRadius = 5
@@ -222,8 +222,9 @@ class DreamsVC: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Selected at \(indexPath.row)")
+        selectedDreamToEdit = indexPath.row
         performSegue(withIdentifier: "toEditDream", sender: nil)
-        
+        EditDreamVC.delegate = self
         // TODO: Delegate with id and cell data
     }
 }
@@ -236,15 +237,42 @@ extension DreamsVC: AddDreamDelegate {
         var newDream = newDream
         
         if newDream.type == .focusedDream {
-            newDream.balance = DreamsList[0].balance
-            DreamsList[0].balance = 0
-            DreamsList[0].type = .dream
-            DreamsList.insert(newDream, at: 0)
+            newDream.balance = dreamsList[0].balance
+            dreamsList[0].balance = 0
+            dreamsList[0].type = .dream
+            dreamsList.insert(newDream, at: 0)
         } else {
-            DreamsList.append(newDream)
+            dreamsList.append(newDream)
         }
         
         dreamCollection.reloadData()
     }
 }
 
+extension DreamsVC: EditDreamDelegate {
+    func dreamEdited(dream: Dream, row: Int) {
+    
+        // TODO: DB dream add
+        
+        var dream = dream
+        
+        if dream.type == .focusedDream && row == 0 {
+            dreamsList[0].title = dream.title
+            dreamsList[0].description = dream.description
+            dreamsList[0].goal = dream.goal
+        } else if dream.type == .focusedDream {
+            dream.balance = dreamsList[0].balance
+            dreamsList[0].balance = 0
+            dreamsList[0].type = .dream
+            dreamsList.remove(at: row)
+            dreamsList.insert(dream, at: 0)
+        } else {
+            dreamsList[row].title = dream.title
+            dreamsList[row].description = dream.description
+            dreamsList[row].goal = dream.goal
+        }
+        
+        dreamCollection.reloadData()
+        
+    }
+}
