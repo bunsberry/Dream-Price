@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="17132" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+    <device id="watch38"/>
+    <dependencies>
+        <deployment identifier="watchOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17105.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="17031"/>
+    </dependencies>
+    <scenes>
+        <!--Dream Price-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller title="Dream Price" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Dream_Price_Companion" customModuleProvider="target">
+                    <items>
+                        <table alignment="left" id="I00-Nm-hYB">
+                            <items>
+                                <tableRow identifier="budgetCell" id="dG8-iy-2mR" customClass="BudgetCell" customModule="Dream_Price_Companion_Extension">
+                                    <group key="rootItem" width="1" alignment="left" animationDuration="1" id="gWH-Ej-PLq">
+                                        <items>
+                                            <label width="1" height="1" alignment="center" verticalAlignment="center" text="Личный Счет" textAlignment="center" id="uvs-kI-h9y"/>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="nameLabel" destination="uvs-kI-h9y" id="Z6T-eO-aMU"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <connections>
+                        <outlet property="tableView" destination="I00-Nm-hYB" id="nq7-F5-ml8"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="228" y="571"/>
+        </scene>
+        <!--Static Notification Interface Controller-->
+        <scene sceneID="AEw-b0-oYE">
+            <objects>
+                <notificationController id="YCC-NB-fut">
+                    <items>
+                        <label alignment="left" text="Alert Label" numberOfLines="0" id="IdU-wH-bcW"/>
+                    </items>
+                    <notificationCategory key="notificationCategory" identifier="myCategory" id="JfB-70-Muf"/>
+                    <connections>
+                        <outlet property="notificationAlertLabel" destination="IdU-wH-bcW" id="JKC-fr-R95"/>
+                        <segue destination="4sK-HA-Art" kind="relationship" relationship="dynamicNotificationInterface" id="kXh-Jw-8B1"/>
+                        <segue destination="eXb-UN-Cd0" kind="relationship" relationship="dynamicInteractiveNotificationInterface" id="mpB-YA-K8N"/>
+                    </connections>
+                </notificationController>
+            </objects>
+            <point key="canvasLocation" x="220" y="1179"/>
+        </scene>
+        <!--Notification Controller-->
+        <scene sceneID="ZPc-GJ-vnh">
+            <objects>
+                <controller id="4sK-HA-Art" customClass="NotificationController" customModule="Dream_Price_Companion" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="528" y="1179"/>
+        </scene>
+        <!--Notification Controller-->
+        <scene sceneID="Niz-AI-uX2">
+            <objects>
+                <controller id="eXb-UN-Cd0" customClass="NotificationController" customModule="Dream_Price_Companion" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="528" y="881"/>
+        </scene>
+        <!--transactionValue-->
+        <scene sceneID="24F-FO-aV8">
+            <objects>
+                <controller identifier="transactionValue" animationDuration="1" id="qfA-Pn-NB5" customClass="ValueChangeIC" customModule="Dream_Price_Companion_Extension">
+                    <items>
+                        <group width="1" alignment="center" verticalAlignment="center" layout="vertical" spacing="5" id="eQ4-Bn-mHi">
+                            <items>
+                                <label width="1" alignment="center" verticalAlignment="center" text="Прокрутите Digital Crown, чтобы изменить значение транзакции" textAlignment="center" numberOfLines="0" id="mfz-zl-jHY">
+                                    <fontDescription key="font" type="system" pointSize="10"/>
+                                </label>
+                                <label width="1" alignment="center" verticalAlignment="center" text="0 ₽" textAlignment="center" id="AkP-KF-4k8">
+                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleTitle0"/>
+                                </label>
+                                <label width="1" alignment="center" verticalAlignment="center" text="Личный Счет" textAlignment="center" id="25N-o0-9fj">
+                                    <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                </label>
+                                <button width="1" alignment="center" verticalAlignment="center" title="Далее" enabled="NO" id="6zc-bf-chp">
+                                    <connections>
+                                        <action selector="nextPage" destination="qfA-Pn-NB5" id="BiD-jW-yI2"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="budgetNameLabel" destination="25N-o0-9fj" id="WF0-8M-PfE"/>
+                        <outlet property="nextButton" destination="6zc-bf-chp" id="Zx8-k8-jyh"/>
+                        <outlet property="valueLabel" destination="AkP-KF-4k8" id="p91-GR-kDk"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="528" y="571"/>
+        </scene>
+        <!--Категория-->
+        <scene sceneID="NuI-pF-Ffh">
+            <objects>
+                <controller identifier="categorySelect" title="Категория" id="XgM-cV-bQB" customClass="CategoryIC" customModule="Dream_Price_Companion_Extension">
+                    <items>
+                        <table alignment="left" id="Mne-SX-L95">
+                            <items>
+                                <tableRow identifier="categoryCell" id="kNF-Wo-JlF" customClass="CategoryRow" customModule="Dream_Price_Companion_Extension">
+                                    <group key="rootItem" width="1" alignment="left" id="7MS-9J-CG8">
+                                        <items>
+                                            <label width="1" height="1" alignment="center" verticalAlignment="center" text="Label" textAlignment="center" id="RPj-MS-eyH"/>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="nameLabel" destination="RPj-MS-eyH" id="3KZ-AK-kP6"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <connections>
+                        <outlet property="tableView" destination="Mne-SX-L95" id="fxn-tc-y0I"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="828" y="571"/>
+        </scene>
+        <!--transactionConstructor-->
+        <scene sceneID="DUJ-Ac-HRD">
+            <objects>
+                <controller identifier="transactionConstructor" id="fmk-MY-j0Q" customClass="TransactionIC" customModule="Dream_Price_Companion_Extension">
+                    <items>
+                        <imageView width="0.69999999999999996" height="0.69999999999999996" alignment="center" verticalAlignment="center" image="checkmark.seal.fill" catalog="system" contentMode="scaleAspectFill" id="7bL-gu-8DG">
+                            <color key="tintColor" red="0.45098039220000002" green="0.79215686269999996" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </imageView>
+                        <button width="1" alignment="center" verticalAlignment="center" title="Готово" id="atG-hi-8TX">
+                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                            <connections>
+                                <action selector="done" destination="fmk-MY-j0Q" id="Loc-TH-gD6"/>
+                            </connections>
+                        </button>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="828" y="881"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="checkmark.seal.fill" catalog="system" width="128" height="124"/>
+    </resources>
+</document>

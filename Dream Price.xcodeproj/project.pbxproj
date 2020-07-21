@@ -52,8 +52,64 @@
 		84BEDBF224C46A3700792F93 /* ETNumberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BEDBF124C46A3700792F93 /* ETNumberCell.swift */; };
 		84BEDBF424C46A4700792F93 /* ETDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BEDBF324C46A4600792F93 /* ETDateCell.swift */; };
 		84E4C73C24BEF882006E3D0A /* ManageCategoriesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E4C73B24BEF882006E3D0A /* ManageCategoriesVC.swift */; };
+		84FD159F24C61A1F003CEF78 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84FD159D24C61A1F003CEF78 /* Interface.storyboard */; };
+		84FD15A124C61A23003CEF78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84FD15A024C61A23003CEF78 /* Assets.xcassets */; };
+		84FD15A824C61A23003CEF78 /* Dream Price Companion Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 84FD15A724C61A23003CEF78 /* Dream Price Companion Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		84FD15AD24C61A23003CEF78 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FD15AC24C61A23003CEF78 /* InterfaceController.swift */; };
+		84FD15AF24C61A23003CEF78 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FD15AE24C61A23003CEF78 /* ExtensionDelegate.swift */; };
+		84FD15B124C61A23003CEF78 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FD15B024C61A23003CEF78 /* NotificationController.swift */; };
+		84FD15B324C61A23003CEF78 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FD15B224C61A23003CEF78 /* ComplicationController.swift */; };
+		84FD15B524C61A25003CEF78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84FD15B424C61A25003CEF78 /* Assets.xcassets */; };
+		84FD15BA24C61A25003CEF78 /* Dream Price Companion.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 84FD159B24C61A1F003CEF78 /* Dream Price Companion.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		84FD161024C63AD0003CEF78 /* ValueChangeIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FD160F24C63AD0003CEF78 /* ValueChangeIC.swift */; };
+		84FD161224C646DA003CEF78 /* BudgetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FD161124C646DA003CEF78 /* BudgetCell.swift */; };
+		84FD161624C65734003CEF78 /* CategoryIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FD161524C65734003CEF78 /* CategoryIC.swift */; };
+		84FD161A24C65AB8003CEF78 /* CategoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FD161924C65AB8003CEF78 /* CategoryRow.swift */; };
+		84FD161C24C66323003CEF78 /* TransactionIC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FD161B24C66323003CEF78 /* TransactionIC.swift */; };
 		A8B42966B8E95C52767D58D5 /* Pods_Dream_Price.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C95879CF6685A037493194E /* Pods_Dream_Price.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		84FD15A924C61A23003CEF78 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 843688AF24BCC0A500793B2B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84FD15A624C61A23003CEF78;
+			remoteInfo = "Dream Price Companion Extension";
+		};
+		84FD15B824C61A25003CEF78 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 843688AF24BCC0A500793B2B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84FD159A24C61A1F003CEF78;
+			remoteInfo = "Dream Price Companion";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		84FD15BB24C61A25003CEF78 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				84FD15BA24C61A25003CEF78 /* Dream Price Companion.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84FD15BE24C61A25003CEF78 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				84FD15A824C61A23003CEF78 /* Dream Price Companion Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		56D8D48E24C49BD200C3194D /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
@@ -110,6 +166,23 @@
 		84BEDBF124C46A3700792F93 /* ETNumberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETNumberCell.swift; sourceTree = "<group>"; };
 		84BEDBF324C46A4600792F93 /* ETDateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETDateCell.swift; sourceTree = "<group>"; };
 		84E4C73B24BEF882006E3D0A /* ManageCategoriesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageCategoriesVC.swift; sourceTree = "<group>"; };
+		84FD159B24C61A1F003CEF78 /* Dream Price Companion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dream Price Companion.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		84FD159E24C61A1F003CEF78 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		84FD15A024C61A23003CEF78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		84FD15A224C61A23003CEF78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84FD15A724C61A23003CEF78 /* Dream Price Companion Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Dream Price Companion Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		84FD15AC24C61A23003CEF78 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		84FD15AE24C61A23003CEF78 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		84FD15B024C61A23003CEF78 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		84FD15B224C61A23003CEF78 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
+		84FD15B424C61A25003CEF78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		84FD15B624C61A25003CEF78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84FD15B724C61A25003CEF78 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		84FD160F24C63AD0003CEF78 /* ValueChangeIC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueChangeIC.swift; sourceTree = "<group>"; };
+		84FD161124C646DA003CEF78 /* BudgetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetCell.swift; sourceTree = "<group>"; };
+		84FD161524C65734003CEF78 /* CategoryIC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryIC.swift; sourceTree = "<group>"; };
+		84FD161924C65AB8003CEF78 /* CategoryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CategoryRow.swift; path = "Dream Price Companion Extension/CategoryRow.swift"; sourceTree = SOURCE_ROOT; };
+		84FD161B24C66323003CEF78 /* TransactionIC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionIC.swift; sourceTree = "<group>"; };
 		DA964BD56361E3E20F7A72E2 /* Pods-Dream Price.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dream Price.release.xcconfig"; path = "Target Support Files/Pods-Dream Price/Pods-Dream Price.release.xcconfig"; sourceTree = "<group>"; };
 		EF6C68EB6CEB36E0454ABD8C /* Pods-Dream Price.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dream Price.debug.xcconfig"; path = "Target Support Files/Pods-Dream Price/Pods-Dream Price.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -120,6 +193,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A8B42966B8E95C52767D58D5 /* Pods_Dream_Price.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84FD15A424C61A23003CEF78 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,6 +297,8 @@
 			isa = PBXGroup;
 			children = (
 				843688B924BCC0A500793B2B /* Dream Price */,
+				84FD159C24C61A1F003CEF78 /* Dream Price Companion */,
+				84FD15AB24C61A23003CEF78 /* Dream Price Companion Extension */,
 				843688B824BCC0A500793B2B /* Products */,
 				626B7057FC512E5F1D86E694 /* Pods */,
 				FBC4D99E871B5FD8E3C67E18 /* Frameworks */,
@@ -227,6 +309,8 @@
 			isa = PBXGroup;
 			children = (
 				843688B724BCC0A500793B2B /* Dream Price.app */,
+				84FD159B24C61A1F003CEF78 /* Dream Price Companion.app */,
+				84FD15A724C61A23003CEF78 /* Dream Price Companion Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -254,6 +338,35 @@
 			path = "Dream Price";
 			sourceTree = "<group>";
 		};
+		84FD159C24C61A1F003CEF78 /* Dream Price Companion */ = {
+			isa = PBXGroup;
+			children = (
+				84FD159D24C61A1F003CEF78 /* Interface.storyboard */,
+				84FD15A024C61A23003CEF78 /* Assets.xcassets */,
+				84FD15A224C61A23003CEF78 /* Info.plist */,
+			);
+			path = "Dream Price Companion";
+			sourceTree = "<group>";
+		};
+		84FD15AB24C61A23003CEF78 /* Dream Price Companion Extension */ = {
+			isa = PBXGroup;
+			children = (
+				84FD161924C65AB8003CEF78 /* CategoryRow.swift */,
+				84FD15B724C61A25003CEF78 /* PushNotificationPayload.apns */,
+				84FD15B624C61A25003CEF78 /* Info.plist */,
+				84FD161124C646DA003CEF78 /* BudgetCell.swift */,
+				84FD15B224C61A23003CEF78 /* ComplicationController.swift */,
+				84FD15AE24C61A23003CEF78 /* ExtensionDelegate.swift */,
+				84FD15AC24C61A23003CEF78 /* InterfaceController.swift */,
+				84FD15B024C61A23003CEF78 /* NotificationController.swift */,
+				84FD160F24C63AD0003CEF78 /* ValueChangeIC.swift */,
+				84FD15B424C61A25003CEF78 /* Assets.xcassets */,
+				84FD161524C65734003CEF78 /* CategoryIC.swift */,
+				84FD161B24C66323003CEF78 /* TransactionIC.swift */,
+			);
+			path = "Dream Price Companion Extension";
+			sourceTree = "<group>";
+		};
 		FBC4D99E871B5FD8E3C67E18 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -275,15 +388,51 @@
 				843688B524BCC0A500793B2B /* Resources */,
 				5EA8CF4677DC2CD7C7E0366C /* [CP] Embed Pods Frameworks */,
 				84B35FA624C21FA7008FD1CE /* ShellScript */,
+				84FD15BB24C61A25003CEF78 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				84FD15B924C61A25003CEF78 /* PBXTargetDependency */,
 			);
 			name = "Dream Price";
 			productName = "Dream Price";
 			productReference = 843688B724BCC0A500793B2B /* Dream Price.app */;
 			productType = "com.apple.product-type.application";
+		};
+		84FD159A24C61A1F003CEF78 /* Dream Price Companion */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84FD15C224C61A25003CEF78 /* Build configuration list for PBXNativeTarget "Dream Price Companion" */;
+			buildPhases = (
+				84FD159924C61A1F003CEF78 /* Resources */,
+				84FD15BE24C61A25003CEF78 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				84FD15AA24C61A23003CEF78 /* PBXTargetDependency */,
+			);
+			name = "Dream Price Companion";
+			productName = "Dream Price Companion";
+			productReference = 84FD159B24C61A1F003CEF78 /* Dream Price Companion.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		84FD15A624C61A23003CEF78 /* Dream Price Companion Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84FD15C124C61A25003CEF78 /* Build configuration list for PBXNativeTarget "Dream Price Companion Extension" */;
+			buildPhases = (
+				84FD15A324C61A23003CEF78 /* Sources */,
+				84FD15A424C61A23003CEF78 /* Frameworks */,
+				84FD15A524C61A23003CEF78 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Dream Price Companion Extension";
+			productName = "Dream Price Companion Extension";
+			productReference = 84FD15A724C61A23003CEF78 /* Dream Price Companion Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -295,6 +444,12 @@
 				LastUpgradeCheck = 1200;
 				TargetAttributes = {
 					843688B624BCC0A500793B2B = {
+						CreatedOnToolsVersion = 12.0;
+					};
+					84FD159A24C61A1F003CEF78 = {
+						CreatedOnToolsVersion = 12.0;
+					};
+					84FD15A624C61A23003CEF78 = {
 						CreatedOnToolsVersion = 12.0;
 					};
 				};
@@ -314,6 +469,8 @@
 			projectRoot = "";
 			targets = (
 				843688B624BCC0A500793B2B /* Dream Price */,
+				84FD159A24C61A1F003CEF78 /* Dream Price Companion */,
+				84FD15A624C61A23003CEF78 /* Dream Price Companion Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -330,6 +487,23 @@
 				843CBCEA24C508E6005E8562 /* History.storyboard in Resources */,
 				841BDAC324BCC8260096BF68 /* Dreams.storyboard in Resources */,
 				841BDABF24BCC4330096BF68 /* Projects.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84FD159924C61A1F003CEF78 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84FD15A124C61A23003CEF78 /* Assets.xcassets in Resources */,
+				84FD159F24C61A1F003CEF78 /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84FD15A524C61A23003CEF78 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84FD15B524C61A25003CEF78 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,7 +614,36 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		84FD15A324C61A23003CEF78 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84FD161024C63AD0003CEF78 /* ValueChangeIC.swift in Sources */,
+				84FD15B124C61A23003CEF78 /* NotificationController.swift in Sources */,
+				84FD15B324C61A23003CEF78 /* ComplicationController.swift in Sources */,
+				84FD15AF24C61A23003CEF78 /* ExtensionDelegate.swift in Sources */,
+				84FD161224C646DA003CEF78 /* BudgetCell.swift in Sources */,
+				84FD161A24C65AB8003CEF78 /* CategoryRow.swift in Sources */,
+				84FD161C24C66323003CEF78 /* TransactionIC.swift in Sources */,
+				84FD161624C65734003CEF78 /* CategoryIC.swift in Sources */,
+				84FD15AD24C61A23003CEF78 /* InterfaceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		84FD15AA24C61A23003CEF78 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84FD15A624C61A23003CEF78 /* Dream Price Companion Extension */;
+			targetProxy = 84FD15A924C61A23003CEF78 /* PBXContainerItemProxy */;
+		};
+		84FD15B924C61A25003CEF78 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84FD159A24C61A1F003CEF78 /* Dream Price Companion */;
+			targetProxy = 84FD15B824C61A25003CEF78 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		843688C024BCC0A500793B2B /* Main.storyboard */ = {
@@ -479,6 +682,14 @@
 				843CBCF624C5114B005E8562 /* ru */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		84FD159D24C61A1F003CEF78 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				84FD159E24C61A1F003CEF78 /* Base */,
+			);
+			name = Interface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -642,6 +853,90 @@
 			};
 			name = Release;
 		};
+		84FD15BC24C61A25003CEF78 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CBSKMU7MH4;
+				IBSC_MODULE = Dream_Price_Companion_Extension;
+				INFOPLIST_FILE = "Dream Price Companion/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "kostya.bunsberry.Dream-Price.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+			};
+			name = Debug;
+		};
+		84FD15BD24C61A25003CEF78 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CBSKMU7MH4;
+				IBSC_MODULE = Dream_Price_Companion_Extension;
+				INFOPLIST_FILE = "Dream Price Companion/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "kostya.bunsberry.Dream-Price.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+			};
+			name = Release;
+		};
+		84FD15BF24C61A25003CEF78 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CBSKMU7MH4;
+				INFOPLIST_FILE = "Dream Price Companion Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "kostya.bunsberry.Dream-Price.watchkitapp.watchkitextension";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+			};
+			name = Debug;
+		};
+		84FD15C024C61A25003CEF78 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CBSKMU7MH4;
+				INFOPLIST_FILE = "Dream Price Companion Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "kostya.bunsberry.Dream-Price.watchkitapp.watchkitextension";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 6.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -659,6 +954,24 @@
 			buildConfigurations = (
 				843688CC24BCC0A800793B2B /* Debug */,
 				843688CD24BCC0A800793B2B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		84FD15C124C61A25003CEF78 /* Build configuration list for PBXNativeTarget "Dream Price Companion Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84FD15BF24C61A25003CEF78 /* Debug */,
+				84FD15C024C61A25003CEF78 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		84FD15C224C61A25003CEF78 /* Build configuration list for PBXNativeTarget "Dream Price Companion" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84FD15BC24C61A25003CEF78 /* Debug */,
+				84FD15BD24C61A25003CEF78 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
