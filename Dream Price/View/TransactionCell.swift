@@ -12,7 +12,7 @@ class TransactionCell: UITableViewCell {
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
     var date: Date!
-    var id: Int!
+    var id: String!
     var desc: String!
     var number: Float!
 

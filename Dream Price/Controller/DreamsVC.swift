@@ -13,6 +13,7 @@ enum DreamType {
 }
 
 struct Dream {
+    var dreamID: String
     var type: DreamType
     var title: String
     var description: String
@@ -22,8 +23,8 @@ struct Dream {
 }
 
 var dreamsList: [Dream] = [
-    Dream(type: .focusedDream, title: NSLocalizedString("Trip to London", comment: ""), description: NSLocalizedString("I wanna see Big Ben", comment: ""), balance: 50000, goal: 150000, dateAdded: parseDate("2020-06-15")),
-    Dream(type: .dream, title: NSLocalizedString("New Phone", comment: ""), description: NSLocalizedString("Mine's a bit old now...", comment: ""), balance: 0, goal: 89999, dateAdded: parseDate("2020-06-13"))
+    Dream(dreamID: UUID().uuidString, type: .focusedDream, title: NSLocalizedString("Trip to London", comment: ""), description: NSLocalizedString("I wanna see Big Ben", comment: ""), balance: 50000, goal: 150000, dateAdded: parseDate("2020-06-15")),
+    Dream(dreamID: UUID().uuidString, type: .dream, title: NSLocalizedString("New Phone", comment: ""), description: NSLocalizedString("Mine's a bit old now...", comment: ""), balance: 0, goal: 89999, dateAdded: parseDate("2020-06-13"))
 ]
 
 

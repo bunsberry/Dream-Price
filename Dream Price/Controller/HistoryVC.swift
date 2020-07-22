@@ -8,7 +8,7 @@
 import UIKit
 
 struct Transaction {
-    var id: Int
+    var transactionID: String
     var date : Date
     var number : Float
     var category : String
@@ -33,7 +33,7 @@ func parseDate(_ str : String) -> Date {
     return dateFormat.date(from: str)!
 }
 
-class HistoryVC: UITableViewController {
+class HistoryVC: UITableViewController, HistoryDelegate {
     
     private let sortButton = UIButton()
     private var sortedBy: SortingType = .daily {
@@ -48,6 +48,11 @@ class HistoryVC: UITableViewController {
         
         transactions.sort { $0.date > $1.date }
         generateSections()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        reloadTransactions()
     }
     
     // MARK: Navigation Bar Setup
@@ -161,12 +166,12 @@ class HistoryVC: UITableViewController {
     // TODO: Getting transactions from a DB
     
     var transactions = [
-        Transaction(id: 0, date: parseDate("2020-06-17"), number: -233, category: NSLocalizedString("Coffee", comment: ""), description: ""),
-        Transaction(id: 1, date: parseDate("2020-06-15"), number: -224, category: NSLocalizedString("Groceries", comment: ""), description: ""),
-        Transaction(id: 2, date: parseDate("2020-07-15"), number: 23, category: NSLocalizedString("Work", comment: ""), description: "")
+        Transaction(transactionID: UUID().uuidString, date: parseDate("2020-06-17"), number: -233, category: NSLocalizedString("Coffee", comment: ""), description: ""),
+        Transaction(transactionID: UUID().uuidString, date: parseDate("2020-06-15"), number: -224, category: NSLocalizedString("Groceries", comment: ""), description: ""),
+        Transaction(transactionID: UUID().uuidString, date: parseDate("2020-07-15"), number: 23, category: NSLocalizedString("Work", comment: ""), description: "")
     ]
     
-    var chosenTransaction: Transaction = Transaction(id: 0, date: parseDate("2020-01-01"), number: 0, category: "", description: "")
+    var chosenTransaction: Transaction = Transaction(transactionID: UUID().uuidString, date: parseDate("2020-01-01"), number: 0, category: "", description: "")
     
     var sections = [GroupedSection<Date, Transaction>]()
     
@@ -256,7 +261,7 @@ class HistoryVC: UITableViewController {
             cell.numberLabel.textColor = UIColor(red: 0.792, green: 0.443, blue: 0.443, alpha: 1)
         }
         
-        cell.id = transaction.id
+        cell.id = transaction.transactionID
         cell.desc = transaction.description
         cell.number = transaction.number
         cell.date = transaction.date
@@ -269,6 +274,7 @@ class HistoryVC: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? EditTransactionVC, segue.identifier == "toTransaction" {
             vc.data = chosenTransaction
+            vc.historyDelegate = self
         }
     }
     
@@ -278,8 +284,14 @@ class HistoryVC: UITableViewController {
         let cell = tableView.cellForRow(at: indexPath) as! TransactionCell
         
         
-        chosenTransaction = Transaction(id: cell.id, date: cell.date, number: cell.number, category: cell.categoryLabel.text!, description: cell.desc)
+        chosenTransaction = Transaction(transactionID: cell.id, date: cell.date, number: cell.number, category: cell.categoryLabel.text!, description: cell.desc)
         
         performSegue(withIdentifier: "toTransaction", sender: nil)
+    }
+    
+    func reloadTransactions() {
+        // TODO: Getting transactions from db
+//        transactions = []
+        tableView.reloadData()
     }
 }

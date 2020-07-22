@@ -44,7 +44,7 @@ class AddDreamsVC: UITableViewController {
     @IBAction func addDream(_ sender: Any) {
         if nameField.text != "" && sumField.text != "" {
             let sum = Float(sumField.text!)
-            let newDream = Dream(type: sw(), title: nameField.text!, description: descriptionField.text!, balance: 0, goal: sum!, dateAdded: Date())
+            let newDream = Dream(dreamID: UUID().uuidString, type: sw(), title: nameField.text!, description: descriptionField.text!, balance: 0, goal: sum!, dateAdded: Date())
             AddDreamsVC.delegate?.dreamAdded(newDream: newDream)
             dismiss(animated: true, completion: nil)
         } else {

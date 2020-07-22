@@ -87,7 +87,7 @@
                                                         <color key="titleColor" systemColor="labelColor"/>
                                                     </state>
                                                     <connections>
-                                                        <segue destination="Xvb-eF-EW8" kind="show" id="cZ5-39-fBk"/>
+                                                        <action selector="toCategoriesManage" destination="BYZ-38-t0r" eventType="touchUpInside" id="7Qe-gI-TpA"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -281,6 +281,7 @@
                         <outlet property="categoriesCollectionView" destination="9n5-yb-l6e" id="U9q-55-OYg"/>
                         <outlet property="doneButton" destination="lqn-AO-Xd0" id="rom-TE-bGc"/>
                         <outlet property="removeButton" destination="OkX-JA-pnK" id="9Wd-5v-IAk"/>
+                        <segue destination="Xvb-eF-EW8" kind="show" identifier="toCategoriesManage" id="kqz-JU-UxU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

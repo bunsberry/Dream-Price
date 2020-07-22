@@ -15,12 +15,18 @@ protocol TransactionDelegate {
     func rewriteDate(date: Date)
 }
 
+protocol HistoryDelegate {
+    func reloadTransactions()
+}
+
 class EditTransactionVC: UIViewController, TransactionDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
     var data: Transaction!
+    var historyDelegate: HistoryDelegate?
     @IBOutlet weak var navigationTitle: UINavigationItem!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +51,8 @@ class EditTransactionVC: UIViewController, TransactionDelegate {
             deleteTransaction()
         } else {
             // TODO: Saving changes to database
+            print("\(data.transactionID) changed to \(data)")
+            historyDelegate?.reloadTransactions()
             dismiss(animated: true, completion: nil)
         }
     }
@@ -54,6 +62,7 @@ class EditTransactionVC: UIViewController, TransactionDelegate {
         
         let deleteAction = UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: .destructive, handler: {
             (alert: UIAlertAction!) -> Void in
+            print("should delete transaction with id = \(self.data.transactionID)")
             // TODO: Deleting from database
             self.dismiss(animated: true, completion: nil)
         })

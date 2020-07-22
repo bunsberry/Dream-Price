@@ -6,23 +6,24 @@
 //
 
 import UIKit
+import Foundation
 
 protocol TransportUpDelegate {
     func transportUp(string: String)
 }
 
-class BudgetVC: UIViewController, BudgetDelegate {
+class BudgetVC: UIViewController, BudgetDelegate, CategoriesBeenManaged {
     
     // TODO: Получение категорий из DB
     
     var categories: [Category] = [
-        Category(id: "0", type: .manage, title: "+", sortInt: 0),
-        Category(id: "0", type: .earning, title: NSLocalizedString("Work", comment: ""), sortInt: 0),
-        Category(id: "0", type: .spending, title: NSLocalizedString("Coffee", comment: ""), sortInt: 0),
-        Category(id: "1", type: .spending, title: NSLocalizedString("Groceries", comment: ""), sortInt: 1),
-        Category(id: "0", type: .budget, title: NSLocalizedString("Personal Account", comment: ""), sortInt: 0),
-        Category(id: "1", type: .budget, title: NSLocalizedString("App", comment: ""), sortInt: 1),
-        Category(id: "2", type: .budget, title: NSLocalizedString("Dream", comment: ""), sortInt: 2)
+        Category(id: UUID().uuidString, type: .manage, title: "+", sortInt: 0),
+        Category(id: UUID().uuidString, type: .earning, title: NSLocalizedString("Work", comment: ""), sortInt: 0),
+        Category(id: UUID().uuidString, type: .spending, title: NSLocalizedString("Coffee", comment: ""), sortInt: 0),
+        Category(id: UUID().uuidString, type: .spending, title: NSLocalizedString("Groceries", comment: ""), sortInt: 1),
+        Category(id: UUID().uuidString, type: .budget, title: NSLocalizedString("Personal Account", comment: ""), sortInt: 0),
+        Category(id: UUID().uuidString, type: .budget, title: NSLocalizedString("App", comment: ""), sortInt: 1),
+        Category(id: UUID().uuidString, type: .budget, title: NSLocalizedString("Dream", comment: ""), sortInt: 2)
     ]
     
     var categoriesShown: [Category] = []
@@ -56,6 +57,11 @@ class BudgetVC: UIViewController, BudgetDelegate {
         
         removeButton.isEnabled = false
         doneButton.isEnabled = false
+    }
+    
+    @IBAction func toCategoriesManage() {
+        performSegue(withIdentifier: "toCategoriesManage", sender: nil)
+        ManageCategoriesVC.delegate = self
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -154,7 +160,9 @@ extension BudgetVC {
     
     func createTransaction(number: Float, budgetID: Int) {
         
-        // TODO: Transactions are added to DB here
+        // TODO: Transactions are added to DB here and balance of budget item changed
+        
+        var newTransaction: Transaction!
         
         if let indexPath = categoriesCollectionView.indexPathsForSelectedItems?.first {
             
@@ -162,16 +170,22 @@ extension BudgetVC {
             
             if cell?.categoryType == CategoryType.spending {
                 print("id-\(budgetID): Spent \(number) on \(cell!.titleLabel.text!)")
+                newTransaction = Transaction(transactionID: UUID().uuidString, date: Date(), number: number, category: cell!.titleLabel.text!, description: "")
             }
             else if cell?.categoryType == CategoryType.earning {
                 print("id-\(budgetID): Earned \(number) from \(cell!.titleLabel.text!)")
+                newTransaction = Transaction(transactionID: UUID().uuidString, date: Date(), number: number, category: cell!.titleLabel.text!, description: "")
             }
             else if cell?.categoryType == CategoryType.budget {
                 print("id-\(budgetID): Transfered \(number) from/to \(cell!.titleLabel.text!)")
+                
+                // TODO: Transfers
+                
             }
             
         } else {
             print("id_\(budgetID): \(number) on/from smthng...")
+            newTransaction = Transaction(transactionID: UUID().uuidString, date: Date(), number: number, category: "", description: "")
         }
         
         categoriesCollectionView.reloadData()
@@ -189,5 +203,10 @@ extension BudgetVC {
     func enableButtons() {
         removeButton.isEnabled = true
         doneButton.isEnabled = true
+    }
+    
+    func reloadCategories() {
+        // TODO: Load categories from DB
+        categoriesCollectionView.reloadData()
     }
 }

@@ -68,7 +68,7 @@ class EditDreamsVC: UITableViewController {
     @IBAction func EditDream(_ sender: Any) {
         if nameField.text != "" && sumFIeld.text != "" {
             let sum = Float(sumFIeld.text!)
-            let dream = Dream(type: sw(), title: nameField.text!, description: descriptionField.text!, balance: 0, goal: sum!, dateAdded: dreamsList[selectedRow].dateAdded)
+            let dream = Dream(dreamID: UUID().uuidString, type: sw(), title: nameField.text!, description: descriptionField.text!, balance: 0, goal: sum!, dateAdded: dreamsList[selectedRow].dateAdded)
             EditDreamsVC.delegate?.dreamEdited(dream: dream, row: selectedRow)
             dismiss(animated: true, completion: nil)
         } else {

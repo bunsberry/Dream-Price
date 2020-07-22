@@ -12,6 +12,10 @@ protocol CategoryManageDelegate {
     func categoryEdited(id: String, title: String)
 }
 
+protocol CategoriesBeenManaged {
+    func reloadCategories()
+}
+
 class ManageCategoriesVC: UIViewController, CategoryManageDelegate {
 
     @IBOutlet weak var tableView: UITableView!
@@ -20,11 +24,10 @@ class ManageCategoriesVC: UIViewController, CategoryManageDelegate {
     // TODO: Read categories from DB
     
     var categories: [Category] = [
-        Category(id: "a", type: .earning, title: NSLocalizedString("Work", comment: ""), sortInt: 1),
-        Category(id: "b", type: .earning, title: NSLocalizedString("Work", comment: ""), sortInt: 3),
-        Category(id: "c", type: .earning, title: "Side Gig", sortInt: 2),
-        Category(id: "d", type: .spending, title: NSLocalizedString("Coffee", comment: ""), sortInt: 1),
-        Category(id: "g", type: .spending, title: NSLocalizedString("Groceries", comment: ""), sortInt: 2)
+        Category(id: UUID().uuidString, type: .earning, title: NSLocalizedString("Work", comment: ""), sortInt: 1),
+        Category(id: UUID().uuidString, type: .earning, title: NSLocalizedString("Work", comment: ""), sortInt: 2),
+        Category(id: UUID().uuidString, type: .spending, title: NSLocalizedString("Coffee", comment: ""), sortInt: 1),
+        Category(id: UUID().uuidString, type: .spending, title: NSLocalizedString("Groceries", comment: ""), sortInt: 2)
     ] {
         didSet { tableView.reloadData() }
     }
@@ -32,6 +35,7 @@ class ManageCategoriesVC: UIViewController, CategoryManageDelegate {
     var earningSection: [Category] = []
     var spendingSection: [Category] = []
     var sections: [[Category]] = []
+    static public var delegate: CategoriesBeenManaged?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +51,8 @@ class ManageCategoriesVC: UIViewController, CategoryManageDelegate {
     // MARK: Buttons
     
     @IBAction func cancel(_ sender: Any) {
+        print("button pressed")
+        ManageCategoriesVC.delegate?.reloadCategories()
         dismiss(animated: true, completion: nil)
     }
     
@@ -68,8 +74,8 @@ class ManageCategoriesVC: UIViewController, CategoryManageDelegate {
         spendingSection.removeAll()
         sections.removeAll()
         
-        earningSection.append(Category(id: "0", type: .new, title: "", sortInt: 0))
-        spendingSection.append(Category(id: "0", type: .new, title: "", sortInt: 0))
+        earningSection.append(Category(id: UUID().uuidString, type: .new, title: "", sortInt: 0))
+        spendingSection.append(Category(id: UUID().uuidString, type: .new, title: "", sortInt: 0))
         
         for el in categories {
             if el.type == .earning {
@@ -93,17 +99,14 @@ class ManageCategoriesVC: UIViewController, CategoryManageDelegate {
         // TODO: New Category Added to DB
         
         if type == .spending {
-            print(Category(id: String(categories.count), type: type, title: category, sortInt: sections[0].count))
-            categories.append(Category(id: String(categories.count), type: type, title: category, sortInt: sections[0].count))
+            print(Category(id: UUID().uuidString, type: type, title: category, sortInt: sections[0].count))
+            categories.append(Category(id: UUID().uuidString, type: type, title: category, sortInt: sections[0].count))
         } else if type == .earning {
-            print(Category(id: String(categories.count), type: type, title: category, sortInt: sections[1].count))
-            categories.append(Category(id: String(categories.count), type: type, title: category, sortInt: sections[1].count))
+            print(Category(id: UUID().uuidString, type: type, title: category, sortInt: sections[1].count))
+            categories.append(Category(id: UUID().uuidString, type: type, title: category, sortInt: sections[1].count))
         }
         
         updateTableView()
-        
-        
-        print("added new category")
     }
     
     // MARK: Category Edit
@@ -144,6 +147,7 @@ extension ManageCategoriesVC: UITableViewDataSource, UITableViewDelegate {
             var movedObj = sections[sourceIndexPath.section][sourceIndexPath.row]
             
             if movedObj.sortInt < sections[destinationIndexPath.section][destinationIndexPath.row].sortInt {
+                print("<")
                 
                 for (index, el) in sections[destinationIndexPath.section].enumerated() {
                     if el.sortInt > movedObj.sortInt {
@@ -158,6 +162,7 @@ extension ManageCategoriesVC: UITableViewDataSource, UITableViewDelegate {
                     }
                 }
                 movedObj.sortInt = destinationIndexPath.row
+                print(movedObj.sortInt)
                 
                 for (index, category) in categories.enumerated() {
                     if movedObj.id == category.id {
@@ -165,6 +170,7 @@ extension ManageCategoriesVC: UITableViewDataSource, UITableViewDelegate {
                     }
                 }
             } else if movedObj.sortInt > sections[destinationIndexPath.section][destinationIndexPath.row].sortInt {
+                print(">")
                 for (index, el) in sections[destinationIndexPath.section].enumerated() {
                     if el.sortInt < movedObj.sortInt {
                         sections[destinationIndexPath.section][index].sortInt += 1
