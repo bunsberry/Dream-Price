@@ -16,7 +16,8 @@ enum CategoryType {
 }
 
 struct Category {
-    let id: Int
-    let type: CategoryType
-    let title: String
+    var id: String
+    var type: CategoryType
+    var title: String
+    var sortInt: Int
 }

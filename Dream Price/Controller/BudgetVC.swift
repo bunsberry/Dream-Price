@@ -15,13 +15,14 @@ class BudgetVC: UIViewController, BudgetDelegate {
     
     // TODO: Получение категорий из DB
     
-    let categories: [Category] = [
-        Category(id: 0, type: .earning, title: NSLocalizedString("Work", comment: "")),
-        Category(id: 0, type: .spending, title: NSLocalizedString("Coffee", comment: "")),
-        Category(id: 1, type: .spending, title: NSLocalizedString("Groceries", comment: "")),
-        Category(id: 0, type: .budget, title: NSLocalizedString("App", comment: "")),
-        Category(id: 1, type: .budget, title: NSLocalizedString("Dream", comment: "")),
-        Category(id: 0, type: .manage, title: NSLocalizedString("More...", comment: ""))
+    var categories: [Category] = [
+        Category(id: "0", type: .manage, title: "+", sortInt: 0),
+        Category(id: "0", type: .earning, title: NSLocalizedString("Work", comment: ""), sortInt: 0),
+        Category(id: "0", type: .spending, title: NSLocalizedString("Coffee", comment: ""), sortInt: 0),
+        Category(id: "1", type: .spending, title: NSLocalizedString("Groceries", comment: ""), sortInt: 1),
+        Category(id: "0", type: .budget, title: NSLocalizedString("Personal Account", comment: ""), sortInt: 0),
+        Category(id: "1", type: .budget, title: NSLocalizedString("App", comment: ""), sortInt: 1),
+        Category(id: "2", type: .budget, title: NSLocalizedString("Dream", comment: ""), sortInt: 2)
     ]
     
     var categoriesShown: [Category] = []
@@ -39,7 +40,7 @@ class BudgetVC: UIViewController, BudgetDelegate {
         super.viewDidLoad()
         
         buttonsSetup()
-        updateCategories(transaction: "-")
+        updateCategories(transaction: "-", name: NSLocalizedString("Personal Account", comment: ""))
     }
     
     // MARK: Buttons setup
@@ -65,25 +66,51 @@ class BudgetVC: UIViewController, BudgetDelegate {
     
     // MARK: Categories Update
     
-    func updateCategories(transaction: String) {
+    func updateCategories(transaction: String, name: String) {
         categoriesShown.removeAll()
         
+        categories.sort(by:{ $0.sortInt > $1.sortInt})
+        
         switch transaction {
-        case "-": do {
-                for el in self.categories {
-                    if el.type != .earning {
-                        self.categoriesShown.append(el)
-                    }
+        case "-":
+            for el in self.categories {
+                if el.type == .manage {
+                    self.categoriesShown.append(el)
                 }
             }
-            case "+": do {
-                for el in self.categories {
-                    if el.type != .spending {
-                        self.categoriesShown.append(el)
-                    }
+            for el in self.categories {
+                if el.type == .spending {
+                    self.categoriesShown.append(el)
                 }
             }
-            default: break
+            for el in self.categories {
+                if el.type == .budget {
+                    self.categoriesShown.append(el)
+                }
+            }
+        case "+":
+            for el in self.categories {
+                if el.type == .manage {
+                    self.categoriesShown.append(el)
+                }
+            }
+            for el in self.categories {
+                if el.type == .earning {
+                    self.categoriesShown.append(el)
+                }
+            }
+            for el in self.categories {
+                if el.type == .budget {
+                    self.categoriesShown.append(el)
+                }
+            }
+        default: print("Incorretct transaction symbol")
+        }
+        
+        for (index, el) in self.categoriesShown.enumerated() {
+            if el.title == name {
+                self.categoriesShown.remove(at: index)
+            }
         }
         
         categoriesCollectionView.reloadData()

@@ -9,19 +9,14 @@ import UIKit
 
 class NewCategoryCell: UITableViewCell {
     
-    var delegate: NewCategoryDelegate?
+    var delegate: CategoryManageDelegate?
     
     @IBAction func categoryTyped(_ sender: UITextField) {
-        if sender.text == "" {
-            return
-        }
-        
-        if let text = sender.text {
-            print(text)
-            delegate?.addNewCategory(category: text, type: .spending)
+        if sender.text != "" {
+            print(sender.text)
+            delegate?.addNewCategory(category: sender.text!, type: .spending)
             sender.text = ""
         }
     }
-    
     
 }

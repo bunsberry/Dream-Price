@@ -7,23 +7,24 @@
 
 import UIKit
 
-protocol NewCategoryDelegate {
+protocol CategoryManageDelegate {
     func addNewCategory(category: String, type: CategoryType)
+    func categoryEdited(id: String, title: String)
 }
 
-class ManageCategoriesVC: UIViewController, NewCategoryDelegate {
+class ManageCategoriesVC: UIViewController, CategoryManageDelegate {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var editButton: UIBarItem!
     
     // TODO: Read categories from DB
     
     var categories: [Category] = [
-        Category(id: 0, type: .earning, title: NSLocalizedString("Work", comment: "")),
-        Category(id: 0, type: .spending, title: NSLocalizedString("Coffee", comment: "")),
-        Category(id: 1, type: .spending, title: NSLocalizedString("Groceries", comment: "")),
-        Category(id: 0, type: .budget, title: NSLocalizedString("App", comment: "")),
-        Category(id: 1, type: .budget, title: NSLocalizedString("Dream", comment: "")),
-        Category(id: 0, type: .manage, title: NSLocalizedString("More...", comment: ""))
+        Category(id: "a", type: .earning, title: NSLocalizedString("Work", comment: ""), sortInt: 1),
+        Category(id: "b", type: .earning, title: NSLocalizedString("Work", comment: ""), sortInt: 3),
+        Category(id: "c", type: .earning, title: "Side Gig", sortInt: 2),
+        Category(id: "d", type: .spending, title: NSLocalizedString("Coffee", comment: ""), sortInt: 1),
+        Category(id: "g", type: .spending, title: NSLocalizedString("Groceries", comment: ""), sortInt: 2)
     ] {
         didSet { tableView.reloadData() }
     }
@@ -39,7 +40,11 @@ class ManageCategoriesVC: UIViewController, NewCategoryDelegate {
         
         tableView.dataSource = self
         tableView.delegate = self
+        
+        editButton.title = NSLocalizedString("Edit", comment: "")
     }
+    
+    // MARK: Buttons
     
     @IBAction func cancel(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -51,20 +56,22 @@ class ManageCategoriesVC: UIViewController, NewCategoryDelegate {
         if sender.title == NSLocalizedString("Edit", comment: "") {
             sender.title = NSLocalizedString("Done", comment: "")
         } else {
-            sender.title = NSLocalizedString("Done", comment: "")
+            sender.title = NSLocalizedString("Edit", comment: "")
         }
         
         self.tableView.cellForRow(at: IndexPath.init(row: 0, section: 0))?.showsReorderControl = false
         self.tableView.cellForRow(at: IndexPath.init(row: 0, section: 1))?.showsReorderControl = false
     }
     
+    // MARK: UpdateTableView()
+    
     private func updateTableView() {
         earningSection.removeAll()
         spendingSection.removeAll()
         sections.removeAll()
         
-        earningSection.append(Category(id: 0, type: .new, title: ""))
-        spendingSection.append(Category(id: 0, type: .new, title: ""))
+        earningSection.append(Category(id: "0", type: .new, title: "", sortInt: 0))
+        spendingSection.append(Category(id: "0", type: .new, title: "", sortInt: 0))
         
         for el in categories {
             if el.type == .earning {
@@ -74,17 +81,56 @@ class ManageCategoriesVC: UIViewController, NewCategoryDelegate {
             }
         }
         
+        earningSection.sort(by:{ $0.sortInt < $1.sortInt })
+        spendingSection.sort(by:{ $0.sortInt < $1.sortInt })
+        
         sections = [spendingSection, earningSection]
         tableView.reloadData()
     }
     
+    // MARK: Adding new Category
+    
     func addNewCategory(category: String, type: CategoryType) {
-        categories.append(Category(id: categories.count, type: type, title: category))
+        
+        // TODO: New Category Added to DB
+        
+        if type == .spending {
+            print(Category(id: String(categories.count), type: type, title: category, sortInt: sections[0].count))
+            categories.append(Category(id: String(categories.count), type: type, title: category, sortInt: sections[0].count))
+        } else if type == .earning {
+            print(Category(id: String(categories.count), type: type, title: category, sortInt: sections[1].count))
+            categories.append(Category(id: String(categories.count), type: type, title: category, sortInt: sections[1].count))
+        }
+        
         updateTableView()
+        
+        self.tableView.cellForRow(at: IndexPath.init(row: 0, section: 0))?.showsReorderControl = false
+        self.tableView.cellForRow(at: IndexPath.init(row: 0, section: 1))?.showsReorderControl = false
+        
         print("added new category")
     }
     
+    // MARK: Category Edit
+    
+    func categoryEdited(id: String, title: String) {
+        
+        // TODO: DB Category title changed
+        
+        for (index, category) in categories.enumerated() {
+            if category.id == id {
+                categories[index].title = title
+                print(categories[index])
+            }
+        }
+        
+        updateTableView()
+        self.tableView.cellForRow(at: IndexPath.init(row: 0, section: 0))?.showsReorderControl = false
+        self.tableView.cellForRow(at: IndexPath.init(row: 0, section: 1))?.showsReorderControl = false
+    }
+    
 }
+
+// MARK: Table View
 
 extension ManageCategoriesVC: UITableViewDataSource, UITableViewDelegate {
     
@@ -96,12 +142,66 @@ extension ManageCategoriesVC: UITableViewDataSource, UITableViewDelegate {
         sections[section].count
     }
     
+    // MARK: Sorting
+    
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         // TODO: DB Object moved to another position
         
-        let movedObj = sections[sourceIndexPath.section][sourceIndexPath.row]
+        var movedObj = sections[sourceIndexPath.section][sourceIndexPath.row]
+        
+        if movedObj.sortInt < sections[destinationIndexPath.section][destinationIndexPath.row].sortInt {
+            print("Less")
+            
+            for (index, el) in sections[destinationIndexPath.section].enumerated() {
+                if el.sortInt > movedObj.sortInt {
+                    sections[destinationIndexPath.section][index].sortInt -= 1
+                }
+                
+                for (index1, category) in categories.enumerated() {
+                    if category.id == sections[destinationIndexPath.section][index].id {
+                        categories[index1].sortInt = sections[destinationIndexPath.section][index].sortInt
+                        print(categories[index1])
+                    }
+                }
+            }
+            movedObj.sortInt = destinationIndexPath.row
+            print(movedObj)
+            
+            for (index, category) in categories.enumerated() {
+                if movedObj.id == category.id {
+                    categories[index].sortInt = movedObj.sortInt
+                }
+            }
+        } else if movedObj.sortInt > sections[destinationIndexPath.section][destinationIndexPath.row].sortInt {
+            print("Bigger")
+            for (index, el) in sections[destinationIndexPath.section].enumerated() {
+                if el.sortInt < movedObj.sortInt {
+                    sections[destinationIndexPath.section][index].sortInt += 1
+                }
+                
+                for (index1, category) in categories.enumerated() {
+                    if category.id == sections[destinationIndexPath.section][index].id {
+                        categories[index1].sortInt = sections[destinationIndexPath.section][index].sortInt
+                        print(categories[index1])
+                    }
+                }
+            }
+            
+            movedObj.sortInt = destinationIndexPath.row
+            print(movedObj)
+            
+            for (index, category) in categories.enumerated() {
+                if movedObj.id == category.id {
+                    categories[index].sortInt = movedObj.sortInt
+                }
+            }
+        }
+        
         sections[sourceIndexPath.section].remove(at: sourceIndexPath.row)
         sections[sourceIndexPath.section].insert(movedObj, at: destinationIndexPath.row)
+        
+        self.tableView.cellForRow(at: IndexPath.init(row: 0, section: 0))?.showsReorderControl = false
+        self.tableView.cellForRow(at: IndexPath.init(row: 0, section: 1))?.showsReorderControl = false
     }
     
     func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
@@ -115,17 +215,49 @@ extension ManageCategoriesVC: UITableViewDataSource, UITableViewDelegate {
         return proposedDestinationIndexPath
     }
     
+    // MARK: Deleting
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         // TODO: DB Object deleted
         
         if editingStyle == .delete {
+            
+            for (index, category) in categories.enumerated() {
+                if category.id == sections[indexPath.section][indexPath.row].id {
+                    categories.remove(at: index)
+                }
+            }
+            
             sections[indexPath.section].remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+            
+            for (index, category) in sections[indexPath.section].enumerated() {
+                sections[indexPath.section][index].sortInt = index
+                
+                if category.id != "-1" {
+                    print(sections[indexPath.section][index])
+                    
+                    for (index1, category) in categories.enumerated() {
+                        if category.id == sections[indexPath.section][index].id {
+                            categories[index1].sortInt = index
+                            print(categories[index1])
+                        }
+                    }
+                }
+                
+                print("----")
+            }
+            
+//            tableView.deleteRows(at: [indexPath], with: .automatic)
+            updateTableView()
             self.tableView.cellForRow(at: IndexPath.init(row: 0, section: 0))?.showsReorderControl = false
             self.tableView.cellForRow(at: IndexPath.init(row: 0, section: 1))?.showsReorderControl = false
         }
+        
+        print("Category Deleted")
     }
+    
+    // MARK: Table View Data Source and Delegate
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         if indexPath == IndexPath.init(row: 0, section: 0) || indexPath == IndexPath.init(row: 0, section: 1) {
@@ -157,6 +289,8 @@ extension ManageCategoriesVC: UITableViewDataSource, UITableViewDelegate {
             
             cell.titleTextField?.text = sections[indexPath.section][indexPath.row].title
             cell.id = sections[indexPath.section][indexPath.row].id
+            cell.firstTitle = sections[indexPath.section][indexPath.row].title
+            cell.delegate = self
             
             return cell
         }

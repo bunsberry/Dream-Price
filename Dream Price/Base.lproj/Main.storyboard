@@ -73,17 +73,17 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="manageCategories" id="xhc-O2-in8" customClass="ManageCategoriesCell" customModule="Dream_Price" customModuleProvider="target">
-                                        <rect key="frame" x="96" y="15" width="96" height="50"/>
+                                        <rect key="frame" x="96" y="15" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="EcC-EU-3wR">
-                                            <rect key="frame" x="0.0" y="0.0" width="96" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hY0-ox-B1H">
-                                                    <rect key="frame" x="0.0" y="0.0" width="96" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                    <inset key="contentEdgeInsets" minX="24" minY="16" maxX="24" maxY="16"/>
-                                                    <state key="normal" title="More...">
+                                                    <inset key="contentEdgeInsets" minX="20" minY="16" maxX="20" maxY="16"/>
+                                                    <state key="normal" title="+">
                                                         <color key="titleColor" systemColor="labelColor"/>
                                                     </state>
                                                     <connections>
@@ -439,8 +439,7 @@
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
-                                                        <action selector="categoryAdded:" destination="URE-Ba-EMz" eventType="editingDidEnd" id="V6g-38-VY2"/>
-                                                        <action selector="categoryTyped:" destination="URE-Ba-EMz" eventType="editingDidEndOnExit" id="DQj-Ux-jhP"/>
+                                                        <action selector="categoryAdded:" destination="URE-Ba-EMz" eventType="editingDidEndOnExit" id="Ceh-UR-eNL"/>
                                                     </connections>
                                                 </textField>
                                             </subviews>
@@ -450,6 +449,9 @@
                                                 <constraint firstAttribute="trailing" secondItem="1ub-ef-9B9" secondAttribute="trailing" constant="20" id="eTN-28-eia"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="textField" destination="1ub-ef-9B9" id="bIG-xD-DXD"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" showsReorderControl="YES" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="categoryCell" id="qbY-zK-dZF" customClass="EditableCategoryCell" customModule="Dream_Price" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="142.5" width="414" height="43.5"/>
@@ -490,13 +492,13 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Categories" id="Q1L-IR-drN">
-                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="cancel" id="BCM-vk-1CX">
+                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="save" id="BCM-vk-1CX">
                             <color key="tintColor" red="0.45098039220000002" green="0.79215686269999996" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <action selector="cancel:" destination="33M-dd-yws" id="D62-4y-9Zq"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="edit" id="gqo-yq-hk5">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" style="done" id="gqo-yq-hk5">
                             <color key="tintColor" red="0.45098039220000002" green="0.79215686269999996" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <action selector="edit:" destination="33M-dd-yws" id="YPK-xy-4K5"/>
@@ -504,6 +506,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="editButton" destination="gqo-yq-hk5" id="AI5-Xu-GqQ"/>
                         <outlet property="tableView" destination="Eeh-OU-zSH" id="B9R-8k-JZx"/>
                     </connections>
                 </viewController>

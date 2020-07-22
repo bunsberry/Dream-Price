@@ -9,17 +9,14 @@ import UIKit
 
 class NewEarningCell: UITableViewCell {
     
-    var delegate: NewCategoryDelegate?
+    @IBOutlet weak var textField: UITextField!
+    var delegate: CategoryManageDelegate?
 
     @IBAction func categoryAdded(_ sender: UITextField) {
-        if sender.text == "" {
-            return
-        }
-        
-        if let text = sender.text {
-            print(text)
-            delegate?.addNewCategory(category: text, type: .earning)
-            sender.text = ""
+        if textField.text != "" {
+            print(textField.text)
+            delegate?.addNewCategory(category: textField.text!, type: .earning)
+            textField.text = ""
         }
     }
 

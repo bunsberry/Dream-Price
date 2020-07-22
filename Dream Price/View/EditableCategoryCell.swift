@@ -10,11 +10,19 @@ import UIKit
 class EditableCategoryCell: UITableViewCell {
 
     @IBOutlet weak var titleTextField: UITextField!
-    var id: Int!
+    var id: String!
+    var firstTitle: String!
+    
+    var delegate: CategoryManageDelegate?
     
     @IBAction func titleChanged(_ sender: UITextField) {
-        // TODO: DB Title change (id is here if that helps)
-        print("\(String(describing: id)): Title changed to \(String(describing: sender.text))")
+        if sender.text != "" {
+            delegate?.categoryEdited(id: id, title: sender.text!)
+            firstTitle = sender.text!
+            sender.text = firstTitle
+        } else {
+            sender.text = firstTitle
+        }
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {

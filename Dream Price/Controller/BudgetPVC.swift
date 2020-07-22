@@ -8,7 +8,7 @@
 import UIKit
 
 protocol BudgetDelegate {
-    func updateCategories(transaction: String)
+    func updateCategories(transaction: String, name: String)
     func createTransaction(number: Float, budgetID: Int)
     func disableButtons()
     func enableButtons()
@@ -62,8 +62,8 @@ class BudgetPVC: UIPageViewController, TransportDelegate, TransportUpDelegate {
     
     // MARK: Delegate protocol
     
-    func transportCurrentState(string: String) {
-        budgetDelegate?.updateCategories(transaction: string)
+    func transportCurrentState(symbol: String, name: String) {
+        budgetDelegate?.updateCategories(transaction: symbol, name: name)
     }
     
     func transportTransactionData(number: Float, budgetID: Int) {
@@ -118,7 +118,7 @@ extension BudgetPVC: UIPageViewControllerDataSource, UIPageViewControllerDelegat
         
         DispatchQueue.main.async {
             self.keyboardDelegate = viewController as? BudgetItemDataVC
-            self.transportCurrentState(string: ((viewController as? BudgetItemDataVC)?.changeTransactionButton.title(for: .normal))!)
+            self.transportCurrentState(symbol: ((viewController as? BudgetItemDataVC)?.changeTransactionButton.title(for: .normal))!, name: ((viewController as? BudgetItemDataVC)?.nameLabelText)!)
         }
         
         return self.pageViewController(for: index)
@@ -129,7 +129,7 @@ extension BudgetPVC: UIPageViewControllerDataSource, UIPageViewControllerDelegat
         
         DispatchQueue.main.async {
             self.keyboardDelegate = viewController as? BudgetItemDataVC
-            self.transportCurrentState(string: ((viewController as? BudgetItemDataVC)?.changeTransactionButton.title(for: .normal))!)
+            self.transportCurrentState(symbol: ((viewController as? BudgetItemDataVC)?.changeTransactionButton.title(for: .normal))!, name: ((viewController as? BudgetItemDataVC)?.nameLabelText)!)
         }
         
         return self.pageViewController(for: index)
