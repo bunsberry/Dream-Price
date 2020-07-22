@@ -36,3 +36,14 @@
 "Description" = "Описание";
 "Amount" = "Значение";
 "Date" = "Дата";
+
+"Something went wrong..." = "Что-то пошло не так...";
+"Fill in all the required information" = "Заполните все обязательные поля пожалуйста";
+"Dismiss" = "Хорошо";
+
+"Trip to London" = "Поездка в Лондон";
+"I wanna see Big Ben" = "Обязательно взгляну на Биг Бен";
+"New Phone" = "Новый телефон";
+"Mine's a bit old now..." = "Мой уже немного устарел...";
+
+"DreamsTitle" = "Мечты";

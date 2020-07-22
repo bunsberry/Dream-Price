@@ -21,9 +21,16 @@ struct Dream {
     var dateAdded: Date
 }
 
+private func parseDate(_ str : String) -> Date {
+    let dateFormat = DateFormatter()
+    dateFormat.dateFormat = "yyyy-MM-dd"
+    dateFormat.locale = Locale.current
+    return dateFormat.date(from: str)!
+}
+
 var dreamsList: [Dream] = [
-    Dream(type: .focusedDream, title: NSLocalizedString("Trip to London", comment: ""), description: NSLocalizedString("I wanna see Big Ben", comment: ""), balance: 50000, goal: 150000, dateAdded: parseDate("2020-06-15")),
-    Dream(type: .dream, title: NSLocalizedString("New Phone", comment: ""), description: NSLocalizedString("Mine's a bit old now...", comment: ""), balance: 0, goal: 89999, dateAdded: parseDate("2020-06-13"))
+    Dream(type: .focusedDream, title: "Поездка на мальдивы", description: "Солнце, пляж... То что надо!", balance: 50000, goal: 150000, dateAdded: parseDate("2020-06-15")),
+    Dream(type: .dream, title: "iPhone 11", description: "Монобровь это не так уж и плохо!", balance: 0, goal: 89999, dateAdded: parseDate("2020-06-13"))
 ]
 
 
@@ -74,7 +81,7 @@ class DreamsVC: UICollectionViewController {
     private func setupNavBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        title = NSLocalizedString("DreamsTitle", comment: "")
+        title = "Мечты"
         let addButtonImage = UIImage(systemName: "plus.circle")
         addButton.setTitle("", for: .normal)
         addButton.setImage(addButtonImage?.withTintColor(.label, renderingMode:.alwaysOriginal), for: .normal)
@@ -132,7 +139,7 @@ class DreamsVC: UICollectionViewController {
     
     @objc func addDream(sender: UIButton!) {
         performSegue(withIdentifier: "toAddDream", sender: nil)
-        AddDreamsVC.delegate = self
+        AddDreamVC.delegate = self
     }
     
     // MARK: Collection View Setup
@@ -165,6 +172,8 @@ class DreamsVC: UICollectionViewController {
             
             cell.titleLabel.text = dreamsList[indexPath.row].title
             cell.descriptionLabel.text = dreamsList[indexPath.row].description
+            
+            // TODO: Formatting balance and date
             
             cell.dateLabel.text = dateFormatter.string(from: dreamsList[indexPath.row].dateAdded)
             cell.balanceLabel.text = "\(currencyFormatter.string(from: NSNumber(value: dreamsList[indexPath.row].balance)) ?? "0")"
@@ -213,7 +222,7 @@ class DreamsVC: UICollectionViewController {
         print("Selected at \(indexPath.row)")
         selectedDreamToEdit = indexPath.row
         performSegue(withIdentifier: "toEditDream", sender: nil)
-        EditDreamsVC.delegate = self
+        EditDreamVC.delegate = self
     }
 }
 

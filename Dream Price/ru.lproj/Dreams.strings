@@ -1,0 +1,108 @@
+
+/* Class = "UILabel"; text = "Main"; ObjectID = "0Ar-Ng-du6"; */
+"0Ar-Ng-du6.text" = "Главная";
+
+/* Class = "UITabBarItem"; title = "Мечты"; ObjectID = "3sZ-cQ-nQE"; */
+"3sZ-cQ-nQE.title" = "Мечты";
+
+/* Class = "UILabel"; text = "/"; ObjectID = "4e7-bg-a0G"; */
+"4e7-bg-a0G.text" = "/";
+
+/* Class = "UILabel"; text = "Main"; ObjectID = "8JK-51-pJM"; */
+"8JK-51-pJM.text" = "Главная";
+
+/* Class = "UITableViewSection"; headerTitle = "Title"; ObjectID = "8oi-Sl-fTg"; */
+"8oi-Sl-fTg.headerTitle" = "Название";
+
+/* Class = "UITextField"; placeholder = "Add description..."; ObjectID = "9g7-p2-cgz"; */
+"9g7-p2-cgz.placeholder" = "Добавьте описание...";
+
+/* Class = "UILabel"; text = "Description"; ObjectID = "9r7-Y7-fSk"; */
+"9r7-Y7-fSk.text" = "Описание";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "Bce-cD-FjU"; */
+"Bce-cD-FjU.text" = "Название";
+
+/* Class = "UIBarButtonItem"; title = "Назад"; ObjectID = "HQS-dN-Vso"; */
+"HQS-dN-Vso.title" = "Назад";
+
+/* Class = "UITextField"; placeholder = "Add title..."; ObjectID = "HUq-Q1-MaZ"; */
+"HUq-Q1-MaZ.placeholder" = "Добавьте название...";
+
+/* Class = "UILabel"; text = "7 000 $"; ObjectID = "Ike-tI-F9Y"; */
+"Ike-tI-F9Y.text" = "7 000 $";
+
+/* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "KMw-lY-Ks4"; */
+"KMw-lY-Ks4.title" = "Отменить";
+
+/* Class = "UITableViewSection"; headerTitle = "Description (optional)"; ObjectID = "W2U-oL-uwu"; */
+"W2U-oL-uwu.headerTitle" = "Описание (Необязательно)";
+
+/* Class = "UINavigationItem"; title = "New Dream"; ObjectID = "Xay-22-ej1"; */
+"Xay-22-ej1.title" = "Новая мечта";
+
+/* Class = "UITableViewSection"; headerTitle = "Goal"; ObjectID = "Y3e-Dy-8S2"; */
+"Y3e-Dy-8S2.headerTitle" = "Цель";
+
+/* Class = "UILabel"; text = "Friday, 20 June"; ObjectID = "Y4H-5k-bgh"; */
+"Y4H-5k-bgh.text" = "Пятница, 20 Июня";
+
+/* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "YAR-VI-yDN"; */
+"YAR-VI-yDN.title" = "Отменить";
+
+/* Class = "UITableViewSection"; headerTitle = "Goal"; ObjectID = "Zaq-co-qFZ"; */
+"Zaq-co-qFZ.headerTitle" = "Goal";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "a6q-PU-cxp"; */
+"a6q-PU-cxp.text" = "Название";
+
+/* Class = "UILabel"; text = "7 000 000 $"; ObjectID = "bBF-QY-KmV"; */
+"bBF-QY-KmV.text" = "7 000 000 ₽";
+
+/* Class = "UITextField"; placeholder = "Add goal..."; ObjectID = "bTg-wG-fXj"; */
+"bTg-wG-fXj.placeholder" = "Добавить цель...";
+
+/* Class = "UILabel"; text = "Secondary"; ObjectID = "cNT-az-Vfo"; */
+"cNT-az-Vfo.text" = "Второстепенная";
+
+/* Class = "UILabel"; text = "Friday, 20 June"; ObjectID = "dfy-tu-tNT"; */
+"dfy-tu-tNT.text" = "Пятница, 20 Июня";
+
+/* Class = "UILabel"; text = "Secondary"; ObjectID = "eQC-an-f88"; */
+"eQC-an-f88.text" = "Второстепенная";
+
+/* Class = "UITableViewSection"; headerTitle = "Description (optional)"; ObjectID = "hqd-PW-Ak7"; */
+"hqd-PW-Ak7.headerTitle" = "Описание (Необязательно)";
+
+/* Class = "UITableViewSection"; headerTitle = "Title"; ObjectID = "lf5-oC-MLw"; */
+"lf5-oC-MLw.headerTitle" = "Название";
+
+/* Class = "UITableViewSection"; headerTitle = "Type"; ObjectID = "m1D-b1-kEn"; */
+"m1D-b1-kEn.headerTitle" = "Тип";
+
+/* Class = "UINavigationItem"; title = "Dream"; ObjectID = "mnf-QQ-fW5"; */
+"mnf-QQ-fW5.title" = "Мечта";
+
+/* Class = "UITextField"; placeholder = "Add title..."; ObjectID = "nOb-q9-ngH"; */
+"nOb-q9-ngH.placeholder" = "Добавить название...";
+
+/* Class = "UIBarButtonItem"; title = "Назад"; ObjectID = "ond-Ex-yy2"; */
+"ond-Ex-yy2.title" = "Назад";
+
+/* Class = "UITabBarItem"; title = "Dreams"; ObjectID = "qpx-1Q-jzv"; */
+"qpx-1Q-jzv.title" = "Мечты";
+
+/* Class = "UITextField"; placeholder = "Add goal..."; ObjectID = "rzY-J9-oh6"; */
+"rzY-J9-oh6.placeholder" = "Добавить цель...";
+
+/* Class = "UILabel"; text = "Description"; ObjectID = "sNJ-bH-IOg"; */
+"sNJ-bH-IOg.text" = "Описание";
+
+/* Class = "UITableViewSection"; headerTitle = "Type"; ObjectID = "vb5-Ol-Wjb"; */
+"vb5-Ol-Wjb.headerTitle" = "Тип";
+
+/* Class = "UITextField"; placeholder = "Add desription..."; ObjectID = "xYl-wX-Y99"; */
+"xYl-wX-Y99.placeholder" = "Добавить название...";
+
+/* Class = "UILabel"; text = "100 $"; ObjectID = "ykj-z6-7Nh"; */
+"ykj-z6-7Nh.text" = "100 ₽";

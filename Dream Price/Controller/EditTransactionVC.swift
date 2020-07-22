@@ -45,7 +45,6 @@ class EditTransactionVC: UIViewController, TransactionDelegate {
             deleteTransaction()
         } else {
             // TODO: Saving changes to database
-            print(data)
             dismiss(animated: true, completion: nil)
         }
     }
@@ -56,7 +55,6 @@ class EditTransactionVC: UIViewController, TransactionDelegate {
         let deleteAction = UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: .destructive, handler: {
             (alert: UIAlertAction!) -> Void in
             // TODO: Deleting from database
-            print("Transaction deleted")
             self.dismiss(animated: true, completion: nil)
         })
         

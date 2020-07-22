@@ -14,7 +14,6 @@ class NewEarningCell: UITableViewCell {
 
     @IBAction func categoryAdded(_ sender: UITextField) {
         if textField.text != "" {
-            print(textField.text)
             delegate?.addNewCategory(category: textField.text!, type: .earning)
             textField.text = ""
         }

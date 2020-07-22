@@ -20,8 +20,12 @@
 		56D8D4A324C4E42600C3194D /* RealmAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8D4A224C4E42600C3194D /* RealmAction.swift */; };
 		56D8D4A524C4E4C200C3194D /* RealmProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8D4A424C4E4C200C3194D /* RealmProject.swift */; };
 		56D8D4A724C4E70700C3194D /* AddProjectCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8D4A624C4E70700C3194D /* AddProjectCVCell.swift */; };
+		8416E83B24C7E23F00DB0C0C /* AddDreamsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8416E83A24C7E23F00DB0C0C /* AddDreamsVC.swift */; };
+		8416E83D24C7E2BB00DB0C0C /* EditDreamsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8416E83C24C7E2BB00DB0C0C /* EditDreamsVC.swift */; };
+		8416E83F24C7E34600DB0C0C /* DreamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8416E83E24C7E34600DB0C0C /* DreamCell.swift */; };
+		8416E84124C7E36200DB0C0C /* FocusedDreamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8416E84024C7E36200DB0C0C /* FocusedDreamCell.swift */; };
+		8416E84224C7F7A400DB0C0C /* Dreams.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8416E84424C7F7A400DB0C0C /* Dreams.storyboard */; };
 		841BDABF24BCC4330096BF68 /* Projects.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 841BDABE24BCC4330096BF68 /* Projects.storyboard */; };
-		841BDAC324BCC8260096BF68 /* Dreams.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 841BDAC224BCC8260096BF68 /* Dreams.storyboard */; };
 		843688BB24BCC0A500793B2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843688BA24BCC0A500793B2B /* AppDelegate.swift */; };
 		843688BD24BCC0A500793B2B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843688BC24BCC0A500793B2B /* SceneDelegate.swift */; };
 		843688C224BCC0A500793B2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 843688C024BCC0A500793B2B /* Main.storyboard */; };
@@ -127,8 +131,14 @@
 		56D8D4A424C4E4C200C3194D /* RealmProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RealmProject.swift; path = "Dream Price/Realm/RealmProject.swift"; sourceTree = SOURCE_ROOT; };
 		56D8D4A624C4E70700C3194D /* AddProjectCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProjectCVCell.swift; sourceTree = "<group>"; };
 		6C95879CF6685A037493194E /* Pods_Dream_Price.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dream_Price.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8416E83A24C7E23F00DB0C0C /* AddDreamsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDreamsVC.swift; sourceTree = "<group>"; };
+		8416E83C24C7E2BB00DB0C0C /* EditDreamsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDreamsVC.swift; sourceTree = "<group>"; };
+		8416E83E24C7E34600DB0C0C /* DreamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DreamCell.swift; sourceTree = "<group>"; };
+		8416E84024C7E36200DB0C0C /* FocusedDreamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusedDreamCell.swift; sourceTree = "<group>"; };
+		8416E84324C7F7A400DB0C0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Dreams.storyboard; sourceTree = "<group>"; };
+		8416E84624C7F7AA00DB0C0C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Dreams.strings; sourceTree = "<group>"; };
+		8416E84824C7F7AE00DB0C0C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Dreams.strings; sourceTree = "<group>"; };
 		841BDABE24BCC4330096BF68 /* Projects.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Projects.storyboard; sourceTree = "<group>"; };
-		841BDAC224BCC8260096BF68 /* Dreams.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Dreams.storyboard; sourceTree = "<group>"; };
 		843688B724BCC0A500793B2B /* Dream Price.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dream Price.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		843688BA24BCC0A500793B2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		843688BC24BCC0A500793B2B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -247,6 +257,8 @@
 				84BEDBF124C46A3700792F93 /* ETNumberCell.swift */,
 				84BEDBF324C46A4600792F93 /* ETDateCell.swift */,
 				843B29BA24C49F7B00A7E87A /* ETDeleteCell.swift */,
+				8416E83E24C7E34600DB0C0C /* DreamCell.swift */,
+				8416E84024C7E36200DB0C0C /* FocusedDreamCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -254,6 +266,7 @@
 		841BDABA24BCC35C0096BF68 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				8416E83A24C7E23F00DB0C0C /* AddDreamsVC.swift */,
 				8447A83224BCCAE8005F448B /* BudgetVC.swift */,
 				8447A83C24BCD990005F448B /* BudgetPVC.swift */,
 				8447A83424BCCB04005F448B /* ProjectsVC.swift */,
@@ -267,6 +280,7 @@
 				84E4C73B24BEF882006E3D0A /* ManageCategoriesVC.swift */,
 				84B35FA024C1E9AD008FD1CE /* HistoryVC.swift */,
 				84BEDBEB24C408D400792F93 /* EditTransactionVC.swift */,
+				8416E83C24C7E2BB00DB0C0C /* EditDreamsVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -330,7 +344,7 @@
 				843688BA24BCC0A500793B2B /* AppDelegate.swift */,
 				843688BC24BCC0A500793B2B /* SceneDelegate.swift */,
 				843688C024BCC0A500793B2B /* Main.storyboard */,
-				841BDAC224BCC8260096BF68 /* Dreams.storyboard */,
+				8416E84424C7F7A400DB0C0C /* Dreams.storyboard */,
 				843CBCEC24C508E6005E8562 /* History.storyboard */,
 				841BDABE24BCC4330096BF68 /* Projects.storyboard */,
 				843688C324BCC0A800793B2B /* Assets.xcassets */,
@@ -488,7 +502,7 @@
 				843688C224BCC0A500793B2B /* Main.storyboard in Resources */,
 				843CBCF324C51142005E8562 /* Localizable.strings in Resources */,
 				843CBCEA24C508E6005E8562 /* History.storyboard in Resources */,
-				841BDAC324BCC8260096BF68 /* Dreams.storyboard in Resources */,
+				8416E84224C7F7A400DB0C0C /* Dreams.storyboard in Resources */,
 				841BDABF24BCC4330096BF68 /* Projects.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -586,6 +600,8 @@
 				56D8D48F24C49BD200C3194D /* RealmService.swift in Sources */,
 				56D8D4A124C4E3C700C3194D /* DataService.swift in Sources */,
 				843D057124BE03C800DF7EFF /* CategoryCollectionVC.swift in Sources */,
+				8416E83D24C7E2BB00DB0C0C /* EditDreamsVC.swift in Sources */,
+				8416E83B24C7E23F00DB0C0C /* AddDreamsVC.swift in Sources */,
 				843B29BB24C49F7B00A7E87A /* ETDeleteCell.swift in Sources */,
 				84B35FA124C1E9AD008FD1CE /* HistoryVC.swift in Sources */,
 				84B35FA524C1FE48008FD1CE /* TransactionCell.swift in Sources */,
@@ -593,6 +609,7 @@
 				843688BB24BCC0A500793B2B /* AppDelegate.swift in Sources */,
 				8447A83924BCCB27005F448B /* DreamsVC.swift in Sources */,
 				84BEDBE824C3CF6200792F93 /* EditableCategoryCell.swift in Sources */,
+				8416E84124C7E36200DB0C0C /* FocusedDreamCell.swift in Sources */,
 				84BEDBF424C46A4700792F93 /* ETDateCell.swift in Sources */,
 				84BEDBF224C46A3700792F93 /* ETNumberCell.swift in Sources */,
 				84E4C73C24BEF882006E3D0A /* ManageCategoriesVC.swift in Sources */,
@@ -609,6 +626,7 @@
 				84BEDBEA24C3DBAB00792F93 /* NewEarningCell.swift in Sources */,
 				84BEDBEC24C408D400792F93 /* EditTransactionVC.swift in Sources */,
 				84E38BF124C76AEC00FF5CC1 /* DashedBorder.swift in Sources */,
+				8416E83F24C7E34600DB0C0C /* DreamCell.swift in Sources */,
 				8447A84124BCDBDE005F448B /* BudgetItemDataVC.swift in Sources */,
 				8447A83324BCCAE8005F448B /* BudgetVC.swift in Sources */,
 				84BEDBE624C3C62A00792F93 /* NewCategoryCell.swift in Sources */,
@@ -650,6 +668,16 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		8416E84424C7F7A400DB0C0C /* Dreams.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8416E84324C7F7A400DB0C0C /* Base */,
+				8416E84624C7F7AA00DB0C0C /* en */,
+				8416E84824C7F7AE00DB0C0C /* ru */,
+			);
+			name = Dreams.storyboard;
+			sourceTree = "<group>";
+		};
 		843688C024BCC0A500793B2B /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

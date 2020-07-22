@@ -13,7 +13,6 @@ class NewCategoryCell: UITableViewCell {
     
     @IBAction func categoryTyped(_ sender: UITextField) {
         if sender.text != "" {
-            print(sender.text)
             delegate?.addNewCategory(category: sender.text!, type: .spending)
             sender.text = ""
         }
