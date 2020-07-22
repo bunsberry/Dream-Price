@@ -2,7 +2,7 @@
 //  DreamsVC.swift
 //  Dream Price
 //
-//  Created by Kostya Bunsberry on 14.07.2020.
+//  Created by Noisegain on 14.07.2020.
 //
 
 import UIKit
@@ -154,8 +154,6 @@ class DreamsVC: UICollectionViewController {
         currencyFormatter.locale = Locale.current
         currencyFormatter.numberStyle = .currency
         
-        // TODO: Depends on setting
-        
         currencyFormatter.minimumFractionDigits = 0
         currencyFormatter.maximumFractionDigits = 0
         
@@ -187,10 +185,10 @@ class DreamsVC: UICollectionViewController {
             cell.contentView.layer.cornerRadius = 5
             cell.contentView.layer.masksToBounds = true
 
-            cell.layer.shadowColor = UIColor.label.cgColor
-            cell.layer.shadowOffset = CGSize(width: 0, height: 2.0)
+            cell.layer.shadowColor = UIColor.secondaryLabel.cgColor
+            cell.layer.shadowOffset = CGSize(width: 4, height: 4)
             cell.layer.shadowRadius = 8
-            cell.layer.shadowOpacity = 0.1
+            cell.layer.shadowOpacity = 0.4
             cell.layer.masksToBounds = false
             cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: cell.contentView.layer.cornerRadius).cgPath
             
@@ -209,10 +207,10 @@ class DreamsVC: UICollectionViewController {
             cell.contentView.layer.cornerRadius = 5
             cell.contentView.layer.masksToBounds = true
 
-            cell.layer.shadowColor = UIColor.label.cgColor
-            cell.layer.shadowOffset = CGSize(width: 0, height: 2.0)
+            cell.layer.shadowColor = UIColor.secondaryLabel.cgColor
+            cell.layer.shadowOffset = CGSize(width: 4, height: 4)
             cell.layer.shadowRadius = 8
-            cell.layer.shadowOpacity = 0.1
+            cell.layer.shadowOpacity = 0.4
             cell.layer.masksToBounds = false
             cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: cell.contentView.layer.cornerRadius).cgPath
             
@@ -225,11 +223,10 @@ class DreamsVC: UICollectionViewController {
         selectedDreamToEdit = indexPath.row
         performSegue(withIdentifier: "toEditDream", sender: nil)
         EditDreamVC.delegate = self
-        // TODO: Delegate with id and cell data
     }
 }
 
-extension DreamsVC: AddDreamDelegate {
+extension DreamsVC: AddDreamDelegate, EditDreamDelegate {
     func dreamAdded(newDream: Dream) {
         
         // TODO: DB dream add
@@ -247,12 +244,10 @@ extension DreamsVC: AddDreamDelegate {
         
         dreamCollection.reloadData()
     }
-}
-
-extension DreamsVC: EditDreamDelegate {
+    
     func dreamEdited(dream: Dream, row: Int) {
     
-        // TODO: DB dream add
+        // TODO: DB dream edit
         
         var dream = dream
         

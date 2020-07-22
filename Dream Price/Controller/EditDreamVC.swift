@@ -2,7 +2,7 @@
 //  EditDreamVC.swift
 //  Dream Price
 //
-//  Created by Kostya Bunsberry on 19.07.2020.
+//  Created by Noisegain on 19.07.2020.
 //
 
 import UIKit
@@ -31,24 +31,27 @@ class EditDreamVC: UITableViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         selectedRow = selectedDreamToEdit
-        print(selectedRow)
+        
         nameField.text = dreamsList[selectedRow].title
         descriptionField.text = dreamsList[selectedRow].description
-        sumFIeld.text = "\(dreamsList[selectedRow].goal)"
+        
+        let numberFormatter = NumberFormatter()
+        numberFormatter.maximumFractionDigits = 0
+        numberFormatter.minimumFractionDigits = 0
+        
+        sumFIeld.text = numberFormatter.string(from: NSNumber(value: dreamsList[selectedRow].goal))
+        
         if dreamsList[selectedRow].type == .focusedDream {
             mainSwitch.setOn(true, animated: false)
         }
     }
     override func viewWillDisappear(_ animated: Bool) {
-        print("ssss")
         nameField.text = ""
         descriptionField.text = ""
         sumFIeld.text = ""
         mainSwitch.setOn(false, animated: false)
     }
-    public func update() {
-        
-    }
+    
     func sw() -> DreamType {
         if mainSwitch.isOn {
             return DreamType.focusedDream
@@ -65,11 +68,15 @@ class EditDreamVC: UITableViewController {
     @IBAction func EditDream(_ sender: Any) {
         if nameField.text != "" && sumFIeld.text != "" {
             let sum = Float(sumFIeld.text!)
-            let dream = Dream(type: sw(), title: nameField.text!, description: descriptionField.text!, balance: 0, goal: sum!, dateAdded: Date())
+            let dream = Dream(type: sw(), title: nameField.text!, description: descriptionField.text!, balance: 0, goal: sum!, dateAdded: dreamsList[selectedRow].dateAdded)
             EditDreamVC.delegate?.dreamEdited(dream: dream, row: selectedRow)
             dismiss(animated: true, completion: nil)
         } else {
-            // TODO: Notification that you didn't type everything
+            let alertController = UIAlertController(title: "Что-то пошло не так...", message:
+                    "Заполните все обязательные поля пожалуйста", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "Хорошо", style: .default))
+
+            self.present(alertController, animated: true, completion: nil)
         }
     }
 

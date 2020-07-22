@@ -48,7 +48,11 @@ class AddDreamVC: UITableViewController {
             AddDreamVC.delegate?.dreamAdded(newDream: newDream)
             dismiss(animated: true, completion: nil)
         } else {
-            // TODO: Notification that you didn't type everything
+            let alertController = UIAlertController(title: "Что-то пошло не так...", message:
+                    "Заполните все обязательные поля пожалуйста", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "Хорошо", style: .default))
+
+            self.present(alertController, animated: true, completion: nil)
         }
     }
 }
