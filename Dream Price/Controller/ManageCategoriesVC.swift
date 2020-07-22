@@ -58,9 +58,7 @@ class ManageCategoriesVC: UIViewController, CategoryManageDelegate {
         } else {
             sender.title = NSLocalizedString("Edit", comment: "")
         }
-        
-        self.tableView.cellForRow(at: IndexPath.init(row: 0, section: 0))?.showsReorderControl = false
-        self.tableView.cellForRow(at: IndexPath.init(row: 0, section: 1))?.showsReorderControl = false
+
     }
     
     // MARK: UpdateTableView()
@@ -104,8 +102,6 @@ class ManageCategoriesVC: UIViewController, CategoryManageDelegate {
         
         updateTableView()
         
-        self.tableView.cellForRow(at: IndexPath.init(row: 0, section: 0))?.showsReorderControl = false
-        self.tableView.cellForRow(at: IndexPath.init(row: 0, section: 1))?.showsReorderControl = false
         
         print("added new category")
     }
@@ -124,8 +120,6 @@ class ManageCategoriesVC: UIViewController, CategoryManageDelegate {
         }
         
         updateTableView()
-        self.tableView.cellForRow(at: IndexPath.init(row: 0, section: 0))?.showsReorderControl = false
-        self.tableView.cellForRow(at: IndexPath.init(row: 0, section: 1))?.showsReorderControl = false
     }
     
 }
@@ -146,62 +140,58 @@ extension ManageCategoriesVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         // TODO: DB Object moved to another position
-        
-        var movedObj = sections[sourceIndexPath.section][sourceIndexPath.row]
-        
-        if movedObj.sortInt < sections[destinationIndexPath.section][destinationIndexPath.row].sortInt {
-            print("Less")
+        if destinationIndexPath.row != 0 {
+            var movedObj = sections[sourceIndexPath.section][sourceIndexPath.row]
             
-            for (index, el) in sections[destinationIndexPath.section].enumerated() {
-                if el.sortInt > movedObj.sortInt {
-                    sections[destinationIndexPath.section][index].sortInt -= 1
+            if movedObj.sortInt < sections[destinationIndexPath.section][destinationIndexPath.row].sortInt {
+                
+                for (index, el) in sections[destinationIndexPath.section].enumerated() {
+                    if el.sortInt > movedObj.sortInt {
+                        sections[destinationIndexPath.section][index].sortInt -= 1
+                    }
+                    
+                    for (index1, category) in categories.enumerated() {
+                        if category.id == sections[destinationIndexPath.section][index].id {
+                            categories[index1].sortInt = sections[destinationIndexPath.section][index].sortInt
+                            print(categories[index1])
+                        }
+                    }
+                }
+                movedObj.sortInt = destinationIndexPath.row
+                
+                for (index, category) in categories.enumerated() {
+                    if movedObj.id == category.id {
+                        categories[index].sortInt = movedObj.sortInt
+                    }
+                }
+            } else if movedObj.sortInt > sections[destinationIndexPath.section][destinationIndexPath.row].sortInt {
+                for (index, el) in sections[destinationIndexPath.section].enumerated() {
+                    if el.sortInt < movedObj.sortInt {
+                        sections[destinationIndexPath.section][index].sortInt += 1
+                    }
+                    
+                    for (index1, category) in categories.enumerated() {
+                        if category.id == sections[destinationIndexPath.section][index].id {
+                            categories[index1].sortInt = sections[destinationIndexPath.section][index].sortInt
+                            print(categories[index1])
+                        }
+                    }
                 }
                 
-                for (index1, category) in categories.enumerated() {
-                    if category.id == sections[destinationIndexPath.section][index].id {
-                        categories[index1].sortInt = sections[destinationIndexPath.section][index].sortInt
-                        print(categories[index1])
+                movedObj.sortInt = destinationIndexPath.row
+                
+                for (index, category) in categories.enumerated() {
+                    if movedObj.id == category.id {
+                        categories[index].sortInt = movedObj.sortInt
                     }
                 }
             }
-            movedObj.sortInt = destinationIndexPath.row
-            print(movedObj)
             
-            for (index, category) in categories.enumerated() {
-                if movedObj.id == category.id {
-                    categories[index].sortInt = movedObj.sortInt
-                }
-            }
-        } else if movedObj.sortInt > sections[destinationIndexPath.section][destinationIndexPath.row].sortInt {
-            print("Bigger")
-            for (index, el) in sections[destinationIndexPath.section].enumerated() {
-                if el.sortInt < movedObj.sortInt {
-                    sections[destinationIndexPath.section][index].sortInt += 1
-                }
-                
-                for (index1, category) in categories.enumerated() {
-                    if category.id == sections[destinationIndexPath.section][index].id {
-                        categories[index1].sortInt = sections[destinationIndexPath.section][index].sortInt
-                        print(categories[index1])
-                    }
-                }
-            }
-            
-            movedObj.sortInt = destinationIndexPath.row
-            print(movedObj)
-            
-            for (index, category) in categories.enumerated() {
-                if movedObj.id == category.id {
-                    categories[index].sortInt = movedObj.sortInt
-                }
-            }
+            sections[sourceIndexPath.section].remove(at: sourceIndexPath.row)
+            sections[sourceIndexPath.section].insert(movedObj, at: destinationIndexPath.row)
+        } else {
+            updateTableView()
         }
-        
-        sections[sourceIndexPath.section].remove(at: sourceIndexPath.row)
-        sections[sourceIndexPath.section].insert(movedObj, at: destinationIndexPath.row)
-        
-        self.tableView.cellForRow(at: IndexPath.init(row: 0, section: 0))?.showsReorderControl = false
-        self.tableView.cellForRow(at: IndexPath.init(row: 0, section: 1))?.showsReorderControl = false
     }
     
     func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
@@ -235,23 +225,16 @@ extension ManageCategoriesVC: UITableViewDataSource, UITableViewDelegate {
                 sections[indexPath.section][index].sortInt = index
                 
                 if category.id != "-1" {
-                    print(sections[indexPath.section][index])
                     
                     for (index1, category) in categories.enumerated() {
                         if category.id == sections[indexPath.section][index].id {
                             categories[index1].sortInt = index
-                            print(categories[index1])
                         }
                     }
                 }
-                
-                print("----")
             }
             
-//            tableView.deleteRows(at: [indexPath], with: .automatic)
             updateTableView()
-            self.tableView.cellForRow(at: IndexPath.init(row: 0, section: 0))?.showsReorderControl = false
-            self.tableView.cellForRow(at: IndexPath.init(row: 0, section: 1))?.showsReorderControl = false
         }
         
         print("Category Deleted")
@@ -302,5 +285,12 @@ extension ManageCategoriesVC: UITableViewDataSource, UITableViewDelegate {
         } else {
             return NSLocalizedString("Earnings", comment: "")
         }
+    }
+    
+    func tableView (_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.row > 0 {
+            return true
+        }
+        return false
     }
 }

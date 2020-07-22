@@ -114,6 +114,9 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="textFieldChanged:" destination="KLB-GB-c0n" eventType="editingChanged" id="plh-tq-I6S"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -172,6 +175,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                                     <connections>
+                                                        <action selector="textFieldAccessed:" destination="wfQ-83-tJT" eventType="editingDidBegin" id="3qp-s7-cLj"/>
                                                         <action selector="textFieldChanged:" destination="wfQ-83-tJT" eventType="editingChanged" id="LPh-99-1jG"/>
                                                         <action selector="textFieldEnded:" destination="wfQ-83-tJT" eventType="editingDidEnd" id="jjg-YL-rbb"/>
                                                     </connections>

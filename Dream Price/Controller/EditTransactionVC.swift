@@ -45,6 +45,7 @@ class EditTransactionVC: UIViewController, TransactionDelegate {
             deleteTransaction()
         } else {
             // TODO: Saving changes to database
+            print(data)
             dismiss(animated: true, completion: nil)
         }
     }
@@ -69,22 +70,19 @@ class EditTransactionVC: UIViewController, TransactionDelegate {
     }
     
     func rewriteCategory(string: String) {
-        
+        data.category = string
     }
     
     func rewriteDesctiption(string: String) {
-        print("Description changed to \(string)")
         data.description = string
-        self.view.endEditing(true)
     }
     
     func rewriteNumber(float: Float) {
-        print("Number changed to \(float)")
         data.number = float
     }
     
     func rewriteDate(date: Date) {
-        
+        // TODO: Date rewriting
     }
     
 }
@@ -92,7 +90,8 @@ class EditTransactionVC: UIViewController, TransactionDelegate {
 extension EditTransactionVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+//        return 5
+        return 4
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -103,15 +102,15 @@ extension EditTransactionVC: UITableViewDelegate, UITableViewDataSource {
             return NSLocalizedString("Description", comment: "")
         case 2:
             return NSLocalizedString("Amount", comment: "")
-        case 3:
-            return NSLocalizedString("Date", comment: "")
+//        case 3:
+//            return NSLocalizedString("Date", comment: "")
         default:
             return ""
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 3 { return 2 }
+//        if section == 3 { return 2 }
         return 1
     }
     
@@ -121,6 +120,7 @@ extension EditTransactionVC: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "transactionCategoryCell") as! ETCategoryCell
             
             cell.textField.text = data.category
+            cell.delegate = self
             
             return cell
         case 1:
@@ -150,11 +150,11 @@ extension EditTransactionVC: UITableViewDelegate, UITableViewDataSource {
             cell.delegate = self
             
             return cell
+//        case 3:
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "transactionDateCell") as! ETDateCell
+//
+//            return cell
         case 3:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "transactionDateCell") as! ETDateCell
-            
-            return cell
-        case 4:
             let cell = tableView.dequeueReusableCell(withIdentifier: "transactionDeleteCell") as! ETDeleteCell
             
             cell.delegate = self

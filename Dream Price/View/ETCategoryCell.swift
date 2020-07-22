@@ -10,5 +10,11 @@ import UIKit
 class ETCategoryCell: UITableViewCell {
 
     @IBOutlet weak var textField: UITextField!
-
+    
+    var delegate: TransactionDelegate?
+    
+    @IBAction func textFieldChanged(_ sender: UITextField) {
+        delegate?.rewriteCategory(string: sender.text!)
+    }
+    
 }
