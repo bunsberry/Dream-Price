@@ -11,10 +11,13 @@ import RealmSwift
 @objc class RealmCategory: Object {
     dynamic var id: String?
     dynamic var title: String?
-    
-    convenience init(id: String, title: String) {
+    dynamic var type: String?
+    dynamic var sortInt: Int?
+    convenience init(id: String, title: String, type: String, sortInt: Int) {
         self.init()
         self.id = id
         self.title = title
+        self.type = type
+        self.sortInt = sortInt
     }
 }

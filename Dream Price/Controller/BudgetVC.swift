@@ -7,6 +7,7 @@
 
 import UIKit
 import Foundation
+import RealmSwift
 
 protocol TransportUpDelegate {
     func transportUp(string: String)
@@ -14,19 +15,14 @@ protocol TransportUpDelegate {
 
 class BudgetVC: UIViewController, BudgetDelegate, CategoriesBeenManaged {
     
-    // TODO: Получение категорий из DB
+    // TODO: Получение категорий из DB - DONE
     
-    var categories: [Category] = [
-        Category(id: UUID().uuidString, type: .manage, title: "+", sortInt: 0),
-        Category(id: UUID().uuidString, type: .earning, title: NSLocalizedString("Work", comment: ""), sortInt: 0),
-        Category(id: UUID().uuidString, type: .spending, title: NSLocalizedString("Coffee", comment: ""), sortInt: 0),
-        Category(id: UUID().uuidString, type: .spending, title: NSLocalizedString("Groceries", comment: ""), sortInt: 1),
-        Category(id: UUID().uuidString, type: .budget, title: NSLocalizedString("Personal Account", comment: ""), sortInt: 0),
-        Category(id: UUID().uuidString, type: .budget, title: NSLocalizedString("App", comment: ""), sortInt: 1),
-        Category(id: UUID().uuidString, type: .budget, title: NSLocalizedString("Dream", comment: ""), sortInt: 2)
-    ]
+    let realm = RealmService.instance.realm
+
+    var categories: Results<RealmCategory>!
     
-    var categoriesShown: [Category] = []
+    
+    var categoriesShown: [RealmCategory] = []
 
     public static var currentTransaction: String = "-"
     
@@ -75,38 +71,38 @@ class BudgetVC: UIViewController, BudgetDelegate, CategoriesBeenManaged {
     func updateCategories(transaction: String, name: String) {
         categoriesShown.removeAll()
         
-        categories.sort(by:{ $0.sortInt > $1.sortInt})
+        let sortedCategories = categories.sorted(by:{ $0.sortInt! > $1.sortInt!})
         
         switch transaction {
         case "-":
-            for el in self.categories {
-                if el.type == .manage {
+            for el in sortedCategories {
+                if el.type == CategoryType.manage.rawValue {
                     self.categoriesShown.append(el)
                 }
             }
             for el in self.categories {
-                if el.type == .spending {
+                if el.type == CategoryType.spending.rawValue {
                     self.categoriesShown.append(el)
                 }
             }
             for el in self.categories {
-                if el.type == .budget {
+                if el.type == CategoryType.budget.rawValue {
                     self.categoriesShown.append(el)
                 }
             }
         case "+":
             for el in self.categories {
-                if el.type == .manage {
+                if el.type == CategoryType.manage.rawValue {
                     self.categoriesShown.append(el)
                 }
             }
             for el in self.categories {
-                if el.type == .earning {
+                if el.type == CategoryType.earning.rawValue {
                     self.categoriesShown.append(el)
                 }
             }
             for el in self.categories {
-                if el.type == .budget {
+                if el.type == CategoryType.budget.rawValue {
                     self.categoriesShown.append(el)
                 }
             }
@@ -206,7 +202,8 @@ extension BudgetVC {
     }
     
     func reloadCategories() {
-        // TODO: Load categories from DB
+        // TODO: Load categories from DB - DONE
+        categories = realm.objects(RealmCategory.self)
         categoriesCollectionView.reloadData()
     }
 }

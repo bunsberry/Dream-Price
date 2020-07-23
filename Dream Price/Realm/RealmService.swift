@@ -35,10 +35,10 @@ class RealmService {
         }
     }
     
-    func add<T: Object>(item object: T) {
+    func delete<T: Object>(_ object: T) {
         do {
             try realm.write {
-                // TODO: Complete Addition
+                realm.delete(object)
             }
         } catch {
             post(error)

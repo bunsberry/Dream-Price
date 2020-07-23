@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 protocol CategoryManageDelegate {
     func addNewCategory(category: String, type: CategoryType)
@@ -21,31 +22,30 @@ class ManageCategoriesVC: UIViewController, CategoryManageDelegate {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var editButton: UIBarItem!
     
-    // TODO: Read categories from DB
+    // TODO: Read categories from DB - DONE
     
-    var categories: [Category] = [
-        Category(id: UUID().uuidString, type: .earning, title: NSLocalizedString("Work", comment: ""), sortInt: 1),
-        Category(id: UUID().uuidString, type: .earning, title: NSLocalizedString("Work", comment: ""), sortInt: 2),
-        Category(id: UUID().uuidString, type: .spending, title: NSLocalizedString("Coffee", comment: ""), sortInt: 1),
-        Category(id: UUID().uuidString, type: .spending, title: NSLocalizedString("Groceries", comment: ""), sortInt: 2)
-    ] {
-        didSet { tableView.reloadData() }
-    }
-    
-    var earningSection: [Category] = []
-    var spendingSection: [Category] = []
-    var sections: [[Category]] = []
+    var earningSection: [RealmCategory] = []
+    var spendingSection: [RealmCategory] = []
+    var sections: [[RealmCategory]] = []
     static public var delegate: CategoriesBeenManaged?
+    
+    let realm = RealmService.instance.realm
+
+    var categories: Results<RealmCategory>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        updateTableView()
-        
         tableView.dataSource = self
         tableView.delegate = self
+        self.editButton.title = NSLocalizedString("Edit", comment: "")
         
-        editButton.title = NSLocalizedString("Edit", comment: "")
+        updateCategories()
+    }
+    
+    func updateCategories() {
+        // categories = realm.objects(RealmCategory.self)
+        categories = realm.objects(RealmCategory.self)
+        self.updateTableView()
     }
     
     // MARK: Buttons
@@ -74,19 +74,15 @@ class ManageCategoriesVC: UIViewController, CategoryManageDelegate {
         spendingSection.removeAll()
         sections.removeAll()
         
-        earningSection.append(Category(id: UUID().uuidString, type: .new, title: "", sortInt: 0))
-        spendingSection.append(Category(id: UUID().uuidString, type: .new, title: "", sortInt: 0))
-        
         for el in categories {
-            if el.type == .earning {
+            if el.type == CategoryType.earning.rawValue {
                 earningSection.append(el)
-            } else if el.type == .spending {
+            } else if el.type == CategoryType.spending.rawValue {
                 spendingSection.append(el)
             }
         }
-        
-        earningSection.sort(by:{ $0.sortInt < $1.sortInt })
-        spendingSection.sort(by:{ $0.sortInt < $1.sortInt })
+        earningSection.sort(by:{ $0.sortInt! < $1.sortInt! })
+        spendingSection.sort(by:{ $0.sortInt! < $1.sortInt! })
         
         sections = [spendingSection, earningSection]
         tableView.reloadData()
@@ -96,33 +92,36 @@ class ManageCategoriesVC: UIViewController, CategoryManageDelegate {
     
     func addNewCategory(category: String, type: CategoryType) {
         
-        // TODO: New Category Added to DB
+        // TODO: New Category Added to DB - DONE
         
         if type == .spending {
             print(Category(id: UUID().uuidString, type: type, title: category, sortInt: sections[0].count))
-            categories.append(Category(id: UUID().uuidString, type: type, title: category, sortInt: sections[0].count))
+            let newCategory = RealmCategory(id: UUID().uuidString, title: category, type: type.rawValue, sortInt: sections[0].count)
+            RealmService.instance.create(newCategory)
         } else if type == .earning {
             print(Category(id: UUID().uuidString, type: type, title: category, sortInt: sections[1].count))
-            categories.append(Category(id: UUID().uuidString, type: type, title: category, sortInt: sections[1].count))
+            let newCategory = RealmCategory(id: UUID().uuidString, title: category, type: type.rawValue, sortInt: sections[1].count)
+            RealmService.instance.create(newCategory)
+            
         }
-        
-        updateTableView()
+        updateCategories()
     }
     
     // MARK: Category Edit
     
     func categoryEdited(id: String, title: String) {
         
-        // TODO: DB Category title changed
+        // TODO: DB Category title changed - DONE
         
         for (index, category) in categories.enumerated() {
             if category.id == id {
-                categories[index].title = title
+                try! realm.write {
+                    categories[index].title = title
+                }
                 print(categories[index])
             }
         }
-        
-        updateTableView()
+        updateCategories()
     }
     
 }
@@ -139,67 +138,6 @@ extension ManageCategoriesVC: UITableViewDataSource, UITableViewDelegate {
         sections[section].count
     }
     
-    // MARK: Sorting
-    
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        // TODO: DB Object moved to another position
-        if destinationIndexPath.row != 0 {
-            var movedObj = sections[sourceIndexPath.section][sourceIndexPath.row]
-            
-            if movedObj.sortInt < sections[destinationIndexPath.section][destinationIndexPath.row].sortInt {
-                print("<")
-                
-                for (index, el) in sections[destinationIndexPath.section].enumerated() {
-                    if el.sortInt > movedObj.sortInt {
-                        sections[destinationIndexPath.section][index].sortInt -= 1
-                    }
-                    
-                    for (index1, category) in categories.enumerated() {
-                        if category.id == sections[destinationIndexPath.section][index].id {
-                            categories[index1].sortInt = sections[destinationIndexPath.section][index].sortInt
-                            print(categories[index1])
-                        }
-                    }
-                }
-                movedObj.sortInt = destinationIndexPath.row
-                print(movedObj.sortInt)
-                
-                for (index, category) in categories.enumerated() {
-                    if movedObj.id == category.id {
-                        categories[index].sortInt = movedObj.sortInt
-                    }
-                }
-            } else if movedObj.sortInt > sections[destinationIndexPath.section][destinationIndexPath.row].sortInt {
-                print(">")
-                for (index, el) in sections[destinationIndexPath.section].enumerated() {
-                    if el.sortInt < movedObj.sortInt {
-                        sections[destinationIndexPath.section][index].sortInt += 1
-                    }
-                    
-                    for (index1, category) in categories.enumerated() {
-                        if category.id == sections[destinationIndexPath.section][index].id {
-                            categories[index1].sortInt = sections[destinationIndexPath.section][index].sortInt
-                            print(categories[index1])
-                        }
-                    }
-                }
-                
-                movedObj.sortInt = destinationIndexPath.row
-                
-                for (index, category) in categories.enumerated() {
-                    if movedObj.id == category.id {
-                        categories[index].sortInt = movedObj.sortInt
-                    }
-                }
-            }
-            
-            sections[sourceIndexPath.section].remove(at: sourceIndexPath.row)
-            sections[sourceIndexPath.section].insert(movedObj, at: destinationIndexPath.row)
-        } else {
-            updateTableView()
-        }
-    }
-    
     func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
         if sourceIndexPath.section != proposedDestinationIndexPath.section {
             var row = 0
@@ -214,35 +152,11 @@ extension ManageCategoriesVC: UITableViewDataSource, UITableViewDelegate {
     // MARK: Deleting
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
-        // TODO: DB Object deleted
-        
+        // TODO: DB Object deleted - DONE
         if editingStyle == .delete {
-            
-            for (index, category) in categories.enumerated() {
-                if category.id == sections[indexPath.section][indexPath.row].id {
-                    categories.remove(at: index)
-                }
-            }
-            
-            sections[indexPath.section].remove(at: indexPath.row)
-            
-            for (index, category) in sections[indexPath.section].enumerated() {
-                sections[indexPath.section][index].sortInt = index
-                
-                if category.id != "-1" {
-                    
-                    for (index1, category) in categories.enumerated() {
-                        if category.id == sections[indexPath.section][index].id {
-                            categories[index1].sortInt = index
-                        }
-                    }
-                }
-            }
-            
-            updateTableView()
+            RealmService.instance.delete(categories[indexPath.row])
+            updateCategories()
         }
-        
         print("Category Deleted")
     }
     
@@ -257,7 +171,7 @@ extension ManageCategoriesVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if sections[indexPath.section][indexPath.row].type == .new {
+        if sections[indexPath.section][indexPath.row].type == CategoryType.new.rawValue {
             if indexPath.section == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "newCategoryCell", for: indexPath) as! NewCategoryCell
                 

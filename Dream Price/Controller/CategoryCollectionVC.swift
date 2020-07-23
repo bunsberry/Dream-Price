@@ -23,7 +23,7 @@ extension BudgetVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if categoriesShown[indexPath.row].type == .manage {
+        if categoriesShown[indexPath.row].type == CategoryType.manage.rawValue {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "manageCategories", for: indexPath) as! ManageCategoriesCell
             
             cell.manageView.layer.cornerRadius = 25
@@ -43,11 +43,11 @@ extension BudgetVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate
             cell.titleLabel.text = categoriesShown[indexPath.row].title
             cell.titleLabel.textColor = UIColor.secondaryLabel
             
-            if categoriesShown[indexPath.row].type == .budget {
+            if categoriesShown[indexPath.row].type == CategoryType.budget.rawValue {
                 cell.categoryView.layer.cornerRadius = 10
             }
             
-            cell.categoryType = categoriesShown[indexPath.row].type
+            cell.categoryType = categoriesShown[indexPath.row].type.map { CategoryType(rawValue: $0)! }
             
             return cell
         }

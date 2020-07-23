@@ -7,12 +7,12 @@
 
 import Foundation
 
-enum CategoryType {
-    case new
-    case manage
-    case spending
-    case earning
-    case budget
+enum CategoryType: String {
+    case new = "new"
+    case manage = "manage"
+    case spending = "spending"
+    case earning = "earning"
+    case budget = "budget"
 }
 
 struct Category {
