@@ -166,9 +166,10 @@ class HistoryVC: UITableViewController, HistoryDelegate {
     // TODO: Getting transactions from a DB
     
     var transactions = [
-        Transaction(transactionID: UUID().uuidString, date: parseDate("2020-06-17"), number: -233, category: NSLocalizedString("Coffee", comment: ""), description: ""),
-        Transaction(transactionID: UUID().uuidString, date: parseDate("2020-06-15"), number: -224, category: NSLocalizedString("Groceries", comment: ""), description: ""),
-        Transaction(transactionID: UUID().uuidString, date: parseDate("2020-07-15"), number: 23, category: NSLocalizedString("Work", comment: ""), description: "")
+        Transaction(transactionID: UUID().uuidString, date: parseDate("2020-07-24"), number: -145, category: NSLocalizedString("Coffee", comment: ""), description: ""),
+        Transaction(transactionID: UUID().uuidString, date: parseDate("2020-07-23"), number: -145, category: NSLocalizedString("Coffee", comment: ""), description: ""),
+        Transaction(transactionID: UUID().uuidString, date: parseDate("2020-07-22"), number: -175, category: NSLocalizedString("Groceries", comment: ""), description: ""),
+        Transaction(transactionID: UUID().uuidString, date: parseDate("2020-07-22"), number: 2500, category: NSLocalizedString("Work", comment: ""), description: "")
     ]
     
     var chosenTransaction: Transaction = Transaction(transactionID: UUID().uuidString, date: parseDate("2020-01-01"), number: 0, category: "", description: "")
