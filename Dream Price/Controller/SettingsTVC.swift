@@ -8,12 +8,40 @@
 import UIKit
 
 class SettingsTVC: UITableViewController {
-
+    
+    @IBOutlet weak var recordCentsSwitch: UISwitch!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        recordCentsSwitch.setOn(Settings.shared.recordCentsOn ?? false, animated: false)
         self.clearsSelectionOnViewWillAppear = true
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setCentsFooter()
+    }
+    
+    @IBAction func recordCentsChanged(_ sender: UISwitch) {
+        Settings.shared.recordCentsOn = sender.isOn
+        setCentsFooter()
+        print(Settings.shared.recordCentsOn)
+    }
+    
+    func setCentsFooter() {
+        var locale = Locale.current
+        if Locale.current.currencySymbol == "RUB" {
+            locale = Locale(identifier: "ru_RU")
+        }
+        
+        if recordCentsSwitch.isOn {
+            tableView.footerView(forSection: 1)?.textLabel?.text = "Транзакции будут записаны как 20,25 \(locale.currencySymbol ?? "$")"
+        } else {
+            tableView.footerView(forSection: 1)?.textLabel?.text = "Транзакции будут записаны как 20 \(locale.currencySymbol ?? "$")"
+        }
+    }
+    
     
     @IBAction func done() {
         dismiss(animated: true, completion: nil)

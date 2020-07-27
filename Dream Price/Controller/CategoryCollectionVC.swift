@@ -58,11 +58,13 @@ extension BudgetVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate
         let cell = collectionView.cellForItem(at: indexPath) as! CategoryCell
         cell.titleLabel.textColor = UIColor.label
         cell.categoryView.layer.borderColor = UIColor.label.cgColor
+        cell.categoryView.layer.borderWidth = 2
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! CategoryCell
-        cell.titleLabel.textColor = UIColor.secondaryLabel
-        cell.categoryView.layer.borderColor = UIColor.secondaryLabel.cgColor
+        let cell = collectionView.cellForItem(at: indexPath) as? CategoryCell
+        cell?.titleLabel.textColor = UIColor.secondaryLabel
+        cell?.categoryView.layer.borderColor = UIColor.secondaryLabel.cgColor
+        cell?.categoryView.layer.borderWidth = 1
     }
 }

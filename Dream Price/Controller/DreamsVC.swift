@@ -164,6 +164,7 @@ class DreamsVC: UICollectionViewController {
         if dreamsList[indexPath.row].type == .focusedDream {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "focusedCell", for: indexPath) as! FocusedDreamCell
             
+            cell.backgroundColor = .clear
             cell.titleLabel.text = dreamsList[indexPath.row].title
             cell.descriptionLabel.text = dreamsList[indexPath.row].description
             
@@ -173,38 +174,49 @@ class DreamsVC: UICollectionViewController {
             
             cell.progressView.progress = dreamsList[indexPath.row].balance / dreamsList[indexPath.row].goal
             
-            cell.contentView.backgroundColor = UIColor.systemBackground
-            cell.contentView.layer.cornerRadius = 5
-            cell.contentView.layer.masksToBounds = true
+            cell.contentView.layer.cornerRadius = 10
+            
+            let gradient: CAGradientLayer = CAGradientLayer()
+            
+            gradient.colors = [UIColor(red: 0.506, green: 0.616, blue: 0.898, alpha: 1).cgColor, UIColor(red: 0.443, green: 0.541, blue: 0.792, alpha: 1).cgColor]
+            gradient.cornerRadius = 10
+            gradient.locations = [0.0 , 1.0]
+            gradient.startPoint = CGPoint(x: 0.6, y: 0.0)
+            gradient.endPoint = CGPoint(x: 0.4, y: 1.0)
+            gradient.frame = CGRect(x: 0.0,
+                                    y: 0.0,
+                                    width: cell.frame.size.width,
+                                    height: cell.frame.size.height)
 
-            cell.layer.shadowColor = UIColor.secondaryLabel.cgColor
-            cell.layer.shadowOffset = CGSize(width: 4, height: 4)
-            cell.layer.shadowRadius = 8
-            cell.layer.shadowOpacity = 0.4
-            cell.layer.masksToBounds = false
-            cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: cell.contentView.layer.cornerRadius).cgPath
+            cell.layer.insertSublayer(gradient, at: 0)
             
             return cell
             
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dreamCell", for: indexPath) as! DreamCell
             
+            cell.backgroundColor = .clear
             cell.titleLabel.text = dreamsList[indexPath.row].title
             cell.descriptionLabel.text = dreamsList[indexPath.row].description
             
             cell.dateLabel.text = dateFormatter.string(from: dreamsList[indexPath.row].dateAdded)
             cell.priceLabel.text = "\(currencyFormatter.string(from: NSNumber(value: dreamsList[indexPath.row].goal)) ?? "0")"
             
-            cell.contentView.backgroundColor = UIColor.systemBackground
-            cell.contentView.layer.cornerRadius = 5
-            cell.contentView.layer.masksToBounds = true
+            cell.contentView.layer.cornerRadius = 10
+            
+            let gradient: CAGradientLayer = CAGradientLayer()
+            
+            gradient.colors = [UIColor(red: 0.506, green: 0.616, blue: 0.898, alpha: 1).cgColor, UIColor(red: 0.443, green: 0.541, blue: 0.792, alpha: 1).cgColor]
+            gradient.cornerRadius = 10
+            gradient.locations = [0.0 , 1.0]
+            gradient.startPoint = CGPoint(x: 0.6, y: 0.0)
+            gradient.endPoint = CGPoint(x: 0.4, y: 1.0)
+            gradient.frame = CGRect(x: 0.0,
+                                    y: 0.0,
+                                    width: cell.frame.size.width,
+                                    height: cell.frame.size.height)
 
-            cell.layer.shadowColor = UIColor.secondaryLabel.cgColor
-            cell.layer.shadowOffset = CGSize(width: 4, height: 4)
-            cell.layer.shadowRadius = 8
-            cell.layer.shadowOpacity = 0.4
-            cell.layer.masksToBounds = false
-            cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: cell.contentView.layer.cornerRadius).cgPath
+            cell.layer.insertSublayer(gradient, at: 0)
             
             return cell
         }
@@ -253,6 +265,11 @@ extension DreamsVC: AddDreamDelegate, EditDreamDelegate {
             dreamsList[0].type = .dream
             dreamsList.remove(at: row)
             dreamsList.insert(dream, at: 0)
+        } else if row == 0 && dream.type == .dream {
+            dreamsList[0].title = dream.title
+            dreamsList[0].description = dream.description
+            dreamsList[0].goal = dream.goal
+            dreamsList[0].type = .dream
         } else {
             dreamsList[row].title = dream.title
             dreamsList[row].description = dream.description

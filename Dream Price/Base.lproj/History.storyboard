@@ -100,14 +100,14 @@
                                 <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="transactionCategoryCell" id="KLB-GB-c0n" customClass="ETCategoryCell" customModule="Dream_Price" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.5" width="414" height="43"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KLB-GB-c0n" id="F4f-hx-fC2">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqX-1W-RRJ">
-                                                    <rect key="frame" x="20" y="11" width="374" height="21"/>
+                                                    <rect key="frame" x="20" y="11" width="374" height="21.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -125,14 +125,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="transactionBudgetCell" id="4u1-BZ-XSY" customClass="ETBudgetCell" customModule="Dream_Price" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="98.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="99" width="414" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4u1-BZ-XSY" id="Z8v-2V-6vC">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Budget Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jSn-Qb-bNV">
-                                                    <rect key="frame" x="20" y="11" width="374" height="21.5"/>
+                                                    <rect key="frame" x="20" y="11" width="374" height="21"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -182,23 +182,60 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="transactionDateCell" id="dEw-Qe-puS" customClass="ETDateCell" customModule="Dream_Price" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="185.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="185.5" width="414" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dEw-Qe-puS" id="82M-jJ-VUc">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12 Jun 2020" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pbs-16-TjJ">
+                                                    <rect key="frame" x="20" y="11" width="374" height="21"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="pbs-16-TjJ" firstAttribute="top" secondItem="82M-jJ-VUc" secondAttribute="topMargin" id="NiC-1w-p29"/>
+                                                <constraint firstItem="pbs-16-TjJ" firstAttribute="leading" secondItem="82M-jJ-VUc" secondAttribute="leadingMargin" id="QQ3-KJ-WrJ"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="pbs-16-TjJ" secondAttribute="bottom" id="nsg-DL-VGZ"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="pbs-16-TjJ" secondAttribute="trailing" id="pA6-RT-N9q"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="dateLabel" destination="pbs-16-TjJ" id="5Cv-nm-yU2"/>
+                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="transactionDatePickerCell" id="A65-Md-GMt">
-                                        <rect key="frame" x="0.0" y="229" width="414" height="43.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="transactionDatePickerCell" id="A65-Md-GMt" customClass="ETDatePickerCell" customModule="Dream_Price" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="228.5" width="414" height="216.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="A65-Md-GMt" id="NZx-H7-55m">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="216.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="IHD-L1-hkg">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="217"/>
+                                                    <date key="minimumDate" timeIntervalSinceReferenceDate="-978267600">
+                                                        <!--1970-01-01 11:00:00 +0000-->
+                                                    </date>
+                                                    <connections>
+                                                        <action selector="dateChanged" destination="A65-Md-GMt" eventType="valueChanged" id="a1c-wP-PuQ"/>
+                                                    </connections>
+                                                </datePicker>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="IHD-L1-hkg" secondAttribute="bottom" id="IQg-h6-76R"/>
+                                                <constraint firstItem="IHD-L1-hkg" firstAttribute="top" secondItem="NZx-H7-55m" secondAttribute="top" id="ObP-xn-Yk3"/>
+                                                <constraint firstAttribute="trailing" secondItem="IHD-L1-hkg" secondAttribute="trailing" id="SEK-4T-FrD"/>
+                                                <constraint firstItem="IHD-L1-hkg" firstAttribute="leading" secondItem="NZx-H7-55m" secondAttribute="leading" id="ara-Nm-yex"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="datePicker" destination="IHD-L1-hkg" id="YQG-ja-Rfo"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="transactionDeleteCell" id="ykb-jF-co2" customClass="ETDeleteCell" customModule="Dream_Price" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="272.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="445" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ykb-jF-co2" id="Psi-xC-w9A">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -230,7 +267,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="transactionPickerCell" id="Y7g-AN-eqa" customClass="ETPickerCell" customModule="Dream_Price" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="316.5" width="414" height="150.5"/>
+                                        <rect key="frame" x="0.0" y="489" width="414" height="150.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Y7g-AN-eqa" id="jnU-rP-1Tt">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="150.5"/>
@@ -255,7 +292,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="transactionBudgetPickerCell" id="QJF-nv-6Wb" customClass="ETBudgetPickerCell" customModule="Dream_Price" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="467" width="414" height="150.5"/>
+                                        <rect key="frame" x="0.0" y="639.5" width="414" height="150.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QJF-nv-6Wb" id="h0Q-n0-wt3">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="150.5"/>
@@ -303,21 +340,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aHJ-ny-z5A" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1908" y="101"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="SOw-dR-x6o">
-            <objects>
-                <viewController id="g47-QP-aet" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="afU-3J-f6h">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="F3S-EV-msc"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eLI-Qs-ZZA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2835" y="277"/>
         </scene>
         <!--History-->
         <scene sceneID="bzR-5b-xf7">

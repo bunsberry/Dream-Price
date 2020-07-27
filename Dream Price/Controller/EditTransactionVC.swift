@@ -30,18 +30,20 @@ class EditTransactionVC: UIViewController, TransactionDelegate {
     var categoriesPickerOpened: Bool = false
     var budgetsPickerOpened: Bool = false
     
+    var datePickerIndexPath: IndexPath?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.allowsSelection = true
+        tableView.dataSource = self
+        tableView.delegate = self
         
         if data.transactionAmount > 0 {
             navigationTitle.title = NSLocalizedString("Earning", comment: "")
         } else {
             navigationTitle.title = NSLocalizedString("Spending", comment: "")
         }
-        
-        tableView.allowsSelection = true
-        tableView.dataSource = self
-        tableView.delegate = self
     }
     
     @IBAction func cancel(_ sender: Any) {
@@ -95,7 +97,15 @@ class EditTransactionVC: UIViewController, TransactionDelegate {
     }
     
     func rewriteDate(date: Date) {
-        // TODO: Date rewriting
+        data.date = date
+        let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 3)) as! ETDateCell
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.calendar = Calendar.current
+        dateFormatter.locale = Locale.current
+        dateFormatter.dateFormat = "MMM dd, yyyy"
+        
+        cell.dateLabel.text = dateFormatter.string(from: date)
     }
     
 }
@@ -103,8 +113,7 @@ class EditTransactionVC: UIViewController, TransactionDelegate {
 extension EditTransactionVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-//        return 5
-        return 4
+        return 5
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -115,24 +124,19 @@ extension EditTransactionVC: UITableViewDelegate, UITableViewDataSource {
             return NSLocalizedString("Budget", comment: "")
         case 2:
             return NSLocalizedString("Category", comment: "")
-//        case 3:
-//            return NSLocalizedString("Date", comment: "")
+        case 3:
+            return NSLocalizedString("Date", comment: "")
         default:
             return ""
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if categoriesPickerOpened && budgetsPickerOpened{
-            if section == 1 || section == 2 { return 2 }
-            return 1
-        } else if categoriesPickerOpened {
-            if section == 2 { return 2 }
-            return 1
-        } else if budgetsPickerOpened {
-            if section == 1 { return 2 }
-            return 1
-        } else { return 1 }
+        var rows = 1
+        
+        if datePickerIndexPath != nil && datePickerIndexPath?.section == section { rows += 1 }
+        
+        return rows
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -145,10 +149,12 @@ extension EditTransactionVC: UITableViewDelegate, UITableViewDataSource {
             numberFormatter.minimumFractionDigits = 0
             let amount = numberFormatter.string(from: NSNumber(value: data.transactionAmount))
             
-            if data.transactionAmount < 0 {
-                cell.textField.text = "\(amount!)"
-            } else {
+            if data.transactionAmount > 0 {
                 cell.textField.text = "+\(amount!)"
+                cell.textField.textColor = UIColor(red: 0.451, green: 0.792, blue: 0.443, alpha: 1)
+            } else {
+                cell.textField.text = "\(amount!)"
+                cell.textField.textColor = UIColor(red: 0.792, green: 0.443, blue: 0.443, alpha: 1)
             }
             cell.delegate = self
             
@@ -184,6 +190,25 @@ extension EditTransactionVC: UITableViewDelegate, UITableViewDataSource {
             
             return cell
         case IndexPath(row: 0, section: 3):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "transactionDateCell") as! ETDateCell
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.calendar = Calendar.current
+            dateFormatter.locale = Locale.current
+            dateFormatter.dateFormat = "MMM dd, yyyy"
+            
+            cell.dateLabel.text = dateFormatter.string(from: data.date)
+            
+            return cell
+        case IndexPath(row: 1, section: 3):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "transactionDatePickerCell") as! ETDatePickerCell
+            
+            cell.datePicker.date = data.date
+            cell.datePicker.maximumDate = Date()
+            cell.delegate = self
+            
+            return cell
+        case IndexPath(row: 0, section: 4):
             let cell = tableView.dequeueReusableCell(withIdentifier: "transactionDeleteCell") as! ETDeleteCell
             
             cell.delegate = self
@@ -198,16 +223,27 @@ extension EditTransactionVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath == IndexPath(row: 0, section: 2) {
-            categoriesPickerOpened = !categoriesPickerOpened
+        tableView.beginUpdates() // because there are more than one action below
+        if datePickerIndexPath != nil && datePickerIndexPath!.row - 1 == indexPath.row { // case 2
+            tableView.deleteRows(at: [datePickerIndexPath!], with: .fade)
+            datePickerIndexPath = nil
+        } else { // case 1、3
+            if datePickerIndexPath != nil { // case 3
+                tableView.deleteRows(at: [datePickerIndexPath!], with: .fade)
+            }
+            datePickerIndexPath = calculateDatePickerIndexPath(indexPathSelected: indexPath)
+            tableView.insertRows(at: [calculateDatePickerIndexPath(indexPathSelected: indexPath)], with: .fade)
         }
-        
-        if indexPath == IndexPath(row: 0, section: 1) {
-            budgetsPickerOpened = !budgetsPickerOpened
-        }
-        
         tableView.deselectRow(at: indexPath, animated: true)
-        tableView.reloadData()
+        tableView.endUpdates()
+    }
+
+    func calculateDatePickerIndexPath(indexPathSelected: IndexPath) -> IndexPath {
+        if datePickerIndexPath != nil && datePickerIndexPath!.row  < indexPathSelected.row { // case 3.2
+            return IndexPath(row: indexPathSelected.row, section: indexPathSelected.section)
+        } else { // case 1、3.1
+            return IndexPath(row: indexPathSelected.row + 1, section: indexPathSelected.section)
+        }
     }
     
 }

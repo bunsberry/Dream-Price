@@ -132,7 +132,6 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
             }
         case "+":
             if transactionLabel.text == "0" {
-                // TODO: Animation of no transaction number
                 return
             } else {
                 if changeTransactionButton.title(for: .normal) == "-" {
@@ -146,7 +145,26 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
                 }
                 // TODO: Animation of transaction sent
                 BudgetItemDataVC.delegate?.transportButtons(enabled: 0)
-                transactionLabel.text! = "0"
+                
+                UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
+                    
+                    self.budgetItemView.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+                    
+                    UIView.transition(with: self.transactionLabel, duration: 0.5, options: .transitionCrossDissolve, animations: {
+                        [weak self] in
+                        self?.transactionLabel.text = "0"
+                }, completion: nil)
+                    
+                }, completion: {
+                    (_) in
+                    
+                    UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
+                        
+                        self.budgetItemView.transform = CGAffineTransform(scaleX: 1, y: 1)
+                        
+                    }, completion: nil)
+                    
+                })
             }
         default:
             print("Transaction switch failed")
