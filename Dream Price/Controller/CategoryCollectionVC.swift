@@ -42,6 +42,7 @@ extension BudgetVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate
             cell.categoryView.layer.cornerRadius = 25
             cell.titleLabel.text = categoriesShown[indexPath.row].title
             cell.titleLabel.textColor = UIColor.secondaryLabel
+            cell.categoryID = categoriesShown[indexPath.row].categoryID
             
             if categoriesShown[indexPath.row].type == .budget {
                 cell.categoryView.layer.cornerRadius = 10

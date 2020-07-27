@@ -15,7 +15,7 @@ enum BudgetItemType {
 
 struct BudgetItem {
     
-    let id: Int
+    let budgetID: String
     let type: BudgetItemType
     let balance: Float
     let name: String

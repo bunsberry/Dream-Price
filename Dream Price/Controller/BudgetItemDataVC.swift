@@ -9,7 +9,7 @@ import UIKit
 
 protocol TransportDelegate {
     func transportCurrentState(symbol: String, name: String)
-    func transportTransactionData(number: Float, budgetID: Int)
+    func transportTransactionData(number: Float, budgetID: String)
     func transportButtons(enabled: Int)
 }
 
@@ -30,7 +30,7 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
     var nameLabelText: String!
     var budgetItemType: BudgetItemType!
     var index: Int?
-    var id: Int!
+    var budgetID: String!
     
     // MARK: View Setup
     
@@ -138,11 +138,11 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
                 if changeTransactionButton.title(for: .normal) == "-" {
                     balance -= Float(transactionLabel.text!)!
                     updateBalance(balanceFloat: balance)
-                    BudgetItemDataVC.delegate?.transportTransactionData(number: -Float(transactionLabel.text!)!, budgetID: self.id)
+                    BudgetItemDataVC.delegate?.transportTransactionData(number: -Float(transactionLabel.text!)!, budgetID: self.budgetID)
                 } else {
                     balance += Float(transactionLabel.text!)!
                     updateBalance(balanceFloat: balance)
-                    BudgetItemDataVC.delegate?.transportTransactionData(number: Float(transactionLabel.text!)!, budgetID: self.id)
+                    BudgetItemDataVC.delegate?.transportTransactionData(number: Float(transactionLabel.text!)!, budgetID: self.budgetID)
                 }
                 // TODO: Animation of transaction sent
                 BudgetItemDataVC.delegate?.transportButtons(enabled: 0)

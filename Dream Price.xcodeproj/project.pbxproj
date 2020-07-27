@@ -20,6 +20,9 @@
 		56D8D4A324C4E42600C3194D /* RealmAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8D4A224C4E42600C3194D /* RealmAction.swift */; };
 		56D8D4A524C4E4C200C3194D /* RealmProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8D4A424C4E4C200C3194D /* RealmProject.swift */; };
 		56D8D4A724C4E70700C3194D /* AddProjectCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8D4A624C4E70700C3194D /* AddProjectCVCell.swift */; };
+		840F2DA824CEAB1E005CA412 /* ETBudgetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840F2DA724CEAB1E005CA412 /* ETBudgetCell.swift */; };
+		840F2DAA24CEB8DE005CA412 /* ETPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840F2DA924CEB8DE005CA412 /* ETPickerCell.swift */; };
+		840F2DAC24CECABA005CA412 /* ETBudgetPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840F2DAB24CECABA005CA412 /* ETBudgetPickerCell.swift */; };
 		8416E83B24C7E23F00DB0C0C /* AddDreamsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8416E83A24C7E23F00DB0C0C /* AddDreamsVC.swift */; };
 		8416E83D24C7E2BB00DB0C0C /* EditDreamsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8416E83C24C7E2BB00DB0C0C /* EditDreamsVC.swift */; };
 		8416E83F24C7E34600DB0C0C /* DreamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8416E83E24C7E34600DB0C0C /* DreamCell.swift */; };
@@ -61,7 +64,6 @@
 		84BEDBEA24C3DBAB00792F93 /* NewEarningCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BEDBE924C3DBAB00792F93 /* NewEarningCell.swift */; };
 		84BEDBEC24C408D400792F93 /* EditTransactionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BEDBEB24C408D400792F93 /* EditTransactionVC.swift */; };
 		84BEDBEE24C469B400792F93 /* ETCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BEDBED24C469B400792F93 /* ETCategoryCell.swift */; };
-		84BEDBF024C46A2400792F93 /* ETDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BEDBEF24C46A2400792F93 /* ETDescriptionCell.swift */; };
 		84BEDBF224C46A3700792F93 /* ETNumberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BEDBF124C46A3700792F93 /* ETNumberCell.swift */; };
 		84BEDBF424C46A4700792F93 /* ETDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BEDBF324C46A4600792F93 /* ETDateCell.swift */; };
 		84C53E3D24CCFC4B0043CEB8 /* SettingsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C53E3C24CCFC4B0043CEB8 /* SettingsTVC.swift */; };
@@ -141,6 +143,9 @@
 		56D8D4A424C4E4C200C3194D /* RealmProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RealmProject.swift; path = "Dream Price/Realm/RealmProject.swift"; sourceTree = SOURCE_ROOT; };
 		56D8D4A624C4E70700C3194D /* AddProjectCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProjectCVCell.swift; sourceTree = "<group>"; };
 		6C95879CF6685A037493194E /* Pods_Dream_Price.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dream_Price.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		840F2DA724CEAB1E005CA412 /* ETBudgetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETBudgetCell.swift; sourceTree = "<group>"; };
+		840F2DA924CEB8DE005CA412 /* ETPickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETPickerCell.swift; sourceTree = "<group>"; };
+		840F2DAB24CECABA005CA412 /* ETBudgetPickerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETBudgetPickerCell.swift; sourceTree = "<group>"; };
 		8416E83A24C7E23F00DB0C0C /* AddDreamsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDreamsVC.swift; sourceTree = "<group>"; };
 		8416E83C24C7E2BB00DB0C0C /* EditDreamsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDreamsVC.swift; sourceTree = "<group>"; };
 		8416E83E24C7E34600DB0C0C /* DreamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DreamCell.swift; sourceTree = "<group>"; };
@@ -192,7 +197,6 @@
 		84BEDBE924C3DBAB00792F93 /* NewEarningCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEarningCell.swift; sourceTree = "<group>"; };
 		84BEDBEB24C408D400792F93 /* EditTransactionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTransactionVC.swift; sourceTree = "<group>"; };
 		84BEDBED24C469B400792F93 /* ETCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETCategoryCell.swift; sourceTree = "<group>"; };
-		84BEDBEF24C46A2400792F93 /* ETDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETDescriptionCell.swift; sourceTree = "<group>"; };
 		84BEDBF124C46A3700792F93 /* ETNumberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETNumberCell.swift; sourceTree = "<group>"; };
 		84BEDBF324C46A4600792F93 /* ETDateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETDateCell.swift; sourceTree = "<group>"; };
 		84C53E3C24CCFC4B0043CEB8 /* SettingsTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTVC.swift; sourceTree = "<group>"; };
@@ -273,12 +277,14 @@
 				84BEDBE724C3CF6200792F93 /* EditableCategoryCell.swift */,
 				84BEDBE924C3DBAB00792F93 /* NewEarningCell.swift */,
 				84BEDBED24C469B400792F93 /* ETCategoryCell.swift */,
-				84BEDBEF24C46A2400792F93 /* ETDescriptionCell.swift */,
 				84BEDBF124C46A3700792F93 /* ETNumberCell.swift */,
 				84BEDBF324C46A4600792F93 /* ETDateCell.swift */,
 				843B29BA24C49F7B00A7E87A /* ETDeleteCell.swift */,
 				8416E83E24C7E34600DB0C0C /* DreamCell.swift */,
 				8416E84024C7E36200DB0C0C /* FocusedDreamCell.swift */,
+				840F2DA724CEAB1E005CA412 /* ETBudgetCell.swift */,
+				840F2DA924CEB8DE005CA412 /* ETPickerCell.swift */,
+				840F2DAB24CECABA005CA412 /* ETBudgetPickerCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -650,8 +656,8 @@
 				8416E83B24C7E23F00DB0C0C /* AddDreamsVC.swift in Sources */,
 				843B29BB24C49F7B00A7E87A /* ETDeleteCell.swift in Sources */,
 				84B35FA124C1E9AD008FD1CE /* HistoryVC.swift in Sources */,
+				840F2DAC24CECABA005CA412 /* ETBudgetPickerCell.swift in Sources */,
 				84B35FA524C1FE48008FD1CE /* TransactionCell.swift in Sources */,
-				84BEDBF024C46A2400792F93 /* ETDescriptionCell.swift in Sources */,
 				843688BB24BCC0A500793B2B /* AppDelegate.swift in Sources */,
 				8447A83924BCCB27005F448B /* DreamsVC.swift in Sources */,
 				84BEDBE824C3CF6200792F93 /* EditableCategoryCell.swift in Sources */,
@@ -661,6 +667,7 @@
 				84E4C73C24BEF882006E3D0A /* ManageCategoriesVC.swift in Sources */,
 				843688BD24BCC0A500793B2B /* SceneDelegate.swift in Sources */,
 				56D8D49324C4D70F00C3194D /* RealmTransaction.swift in Sources */,
+				840F2DAA24CEB8DE005CA412 /* ETPickerCell.swift in Sources */,
 				56D8D49D24C4E30200C3194D /* ActionsCell.swift in Sources */,
 				56D8D49524C4D7E400C3194D /* RealmCategory.swift in Sources */,
 				56D8D49B24C4E20D00C3194D /* ProjectsCell.swift in Sources */,
@@ -670,6 +677,7 @@
 				84B35FA324C1FB9F008FD1CE /* GroupedSection.swift in Sources */,
 				84BEDBEE24C469B400792F93 /* ETCategoryCell.swift in Sources */,
 				84BEDBEA24C3DBAB00792F93 /* NewEarningCell.swift in Sources */,
+				840F2DA824CEAB1E005CA412 /* ETBudgetCell.swift in Sources */,
 				84BEDBEC24C408D400792F93 /* EditTransactionVC.swift in Sources */,
 				84E38BF124C76AEC00FF5CC1 /* DashedBorder.swift in Sources */,
 				84961BCF24CCFF64007B73BA /* AppIconTVC.swift in Sources */,

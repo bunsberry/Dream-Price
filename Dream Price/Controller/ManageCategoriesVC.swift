@@ -24,10 +24,10 @@ class ManageCategoriesVC: UIViewController, CategoryManageDelegate {
     // TODO: Read categories from DB
     
     var categories: [Category] = [
-        Category(id: UUID().uuidString, type: .earning, title: NSLocalizedString("Work", comment: ""), sortInt: 1),
-        Category(id: UUID().uuidString, type: .earning, title: NSLocalizedString("Work", comment: ""), sortInt: 2),
-        Category(id: UUID().uuidString, type: .spending, title: NSLocalizedString("Coffee", comment: ""), sortInt: 1),
-        Category(id: UUID().uuidString, type: .spending, title: NSLocalizedString("Groceries", comment: ""), sortInt: 2)
+        Category(categoryID: UUID().uuidString, type: .earning, title: NSLocalizedString("Work", comment: ""), sortInt: 1),
+        Category(categoryID: UUID().uuidString, type: .earning, title: NSLocalizedString("Work", comment: ""), sortInt: 2),
+        Category(categoryID: UUID().uuidString, type: .spending, title: NSLocalizedString("Coffee", comment: ""), sortInt: 1),
+        Category(categoryID: UUID().uuidString, type: .spending, title: NSLocalizedString("Groceries", comment: ""), sortInt: 2)
     ] {
         didSet { tableView.reloadData() }
     }
@@ -74,8 +74,8 @@ class ManageCategoriesVC: UIViewController, CategoryManageDelegate {
         spendingSection.removeAll()
         sections.removeAll()
         
-        earningSection.append(Category(id: UUID().uuidString, type: .new, title: "", sortInt: 0))
-        spendingSection.append(Category(id: UUID().uuidString, type: .new, title: "", sortInt: 0))
+        earningSection.append(Category(categoryID: UUID().uuidString, type: .new, title: "", sortInt: 0))
+        spendingSection.append(Category(categoryID: UUID().uuidString, type: .new, title: "", sortInt: 0))
         
         for el in categories {
             if el.type == .earning {
@@ -99,11 +99,11 @@ class ManageCategoriesVC: UIViewController, CategoryManageDelegate {
         // TODO: New Category Added to DB
         
         if type == .spending {
-            print(Category(id: UUID().uuidString, type: type, title: category, sortInt: sections[0].count))
-            categories.append(Category(id: UUID().uuidString, type: type, title: category, sortInt: sections[0].count))
+            print(Category(categoryID: UUID().uuidString, type: type, title: category, sortInt: sections[0].count))
+            categories.append(Category(categoryID: UUID().uuidString, type: type, title: category, sortInt: sections[0].count))
         } else if type == .earning {
-            print(Category(id: UUID().uuidString, type: type, title: category, sortInt: sections[1].count))
-            categories.append(Category(id: UUID().uuidString, type: type, title: category, sortInt: sections[1].count))
+            print(Category(categoryID: UUID().uuidString, type: type, title: category, sortInt: sections[1].count))
+            categories.append(Category(categoryID: UUID().uuidString, type: type, title: category, sortInt: sections[1].count))
         }
         
         updateTableView()
@@ -116,7 +116,7 @@ class ManageCategoriesVC: UIViewController, CategoryManageDelegate {
         // TODO: DB Category title changed
         
         for (index, category) in categories.enumerated() {
-            if category.id == id {
+            if category.categoryID == id {
                 categories[index].title = title
                 print(categories[index])
             }
@@ -155,7 +155,7 @@ extension ManageCategoriesVC: UITableViewDataSource, UITableViewDelegate {
                     }
                     
                     for (index1, category) in categories.enumerated() {
-                        if category.id == sections[destinationIndexPath.section][index].id {
+                        if category.categoryID == sections[destinationIndexPath.section][index].categoryID {
                             categories[index1].sortInt = sections[destinationIndexPath.section][index].sortInt
                             print(categories[index1])
                         }
@@ -165,7 +165,7 @@ extension ManageCategoriesVC: UITableViewDataSource, UITableViewDelegate {
                 print(movedObj.sortInt)
                 
                 for (index, category) in categories.enumerated() {
-                    if movedObj.id == category.id {
+                    if movedObj.categoryID == category.categoryID {
                         categories[index].sortInt = movedObj.sortInt
                     }
                 }
@@ -177,7 +177,7 @@ extension ManageCategoriesVC: UITableViewDataSource, UITableViewDelegate {
                     }
                     
                     for (index1, category) in categories.enumerated() {
-                        if category.id == sections[destinationIndexPath.section][index].id {
+                        if category.categoryID == sections[destinationIndexPath.section][index].categoryID {
                             categories[index1].sortInt = sections[destinationIndexPath.section][index].sortInt
                             print(categories[index1])
                         }
@@ -187,7 +187,7 @@ extension ManageCategoriesVC: UITableViewDataSource, UITableViewDelegate {
                 movedObj.sortInt = destinationIndexPath.row
                 
                 for (index, category) in categories.enumerated() {
-                    if movedObj.id == category.id {
+                    if movedObj.categoryID == category.categoryID {
                         categories[index].sortInt = movedObj.sortInt
                     }
                 }
@@ -220,7 +220,7 @@ extension ManageCategoriesVC: UITableViewDataSource, UITableViewDelegate {
         if editingStyle == .delete {
             
             for (index, category) in categories.enumerated() {
-                if category.id == sections[indexPath.section][indexPath.row].id {
+                if category.categoryID == sections[indexPath.section][indexPath.row].categoryID {
                     categories.remove(at: index)
                 }
             }
@@ -230,10 +230,10 @@ extension ManageCategoriesVC: UITableViewDataSource, UITableViewDelegate {
             for (index, category) in sections[indexPath.section].enumerated() {
                 sections[indexPath.section][index].sortInt = index
                 
-                if category.id != "-1" {
+                if category.categoryID != "-1" {
                     
                     for (index1, category) in categories.enumerated() {
-                        if category.id == sections[indexPath.section][index].id {
+                        if category.categoryID == sections[indexPath.section][index].categoryID {
                             categories[index1].sortInt = index
                         }
                     }
@@ -277,7 +277,7 @@ extension ManageCategoriesVC: UITableViewDataSource, UITableViewDelegate {
             let cell = tableView.dequeueReusableCell(withIdentifier: "categoryCell", for: indexPath) as! EditableCategoryCell
             
             cell.titleTextField?.text = sections[indexPath.section][indexPath.row].title
-            cell.id = sections[indexPath.section][indexPath.row].id
+            cell.id = sections[indexPath.section][indexPath.row].categoryID
             cell.firstTitle = sections[indexPath.section][indexPath.row].title
             cell.delegate = self
             

@@ -57,10 +57,8 @@
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
       notificationPayloadFile = "Dream Price Companion Extension/PushNotificationPayload.apns">
-      <RemoteRunnable
-         runnableDebuggingMode = "2"
-         BundleIdentifier = "com.apple.Carousel"
-         RemotePath = "/Dream Price">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "84FD159A24C61A1F003CEF78"
@@ -68,7 +66,7 @@
             BlueprintName = "Dream Price Companion"
             ReferencedContainer = "container:Dream Price.xcodeproj">
          </BuildableReference>
-      </RemoteRunnable>
+      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -76,10 +74,8 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <RemoteRunnable
-         runnableDebuggingMode = "2"
-         BundleIdentifier = "com.apple.Carousel"
-         RemotePath = "/Dream Price">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "84FD159A24C61A1F003CEF78"
@@ -87,16 +83,7 @@
             BlueprintName = "Dream Price Companion"
             ReferencedContainer = "container:Dream Price.xcodeproj">
          </BuildableReference>
-      </RemoteRunnable>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "84FD159A24C61A1F003CEF78"
-            BuildableName = "Dream Price Companion.app"
-            BlueprintName = "Dream Price Companion"
-            ReferencedContainer = "container:Dream Price.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

@@ -9,8 +9,8 @@ import UIKit
 
 protocol TransactionDelegate {
     func deleteTransaction()
-    func rewriteCategory(string: String)
-    func rewriteDesctiption(string: String)
+    func rewriteCategory(id: String)
+    func rewriteBudget(id: String)
     func rewriteNumber(float: Float)
     func rewriteDate(date: Date)
 }
@@ -27,17 +27,19 @@ class EditTransactionVC: UIViewController, TransactionDelegate {
     var historyDelegate: HistoryDelegate?
     @IBOutlet weak var navigationTitle: UINavigationItem!
     
+    var categoriesPickerOpened: Bool = false
+    var budgetsPickerOpened: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if data.number > 0 {
+        if data.transactionAmount > 0 {
             navigationTitle.title = NSLocalizedString("Earning", comment: "")
         } else {
             navigationTitle.title = NSLocalizedString("Spending", comment: "")
         }
         
-        tableView.allowsSelection = false
+        tableView.allowsSelection = true
         tableView.dataSource = self
         tableView.delegate = self
     }
@@ -47,7 +49,7 @@ class EditTransactionVC: UIViewController, TransactionDelegate {
     }
     
     @IBAction func save(_ sender: Any) {
-        if data.number == 0 {
+        if data.transactionAmount == 0 {
             deleteTransaction()
         } else {
             // TODO: Saving changes to database
@@ -76,16 +78,20 @@ class EditTransactionVC: UIViewController, TransactionDelegate {
         
     }
     
-    func rewriteCategory(string: String) {
-        data.category = string
+    func rewriteCategory(id: String) {
+        data.categoryID = id
+        let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 2)) as! ETCategoryCell
+        cell.titleLabel.text = id
     }
     
-    func rewriteDesctiption(string: String) {
-        data.description = string
+    func rewriteBudget(id: String) {
+        data.budgetFromID = id
+        let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! ETBudgetCell
+        cell.titleLabel.text = id
     }
     
     func rewriteNumber(float: Float) {
-        data.number = float
+        data.transactionAmount = float
     }
     
     func rewriteDate(date: Date) {
@@ -104,11 +110,11 @@ extension EditTransactionVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
-            return NSLocalizedString("Category", comment: "")
-        case 1:
-            return NSLocalizedString("Description", comment: "")
-        case 2:
             return NSLocalizedString("Amount", comment: "")
+        case 1:
+            return NSLocalizedString("Budget", comment: "")
+        case 2:
+            return NSLocalizedString("Category", comment: "")
 //        case 3:
 //            return NSLocalizedString("Date", comment: "")
         default:
@@ -117,51 +123,67 @@ extension EditTransactionVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if section == 3 { return 2 }
-        return 1
+        if categoriesPickerOpened && budgetsPickerOpened{
+            if section == 1 || section == 2 { return 2 }
+            return 1
+        } else if categoriesPickerOpened {
+            if section == 2 { return 2 }
+            return 1
+        } else if budgetsPickerOpened {
+            if section == 1 { return 2 }
+            return 1
+        } else { return 1 }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.section {
-        case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "transactionCategoryCell") as! ETCategoryCell
-            
-            cell.textField.text = data.category
-            cell.delegate = self
-            
-            return cell
-        case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "transactionDescriptionCell") as! ETDescriptionCell
-            
-            cell.textField.text = data.description
-            cell.delegate = self
-            
-            return cell
-        case 2:
+        switch indexPath {
+        case IndexPath(row: 0, section: 0):
             let cell = tableView.dequeueReusableCell(withIdentifier: "transactionCostCell") as! ETNumberCell
-            
-//            if var localeCurrency = Locale.current.currencySymbol {
-//                if localeCurrency == "RUB" { localeCurrency = "₽" }
-//            }
             
             let numberFormatter = NumberFormatter()
             numberFormatter.maximumFractionDigits = 0
             numberFormatter.minimumFractionDigits = 0
-            let cost = numberFormatter.string(from: NSNumber(value: data.number))
+            let amount = numberFormatter.string(from: NSNumber(value: data.transactionAmount))
             
-            if data.number < 0 {
-                cell.textField.text = "\(cost!)"
+            if data.transactionAmount < 0 {
+                cell.textField.text = "\(amount!)"
             } else {
-                cell.textField.text = "+\(cost!)"
+                cell.textField.text = "+\(amount!)"
             }
             cell.delegate = self
             
             return cell
-//        case 3:
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "transactionDateCell") as! ETDateCell
-//
-//            return cell
-        case 3:
+        case IndexPath(row: 0, section: 1):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "transactionBudgetCell") as! ETBudgetCell
+            
+            cell.titleLabel.text = data.budgetFromID
+            
+            return cell
+        case IndexPath(row: 1, section: 1):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "transactionBudgetPickerCell") as! ETBudgetPickerCell
+            
+            cell.delegate = self
+            
+            return cell
+        case IndexPath(row: 0, section: 2):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "transactionCategoryCell") as! ETCategoryCell
+            
+            cell.titleLabel.text = data.categoryID
+            
+            return cell
+        case IndexPath(row: 1, section: 2):
+            let cell = tableView.dequeueReusableCell(withIdentifier: "transactionPickerCell") as! ETPickerCell
+            
+            if data.transactionAmount > 0 {
+                cell.pickerMode = 1
+            } else {
+                cell.pickerMode = 0
+            }
+            
+            cell.delegate = self
+            
+            return cell
+        case IndexPath(row: 0, section: 3):
             let cell = tableView.dequeueReusableCell(withIdentifier: "transactionDeleteCell") as! ETDeleteCell
             
             cell.delegate = self
@@ -173,6 +195,19 @@ extension EditTransactionVC: UITableViewDelegate, UITableViewDataSource {
             
             return cell
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath == IndexPath(row: 0, section: 2) {
+            categoriesPickerOpened = !categoriesPickerOpened
+        }
+        
+        if indexPath == IndexPath(row: 0, section: 1) {
+            budgetsPickerOpened = !budgetsPickerOpened
+        }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        tableView.reloadData()
     }
     
 }

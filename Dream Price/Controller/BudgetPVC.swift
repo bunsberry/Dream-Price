@@ -9,7 +9,7 @@ import UIKit
 
 protocol BudgetDelegate {
     func updateCategories(transaction: String, name: String)
-    func createTransaction(number: Float, budgetID: Int)
+    func createTransaction(number: Float, budgetID: String)
     func disableButtons()
     func enableButtons()
 }
@@ -23,9 +23,9 @@ class BudgetPVC: UIPageViewController, TransportDelegate, TransportUpDelegate {
     // TODO: Getting budgetItems from DB here
     
     let pagesData: [BudgetItem] = [
-        BudgetItem(id: 2, type: .project, balance: 0, name: NSLocalizedString("App", comment: "")),
-        BudgetItem(id: 0, type: .personal, balance: 2180, name: NSLocalizedString("Personal Account", comment: "")),
-        BudgetItem(id: 1, type: .dream, balance: 50000, name: NSLocalizedString("Dream", comment: ""))
+        BudgetItem(budgetID: UUID().uuidString, type: .project, balance: 0, name: NSLocalizedString("App", comment: "")),
+        BudgetItem(budgetID: UUID().uuidString, type: .personal, balance: 2180, name: NSLocalizedString("Personal Account", comment: "")),
+        BudgetItem(budgetID: UUID().uuidString, type: .dream, balance: 50000, name: NSLocalizedString("Dream", comment: ""))
     ]
     
     var budgetDelegate: BudgetDelegate?
@@ -66,7 +66,7 @@ class BudgetPVC: UIPageViewController, TransportDelegate, TransportUpDelegate {
         budgetDelegate?.updateCategories(transaction: symbol, name: name)
     }
     
-    func transportTransactionData(number: Float, budgetID: Int) {
+    func transportTransactionData(number: Float, budgetID: String) {
         budgetDelegate?.createTransaction(number: number, budgetID: budgetID)
     }
     
@@ -94,7 +94,7 @@ class BudgetPVC: UIPageViewController, TransportDelegate, TransportUpDelegate {
         vc.nameLabelText = pagesData[index].name
         vc.budgetItemType = pagesData[index].type
         vc.index = index
-        vc.id = pagesData[index].id
+        vc.budgetID = pagesData[index].budgetID
         
         self.currentIndex = index
         

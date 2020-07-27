@@ -17,13 +17,13 @@ class BudgetVC: UIViewController, BudgetDelegate, CategoriesBeenManaged {
     // TODO: Получение категорий из DB
     
     var categories: [Category] = [
-        Category(id: UUID().uuidString, type: .manage, title: "+", sortInt: 0),
-        Category(id: UUID().uuidString, type: .earning, title: NSLocalizedString("Work", comment: ""), sortInt: 0),
-        Category(id: UUID().uuidString, type: .spending, title: NSLocalizedString("Coffee", comment: ""), sortInt: 0),
-        Category(id: UUID().uuidString, type: .spending, title: NSLocalizedString("Groceries", comment: ""), sortInt: 1),
-        Category(id: UUID().uuidString, type: .budget, title: NSLocalizedString("Personal Account", comment: ""), sortInt: 0),
-        Category(id: UUID().uuidString, type: .budget, title: NSLocalizedString("App", comment: ""), sortInt: 1),
-        Category(id: UUID().uuidString, type: .budget, title: NSLocalizedString("Dream", comment: ""), sortInt: 2)
+        Category(categoryID: UUID().uuidString, type: .manage, title: "+", sortInt: 0),
+        Category(categoryID: UUID().uuidString, type: .earning, title: NSLocalizedString("Work", comment: ""), sortInt: 0),
+        Category(categoryID: UUID().uuidString, type: .spending, title: NSLocalizedString("Coffee", comment: ""), sortInt: 0),
+        Category(categoryID: UUID().uuidString, type: .spending, title: NSLocalizedString("Groceries", comment: ""), sortInt: 1),
+        Category(categoryID: UUID().uuidString, type: .budget, title: NSLocalizedString("Personal Account", comment: ""), sortInt: 0),
+        Category(categoryID: UUID().uuidString, type: .budget, title: NSLocalizedString("App", comment: ""), sortInt: 1),
+        Category(categoryID: UUID().uuidString, type: .budget, title: NSLocalizedString("Dream", comment: ""), sortInt: 2)
     ]
     
     var categoriesShown: [Category] = []
@@ -47,13 +47,21 @@ class BudgetVC: UIViewController, BudgetDelegate, CategoriesBeenManaged {
     // MARK: Buttons setup
     
     func buttonsSetup() {
-        removeButton.imageView?.contentMode = .scaleAspectFit
-        removeButton.setImage(removeButton.image(for: .normal)?.withTintColor(.label, renderingMode:.alwaysOriginal), for: .normal)
-        removeButton.setImage(removeButton.image(for: .normal)?.withTintColor(.quaternaryLabel, renderingMode: .alwaysOriginal), for: .highlighted)
         
-        doneButton.setImage(doneButton.image(for: .normal)?.withTintColor(.label, renderingMode:.alwaysOriginal), for: .normal)
-        doneButton.setImage(doneButton.image(for: .normal)?.withTintColor(.quaternaryLabel, renderingMode:.alwaysOriginal), for: .highlighted)
-        doneButton.setImage(doneButton.image(for: .normal)?.withTintColor(.secondaryLabel, renderingMode:.alwaysOriginal), for: .disabled)
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: 18, weight: .bold, scale: .large)
+
+        let largeBoldDelete = UIImage(systemName: "delete.left.fill", withConfiguration: largeConfig)
+        let largeBoldDone = UIImage(systemName: "checkmark.circle.fill", withConfiguration: largeConfig)
+
+//         button.setImage(largeBoldDoc, for: .normal)
+        
+        removeButton.setImage(largeBoldDelete?.withTintColor(.label, renderingMode:.alwaysOriginal), for: .normal)
+        removeButton.setImage(largeBoldDelete?.withTintColor(.quaternaryLabel, renderingMode: .alwaysOriginal), for: .highlighted)
+        removeButton.setImage(largeBoldDelete?.withTintColor(.secondaryLabel, renderingMode:.alwaysOriginal), for: .disabled)
+        
+        doneButton.setImage(largeBoldDone?.withTintColor(UIColor(red: 0.451, green: 0.792, blue: 0.443, alpha: 1), renderingMode:.alwaysOriginal), for: .normal)
+        doneButton.setImage(largeBoldDone?.withTintColor(.quaternaryLabel, renderingMode:.alwaysOriginal), for: .highlighted)
+        doneButton.setImage(largeBoldDone?.withTintColor(.secondaryLabel, renderingMode:.alwaysOriginal), for: .disabled)
         
         removeButton.isEnabled = false
         doneButton.isEnabled = false
@@ -158,7 +166,7 @@ extension BudgetVC {
     
     // MARK: Delegate protocol
     
-    func createTransaction(number: Float, budgetID: Int) {
+    func createTransaction(number: Float, budgetID: String) {
         
         // TODO: Transactions are added to DB here and balance of budget item changed
         
@@ -170,11 +178,11 @@ extension BudgetVC {
             
             if cell?.categoryType == CategoryType.spending {
                 print("id-\(budgetID): Spent \(number) on \(cell!.titleLabel.text!)")
-                newTransaction = Transaction(transactionID: UUID().uuidString, date: Date(), number: number, category: cell!.titleLabel.text!, description: "")
+                newTransaction = Transaction(transactionID: UUID().uuidString, transactionAmount: number, categoryID: cell?.categoryID, date: Date(), budgetFromID: budgetID, budgetToID: nil)
             }
             else if cell?.categoryType == CategoryType.earning {
                 print("id-\(budgetID): Earned \(number) from \(cell!.titleLabel.text!)")
-                newTransaction = Transaction(transactionID: UUID().uuidString, date: Date(), number: number, category: cell!.titleLabel.text!, description: "")
+                newTransaction = Transaction(transactionID: UUID().uuidString, transactionAmount: number, categoryID: cell?.categoryID, date: Date(), budgetFromID: budgetID, budgetToID: nil)
             }
             else if cell?.categoryType == CategoryType.budget {
                 print("id-\(budgetID): Transfered \(number) from/to \(cell!.titleLabel.text!)")
@@ -185,7 +193,7 @@ extension BudgetVC {
             
         } else {
             print("id_\(budgetID): \(number) on/from smthng...")
-            newTransaction = Transaction(transactionID: UUID().uuidString, date: Date(), number: number, category: "", description: "")
+            Transaction(transactionID: UUID().uuidString, transactionAmount: number, categoryID: nil, date: Date(), budgetFromID: budgetID, budgetToID: nil)
         }
         
         categoriesCollectionView.reloadData()

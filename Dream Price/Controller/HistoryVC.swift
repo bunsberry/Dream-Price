@@ -9,10 +9,11 @@ import UIKit
 
 struct Transaction {
     var transactionID: String
+    var transactionAmount : Float
+    var categoryID : String?
     var date : Date
-    var number : Float
-    var category : String
-    var description: String
+    var budgetFromID: String
+    var budgetToID: String?
 }
 
 enum SortingType {
@@ -166,13 +167,10 @@ class HistoryVC: UITableViewController, HistoryDelegate {
     // TODO: Getting transactions from a DB
     
     var transactions = [
-        Transaction(transactionID: UUID().uuidString, date: parseDate("2020-07-24"), number: -145, category: NSLocalizedString("Coffee", comment: ""), description: ""),
-        Transaction(transactionID: UUID().uuidString, date: parseDate("2020-07-23"), number: -145, category: NSLocalizedString("Coffee", comment: ""), description: ""),
-        Transaction(transactionID: UUID().uuidString, date: parseDate("2020-07-22"), number: -175, category: NSLocalizedString("Groceries", comment: ""), description: ""),
-        Transaction(transactionID: UUID().uuidString, date: parseDate("2020-07-22"), number: 2500, category: NSLocalizedString("Work", comment: ""), description: "")
+        Transaction(transactionID: UUID().uuidString, transactionAmount: -145, categoryID: UUID().uuidString, date: parseDate("2020-07-22"), budgetFromID: UUID().uuidString, budgetToID: nil)
     ]
     
-    var chosenTransaction: Transaction = Transaction(transactionID: UUID().uuidString, date: parseDate("2020-01-01"), number: 0, category: "", description: "")
+    var chosenTransaction: Transaction = Transaction(transactionID: UUID().uuidString, transactionAmount: 0, categoryID: UUID().uuidString, date: parseDate("2000-01-01"), budgetFromID: UUID().uuidString, budgetToID: nil)
     
     var sections = [GroupedSection<Date, Transaction>]()
     
@@ -248,13 +246,13 @@ class HistoryVC: UITableViewController, HistoryDelegate {
 //        if Settings.shared.isIntSettingSet! {
         currencyFormatter.maximumFractionDigits = 0
         currencyFormatter.minimumFractionDigits = 0
-        priceString = currencyFormatter.string(from: NSNumber(value: transaction.number))!
+        priceString = currencyFormatter.string(from: NSNumber(value: transaction.transactionAmount))!
 
 //        } else {
 //            priceString = currencyFormatter.string(from: NSNumber(value: transaction.number))!
 //        }
         
-        if transaction.number > 0 {
+        if transaction.transactionAmount > 0 {
             cell.numberLabel.text = "+\(priceString)"
             cell.numberLabel.textColor = UIColor(red: 0.451, green: 0.792, blue: 0.443, alpha: 1)
         } else {
@@ -262,12 +260,16 @@ class HistoryVC: UITableViewController, HistoryDelegate {
             cell.numberLabel.textColor = UIColor(red: 0.792, green: 0.443, blue: 0.443, alpha: 1)
         }
         
-        cell.id = transaction.transactionID
-        cell.desc = transaction.description
-        cell.number = transaction.number
+        cell.transactionID = transaction.transactionID
+        cell.amount = transaction.transactionAmount
         cell.date = transaction.date
+        cell.categoryID = transaction.categoryID
+        cell.budgetFromID = transaction.budgetFromID
+        cell.budgetToID = transaction.budgetToID
         
-        cell.categoryLabel.text = transaction.category
+        // TODO: Getting name from id
+        
+        cell.categoryLabel.text = transaction.categoryID
         
         return cell
     }
@@ -285,7 +287,7 @@ class HistoryVC: UITableViewController, HistoryDelegate {
         let cell = tableView.cellForRow(at: indexPath) as! TransactionCell
         
         
-        chosenTransaction = Transaction(transactionID: cell.id, date: cell.date, number: cell.number, category: cell.categoryLabel.text!, description: cell.desc)
+        chosenTransaction = Transaction(transactionID: cell.transactionID, transactionAmount: cell.amount, categoryID: cell.categoryID, date: cell.date, budgetFromID: cell.budgetFromID, budgetToID: cell.budgetToID)
         
         performSegue(withIdentifier: "toTransaction", sender: nil)
     }
