@@ -11,7 +11,7 @@ protocol AddDreamDelegate {
     func dreamAdded(newDream: Dream)
 }
 
-class AddDreamsVC: UITableViewController {
+class AddDreamsVC: UITableViewController, UITextFieldDelegate {
     
     static public var delegate: AddDreamDelegate?
     
@@ -20,12 +20,42 @@ class AddDreamsVC: UITableViewController {
     @IBOutlet weak var sumField: UITextField!
     @IBOutlet weak var mainSwitch: UISwitch!
     
-    // TODO: sumField formatter
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let numberFormatter = NumberFormatter()
+        
+        if Settings.shared.recordCentsOn! {
+            numberFormatter.maximumFractionDigits = 2
+            numberFormatter.minimumFractionDigits = 2
+            sumField.keyboardType = .decimalPad
+        } else {
+            numberFormatter.maximumFractionDigits = 0
+            numberFormatter.minimumFractionDigits = 0
+            sumField.keyboardType = .numberPad
+        }
+        
+        sumField.delegate = self
+        
         tableView.allowsSelection = false
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let oldText = textField.text, let r = Range(range, in: oldText) else {
+            return true
+        }
+
+        let newText = oldText.replacingCharacters(in: r, with: string)
+        let numberOfDots = newText.components(separatedBy: ",").count - 1
+
+        let numberOfDecimalDigits: Int
+        if let dotIndex = newText.index(of: ",") {
+            numberOfDecimalDigits = newText.distance(from: dotIndex, to: newText.endIndex) - 1
+        } else {
+            numberOfDecimalDigits = 0
+        }
+
+        return numberOfDots <= 1 && numberOfDecimalDigits <= 2
     }
     
     func sw() -> DreamType {
@@ -43,8 +73,18 @@ class AddDreamsVC: UITableViewController {
     
     @IBAction func addDream(_ sender: Any) {
         if nameField.text != "" && sumField.text != "" {
-            let sum = Float(sumField.text!)
-            let newDream = Dream(dreamID: UUID().uuidString, type: sw(), title: nameField.text!, description: descriptionField.text!, balance: 0, goal: sum!, dateAdded: Date())
+            
+            var sum: Float = 0
+            
+            if Settings.shared.recordCentsOn! {
+                let numberFormatter = NumberFormatter()
+                numberFormatter.decimalSeparator = ","
+                sum = Float(truncating: numberFormatter.number(from: sumField.text!)!)
+            } else {
+                sum = Float(sumField.text!)!
+            }
+            
+            let newDream = Dream(dreamID: UUID().uuidString, type: sw(), title: nameField.text!, description: descriptionField.text!, balance: 0, goal: sum, dateAdded: Date())
             AddDreamsVC.delegate?.dreamAdded(newDream: newDream)
             dismiss(animated: true, completion: nil)
         } else {

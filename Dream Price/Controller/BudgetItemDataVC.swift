@@ -48,6 +48,12 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
             currencyLabel.text = " $"
         }
         
+        if Settings.shared.recordCentsOn! {
+            transactionLabel.text = "0.00"
+            transactionLabel.font = transactionLabel.font.withSize(56)
+        } else {
+            transactionLabel.text = "0"
+        }
         
         let gradient: CAGradientLayer = CAGradientLayer()
         
@@ -88,50 +94,69 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
             currencyFormatter.locale = Locale.init(identifier: "ru_RU") }
         else { currencyFormatter.locale = Locale.current }
         
-//        if Settings.shared.isIntSettingSet! {
-        
-        let balance: Int = Int(balanceFloat)
-        currencyFormatter.maximumFractionDigits = 0
-        currencyFormatter.minimumFractionDigits = 0
-        let priceString = currencyFormatter.string(from: NSNumber(value: balance))!
-        self.balanceLabel.text = NSLocalizedString("Balance: ", comment: "") + priceString
-
-//        } else {
-//            let priceString = currencyFormatter.string(from: NSNumber(value: balanceFloat))!
-//            self.balanceLabel.text = "Баланс: \(priceString)"
-//        }
+        if Settings.shared.recordCentsOn! {
+            currencyFormatter.maximumFractionDigits = 2
+            currencyFormatter.minimumFractionDigits = 2
+            let priceString = currencyFormatter.string(from: NSNumber(value: balanceFloat))!
+            self.balanceLabel.text = "Баланс: \(priceString)"
+        } else {
+            let balance: Int = Int(balanceFloat)
+            currencyFormatter.maximumFractionDigits = 0
+            currencyFormatter.minimumFractionDigits = 0
+            let priceString = currencyFormatter.string(from: NSNumber(value: balance))!
+            self.balanceLabel.text = NSLocalizedString("Balance: ", comment: "") + priceString
+        }
+    }
+    
+    func reloadItems() {
+        updateBalance(balanceFloat: balance)
+        codeAmount += ""
     }
     
     // MARK: Update Balance Label
     
+    private var codeAmount: String = "0" {
+        didSet {
+            if Settings.shared.recordCentsOn! {
+                let codeAmountFloat: Float = Float(codeAmount)!
+                transactionLabel.text = "\(codeAmountFloat / 100)"
+                if codeAmount == "0" {
+                    transactionLabel.text = "0.00"
+                }
+            } else {
+                transactionLabel.text = codeAmount
+            }
+        }
+    }
+    
     func updateTransaction(action: String) {
         switch action {
         case "0":
-            if transactionLabel.text?.count == 7 { return }
+            if codeAmount.count == 7 { return }
             
-            if transactionLabel.text == "0" {
+            if codeAmount == "0" {
                 return
             } else {
-                transactionLabel.text! += action
+                codeAmount += action
             }
         case "1", "2", "3", "4", "5", "6", "7", "8", "9":
-            if transactionLabel.text?.count == 7 { return }
+            if codeAmount.count == 7 { return }
             
-            if transactionLabel.text == "0" {
-                transactionLabel.text! = action
+            if codeAmount == "0" {
+                codeAmount = action
                 BudgetItemDataVC.delegate?.transportButtons(enabled: 1)
             } else {
-                transactionLabel.text! += action
+                codeAmount += action
             }
         case "-":
-            if transactionLabel.text?.count == 1 {
-                transactionLabel.text =  "0"
+            if codeAmount.count == 1 {
+                codeAmount =  "0"
                 BudgetItemDataVC.delegate?.transportButtons(enabled: 0)
             } else {
-                transactionLabel.text!.removeLast()
+                codeAmount.removeLast()
             }
         case "+":
-            if transactionLabel.text == "0" {
+            if codeAmount == "0" {
                 return
             } else {
                 if changeTransactionButton.title(for: .normal) == "-" {
@@ -143,7 +168,6 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
                     updateBalance(balanceFloat: balance)
                     BudgetItemDataVC.delegate?.transportTransactionData(number: Float(transactionLabel.text!)!, budgetID: self.budgetID)
                 }
-                // TODO: Animation of transaction sent
                 BudgetItemDataVC.delegate?.transportButtons(enabled: 0)
                 
                 UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
@@ -152,7 +176,7 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
                     
                     UIView.transition(with: self.transactionLabel, duration: 0.5, options: .transitionCrossDissolve, animations: {
                         [weak self] in
-                        self?.transactionLabel.text = "0"
+                        self?.codeAmount = "0"
                 }, completion: nil)
                     
                 }, completion: {
@@ -179,11 +203,13 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
             transactionLabel.font = transactionLabel.font.withSize(48)
         case 6:
             transactionLabel.font = transactionLabel.font.withSize(42)
-        case 7:
+        case 7, 8:
             transactionLabel.font = transactionLabel.font.withSize(36)
         default:
             transactionLabel.font = transactionLabel.font.withSize(64)
         }
+        
+        // TODO: Update db balance
     }
     
     // MARK: Transaction Change Button

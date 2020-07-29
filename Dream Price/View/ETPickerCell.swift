@@ -37,7 +37,7 @@ class ETPickerCell: UITableViewCell, UIPickerViewDataSource, UIPickerViewDelegat
         Category(categoryID: UUID().uuidString, type: .budget, title: "Budget", sortInt: 0)
     ]
     
-    var categoriesShown: [Category] = []
+    var categoriesShown: [Category] = [Category(categoryID: "", type: .manage, title: "None", sortInt: 0)]
 
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -148,8 +148,13 @@ class DreamsVC: UICollectionViewController {
         currencyFormatter.locale = Locale.current
         currencyFormatter.numberStyle = .currency
         
-        currencyFormatter.minimumFractionDigits = 0
-        currencyFormatter.maximumFractionDigits = 0
+        if Settings.shared.recordCentsOn! {
+            currencyFormatter.minimumFractionDigits = 2
+            currencyFormatter.maximumFractionDigits = 2
+        } else {
+            currencyFormatter.minimumFractionDigits = 0
+            currencyFormatter.maximumFractionDigits = 0
+        }
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd MMM"
@@ -227,6 +232,7 @@ class DreamsVC: UICollectionViewController {
         selectedDreamToEdit = indexPath.row
         performSegue(withIdentifier: "toEditDream", sender: nil)
         EditDreamsVC.delegate = self
+        EditDreamsVC.dreamID = dreamsList[indexPath.row].dreamID
     }
 }
 
@@ -247,6 +253,15 @@ extension DreamsVC: AddDreamDelegate, EditDreamDelegate {
         }
         
         dreamCollection.reloadData()
+    }
+    
+    func dreamDeleted(dreamID: String, row: Int) {
+        
+        // TODO: Delete from DB by ID
+        
+        dreamsList.remove(at: row)
+        dreamCollection.reloadData()
+        
     }
     
     func dreamEdited(dream: Dream, row: Int) {

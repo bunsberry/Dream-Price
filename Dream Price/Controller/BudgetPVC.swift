@@ -16,6 +16,7 @@ protocol BudgetDelegate {
 
 protocol KeyboardDelegate {
     func updateTransaction(action: String)
+    func reloadItems()
 }
 
 class BudgetPVC: UIPageViewController, TransportDelegate, TransportUpDelegate {
@@ -80,6 +81,10 @@ class BudgetPVC: UIPageViewController, TransportDelegate, TransportUpDelegate {
     
     func transportUp(string: String) {
         keyboardDelegate?.updateTransaction(action: string)
+    }
+    
+    func reloadItems() {
+        keyboardDelegate?.reloadItems()
     }
     
     // MARK: Page View

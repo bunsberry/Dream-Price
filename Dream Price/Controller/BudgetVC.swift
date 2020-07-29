@@ -10,6 +10,7 @@ import Foundation
 
 protocol TransportUpDelegate {
     func transportUp(string: String)
+    func reloadItems()
 }
 
 class BudgetVC: UIViewController, BudgetDelegate, CategoriesBeenManaged {
@@ -42,6 +43,12 @@ class BudgetVC: UIViewController, BudgetDelegate, CategoriesBeenManaged {
         
         buttonsSetup()
         updateCategories(transaction: "-", name: NSLocalizedString("Personal Account", comment: ""))
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        BudgetVC.delegateUp?.reloadItems()
     }
     
     // MARK: Buttons setup

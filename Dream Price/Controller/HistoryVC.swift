@@ -167,7 +167,8 @@ class HistoryVC: UITableViewController, HistoryDelegate {
     // TODO: Getting transactions from a DB
     
     var transactions = [
-        Transaction(transactionID: UUID().uuidString, transactionAmount: -145, categoryID: UUID().uuidString, date: parseDate("2020-07-22"), budgetFromID: UUID().uuidString, budgetToID: nil)
+        Transaction(transactionID: UUID().uuidString, transactionAmount: -145, categoryID: UUID().uuidString, date: parseDate("2020-07-22"), budgetFromID: UUID().uuidString, budgetToID: nil),
+        Transaction(transactionID: UUID().uuidString, transactionAmount: 145, categoryID: nil, date: parseDate("2020-07-23"), budgetFromID: UUID().uuidString, budgetToID: nil)
     ]
     
     var chosenTransaction: Transaction = Transaction(transactionID: UUID().uuidString, transactionAmount: 0, categoryID: UUID().uuidString, date: parseDate("2000-01-01"), budgetFromID: UUID().uuidString, budgetToID: nil)
@@ -243,14 +244,15 @@ class HistoryVC: UITableViewController, HistoryDelegate {
         
         var priceString: String = ""
         
-//        if Settings.shared.isIntSettingSet! {
-        currencyFormatter.maximumFractionDigits = 0
-        currencyFormatter.minimumFractionDigits = 0
-        priceString = currencyFormatter.string(from: NSNumber(value: transaction.transactionAmount))!
-
-//        } else {
-//            priceString = currencyFormatter.string(from: NSNumber(value: transaction.number))!
-//        }
+        if Settings.shared.recordCentsOn! {
+            currencyFormatter.maximumFractionDigits = 2
+            currencyFormatter.minimumFractionDigits = 2
+            priceString = currencyFormatter.string(from: NSNumber(value: transaction.transactionAmount))!
+        } else {
+            currencyFormatter.maximumFractionDigits = 0
+            currencyFormatter.minimumFractionDigits = 0
+            priceString = currencyFormatter.string(from: NSNumber(value: transaction.transactionAmount))!
+        }
         
         if transaction.transactionAmount > 0 {
             cell.numberLabel.text = "+\(priceString)"
@@ -264,12 +266,16 @@ class HistoryVC: UITableViewController, HistoryDelegate {
         cell.amount = transaction.transactionAmount
         cell.date = transaction.date
         cell.categoryID = transaction.categoryID
+        
+        if let categoryID = transaction.categoryID {
+            // TODO: Get title from id
+            cell.categoryLabel.text = categoryID
+        } else {
+            cell.categoryLabel.text = ""
+        }
+        
         cell.budgetFromID = transaction.budgetFromID
         cell.budgetToID = transaction.budgetToID
-        
-        // TODO: Getting name from id
-        
-        cell.categoryLabel.text = transaction.categoryID
         
         return cell
     }

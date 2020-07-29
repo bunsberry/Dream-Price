@@ -83,12 +83,21 @@ class EditTransactionVC: UIViewController, TransactionDelegate {
     func rewriteCategory(id: String) {
         data.categoryID = id
         let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 2)) as! ETCategoryCell
-        cell.titleLabel.text = id
+        
+        // TODO: Get title from id
+        if id == "" {
+            cell.titleLabel.text = "None"
+            data.categoryID = nil
+        } else {
+            cell.titleLabel.text = id
+        }
     }
     
     func rewriteBudget(id: String) {
         data.budgetFromID = id
         let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! ETBudgetCell
+        
+        // TODO: Get title from id
         cell.titleLabel.text = id
     }
     
@@ -145,8 +154,15 @@ extension EditTransactionVC: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "transactionCostCell") as! ETNumberCell
             
             let numberFormatter = NumberFormatter()
-            numberFormatter.maximumFractionDigits = 0
-            numberFormatter.minimumFractionDigits = 0
+            
+            if Settings.shared.recordCentsOn! {
+                numberFormatter.maximumFractionDigits = 2
+                numberFormatter.minimumFractionDigits = 2
+            } else {
+                numberFormatter.maximumFractionDigits = 0
+                numberFormatter.minimumFractionDigits = 0
+            }
+            
             let amount = numberFormatter.string(from: NSNumber(value: data.transactionAmount))
             
             if data.transactionAmount > 0 {
@@ -174,7 +190,13 @@ extension EditTransactionVC: UITableViewDelegate, UITableViewDataSource {
         case IndexPath(row: 0, section: 2):
             let cell = tableView.dequeueReusableCell(withIdentifier: "transactionCategoryCell") as! ETCategoryCell
             
-            cell.titleLabel.text = data.categoryID
+            
+            if let categoryID = data.categoryID {
+                // TODO: Get title from category id
+                cell.titleLabel.text = data.categoryID
+            } else {
+                cell.titleLabel.text = "None"
+            }
             
             return cell
         case IndexPath(row: 1, section: 2):

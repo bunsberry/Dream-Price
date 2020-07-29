@@ -26,7 +26,6 @@ class SettingsTVC: UITableViewController {
     @IBAction func recordCentsChanged(_ sender: UISwitch) {
         Settings.shared.recordCentsOn = sender.isOn
         setCentsFooter()
-        print(Settings.shared.recordCentsOn)
     }
     
     func setCentsFooter() {
