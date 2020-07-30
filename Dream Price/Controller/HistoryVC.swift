@@ -86,7 +86,7 @@ class HistoryVC: UITableViewController, HistoryDelegate {
     private func setupNavBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        private let sortButtonImage = UIImage(systemName: "line.horizontal.3.decrease.circle")
+        let sortButtonImage = UIImage(systemName: "line.horizontal.3.decrease.circle")
         sortButton.setTitle("", for: .normal)
         sortButton.setImage(sortButtonImage?.withTintColor(.label, renderingMode:.alwaysOriginal), for: .normal)
         sortButton.setImage(sortButtonImage?.withTintColor(.quaternaryLabel, renderingMode:.alwaysOriginal), for: .highlighted)
