@@ -38,7 +38,14 @@ class DreamsVC: UICollectionViewController {
         super.viewDidLoad()
         setupNavBar()
     }
-    func reloaddata() {
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        reloadData()
+    }
+    
+    func reloadData() {
         DispatchQueue.main.async {
             self.dreamCollection.reloadData()
         }
@@ -145,7 +152,16 @@ class DreamsVC: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let currencyFormatter = NumberFormatter()
-        currencyFormatter.locale = Locale.current
+        
+        if let localeIdentifier = Settings.shared.chosenLocaleIdentifier {
+            currencyFormatter.locale = Locale.init(identifier: localeIdentifier)
+        } else {
+            currencyFormatter.locale = Locale.current
+            if Locale.current.currencyCode == "RUB" {
+                currencyFormatter.locale = Locale.init(identifier: "ru_RU")
+            }
+        }
+        
         currencyFormatter.numberStyle = .currency
         
         if Settings.shared.recordCentsOn! {
@@ -161,9 +177,8 @@ class DreamsVC: UICollectionViewController {
         dateFormatter.locale = Locale.current
         dateFormatter.calendar = Locale.current.calendar
         
-        if Locale.current.currencyCode == "RUB" {
+        if currencyFormatter.locale.currencyCode == "RUB" {
             dateFormatter.locale = Locale.init(identifier: "ru_RU")
-            currencyFormatter.locale = Locale.init(identifier: "ru_RU")
         }
         
         if dreamsList[indexPath.row].type == .focusedDream {

@@ -236,11 +236,16 @@ class HistoryVC: UITableViewController, HistoryDelegate {
         let currencyFormatter = NumberFormatter()
         currencyFormatter.usesGroupingSeparator = true
         currencyFormatter.numberStyle = .currency
+        
         let localeCode = Locale.current.currencyCode
         
-        if localeCode == "RUB" {
-            currencyFormatter.locale = Locale.init(identifier: "ru_RU") }
-        else { currencyFormatter.locale = Locale.current }
+        if let localeIdentifier = Settings.shared.chosenLocaleIdentifier {
+            currencyFormatter.locale = Locale.init(identifier: localeIdentifier)
+        } else {
+            if localeCode == "RUB" {
+                currencyFormatter.locale = Locale.init(identifier: "ru_RU")
+            } else { currencyFormatter.locale = Locale.current }
+        }
         
         var priceString: String = ""
         

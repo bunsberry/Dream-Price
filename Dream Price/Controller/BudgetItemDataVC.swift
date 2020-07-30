@@ -41,13 +41,6 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
         self.budgetItemNameLabel.text = nameLabelText
         updateBalance(balanceFloat: balance)
         
-        if var localeCurrency = Locale.current.currencySymbol {
-            if localeCurrency == "RUB" { localeCurrency = "₽" }
-            currencyLabel.text = " \(localeCurrency)"
-        } else {
-            currencyLabel.text = " $"
-        }
-        
         if Settings.shared.recordCentsOn! {
             transactionLabel.text = "0.00"
             transactionLabel.font = transactionLabel.font.withSize(56)
@@ -88,11 +81,16 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
         let currencyFormatter = NumberFormatter()
         currencyFormatter.usesGroupingSeparator = true
         currencyFormatter.numberStyle = .currency
-        let localeCode = Locale.current.currencyCode
         
-        if localeCode == "RUB" {
-            currencyFormatter.locale = Locale.init(identifier: "ru_RU") }
-        else { currencyFormatter.locale = Locale.current }
+        if let localeIdentifier = Settings.shared.chosenLocaleIdentifier {
+            currencyFormatter.locale = Locale.init(identifier: localeIdentifier)
+        } else {
+            let localeCode = Locale.current.currencyCode
+            
+            if localeCode == "RUB" {
+                currencyFormatter.locale = Locale.init(identifier: "ru_RU") }
+            else { currencyFormatter.locale = Locale.current }
+        }
         
         if Settings.shared.recordCentsOn! {
             currencyFormatter.maximumFractionDigits = 2
@@ -105,6 +103,15 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
             currencyFormatter.minimumFractionDigits = 0
             let priceString = currencyFormatter.string(from: NSNumber(value: balance))!
             self.balanceLabel.text = NSLocalizedString("Balance: ", comment: "") + priceString
+        }
+        
+        if let localeIdentifier = Settings.shared.chosenLocaleIdentifier {
+            currencyLabel.text = " \(String(describing: Locale.init(identifier: localeIdentifier).currencySymbol!))"
+        } else {
+            if var localeCurrency = Locale.current.currencySymbol {
+                if localeCurrency == "RUB" { localeCurrency = "₽" }
+                currencyLabel.text = " \(localeCurrency)"
+            }
         }
     }
     
