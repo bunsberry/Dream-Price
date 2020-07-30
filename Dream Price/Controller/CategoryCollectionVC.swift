@@ -37,11 +37,17 @@ extension BudgetVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "category", for: indexPath) as! CategoryCell
             
-            cell.categoryView.layer.borderWidth = 1
-            cell.categoryView.layer.borderColor = UIColor.secondaryLabel.cgColor
+            if cell == selectedCategoryCell {
+                cell.categoryView.layer.borderWidth = 1.5
+                cell.categoryView.layer.borderColor = UIColor.label.cgColor
+                cell.titleLabel.textColor = UIColor.label
+            } else {
+                cell.categoryView.layer.borderWidth = 1
+                cell.categoryView.layer.borderColor = UIColor.secondaryLabel.cgColor
+                cell.titleLabel.textColor = UIColor.secondaryLabel
+            }
             cell.categoryView.layer.cornerRadius = 25
             cell.titleLabel.text = categoriesShown[indexPath.row].title
-            cell.titleLabel.textColor = UIColor.secondaryLabel
             cell.categoryID = categoriesShown[indexPath.row].categoryID
             
             if categoriesShown[indexPath.row].type == .budget {
@@ -58,7 +64,10 @@ extension BudgetVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate
         let cell = collectionView.cellForItem(at: indexPath) as! CategoryCell
         cell.titleLabel.textColor = UIColor.label
         cell.categoryView.layer.borderColor = UIColor.label.cgColor
-        cell.categoryView.layer.borderWidth = 2
+        cell.categoryView.layer.borderWidth = 1.5
+        
+        selectedCategoryPath = indexPath
+        selectedCategoryCell = cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -66,5 +75,24 @@ extension BudgetVC: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate
         cell?.titleLabel.textColor = UIColor.secondaryLabel
         cell?.categoryView.layer.borderColor = UIColor.secondaryLabel.cgColor
         cell?.categoryView.layer.borderWidth = 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        if collectionView.cellForItem(at: indexPath)?.isSelected == true {
+            
+            collectionView.deselectItem(at: indexPath, animated: true)
+            
+            let cell = collectionView.cellForItem(at: indexPath) as? CategoryCell
+            cell?.titleLabel.textColor = UIColor.secondaryLabel
+            cell?.categoryView.layer.borderColor = UIColor.secondaryLabel.cgColor
+            cell?.categoryView.layer.borderWidth = 1
+            
+            selectedCategoryPath = nil
+            selectedCategoryCell = nil
+            
+            return false
+        } else {
+            return true
+        }
     }
 }

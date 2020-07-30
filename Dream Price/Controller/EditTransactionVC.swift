@@ -55,7 +55,7 @@ class EditTransactionVC: UIViewController, TransactionDelegate {
             deleteTransaction()
         } else {
             // TODO: Saving changes to database
-            print("\(data.transactionID) changed to \(data)")
+//            print("\(data.transactionID) changed to \(data)")
             historyDelegate?.reloadTransactions()
             dismiss(animated: true, completion: nil)
         }

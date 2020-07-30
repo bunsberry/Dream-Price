@@ -49,7 +49,7 @@ class AddDreamsVC: UITableViewController, UITextFieldDelegate {
         let numberOfDots = newText.components(separatedBy: ",").count - 1
 
         let numberOfDecimalDigits: Int
-        if let dotIndex = newText.index(of: ",") {
+        if let dotIndex = newText.firstIndex(of: ",") {
             numberOfDecimalDigits = newText.distance(from: dotIndex, to: newText.endIndex) - 1
         } else {
             numberOfDecimalDigits = 0

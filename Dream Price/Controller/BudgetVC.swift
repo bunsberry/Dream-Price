@@ -17,7 +17,7 @@ class BudgetVC: UIViewController, BudgetDelegate, CategoriesBeenManaged {
     
     // TODO: Получение категорий из DB
     
-    var categories: [Category] = [
+    private var categories: [Category] = [
         Category(categoryID: UUID().uuidString, type: .manage, title: "+", sortInt: 0),
         Category(categoryID: UUID().uuidString, type: .earning, title: NSLocalizedString("Work", comment: ""), sortInt: 0),
         Category(categoryID: UUID().uuidString, type: .spending, title: NSLocalizedString("Coffee", comment: ""), sortInt: 0),
@@ -27,7 +27,9 @@ class BudgetVC: UIViewController, BudgetDelegate, CategoriesBeenManaged {
         Category(categoryID: UUID().uuidString, type: .budget, title: NSLocalizedString("Dream", comment: ""), sortInt: 2)
     ]
     
-    var categoriesShown: [Category] = []
+    public var categoriesShown: [Category] = []
+    public var selectedCategoryPath: IndexPath?
+    public var selectedCategoryCell: CategoryCell?
 
     public static var currentTransaction: String = "-"
     
@@ -59,8 +61,6 @@ class BudgetVC: UIViewController, BudgetDelegate, CategoriesBeenManaged {
 
         let largeBoldDelete = UIImage(systemName: "delete.left.fill", withConfiguration: largeConfig)
         let largeBoldDone = UIImage(systemName: "checkmark.circle.fill", withConfiguration: largeConfig)
-
-//         button.setImage(largeBoldDoc, for: .normal)
         
         removeButton.setImage(largeBoldDelete?.withTintColor(.label, renderingMode:.alwaysOriginal), for: .normal)
         removeButton.setImage(largeBoldDelete?.withTintColor(.quaternaryLabel, renderingMode: .alwaysOriginal), for: .highlighted)
@@ -134,9 +134,8 @@ class BudgetVC: UIViewController, BudgetDelegate, CategoriesBeenManaged {
             }
         }
         
-        categoriesCollectionView.reloadData()
+        reloadCategories()
     }
-    
 }
 
 // MARK:  Buttons Interaction
@@ -179,20 +178,18 @@ extension BudgetVC {
         
         var newTransaction: Transaction!
         
-        if let indexPath = categoriesCollectionView.indexPathsForSelectedItems?.first {
+        if let category = selectedCategoryCell {
             
-            let cell = categoriesCollectionView.cellForItem(at: indexPath) as? CategoryCell
-            
-            if cell?.categoryType == CategoryType.spending {
-                print("id-\(budgetID): Spent \(number) on \(cell!.titleLabel.text!)")
-                newTransaction = Transaction(transactionID: UUID().uuidString, transactionAmount: number, categoryID: cell?.categoryID, date: Date(), budgetFromID: budgetID, budgetToID: nil)
+            if category.categoryType == CategoryType.spending {
+                print("id-\(budgetID): Spent \(number) on \(category.titleLabel.text!)")
+                newTransaction = Transaction(transactionID: UUID().uuidString, transactionAmount: number, categoryID: category.categoryID, date: Date(), budgetFromID: budgetID, budgetToID: nil)
             }
-            else if cell?.categoryType == CategoryType.earning {
-                print("id-\(budgetID): Earned \(number) from \(cell!.titleLabel.text!)")
-                newTransaction = Transaction(transactionID: UUID().uuidString, transactionAmount: number, categoryID: cell?.categoryID, date: Date(), budgetFromID: budgetID, budgetToID: nil)
+            else if category.categoryType == CategoryType.earning {
+                print("id-\(budgetID): Earned \(number) from \(category.titleLabel.text!)")
+                newTransaction = Transaction(transactionID: UUID().uuidString, transactionAmount: number, categoryID: category.categoryID, date: Date(), budgetFromID: budgetID, budgetToID: nil)
             }
-            else if cell?.categoryType == CategoryType.budget {
-                print("id-\(budgetID): Transfered \(number) from/to \(cell!.titleLabel.text!)")
+            else if category.categoryType == CategoryType.budget {
+                print("id-\(budgetID): Transfered \(number) from/to \(category.titleLabel.text!)")
                 
                 // TODO: Transfers
                 
@@ -203,7 +200,7 @@ extension BudgetVC {
             Transaction(transactionID: UUID().uuidString, transactionAmount: number, categoryID: nil, date: Date(), budgetFromID: budgetID, budgetToID: nil)
         }
         
-        categoriesCollectionView.reloadData()
+        reloadCategories()
     }
     
     func sendAction(action: String) {
@@ -222,6 +219,8 @@ extension BudgetVC {
     
     func reloadCategories() {
         // TODO: Load categories from DB
+        selectedCategoryPath = nil
+        selectedCategoryCell = nil
         categoriesCollectionView.reloadData()
     }
 }
