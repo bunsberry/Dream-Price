@@ -86,7 +86,7 @@ class HistoryVC: UITableViewController, HistoryDelegate {
     private func setupNavBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        let sortButtonImage = UIImage(systemName: "line.horizontal.3.decrease.circle")
+        private let sortButtonImage = UIImage(systemName: "line.horizontal.3.decrease.circle")
         sortButton.setTitle("", for: .normal)
         sortButton.setImage(sortButtonImage?.withTintColor(.label, renderingMode:.alwaysOriginal), for: .normal)
         sortButton.setImage(sortButtonImage?.withTintColor(.quaternaryLabel, renderingMode:.alwaysOriginal), for: .highlighted)
@@ -291,7 +291,6 @@ class HistoryVC: UITableViewController, HistoryDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let cell = tableView.cellForRow(at: indexPath) as! TransactionCell
-        
         
         chosenTransaction = Transaction(transactionID: cell.transactionID, transactionAmount: cell.amount, categoryID: cell.categoryID, date: cell.date, budgetFromID: cell.budgetFromID, budgetToID: cell.budgetToID)
         

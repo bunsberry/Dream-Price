@@ -245,25 +245,26 @@ extension EditTransactionVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.beginUpdates() // because there are more than one action below
-        if datePickerIndexPath != nil && datePickerIndexPath!.row - 1 == indexPath.row { // case 2
+        tableView.beginUpdates()
+        if datePickerIndexPath != nil && datePickerIndexPath?.section == indexPath.section && datePickerIndexPath!.row - 1 == indexPath.row {
             tableView.deleteRows(at: [datePickerIndexPath!], with: .fade)
             datePickerIndexPath = nil
-        } else { // case 1、3
-            if datePickerIndexPath != nil { // case 3
+        } else {
+            if datePickerIndexPath != nil {
+                print("case 3")
                 tableView.deleteRows(at: [datePickerIndexPath!], with: .fade)
             }
-            datePickerIndexPath = calculateDatePickerIndexPath(indexPathSelected: indexPath)
-            tableView.insertRows(at: [calculateDatePickerIndexPath(indexPathSelected: indexPath)], with: .fade)
+            datePickerIndexPath = calculatePickerIndexPath(indexPathSelected: indexPath)
+            tableView.insertRows(at: [datePickerIndexPath!], with: .fade)
         }
         tableView.deselectRow(at: indexPath, animated: true)
         tableView.endUpdates()
     }
 
-    func calculateDatePickerIndexPath(indexPathSelected: IndexPath) -> IndexPath {
-        if datePickerIndexPath != nil && datePickerIndexPath!.row  < indexPathSelected.row { // case 3.2
+    func calculatePickerIndexPath(indexPathSelected: IndexPath) -> IndexPath {
+        if datePickerIndexPath != nil && datePickerIndexPath!.row  < indexPathSelected.row {
             return IndexPath(row: indexPathSelected.row, section: indexPathSelected.section)
-        } else { // case 1、3.1
+        } else {
             return IndexPath(row: indexPathSelected.row + 1, section: indexPathSelected.section)
         }
     }
