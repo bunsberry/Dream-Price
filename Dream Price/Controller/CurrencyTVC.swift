@@ -9,7 +9,7 @@ import UIKit
 
 class CurrencyTVC: UITableViewController {
     
-    let commonCurrencyIdentifiers: [String] = ["en_US", "fr_FR", "en_GB", "ru_RU"]
+    let commonCurrencyIdentifiers: [String] = ["en_US", "fr_FR", "de_DE", "en_GB", "pt_BR", "ru_RU", "ja_JP"]
     var starterIndexPath: IndexPath = IndexPath(row: 0, section: 0)
 
     override func viewDidLoad() {

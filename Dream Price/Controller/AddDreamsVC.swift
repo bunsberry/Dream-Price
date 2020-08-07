@@ -40,6 +40,33 @@ class AddDreamsVC: UITableViewController, UITextFieldDelegate {
         tableView.allowsSelection = false
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        setupTextFields()
+    }
+    
+    func setupTextFields() {
+        let toolbar = UIToolbar(frame: CGRect(origin: .zero,
+                                              size: .init(width: view.frame.size.width, height: 30)))
+        
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(title: NSLocalizedString("Done", comment: ""), style: .done, target: self,
+                                         action: #selector(doneButtonAction))
+        doneButton.tintColor = UIColor(red: 0.443, green: 0.541, blue: 0.792, alpha: 1)
+        
+        toolbar.setItems([flexSpace, doneButton], animated: false)
+        toolbar.sizeToFit()
+        
+        sumField.inputAccessoryView = toolbar
+        nameField.inputAccessoryView = toolbar
+        descriptionField.inputAccessoryView = toolbar
+    }
+    
+    @objc func doneButtonAction() {
+        self.view.endEditing(true)
+    }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let oldText = textField.text, let r = Range(range, in: oldText) else {
             return true

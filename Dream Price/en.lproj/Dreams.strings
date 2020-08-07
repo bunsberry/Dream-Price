@@ -106,3 +106,6 @@
 
 /* Class = "UILabel"; text = "100 $"; ObjectID = "ykj-z6-7Nh"; */
 "ykj-z6-7Nh.text" = "100 $";
+
+// Delete button
+"hIt-S8-jNq.normalTitle" = "Delete";

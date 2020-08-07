@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17140" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7QX-A6-69e">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17147" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="7QX-A6-69e">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17115"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17120"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -67,7 +67,7 @@
                                                     </collectionViewCellContentView>
                                                     <color key="backgroundColor" red="0.39607843139999999" green="0.38823529410000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </collectionViewCell>
-                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="ProjectCCell" id="VEC-b0-ajq" customClass="ProjectCVCell" customModule="Dream_Price" customModuleProvider="target">
+                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="ProjectCell" id="VEC-b0-ajq" customClass="ProjectCVCell" customModule="Dream_Price" customModuleProvider="target">
                                                     <rect key="frame" x="224" y="0.0" width="196" height="256"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="70L-i8-QrF">
@@ -545,8 +545,8 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Синяя" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nA6-gl-0xM">
-                                                    <rect key="frame" x="88" y="29.5" width="49" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Фиолетовая" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nA6-gl-0xM">
+                                                    <rect key="frame" x="88" y="29.5" width="96" height="21"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -727,11 +727,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="IconBlack" width="1024" height="1024"/>
-        <image name="IconBlue" width="1024" height="1024"/>
-        <image name="IconClassic" width="1024" height="1024"/>
-        <image name="IconRed" width="1024" height="1024"/>
-        <image name="IconYellow" width="1024" height="1024"/>
+        <image name="IconBlack" width="512" height="512"/>
+        <image name="IconBlue" width="512" height="512"/>
+        <image name="IconClassic" width="512" height="512"/>
+        <image name="IconRed" width="512" height="512"/>
+        <image name="IconYellow" width="512" height="512"/>
         <image name="checkmark.square" catalog="system" width="128" height="114"/>
         <image name="globe" catalog="system" width="128" height="121"/>
         <image name="link" catalog="system" width="128" height="122"/>

@@ -28,7 +28,7 @@ var dreamsList: [Dream] = [
 ]
 
 
-class DreamsVC: UICollectionViewController {
+class DreamsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     // TODO: Reading from DB
 
@@ -36,13 +36,17 @@ class DreamsVC: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        dreamCollection.dataSource = self
+        dreamCollection.delegate = self
         setupNavBar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        reloadData()
+        navigationController?.navigationBar.prefersLargeTitles = true
+        dreamCollection.reloadData()
     }
     
     func reloadData() {
@@ -74,7 +78,7 @@ class DreamsVC: UICollectionViewController {
         showImage(false)
     }
     
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard let height = navigationController?.navigationBar.frame.height else { return }
         moveAndResizeImage(for: height)
     }
@@ -145,11 +149,16 @@ class DreamsVC: UICollectionViewController {
     
     // MARK: Collection View Setup
     
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dreamsList.count
     }
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        print("Set size")
+        return CGSize(width: self.view.frame.width - 40, height: 115)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let currencyFormatter = NumberFormatter()
         
@@ -242,7 +251,7 @@ class DreamsVC: UICollectionViewController {
         }
     }
     
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Selected at \(indexPath.row)")
         selectedDreamToEdit = indexPath.row
         performSegue(withIdentifier: "toEditDream", sender: nil)

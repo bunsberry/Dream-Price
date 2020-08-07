@@ -46,6 +46,32 @@ class EditTransactionVC: UIViewController, TransactionDelegate {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        setupTextFields()
+    }
+    
+    func setupTextFields() {
+        let toolbar = UIToolbar(frame: CGRect(origin: .zero,
+                                              size: .init(width: view.frame.size.width, height: 30)))
+        
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(title: NSLocalizedString("Done", comment: ""), style: .done, target: self,
+                                         action: #selector(doneButtonAction))
+        doneButton.tintColor = #colorLiteral(red: 0.3075794578, green: 0.8026421666, blue: 0.3980509043, alpha: 1)
+        
+        toolbar.setItems([flexSpace, doneButton], animated: false)
+        toolbar.sizeToFit()
+        
+        let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! ETNumberCell
+        cell.textField.inputAccessoryView = toolbar
+    }
+    
+    @objc func doneButtonAction() {
+        self.view.endEditing(true)
+    }
+    
     @IBAction func cancel(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
