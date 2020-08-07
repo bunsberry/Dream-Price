@@ -18,13 +18,13 @@ class BudgetVC: UIViewController, BudgetDelegate, CategoriesBeenManaged {
     // TODO: Получение категорий из DB
     
     private var categories: [Category] = [
-        Category(categoryID: UUID().uuidString, type: .manage, title: "+", sortInt: 0),
         Category(categoryID: UUID().uuidString, type: .earning, title: NSLocalizedString("Work", comment: ""), sortInt: 0),
         Category(categoryID: UUID().uuidString, type: .spending, title: NSLocalizedString("Coffee", comment: ""), sortInt: 0),
         Category(categoryID: UUID().uuidString, type: .spending, title: NSLocalizedString("Groceries", comment: ""), sortInt: 1),
         Category(categoryID: UUID().uuidString, type: .budget, title: NSLocalizedString("Personal Account", comment: ""), sortInt: 0),
         Category(categoryID: UUID().uuidString, type: .budget, title: NSLocalizedString("App", comment: ""), sortInt: 1),
-        Category(categoryID: UUID().uuidString, type: .budget, title: NSLocalizedString("Dream", comment: ""), sortInt: 2)
+        Category(categoryID: UUID().uuidString, type: .budget, title: NSLocalizedString("Dream", comment: ""), sortInt: 2),
+        Category(categoryID: UUID().uuidString, type: .manage, title: "+", sortInt: 0)
     ]
     
     public var categoriesShown: [Category] = []
@@ -95,11 +95,6 @@ class BudgetVC: UIViewController, BudgetDelegate, CategoriesBeenManaged {
         switch transaction {
         case "-":
             for el in self.categories {
-                if el.type == .manage {
-                    self.categoriesShown.append(el)
-                }
-            }
-            for el in self.categories {
                 if el.type == .spending {
                     self.categoriesShown.append(el)
                 }
@@ -109,12 +104,12 @@ class BudgetVC: UIViewController, BudgetDelegate, CategoriesBeenManaged {
                     self.categoriesShown.append(el)
                 }
             }
-        case "+":
             for el in self.categories {
                 if el.type == .manage {
                     self.categoriesShown.append(el)
                 }
             }
+        case "+":
             for el in self.categories {
                 if el.type == .earning {
                     self.categoriesShown.append(el)
@@ -122,6 +117,11 @@ class BudgetVC: UIViewController, BudgetDelegate, CategoriesBeenManaged {
             }
             for el in self.categories {
                 if el.type == .budget {
+                    self.categoriesShown.append(el)
+                }
+            }
+            for el in self.categories {
+                if el.type == .manage {
                     self.categoriesShown.append(el)
                 }
             }

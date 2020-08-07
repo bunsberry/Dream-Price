@@ -10,6 +10,7 @@ import Foundation
 public struct Base {
     static let projectsID = "ProjectsCell"
     static let actionsID = "ActionsCell"
+    static let separatorID = "SeparatorCell"
     static let addProjectCellID = "AddProjectCell"
     static let projectCID = "ProjectCCell"
 }

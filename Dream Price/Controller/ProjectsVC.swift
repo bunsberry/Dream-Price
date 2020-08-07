@@ -108,7 +108,7 @@ class ProjectsVC: UITableViewController {
     // MARK: Table view setup
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
+        if section == 0 || section == 1 {
             return 1
         } else {
             return DataService.actions.count
@@ -116,12 +116,15 @@ class ProjectsVC: UITableViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: Base.projectsID, for: indexPath) as! ProjectsCell
+            return cell
+        } else if indexPath.section == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: Base.separatorID, for: indexPath)
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: Base.actionsID, for: indexPath) as! ActionsCell
@@ -130,8 +133,12 @@ class ProjectsVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0 {
+        if indexPath.section == 0 {
+            print("projects height")
             return 256.0
+        } else if indexPath.section == 1 {
+            print("separator height")
+            return 28.0
         } else {
             return 64.0
         }

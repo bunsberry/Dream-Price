@@ -8,7 +8,7 @@
 import UIKit
 
 extension UIView {
-    func addDashedBorder(color: CGColor) {
+    func addDashedBorder(color: CGColor, lineWidth: CGFloat, patternLength: Float, cornerRadius: CGFloat) {
         let color = color
 
         let shapeLayer:CAShapeLayer = CAShapeLayer()
@@ -21,10 +21,12 @@ extension UIView {
         shapeLayer.position = CGPoint(x: frameSize.width/2, y: frameSize.height/2)
         shapeLayer.fillColor = UIColor.clear.cgColor
         shapeLayer.strokeColor = color
-        shapeLayer.lineWidth = 2
+        shapeLayer.lineWidth = 3
         shapeLayer.lineJoin = CAShapeLayerLineJoin.round
-        shapeLayer.lineDashPattern = [6,3]
-        shapeLayer.path = UIBezierPath(roundedRect: shapeRect, cornerRadius: 5).cgPath
+        let ptLength = NSNumber(value: patternLength)
+        let spLength = NSNumber(value: patternLength / 2)
+        shapeLayer.lineDashPattern = [ptLength, spLength]
+        shapeLayer.path = UIBezierPath(roundedRect: shapeRect, cornerRadius: cornerRadius).cgPath
 
         self.layer.addSublayer(shapeLayer)
     }
