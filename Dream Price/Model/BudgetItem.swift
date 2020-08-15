@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum BudgetItemType {
+enum BudgetItemType: String {
     case project
     case personal
     case dream

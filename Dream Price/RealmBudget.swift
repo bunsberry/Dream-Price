@@ -8,12 +8,12 @@
 import Foundation
 import RealmSwift
 
-@objc class RealmBudget: Object {
+class RealmBudget: Object {
     
-    dynamic var id: String?
-    dynamic var name: String?
-    dynamic var balance: Float?
-    dynamic var type: String?
+    @objc dynamic var id: String = ""
+    @objc dynamic var name: String = ""
+    @objc dynamic var balance: Float = 0
+    @objc dynamic var type: String = ""
     
     convenience init(id: String, name: String, balance: Float, type: String) {
         self.init()

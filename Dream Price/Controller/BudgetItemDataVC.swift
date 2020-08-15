@@ -8,7 +8,7 @@
 import UIKit
 
 protocol TransportDelegate {
-    func transportCurrentState(symbol: String, name: String)
+    func transportCurrentState(symbol: String, id: String)
     func transportTransactionData(number: Float, budgetID: String)
     func transportButtons(enabled: Int)
 }
@@ -73,7 +73,7 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
         self.budgetItemView.layer.shadowRadius = CGFloat(12)
         self.budgetItemView.layer.shadowOpacity = 0.25
         
-        BudgetItemDataVC.delegate?.transportCurrentState(symbol: "-", name: nameLabelText)
+        BudgetItemDataVC.delegate?.transportCurrentState(symbol: "-", id: budgetID)
         
     }
     
@@ -230,7 +230,7 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
         }
                 
         changeTransactionButton.setTitle(BudgetItemDataVC.currentTransaction, for: .normal)
-        BudgetItemDataVC.delegate?.transportCurrentState(symbol: BudgetItemDataVC.currentTransaction, name: nameLabelText)
+        BudgetItemDataVC.delegate?.transportCurrentState(symbol: BudgetItemDataVC.currentTransaction, id: budgetID)
     }
     
 }

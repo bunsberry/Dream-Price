@@ -7,6 +7,7 @@
 
 import UIKit
 import Foundation
+import RealmSwift
 
 protocol TransportUpDelegate {
     func transportUp(string: String)
@@ -17,15 +18,7 @@ class BudgetVC: UIViewController, BudgetDelegate, CategoriesBeenManaged {
     
     // TODO: Получение категорий из DB
     
-    private var categories: [Category] = [
-        Category(categoryID: UUID().uuidString, type: .earning, title: NSLocalizedString("Work", comment: ""), sortInt: 0),
-        Category(categoryID: UUID().uuidString, type: .spending, title: NSLocalizedString("Coffee", comment: ""), sortInt: 0),
-        Category(categoryID: UUID().uuidString, type: .spending, title: NSLocalizedString("Groceries", comment: ""), sortInt: 1),
-        Category(categoryID: UUID().uuidString, type: .budget, title: NSLocalizedString("Personal Account", comment: ""), sortInt: 0),
-        Category(categoryID: UUID().uuidString, type: .budget, title: NSLocalizedString("App", comment: ""), sortInt: 1),
-        Category(categoryID: UUID().uuidString, type: .budget, title: NSLocalizedString("Dream", comment: ""), sortInt: 2),
-        Category(categoryID: UUID().uuidString, type: .manage, title: "+", sortInt: 0)
-    ]
+    private var categories: [Category] = []
     
     public var categoriesShown: [Category] = []
     public var selectedCategoryPath: IndexPath?
@@ -40,11 +33,12 @@ class BudgetVC: UIViewController, BudgetDelegate, CategoriesBeenManaged {
     @IBOutlet weak var removeButton: UIButton!
     @IBOutlet weak var doneButton: UIButton!
     
+    let realm = try! Realm()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         buttonsSetup()
-        updateCategories(transaction: "-", name: NSLocalizedString("Personal Account", comment: ""))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -81,13 +75,46 @@ class BudgetVC: UIViewController, BudgetDelegate, CategoriesBeenManaged {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? BudgetPVC, segue.identifier == "embedWindow" {
+            
+            if realm.objects(RealmBudget.self).count == 0 {
+                let personalAccount = RealmBudget(id: UUID().uuidString, name: NSLocalizedString("Personal Account", comment: ""), balance: 0.0, type: "personal")
+                let dreamAccount = RealmBudget(id: UUID().uuidString, name: NSLocalizedString("Dream", comment: ""), balance: 0.0, type: "dream")
+                
+                RealmService().create(personalAccount)
+                RealmService().create(dreamAccount)
+                
+                let exampleCategory1 = RealmCategory(id: UUID().uuidString, type: "earning", title: NSLocalizedString("Work", comment: ""), sortInt: 0)
+                let exampleCategory2 = RealmCategory(id: UUID().uuidString, type: "spending",  title: NSLocalizedString("Coffee", comment: ""), sortInt: 0)
+                let exampleCategory3 = RealmCategory(id: UUID().uuidString, type: "spending",  title: NSLocalizedString("Groceries", comment: ""), sortInt: 1)
+                
+                RealmService().create(exampleCategory1)
+                RealmService().create(exampleCategory2)
+                RealmService().create(exampleCategory3)
+                
+                for (index, object) in realm.objects(RealmBudget.self).enumerated() {
+                    RealmService().create(RealmCategory(id: object.id, type: "budget", title: object.name, sortInt: index))
+                }
+            }
+            
+            for object in realm.objects(RealmCategory.self) {
+                categories.append(Category(categoryID: object.id, type: CategoryType(rawValue: object.type)!, title: object.title, sortInt: object.sortInt))
+            }
+            
+            categories.append(Category(categoryID: "", type: .manage, title: "+", sortInt: 0))
+            
+            for object in realm.objects(RealmBudget.self) {
+                if object.type == "personal" {
+                    updateCategories(transaction: "-", id: object.id)
+                }
+            }
+            
             vc.budgetDelegate = self
         }
     }
     
     // MARK: Categories Update
     
-    func updateCategories(transaction: String, name: String) {
+    func updateCategories(transaction: String, id: String) {
         categoriesShown.removeAll()
         
         categories.sort(by:{ $0.sortInt > $1.sortInt})
@@ -129,7 +156,7 @@ class BudgetVC: UIViewController, BudgetDelegate, CategoriesBeenManaged {
         }
         
         for (index, el) in self.categoriesShown.enumerated() {
-            if el.title == name {
+            if el.categoryID == id {
                 self.categoriesShown.remove(at: index)
             }
         }

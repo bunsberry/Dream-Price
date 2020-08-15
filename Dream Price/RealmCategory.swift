@@ -8,13 +8,17 @@
 import Foundation
 import RealmSwift
 
-@objc class RealmCategory: Object {
-    dynamic var id: String?
-    dynamic var title: String?
+class RealmCategory: Object {
+    @objc dynamic var id: String = ""
+    @objc dynamic var type: String = ""
+    @objc dynamic var title: String = ""
+    @objc dynamic var sortInt: Int = 0
     
-    convenience init(id: String, title: String) {
+    convenience init(id: String, type: String, title: String, sortInt: Int) {
         self.init()
         self.id = id
+        self.type = type
         self.title = title
+        self.sortInt = sortInt
     }
 }

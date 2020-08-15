@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CategoryType {
+enum CategoryType: String {
     case new
     case manage
     case spending

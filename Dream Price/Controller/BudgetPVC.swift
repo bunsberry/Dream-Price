@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import RealmSwift
 
 protocol BudgetDelegate {
-    func updateCategories(transaction: String, name: String)
+    func updateCategories(transaction: String, id: String)
     func createTransaction(number: Float, budgetID: String)
     func disableButtons()
     func enableButtons()
@@ -21,13 +22,9 @@ protocol KeyboardDelegate {
 
 class BudgetPVC: UIPageViewController, TransportDelegate, TransportUpDelegate {
     
-    // TODO: Getting budgetItems from DB here
+    let realm = try! Realm()
     
-    let pagesData: [BudgetItem] = [
-        BudgetItem(budgetID: UUID().uuidString, type: .project, balance: 0, name: NSLocalizedString("App", comment: "")),
-        BudgetItem(budgetID: UUID().uuidString, type: .personal, balance: 2180, name: NSLocalizedString("Personal Account", comment: "")),
-        BudgetItem(budgetID: UUID().uuidString, type: .dream, balance: 50000, name: NSLocalizedString("Dream", comment: ""))
-    ]
+    var pagesData: [BudgetItem] = []
     
     var budgetDelegate: BudgetDelegate?
     var keyboardDelegate: KeyboardDelegate?
@@ -42,7 +39,14 @@ class BudgetPVC: UIPageViewController, TransportDelegate, TransportUpDelegate {
         
         appearance.pageIndicatorTintColor = UIColor.secondaryLabel
         appearance.currentPageIndicatorTintColor = UIColor.label
-
+        
+        let realmBudgets = realm.objects(RealmBudget.self)
+        print(realmBudgets)
+        
+        for budget in realmBudgets {
+            pagesData.append(BudgetItem(budgetID: budget.id, type: BudgetItemType(rawValue: budget.type)!, balance: Float(budget.balance), name: budget.name))
+        }
+        
         self.dataSource = self
         self.delegate = self
         
@@ -63,8 +67,8 @@ class BudgetPVC: UIPageViewController, TransportDelegate, TransportUpDelegate {
     
     // MARK: Delegate protocol
     
-    func transportCurrentState(symbol: String, name: String) {
-        budgetDelegate?.updateCategories(transaction: symbol, name: name)
+    func transportCurrentState(symbol: String, id: String) {
+        budgetDelegate?.updateCategories(transaction: symbol, id: id)
     }
     
     func transportTransactionData(number: Float, budgetID: String) {
@@ -123,7 +127,7 @@ extension BudgetPVC: UIPageViewControllerDataSource, UIPageViewControllerDelegat
         
         DispatchQueue.main.async {
             self.keyboardDelegate = viewController as? BudgetItemDataVC
-            self.transportCurrentState(symbol: ((viewController as? BudgetItemDataVC)?.changeTransactionButton.title(for: .normal))!, name: ((viewController as? BudgetItemDataVC)?.nameLabelText)!)
+            self.transportCurrentState(symbol: ((viewController as? BudgetItemDataVC)?.changeTransactionButton.title(for: .normal))!, id: ((viewController as? BudgetItemDataVC)?.budgetID)!)
         }
         
         return self.pageViewController(for: index)
@@ -134,7 +138,7 @@ extension BudgetPVC: UIPageViewControllerDataSource, UIPageViewControllerDelegat
         
         DispatchQueue.main.async {
             self.keyboardDelegate = viewController as? BudgetItemDataVC
-            self.transportCurrentState(symbol: ((viewController as? BudgetItemDataVC)?.changeTransactionButton.title(for: .normal))!, name: ((viewController as? BudgetItemDataVC)?.nameLabelText)!)
+            self.transportCurrentState(symbol: ((viewController as? BudgetItemDataVC)?.changeTransactionButton.title(for: .normal))!, id: ((viewController as? BudgetItemDataVC)?.budgetID)!)
         }
         
         return self.pageViewController(for: index)
