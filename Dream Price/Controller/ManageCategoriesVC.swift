@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 protocol CategoryManageDelegate {
     func addNewCategory(category: String, type: CategoryType)
@@ -13,7 +14,7 @@ protocol CategoryManageDelegate {
 }
 
 protocol CategoriesBeenManaged {
-    func reloadCategories()
+    func categoriesBeenManaged()
 }
 
 class ManageCategoriesVC: UIViewController, CategoryManageDelegate {
@@ -21,20 +22,13 @@ class ManageCategoriesVC: UIViewController, CategoryManageDelegate {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var editButton: UIBarItem!
     
-    // TODO: Read categories from DB
+    let realm = try! Realm()
     
-    var categories: [Category] = [
-        Category(categoryID: UUID().uuidString, type: .earning, title: NSLocalizedString("Work", comment: ""), sortInt: 1),
-        Category(categoryID: UUID().uuidString, type: .earning, title: NSLocalizedString("Work", comment: ""), sortInt: 2),
-        Category(categoryID: UUID().uuidString, type: .spending, title: NSLocalizedString("Coffee", comment: ""), sortInt: 1),
-        Category(categoryID: UUID().uuidString, type: .spending, title: NSLocalizedString("Groceries", comment: ""), sortInt: 2)
-    ] {
-        didSet { tableView.reloadData() }
-    }
-    
+    var categories: [Category] = []
     var earningSection: [Category] = []
     var spendingSection: [Category] = []
     var sections: [[Category]] = []
+    
     static public var delegate: CategoriesBeenManaged?
     
     override func viewDidLoad() {
@@ -50,9 +44,8 @@ class ManageCategoriesVC: UIViewController, CategoryManageDelegate {
     
     // MARK: Buttons
     
-    @IBAction func cancel(_ sender: Any) {
-        print("button pressed")
-        ManageCategoriesVC.delegate?.reloadCategories()
+    @IBAction func save(_ sender: Any) {
+        ManageCategoriesVC.delegate?.categoriesBeenManaged()
         dismiss(animated: true, completion: nil)
     }
     
@@ -63,6 +56,7 @@ class ManageCategoriesVC: UIViewController, CategoryManageDelegate {
             sender.title = NSLocalizedString("Done", comment: "")
         } else {
             sender.title = NSLocalizedString("Edit", comment: "")
+            updateTableView()
         }
 
     }
@@ -70,9 +64,16 @@ class ManageCategoriesVC: UIViewController, CategoryManageDelegate {
     // MARK: UpdateTableView()
     
     private func updateTableView() {
+        categories.removeAll()
         earningSection.removeAll()
         spendingSection.removeAll()
         sections.removeAll()
+        
+        let realmCategories = realm.objects(RealmCategory.self)
+        
+        for object in realmCategories {
+            categories.append(Category(categoryID: object.id, type: CategoryType(rawValue: object.type)!, title: object.title, sortInt: object.sortInt))
+        }
         
         earningSection.append(Category(categoryID: UUID().uuidString, type: .new, title: "", sortInt: 0))
         spendingSection.append(Category(categoryID: UUID().uuidString, type: .new, title: "", sortInt: 0))
@@ -96,15 +97,20 @@ class ManageCategoriesVC: UIViewController, CategoryManageDelegate {
     
     func addNewCategory(category: String, type: CategoryType) {
         
-        // TODO: New Category Added to DB
+        let newCategory = RealmCategory()
+        newCategory.id = UUID().uuidString
+        newCategory.title = category
+        newCategory.type = type.rawValue
         
         if type == .spending {
-            print(Category(categoryID: UUID().uuidString, type: type, title: category, sortInt: sections[0].count))
-            categories.append(Category(categoryID: UUID().uuidString, type: type, title: category, sortInt: sections[0].count))
+            newCategory.sortInt = sections[0].count
+            categories.append(Category(categoryID: newCategory.id, type: type, title: newCategory.title, sortInt: sections[0].count))
         } else if type == .earning {
-            print(Category(categoryID: UUID().uuidString, type: type, title: category, sortInt: sections[1].count))
-            categories.append(Category(categoryID: UUID().uuidString, type: type, title: category, sortInt: sections[1].count))
+            newCategory.sortInt = sections[1].count
+            categories.append(Category(categoryID: newCategory.id, type: type, title: category, sortInt: sections[1].count))
         }
+        
+        RealmService().create(newCategory)
         
         updateTableView()
     }
@@ -113,16 +119,13 @@ class ManageCategoriesVC: UIViewController, CategoryManageDelegate {
     
     func categoryEdited(id: String, title: String) {
         
-        // TODO: DB Category title changed
-        
-        for (index, category) in categories.enumerated() {
-            if category.categoryID == id {
-                categories[index].title = title
-                print(categories[index])
+        for object in realm.objects(RealmCategory.self) {
+            if object.id == id {
+                try! realm.write {
+                    object.title = title
+                }
             }
         }
-        
-        updateTableView()
     }
     
 }
@@ -215,13 +218,19 @@ extension ManageCategoriesVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
-        // TODO: DB Object deleted
-        
         if editingStyle == .delete {
             
             for (index, category) in categories.enumerated() {
                 if category.categoryID == sections[indexPath.section][indexPath.row].categoryID {
                     categories.remove(at: index)
+                    
+                    for object in realm.objects(RealmCategory.self) {
+                        if object.id == category.categoryID {
+                            try! realm.write {
+                                realm.delete(object)
+                            }
+                        }
+                    }
                 }
             }
             
@@ -235,6 +244,14 @@ extension ManageCategoriesVC: UITableViewDataSource, UITableViewDelegate {
                     for (index1, category) in categories.enumerated() {
                         if category.categoryID == sections[indexPath.section][index].categoryID {
                             categories[index1].sortInt = index
+                            
+                            for object in realm.objects(RealmCategory.self) {
+                                if object.id == category.categoryID {
+                                    try! realm.write {
+                                        object.sortInt = index
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -242,8 +259,6 @@ extension ManageCategoriesVC: UITableViewDataSource, UITableViewDelegate {
             
             updateTableView()
         }
-        
-        print("Category Deleted")
     }
     
     // MARK: Table View Data Source and Delegate

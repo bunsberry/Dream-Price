@@ -469,7 +469,7 @@
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
-                                                        <action selector="titleChanged:" destination="qbY-zK-dZF" eventType="editingDidEndOnExit" id="ySz-gN-za4"/>
+                                                        <action selector="titleChanged:" destination="qbY-zK-dZF" eventType="editingChanged" id="GnS-tf-4XI"/>
                                                     </connections>
                                                 </textField>
                                             </subviews>
@@ -500,7 +500,7 @@
                         <barButtonItem key="leftBarButtonItem" style="done" systemItem="save" id="BCM-vk-1CX">
                             <color key="tintColor" red="0.45098039220000002" green="0.79215686269999996" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
-                                <action selector="cancel:" destination="33M-dd-yws" id="D62-4y-9Zq"/>
+                                <action selector="save:" destination="33M-dd-yws" id="D62-4y-9Zq"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Edit" style="done" id="gqo-yq-hk5">

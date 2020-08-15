@@ -16,8 +16,6 @@ protocol TransportUpDelegate {
 
 class BudgetVC: UIViewController, BudgetDelegate, CategoriesBeenManaged {
     
-    // TODO: Получение категорий из DB
-    
     private var categories: [Category] = []
     
     public var categoriesShown: [Category] = []
@@ -25,6 +23,7 @@ class BudgetVC: UIViewController, BudgetDelegate, CategoriesBeenManaged {
     public var selectedCategoryCell: CategoryCell?
 
     public static var currentTransaction: String = "-"
+    var currentBudgetID: String = ""
     
     public static var delegateUp: TransportUpDelegate?
     
@@ -96,15 +95,12 @@ class BudgetVC: UIViewController, BudgetDelegate, CategoriesBeenManaged {
                 }
             }
             
-            for object in realm.objects(RealmCategory.self) {
-                categories.append(Category(categoryID: object.id, type: CategoryType(rawValue: object.type)!, title: object.title, sortInt: object.sortInt))
-            }
-            
-            categories.append(Category(categoryID: "", type: .manage, title: "+", sortInt: 0))
+            reloadCategoriesData()
             
             for object in realm.objects(RealmBudget.self) {
                 if object.type == "personal" {
                     updateCategories(transaction: "-", id: object.id)
+                    currentBudgetID = object.id
                 }
             }
             
@@ -115,9 +111,16 @@ class BudgetVC: UIViewController, BudgetDelegate, CategoriesBeenManaged {
     // MARK: Categories Update
     
     func updateCategories(transaction: String, id: String) {
-        categoriesShown.removeAll()
         
-        categories.sort(by:{ $0.sortInt > $1.sortInt})
+        currentBudgetID = id
+        BudgetVC.currentTransaction = transaction
+        
+        categoriesShown.removeAll()
+        categories.removeAll()
+        
+        reloadCategoriesData()
+        
+        categories.sort(by:{ $0.sortInt < $1.sortInt})
         
         switch transaction {
         case "-":
@@ -161,7 +164,9 @@ class BudgetVC: UIViewController, BudgetDelegate, CategoriesBeenManaged {
             }
         }
         
-        reloadCategories()
+        selectedCategoryPath = nil
+        selectedCategoryCell = nil
+        categoriesCollectionView.reloadData()
     }
 }
 
@@ -227,7 +232,9 @@ extension BudgetVC {
             Transaction(transactionID: UUID().uuidString, transactionAmount: number, categoryID: nil, date: Date(), budgetFromID: budgetID, budgetToID: nil)
         }
         
-        reloadCategories()
+        selectedCategoryPath = nil
+        selectedCategoryCell = nil
+        categoriesCollectionView.reloadData()
     }
     
     func sendAction(action: String) {
@@ -244,10 +251,15 @@ extension BudgetVC {
         doneButton.isEnabled = true
     }
     
-    func reloadCategories() {
-        // TODO: Load categories from DB
-        selectedCategoryPath = nil
-        selectedCategoryCell = nil
-        categoriesCollectionView.reloadData()
+    func reloadCategoriesData() {
+        for object in realm.objects(RealmCategory.self) {
+            categories.append(Category(categoryID: object.id, type: CategoryType(rawValue: object.type)!, title: object.title, sortInt: object.sortInt))
+        }
+        
+        categories.append(Category(categoryID: "", type: .manage, title: "+", sortInt: 0))
+    }
+    
+    func categoriesBeenManaged() {
+        updateCategories(transaction: BudgetVC.currentTransaction, id: currentBudgetID)
     }
 }

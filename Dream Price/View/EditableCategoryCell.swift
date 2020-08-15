@@ -18,10 +18,8 @@ class EditableCategoryCell: UITableViewCell {
     @IBAction func titleChanged(_ sender: UITextField) {
         if sender.text != "" {
             delegate?.categoryEdited(id: id, title: sender.text!)
-            firstTitle = sender.text!
-            sender.text = firstTitle
         } else {
-            sender.text = firstTitle
+            delegate?.categoryEdited(id: id, title: firstTitle)
         }
     }
     
