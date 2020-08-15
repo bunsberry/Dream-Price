@@ -16,7 +16,6 @@
 		56D8D49B24C4E20D00C3194D /* ProjectsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8D49A24C4E20D00C3194D /* ProjectsCell.swift */; };
 		56D8D49D24C4E30200C3194D /* ActionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8D49C24C4E30200C3194D /* ActionsCell.swift */; };
 		56D8D49F24C4E38700C3194D /* ProjectCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8D49E24C4E38700C3194D /* ProjectCVCell.swift */; };
-		56D8D4A124C4E3C700C3194D /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8D4A024C4E3C700C3194D /* DataService.swift */; };
 		56D8D4A324C4E42600C3194D /* RealmAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8D4A224C4E42600C3194D /* RealmAction.swift */; };
 		56D8D4A524C4E4C200C3194D /* RealmProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8D4A424C4E4C200C3194D /* RealmProject.swift */; };
 		56D8D4A724C4E70700C3194D /* AddProjectCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8D4A624C4E70700C3194D /* AddProjectCVCell.swift */; };
@@ -142,7 +141,6 @@
 		56D8D49A24C4E20D00C3194D /* ProjectsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsCell.swift; sourceTree = "<group>"; };
 		56D8D49C24C4E30200C3194D /* ActionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsCell.swift; sourceTree = "<group>"; };
 		56D8D49E24C4E38700C3194D /* ProjectCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCVCell.swift; sourceTree = "<group>"; };
-		56D8D4A024C4E3C700C3194D /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		56D8D4A224C4E42600C3194D /* RealmAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RealmAction.swift; path = "Dream Price/Realm/RealmAction.swift"; sourceTree = SOURCE_ROOT; };
 		56D8D4A424C4E4C200C3194D /* RealmProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RealmProject.swift; path = "Dream Price/Realm/RealmProject.swift"; sourceTree = SOURCE_ROOT; };
 		56D8D4A624C4E70700C3194D /* AddProjectCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProjectCVCell.swift; sourceTree = "<group>"; };
@@ -337,7 +335,6 @@
 			isa = PBXGroup;
 			children = (
 				56D8D48E24C49BD200C3194D /* RealmService.swift */,
-				56D8D4A024C4E3C700C3194D /* DataService.swift */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
@@ -662,7 +659,6 @@
 				56D8D4A724C4E70700C3194D /* AddProjectCVCell.swift in Sources */,
 				56D8D4A324C4E42600C3194D /* RealmAction.swift in Sources */,
 				56D8D48F24C49BD200C3194D /* RealmService.swift in Sources */,
-				56D8D4A124C4E3C700C3194D /* DataService.swift in Sources */,
 				843D057124BE03C800DF7EFF /* CategoryCollectionVC.swift in Sources */,
 				8416E83D24C7E2BB00DB0C0C /* EditDreamsVC.swift in Sources */,
 				8416E83B24C7E23F00DB0C0C /* AddDreamsVC.swift in Sources */,

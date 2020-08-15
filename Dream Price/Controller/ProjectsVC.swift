@@ -111,7 +111,8 @@ class ProjectsVC: UITableViewController {
         if section == 0 || section == 1 {
             return 1
         } else {
-            return DataService.actions.count
+            // recent actions count
+            return 0
         }
     }
     

@@ -219,7 +219,7 @@ extension EditTransactionVC: UITableViewDelegate, UITableViewDataSource {
             
             if let categoryID = data.categoryID {
                 // TODO: Get title from category id
-                cell.titleLabel.text = data.categoryID
+                cell.titleLabel.text = categoryID
             } else {
                 cell.titleLabel.text = "None"
             }

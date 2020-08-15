@@ -41,7 +41,6 @@ class BudgetPVC: UIPageViewController, TransportDelegate, TransportUpDelegate {
         appearance.currentPageIndicatorTintColor = UIColor.label
         
         let realmBudgets = realm.objects(RealmBudget.self)
-        print(realmBudgets)
         
         for budget in realmBudgets {
             pagesData.append(BudgetItem(budgetID: budget.id, type: BudgetItemType(rawValue: budget.type)!, balance: Float(budget.balance), name: budget.name))
@@ -127,6 +126,13 @@ extension BudgetPVC: UIPageViewControllerDataSource, UIPageViewControllerDelegat
         
         DispatchQueue.main.async {
             self.keyboardDelegate = viewController as? BudgetItemDataVC
+            
+            if (viewController as? BudgetItemDataVC)?.transactionLabel.text == "0"  || (viewController as? BudgetItemDataVC)?.transactionLabel.text == "0.00" {
+                self.transportButtons(enabled: 0)
+            } else {
+                self.transportButtons(enabled: 1)
+            }
+            
             self.transportCurrentState(symbol: ((viewController as? BudgetItemDataVC)?.changeTransactionButton.title(for: .normal))!, id: ((viewController as? BudgetItemDataVC)?.budgetID)!)
         }
         
@@ -138,6 +144,13 @@ extension BudgetPVC: UIPageViewControllerDataSource, UIPageViewControllerDelegat
         
         DispatchQueue.main.async {
             self.keyboardDelegate = viewController as? BudgetItemDataVC
+            
+            if (viewController as? BudgetItemDataVC)?.transactionLabel.text == "0" || (viewController as? BudgetItemDataVC)?.transactionLabel.text == "0.00" {
+                self.transportButtons(enabled: 0)
+            } else {
+                self.transportButtons(enabled: 1)
+            }
+            
             self.transportCurrentState(symbol: ((viewController as? BudgetItemDataVC)?.changeTransactionButton.title(for: .normal))!, id: ((viewController as? BudgetItemDataVC)?.budgetID)!)
         }
         

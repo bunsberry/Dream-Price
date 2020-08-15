@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class DataService {
-    static var projects = [RealmProject]()
-    static var actions = [RealmAction]()
+//    static var projects = [RealmProject]()
+//    static var actions = [RealmAction]()
     
 }

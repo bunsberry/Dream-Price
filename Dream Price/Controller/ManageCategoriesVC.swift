@@ -145,12 +145,10 @@ extension ManageCategoriesVC: UITableViewDataSource, UITableViewDelegate {
     // MARK: Sorting
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        // TODO: DB Object moved to another position
         if destinationIndexPath.row != 0 {
             var movedObj = sections[sourceIndexPath.section][sourceIndexPath.row]
             
             if movedObj.sortInt < sections[destinationIndexPath.section][destinationIndexPath.row].sortInt {
-                print("<")
                 
                 for (index, el) in sections[destinationIndexPath.section].enumerated() {
                     if el.sortInt > movedObj.sortInt {
@@ -160,20 +158,29 @@ extension ManageCategoriesVC: UITableViewDataSource, UITableViewDelegate {
                     for (index1, category) in categories.enumerated() {
                         if category.categoryID == sections[destinationIndexPath.section][index].categoryID {
                             categories[index1].sortInt = sections[destinationIndexPath.section][index].sortInt
-                            print(categories[index1])
                         }
                     }
                 }
                 movedObj.sortInt = destinationIndexPath.row
-                print(movedObj.sortInt)
                 
                 for (index, category) in categories.enumerated() {
                     if movedObj.categoryID == category.categoryID {
                         categories[index].sortInt = movedObj.sortInt
                     }
                 }
+                
+                try! realm.write {
+                    for object in realm.objects(RealmCategory.self) {
+                        realm.delete(object)
+                    }
+                }
+                
+                for category in categories {
+                    RealmService().create(RealmCategory(id: category.categoryID, type: category.type.rawValue, title: category.title, sortInt: category.sortInt))
+                }
+                
             } else if movedObj.sortInt > sections[destinationIndexPath.section][destinationIndexPath.row].sortInt {
-                print(">")
+                
                 for (index, el) in sections[destinationIndexPath.section].enumerated() {
                     if el.sortInt < movedObj.sortInt {
                         sections[destinationIndexPath.section][index].sortInt += 1
@@ -182,7 +189,6 @@ extension ManageCategoriesVC: UITableViewDataSource, UITableViewDelegate {
                     for (index1, category) in categories.enumerated() {
                         if category.categoryID == sections[destinationIndexPath.section][index].categoryID {
                             categories[index1].sortInt = sections[destinationIndexPath.section][index].sortInt
-                            print(categories[index1])
                         }
                     }
                 }
@@ -193,6 +199,16 @@ extension ManageCategoriesVC: UITableViewDataSource, UITableViewDelegate {
                     if movedObj.categoryID == category.categoryID {
                         categories[index].sortInt = movedObj.sortInt
                     }
+                }
+                
+                try! realm.write {
+                    for object in realm.objects(RealmCategory.self) {
+                        realm.delete(object)
+                    }
+                }
+                
+                for category in categories {
+                    RealmService().create(RealmCategory(id: category.categoryID, type: category.type.rawValue, title: category.title, sortInt: category.sortInt))
                 }
             }
             

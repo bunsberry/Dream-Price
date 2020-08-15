@@ -155,7 +155,8 @@ class BudgetVC: UIViewController, BudgetDelegate, CategoriesBeenManaged {
                     self.categoriesShown.append(el)
                 }
             }
-        default: print("Incorretct transaction symbol")
+        default:
+            print("switch didn't work")
         }
         
         for (index, el) in self.categoriesShown.enumerated() {
