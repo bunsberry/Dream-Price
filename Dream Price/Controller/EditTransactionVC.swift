@@ -6,10 +6,11 @@
 //
 
 import UIKit
+import RealmSwift
 
 protocol TransactionDelegate {
     func deleteTransaction()
-    func rewriteCategory(id: String)
+    func rewriteCategory(id: String?)
     func rewriteBudget(id: String)
     func rewriteNumber(float: Float)
     func rewriteDate(date: Date)
@@ -24,6 +25,7 @@ class EditTransactionVC: UIViewController, TransactionDelegate {
     @IBOutlet weak var tableView: UITableView!
     
     var data: Transaction!
+    var startData: Transaction!
     var historyDelegate: HistoryDelegate?
     @IBOutlet weak var navigationTitle: UINavigationItem!
     
@@ -32,12 +34,16 @@ class EditTransactionVC: UIViewController, TransactionDelegate {
     
     var datePickerIndexPath: IndexPath?
     
+    let realm = try! Realm()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.allowsSelection = true
         tableView.dataSource = self
         tableView.delegate = self
+        
+        startData = data
         
         if data.transactionAmount > 0 {
             navigationTitle.title = NSLocalizedString("Earning", comment: "")
@@ -79,9 +85,95 @@ class EditTransactionVC: UIViewController, TransactionDelegate {
     @IBAction func save(_ sender: Any) {
         if data.transactionAmount == 0 {
             deleteTransaction()
+            historyDelegate?.reloadTransactions()
         } else {
-            // TODO: Saving changes to database
-//            print("\(data.transactionID) changed to \(data)")
+            let transactionsRealm = realm.objects(RealmTransaction.self)
+            let budgetsRealm = realm.objects(RealmBudget.self)
+            
+            for object in transactionsRealm {
+                if object.id == data.transactionID {
+                    try! realm.write {
+                        object.categoryID = data.categoryID
+                        object.toBudget = data.toBudget
+                        object.fromBudget = data.fromBudget
+                        object.date = data.date as NSDate
+                        object.transactionAmount = data.transactionAmount
+                    }
+                }
+            }
+            
+            if data.fromBudget != startData.fromBudget {
+                for object in budgetsRealm {
+                    if object.id == startData.fromBudget {
+                        try! realm.write {
+                            object.balance -= data.transactionAmount
+                        }
+                    }
+                    if object.id == data.fromBudget {
+                        try! realm.write {
+                            object.balance += data.transactionAmount
+                        }
+                    }
+                }
+            }
+            
+            if data.toBudget != startData.toBudget {
+                if startData.toBudget == nil {
+                    for object in budgetsRealm {
+                        if object.id == data.toBudget {
+                            try! realm.write {
+                                object.balance -= data.transactionAmount
+                            }
+                        }
+                    }
+                } else if startData.toBudget != nil && data.toBudget != nil {
+                    for object in budgetsRealm {
+                        if object.id == startData.toBudget {
+                            try! realm.write {
+                                object.balance += data.transactionAmount
+                            }
+                        }
+                        if object.id == data.toBudget {
+                            try! realm.write {
+                                object.balance -= data.transactionAmount
+                            }
+                        }
+                    }
+                } else if startData.toBudget != nil && data.toBudget == nil {
+                    for object in budgetsRealm {
+                        if object.id == startData.toBudget {
+                            try! realm.write {
+                                object.balance += data.transactionAmount
+                            }
+                        }
+                    }
+                }
+            }
+            
+            if startData.transactionAmount != data.transactionAmount {
+                for object in budgetsRealm {
+                    if object.id == data.fromBudget {
+                        try! realm.write {
+                            if data.transactionAmount < 0 {
+                                if data.transactionAmount > startData.transactionAmount {
+                                    // -20 -> -5 | +15 (--15)
+                                    object.balance -= (startData.transactionAmount - data.transactionAmount)
+                                } else {
+                                    // -5 -> -20 | -15 (+-15)
+                                    object.balance += (data.transactionAmount - startData.transactionAmount)
+                                }
+                            } else {
+                                if data.transactionAmount > startData.transactionAmount {
+                                    object.balance += (data.transactionAmount - startData.transactionAmount)
+                                } else {
+                                    object.balance -= (startData.transactionAmount - data.transactionAmount)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
             historyDelegate?.reloadTransactions()
             dismiss(animated: true, completion: nil)
         }
@@ -92,8 +184,54 @@ class EditTransactionVC: UIViewController, TransactionDelegate {
         
         let deleteAction = UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: .destructive, handler: {
             (alert: UIAlertAction!) -> Void in
-            print("should delete transaction with id = \(self.data.transactionID)")
-            // TODO: Deleting from database
+            
+            let transactionsRealm = self.realm.objects(RealmTransaction.self)
+            let budgetsRealm = self.realm.objects(RealmBudget.self)
+            
+            for object in transactionsRealm {
+                if object.id == self.data.transactionID {
+                    if self.startData.transactionAmount > 0 {
+                        for budget in budgetsRealm {
+                            
+                            if self.startData.fromBudget == budget.id {
+                                try! self.realm.write {
+                                    budget.balance -= self.startData.transactionAmount
+                                }
+                            }
+                            
+                            if let toBudget = self.startData.toBudget {
+                                if budget.id == toBudget {
+                                    try! self.realm.write {
+                                        budget.balance += self.startData.transactionAmount
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        for budget in budgetsRealm {
+                            
+                            if self.startData.fromBudget == budget.id {
+                                try! self.realm.write {
+                                    budget.balance -= self.startData.transactionAmount
+                                }
+                            }
+                            
+                            if let toBudget = self.startData.toBudget {
+                                if budget.id == toBudget {
+                                    try! self.realm.write {
+                                        budget.balance += self.startData.transactionAmount
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    try! self.realm.write {
+                        self.realm.delete(object)
+                    }
+                }
+            }
+            self.historyDelegate?.reloadTransactions()
             self.dismiss(animated: true, completion: nil)
         })
         
@@ -106,16 +244,19 @@ class EditTransactionVC: UIViewController, TransactionDelegate {
         
     }
     
-    func rewriteCategory(id: String) {
+    func rewriteCategory(id: String?) {
         data.categoryID = id
         let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 2)) as! ETCategoryCell
         
-        // TODO: Get title from id
-        if id == "" {
-            cell.titleLabel.text = "None"
-            data.categoryID = nil
+        if let categoryID = data.categoryID {
+            let categoriesRealm = realm.objects(RealmCategory.self)
+            for object in categoriesRealm {
+                if object.id == categoryID {
+                    cell.titleLabel.text = object.title
+                }
+            }
         } else {
-            cell.titleLabel.text = id
+            cell.titleLabel.text = "None"
         }
     }
     
@@ -123,8 +264,12 @@ class EditTransactionVC: UIViewController, TransactionDelegate {
         data.fromBudget = id
         let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! ETBudgetCell
         
-        // TODO: Get title from id
-        cell.titleLabel.text = id
+        let budgetsRealm = realm.objects(RealmBudget.self)
+        for object in budgetsRealm {
+            if object.id == data.fromBudget {
+                cell.titleLabel.text = object.name
+            }
+        }
     }
     
     func rewriteNumber(float: Float) {
@@ -204,7 +349,12 @@ extension EditTransactionVC: UITableViewDelegate, UITableViewDataSource {
         case IndexPath(row: 0, section: 1):
             let cell = tableView.dequeueReusableCell(withIdentifier: "transactionBudgetCell") as! ETBudgetCell
             
-            cell.titleLabel.text = data.fromBudget
+            let budgetsRealm = realm.objects(RealmBudget.self)
+            for object in budgetsRealm {
+                if object.id == data.fromBudget {
+                    cell.titleLabel.text = object.name
+                }
+            }
             
             return cell
         case IndexPath(row: 1, section: 1):
@@ -218,8 +368,12 @@ extension EditTransactionVC: UITableViewDelegate, UITableViewDataSource {
             
             
             if let categoryID = data.categoryID {
-                // TODO: Get title from category id
-                cell.titleLabel.text = categoryID
+                let categoriesRealm = realm.objects(RealmCategory.self)
+                for object in categoriesRealm {
+                    if object.id == categoryID {
+                        cell.titleLabel.text = object.title
+                    }
+                }
             } else {
                 cell.titleLabel.text = "None"
             }

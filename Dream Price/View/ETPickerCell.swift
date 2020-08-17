@@ -6,12 +6,24 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ETPickerCell: UITableViewCell, UIPickerViewDataSource, UIPickerViewDelegate {
     
     @IBOutlet weak var pickerView: UIPickerView!
+    
+    let realm = try! Realm()
+    
     var pickerMode: Int! {
         didSet {
+            categories.removeAll()
+            let categoriesRealm = realm.objects(RealmCategory.self)
+            for object in categoriesRealm {
+                categories.append(Category(categoryID: object.id, type: CategoryType(rawValue: object.type)!, title: object.title, sortInt: object.sortInt))
+            }
+            
+            categories.sort(by: { $0.sortInt > $1.sortInt} )
+            
             if pickerMode == 0 {
                 for category in categories {
                     if category.type == .spending { categoriesShown.append(category) }
@@ -31,11 +43,7 @@ class ETPickerCell: UITableViewCell, UIPickerViewDataSource, UIPickerViewDelegat
     }
     var delegate: TransactionDelegate?
     
-    var categories = [
-        Category(categoryID: UUID().uuidString, type: .spending, title: "Groceries", sortInt: 0),
-        Category(categoryID: UUID().uuidString, type: .earning, title: "Work", sortInt: 0),
-        Category(categoryID: UUID().uuidString, type: .budget, title: "Budget", sortInt: 0)
-    ]
+    var categories = [Category]()
     
     var categoriesShown: [Category] = [Category(categoryID: "", type: .manage, title: "None", sortInt: 0)]
 
@@ -59,7 +67,11 @@ class ETPickerCell: UITableViewCell, UIPickerViewDataSource, UIPickerViewDelegat
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        delegate?.rewriteCategory(id: categoriesShown[row].categoryID)
+        if categoriesShown[row].categoryID != "" {
+            delegate?.rewriteCategory(id: categoriesShown[row].categoryID)
+        } else {
+            delegate?.rewriteCategory(id: nil)
+        }
     }
 
 }

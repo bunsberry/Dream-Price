@@ -81,6 +81,8 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
     }
     
     func updateBalance(balanceFloat: Float) {
+        balance = balanceFloat
+        
         let currencyFormatter = NumberFormatter()
         currencyFormatter.usesGroupingSeparator = true
         currencyFormatter.numberStyle = .currency
@@ -119,7 +121,14 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
     }
     
     func reloadItems() {
-        updateBalance(balanceFloat: balance)
+        print("reloading balance")
+        
+        let budgetsRealm = realm.objects(RealmBudget.self)
+        for object in budgetsRealm {
+            if object.id == budgetID {
+                updateBalance(balanceFloat: object.balance)
+            }
+        }
         codeAmount += ""
     }
     

@@ -6,18 +6,16 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ETBudgetPickerCell: UITableViewCell, UIPickerViewDataSource, UIPickerViewDelegate {
     
     @IBOutlet weak var pickerView: UIPickerView!
     
     var delegate: TransactionDelegate?
+    let realm = try! Realm()
     
-    var budgets = [
-        BudgetItem(budgetID: UUID().uuidString, type: .personal, balance: 222, name: "Personal Account"),
-        BudgetItem(budgetID: UUID().uuidString, type: .dream, balance: 222, name: "Dream"),
-        BudgetItem(budgetID: UUID().uuidString, type: .project, balance: 222, name: "Project"),
-    ]
+    var budgets = [BudgetItem]()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,6 +25,13 @@ class ETBudgetPickerCell: UITableViewCell, UIPickerViewDataSource, UIPickerViewD
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        
+        budgets.removeAll()
+        let budgetsRealm = realm.objects(RealmBudget.self)
+        for object in budgetsRealm {
+            budgets.append(BudgetItem(budgetID: object.id, type: BudgetItemType(rawValue: object.type)!, balance: object.balance, name: object.name))
+        }
+        
         return budgets.count
     }
     

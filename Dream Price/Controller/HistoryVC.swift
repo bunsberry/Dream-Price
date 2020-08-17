@@ -28,6 +28,12 @@ private func firstDayOfMonth(date: Date) -> Date {
     return calendar.date(from: components)!
 }
 
+func firstSecondOfDay(date: Date) -> Date {
+    let calendar = Calendar.current
+    let components = calendar.dateComponents([.year, .month, .day], from: date)
+    return calendar.date(from: components)!
+}
+
 func parseDate(_ str : String) -> Date {
     let dateFormat = DateFormatter()
     dateFormat.dateFormat = "yyyy-MM-dd"
@@ -62,7 +68,7 @@ class HistoryVC: UITableViewController, HistoryDelegate {
         transactions.removeAll()
         
         for object in transactionsRealm {
-            transactions.append(Transaction(transactionID: object.id, transactionAmount: object.transactionAmount, categoryID: object.categoryID, date: object.date as Date, fromBudget: object.fromBudget, toBudget: object.toBudget))
+            transactions.append(Transaction(transactionID: object.id, transactionAmount: object.transactionAmount, categoryID: object.categoryID, date: Date(timeIntervalSinceReferenceDate: object.date.timeIntervalSinceReferenceDate), fromBudget: object.fromBudget, toBudget: object.toBudget))
         }
         
         transactions.sort { $0.date > $1.date }
@@ -193,7 +199,7 @@ class HistoryVC: UITableViewController, HistoryDelegate {
             self.sections = GroupedSection.group(rows: self.transactions, by: { firstDayOfMonth(date: $0.date) })
             self.sections.sort { lhs, rhs in lhs.sectionItem > rhs.sectionItem }
         } else {
-            self.sections = GroupedSection.group(rows: self.transactions, by: { $0.date })
+            self.sections = GroupedSection.group(rows: self.transactions, by: { firstSecondOfDay(date: $0.date) })
             self.sections.sort { lhs, rhs in lhs.sectionItem > rhs.sectionItem }
         }
     }
@@ -287,15 +293,35 @@ class HistoryVC: UITableViewController, HistoryDelegate {
         
         if let categoryID = transaction.categoryID {
             let categoriesRealm = realm.objects(RealmCategory.self)
+            let budgetsRealm = realm.objects(RealmBudget.self)
             
             for category in categoriesRealm {
                 if category.id == categoryID {
-                    cell.categoryLabel.text = category.title
+                    for object in budgetsRealm {
+                        if object.id == transaction.fromBudget {
+                            if transaction.transactionAmount > 0 {
+                                // TODO: bold to/from
+                                cell.categoryLabel.text = "\(category.title) to \(object.name)"
+                            } else {
+                                cell.categoryLabel.text = "\(category.title) from \(object.name)"
+                            }
+                        }
+                    }
                 }
             }
             
         } else {
-            cell.categoryLabel.text = ""
+            let budgetsRealm = realm.objects(RealmBudget.self)
+            
+            for object in budgetsRealm {
+                if object.id == transaction.fromBudget {
+                    if transaction.transactionAmount > 0 {
+                        cell.categoryLabel.text = "to \(object.name)"
+                    } else {
+                        cell.categoryLabel.text = "from \(object.name)"
+                    }
+                }
+            }
         }
         
         cell.budgetFromID = transaction.fromBudget
