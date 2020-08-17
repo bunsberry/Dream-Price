@@ -35,16 +35,6 @@ class RealmService {
         }
     }
     
-    func add<T: Object>(item object: T) {
-        do {
-            try realm.write {
-                // TODO: Complete Addition
-            }
-        } catch {
-            post(error)
-        }
-    }
-    
     func post(_ error: Error) {
         NotificationCenter.default.post(name: .realmError, object: error)
     }

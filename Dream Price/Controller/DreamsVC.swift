@@ -2,43 +2,26 @@
 //  DreamsVC.swift
 //  Dream Price
 //
-//  Created by Noisegain on 14.07.2020.
+//  Created by Kostya Bunsberry on 14.07.2020.
 //
 
 import UIKit
+import RealmSwift
 
-enum DreamType {
-    case focusedDream
-    case dream
-}
-
-struct Dream {
-    var dreamID: String
-    var type: DreamType
-    var title: String
-    var description: String
-    var balance: Float
-    var goal: Float
-    var dateAdded: Date
-}
-
-var dreamsList: [Dream] = [
-    Dream(dreamID: UUID().uuidString, type: .focusedDream, title: NSLocalizedString("Trip to London", comment: ""), description: NSLocalizedString("I wanna see Big Ben", comment: ""), balance: 50000, goal: 150000, dateAdded: parseDate("2020-06-15")),
-    Dream(dreamID: UUID().uuidString, type: .dream, title: NSLocalizedString("New Phone", comment: ""), description: NSLocalizedString("Mine's a bit old now...", comment: ""), balance: 0, goal: 89999, dateAdded: parseDate("2020-06-13"))
-]
-
+var dreamsList = [Dream]()
 
 class DreamsVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    // TODO: Reading from DB
-
     @IBOutlet public var dreamCollection: UICollectionView!
+    let realm = try! Realm()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadDreams()
         
         dreamCollection.dataSource = self
         dreamCollection.delegate = self
+        
         setupNavBar()
     }
     
@@ -49,7 +32,36 @@ class DreamsVC: UIViewController, UICollectionViewDelegate, UICollectionViewData
         dreamCollection.reloadData()
     }
     
+    func loadDreams() {
+        dreamsList.removeAll()
+        let dreamsRealm = realm.objects(RealmDream.self)
+        let budgetsRealm = realm.objects(RealmBudget.self)
+        var balance: Float!
+        
+        for budget in budgetsRealm {
+            if budget.type == "dream" {
+                balance = budget.balance
+            }
+        }
+        
+        var mainDream: Dream?
+        
+        for object in dreamsRealm {
+            if DreamType(rawValue: object.type)! == .focusedDream {
+                mainDream = Dream(dreamID: object.id, type: .focusedDream, title: object.title, description: object.descript, balance: balance, goal: object.goal, dateAdded: object.dateAdded as Date)
+            } else {
+                dreamsList.append(Dream(dreamID: object.id, type: .dream, title: object.title, description: object.descript, balance: 0, goal: object.goal, dateAdded: object.dateAdded as Date))
+            }
+        }
+        
+        dreamsList.sort(by: { $0.dateAdded > $1.dateAdded })
+        if mainDream != nil {
+            dreamsList.insert(mainDream!, at: 0)
+        }
+    }
+    
     func reloadData() {
+        loadDreams()
         DispatchQueue.main.async {
             self.dreamCollection.reloadData()
         }
@@ -263,59 +275,57 @@ class DreamsVC: UIViewController, UICollectionViewDelegate, UICollectionViewData
 extension DreamsVC: AddDreamDelegate, EditDreamDelegate {
     func dreamAdded(newDream: Dream) {
         
-        // TODO: DB dream add
-        
-        var newDream = newDream
+        let newDream = newDream
+        let realmDreams = realm.objects(RealmDream.self)
         
         if newDream.type == .focusedDream {
-            newDream.balance = dreamsList[0].balance
-            dreamsList[0].balance = 0
-            dreamsList[0].type = .dream
-            dreamsList.insert(newDream, at: 0)
+            for object in realmDreams {
+                if object.type == "focusedDream" {
+                    try! realm.write {
+                        object.type = "dream"
+                    }
+                }
+            }
+            
+            RealmService().create(RealmDream(title: newDream.title, description: newDream.description, goal: newDream.goal, type: newDream.type.rawValue, dateAdded: newDream.dateAdded))
         } else {
-            dreamsList.append(newDream)
+            RealmService().create(RealmDream(title: newDream.title, description: newDream.description, goal: newDream.goal, type: newDream.type.rawValue, dateAdded: newDream.dateAdded))
         }
         
-        dreamCollection.reloadData()
+        reloadData()
     }
     
     func dreamDeleted(dreamID: String, row: Int) {
         
-        // TODO: Delete from DB by ID
+        let dreamsRealm = realm.objects(RealmDream.self)
+        
+        for object in dreamsRealm {
+            if object.id == dreamID {
+                try! realm.write {
+                    realm.delete(object)
+                }
+            }
+        }
         
         dreamsList.remove(at: row)
-        dreamCollection.reloadData()
-        
+        dreamCollection.deleteItems(at: [IndexPath(row: row, section: 0)])
     }
     
     func dreamEdited(dream: Dream, row: Int) {
-    
-        // TODO: DB dream edit
         
-        var dream = dream
+        let dreamsRealm = realm.objects(RealmDream.self)
         
-        if dream.type == .focusedDream && row == 0 {
-            dreamsList[0].title = dream.title
-            dreamsList[0].description = dream.description
-            dreamsList[0].goal = dream.goal
-        } else if dream.type == .focusedDream {
-            dream.balance = dreamsList[0].balance
-            dreamsList[0].balance = 0
-            dreamsList[0].type = .dream
-            dreamsList.remove(at: row)
-            dreamsList.insert(dream, at: 0)
-        } else if row == 0 && dream.type == .dream {
-            dreamsList[0].title = dream.title
-            dreamsList[0].description = dream.description
-            dreamsList[0].goal = dream.goal
-            dreamsList[0].type = .dream
-        } else {
-            dreamsList[row].title = dream.title
-            dreamsList[row].description = dream.description
-            dreamsList[row].goal = dream.goal
+        for object in dreamsRealm {
+            if object.id == dream.dreamID {
+                try! realm.write {
+                    object.title = dream.title
+                    object.descript = dream.description
+                    object.goal = dream.goal
+                    object.type = dream.type.rawValue
+                }
+            }
         }
         
-        dreamCollection.reloadData()
-        
+        reloadData()
     }
 }

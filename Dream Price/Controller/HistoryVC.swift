@@ -8,15 +8,6 @@
 import UIKit
 import RealmSwift
 
-struct Transaction {
-    var transactionID: String
-    var transactionAmount : Float
-    var categoryID : String?
-    var date : Date
-    var fromBudget: String
-    var toBudget: String?
-}
-
 enum SortingType {
     case daily
     case monthly
@@ -300,7 +291,6 @@ class HistoryVC: UITableViewController, HistoryDelegate {
                     for object in budgetsRealm {
                         if object.id == transaction.fromBudget {
                             if transaction.transactionAmount > 0 {
-                                // TODO: bold to/from
                                 let targetString = "\(category.title) to \(object.name)"
                                 let range = NSMakeRange(category.title.count + 1, 4)
                                 cell.categoryLabel.attributedText = attributedString(from: targetString, nonBoldRange: range)

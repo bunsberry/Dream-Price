@@ -45,7 +45,7 @@
                                         <rect key="frame" x="0.0" y="15" width="85" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="2zd-IU-MTf">
-                                            <rect key="frame" x="0.0" y="0.0" width="85.333333333333329" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="85" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lMc-fj-Ab3">
@@ -73,7 +73,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="manageCategories" id="xhc-O2-in8" customClass="ManageCategoriesCell" customModule="Dream_Price" customModuleProvider="target">
-                                        <rect key="frame" x="95.333333333333329" y="15" width="49.999999999999986" height="50"/>
+                                        <rect key="frame" x="95" y="15" width="49.999999999999986" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="EcC-EU-3wR">
                                             <rect key="frame" x="0.0" y="0.0" width="49.999999999999986" height="50"/>

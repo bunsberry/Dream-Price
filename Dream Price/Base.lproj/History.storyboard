@@ -33,7 +33,7 @@
                                             <color key="textColor" systemColor="systemRedColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zKm-XZ-OK7">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zKm-XZ-OK7">
                                             <rect key="frame" x="71.5" y="22.5" width="70" height="20"/>
                                             <attributedString key="attributedText">
                                                 <fragment content="Groceries">
@@ -53,6 +53,7 @@
                                         <constraint firstItem="R1I-I0-SXr" firstAttribute="leading" secondItem="sXq-Ho-lVq" secondAttribute="leading" constant="10" id="IzX-1t-LVz"/>
                                         <constraint firstAttribute="bottom" secondItem="R1I-I0-SXr" secondAttribute="bottom" constant="20" id="bWV-nG-IAU"/>
                                         <constraint firstItem="zKm-XZ-OK7" firstAttribute="centerY" secondItem="sXq-Ho-lVq" secondAttribute="centerY" id="jUM-I4-91t"/>
+                                        <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="zKm-XZ-OK7" secondAttribute="trailing" id="khc-m9-MGC"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>

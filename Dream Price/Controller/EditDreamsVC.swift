@@ -2,10 +2,11 @@
 //  EditDreamVC.swift
 //  Dream Price
 //
-//  Created by Noisegain on 19.07.2020.
+//  Created by Kostya Bunsberry on 19.07.2020.
 //
 
 import UIKit
+import RealmSwift
 
 protocol EditDreamDelegate {
     func dreamEdited(dream: Dream, row: Int)

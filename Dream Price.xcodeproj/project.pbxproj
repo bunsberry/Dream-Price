@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		170E011224EADE8100632CA6 /* RealmDream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170E011124EADE8100632CA6 /* RealmDream.swift */; };
+		170E011424EAE16C00632CA6 /* Dream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170E011324EAE16C00632CA6 /* Dream.swift */; };
+		170E011624EAE18000632CA6 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170E011524EAE18000632CA6 /* Transaction.swift */; };
 		56D8D48F24C49BD200C3194D /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8D48E24C49BD200C3194D /* RealmService.swift */; };
 		56D8D49124C49C6B00C3194D /* Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8D49024C49C6B00C3194D /* Base.swift */; };
 		56D8D49324C4D70F00C3194D /* RealmTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8D49224C4D70F00C3194D /* RealmTransaction.swift */; };
@@ -132,6 +135,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		170E011124EADE8100632CA6 /* RealmDream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDream.swift; sourceTree = "<group>"; };
+		170E011324EAE16C00632CA6 /* Dream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dream.swift; sourceTree = "<group>"; };
+		170E011524EAE18000632CA6 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		56D8D48E24C49BD200C3194D /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		56D8D49024C49C6B00C3194D /* Base.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Base.swift; sourceTree = "<group>"; };
 		56D8D49224C4D70F00C3194D /* RealmTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RealmTransaction.swift; path = "Dream Price/RealmTransaction.swift"; sourceTree = SOURCE_ROOT; };
@@ -263,6 +269,7 @@
 				56D8D49224C4D70F00C3194D /* RealmTransaction.swift */,
 				56D8D49424C4D7E400C3194D /* RealmCategory.swift */,
 				56D8D49624C4D7F800C3194D /* RealmBudget.swift */,
+				170E011124EADE8100632CA6 /* RealmDream.swift */,
 				56D8D49824C4DBE400C3194D /* RealmGoal.swift */,
 				56D8D4A224C4E42600C3194D /* RealmAction.swift */,
 				56D8D4A424C4E4C200C3194D /* RealmProject.swift */,
@@ -270,6 +277,8 @@
 				843D056C24BDFD2200DF7EFF /* Category.swift */,
 				84B35FA224C1FB9E008FD1CE /* GroupedSection.swift */,
 				84C730FC24CF8F5F00FE003D /* Settings.swift */,
+				170E011324EAE16C00632CA6 /* Dream.swift */,
+				170E011524EAE18000632CA6 /* Transaction.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -674,11 +683,13 @@
 				84BEDBF224C46A3700792F93 /* ETNumberCell.swift in Sources */,
 				84C730FB24CF719D00FE003D /* ETDatePickerCell.swift in Sources */,
 				84E4C73C24BEF882006E3D0A /* ManageCategoriesVC.swift in Sources */,
+				170E011424EAE16C00632CA6 /* Dream.swift in Sources */,
 				843688BD24BCC0A500793B2B /* SceneDelegate.swift in Sources */,
 				56D8D49324C4D70F00C3194D /* RealmTransaction.swift in Sources */,
 				840F2DAA24CEB8DE005CA412 /* ETPickerCell.swift in Sources */,
 				56D8D49D24C4E30200C3194D /* ActionsCell.swift in Sources */,
 				56D8D49524C4D7E400C3194D /* RealmCategory.swift in Sources */,
+				170E011224EADE8100632CA6 /* RealmDream.swift in Sources */,
 				56D8D49B24C4E20D00C3194D /* ProjectsCell.swift in Sources */,
 				84B4813524D34DD300223B5C /* DevelopersTVC.swift in Sources */,
 				8447A83524BCCB04005F448B /* ProjectsVC.swift in Sources */,
@@ -689,6 +700,7 @@
 				84BEDBEA24C3DBAB00792F93 /* NewEarningCell.swift in Sources */,
 				840F2DA824CEAB1E005CA412 /* ETBudgetCell.swift in Sources */,
 				84BEDBEC24C408D400792F93 /* EditTransactionVC.swift in Sources */,
+				170E011624EAE18000632CA6 /* Transaction.swift in Sources */,
 				84E38BF124C76AEC00FF5CC1 /* DashedBorder.swift in Sources */,
 				84961BCF24CCFF64007B73BA /* AppIconTVC.swift in Sources */,
 				84B4813724D34E0300223B5C /* CurrencyTVC.swift in Sources */,
