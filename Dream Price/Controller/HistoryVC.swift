@@ -6,14 +6,15 @@
 //
 
 import UIKit
+import RealmSwift
 
 struct Transaction {
     var transactionID: String
     var transactionAmount : Float
     var categoryID : String?
     var date : Date
-    var budgetFromID: String
-    var budgetToID: String?
+    var fromBudget: String
+    var toBudget: String?
 }
 
 enum SortingType {
@@ -40,20 +41,38 @@ class HistoryVC: UITableViewController, HistoryDelegate {
     private var sortedBy: SortingType = .daily {
         didSet { tableView.reloadData() }
     }
+    
+    let realm = try! Realm()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor.systemBackground
         setupNavBar()
-        
-        transactions.sort { $0.date > $1.date }
-        generateSections()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         reloadTransactions()
+    }
+    
+    // Loading from db and setting sections
+    func loadTransactions() {
+        let transactionsRealm = realm.objects(RealmTransaction.self)
+        transactions.removeAll()
+        
+        for object in transactionsRealm {
+            transactions.append(Transaction(transactionID: object.id, transactionAmount: object.transactionAmount, categoryID: object.categoryID, date: object.date as Date, fromBudget: object.fromBudget, toBudget: object.toBudget))
+        }
+        
+        transactions.sort { $0.date > $1.date }
+        generateSections()
+    }
+    
+    // Reloading after editing
+    func reloadTransactions() {
+        loadTransactions()
+        tableView.reloadData()
     }
     
     // MARK: Navigation Bar Setup
@@ -164,14 +183,8 @@ class HistoryVC: UITableViewController, HistoryDelegate {
     
     // MARK: TableView Setup
     
-    // TODO: Getting transactions from a DB
-    
-    var transactions = [
-        Transaction(transactionID: UUID().uuidString, transactionAmount: -145, categoryID: UUID().uuidString, date: parseDate("2020-07-22"), budgetFromID: UUID().uuidString, budgetToID: nil),
-        Transaction(transactionID: UUID().uuidString, transactionAmount: 145, categoryID: nil, date: parseDate("2020-07-23"), budgetFromID: UUID().uuidString, budgetToID: nil)
-    ]
-    
-    var chosenTransaction: Transaction = Transaction(transactionID: UUID().uuidString, transactionAmount: 0, categoryID: UUID().uuidString, date: parseDate("2000-01-01"), budgetFromID: UUID().uuidString, budgetToID: nil)
+    var transactions = [Transaction]()
+    var chosenTransaction = Transaction(transactionID: "", transactionAmount: 0, categoryID: "", date: Date(), fromBudget: "", toBudget: nil)
     
     var sections = [GroupedSection<Date, Transaction>]()
     
@@ -273,14 +286,20 @@ class HistoryVC: UITableViewController, HistoryDelegate {
         cell.categoryID = transaction.categoryID
         
         if let categoryID = transaction.categoryID {
-            // TODO: Get title from id
-            cell.categoryLabel.text = categoryID
+            let categoriesRealm = realm.objects(RealmCategory.self)
+            
+            for category in categoriesRealm {
+                if category.id == categoryID {
+                    cell.categoryLabel.text = category.title
+                }
+            }
+            
         } else {
             cell.categoryLabel.text = ""
         }
         
-        cell.budgetFromID = transaction.budgetFromID
-        cell.budgetToID = transaction.budgetToID
+        cell.budgetFromID = transaction.fromBudget
+        cell.budgetToID = transaction.toBudget
         
         return cell
     }
@@ -297,14 +316,8 @@ class HistoryVC: UITableViewController, HistoryDelegate {
         
         let cell = tableView.cellForRow(at: indexPath) as! TransactionCell
         
-        chosenTransaction = Transaction(transactionID: cell.transactionID, transactionAmount: cell.amount, categoryID: cell.categoryID, date: cell.date, budgetFromID: cell.budgetFromID, budgetToID: cell.budgetToID)
+        chosenTransaction = Transaction(transactionID: cell.transactionID, transactionAmount: cell.amount, categoryID: cell.categoryID, date: cell.date, fromBudget: cell.budgetFromID, toBudget: cell.budgetToID)
         
         performSegue(withIdentifier: "toTransaction", sender: nil)
-    }
-    
-    func reloadTransactions() {
-        // TODO: Getting transactions from db
-//        transactions = []
-        tableView.reloadData()
     }
 }

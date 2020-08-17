@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 protocol TransportDelegate {
     func transportCurrentState(symbol: String, id: String)
@@ -31,6 +32,8 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
     var budgetItemType: BudgetItemType!
     var index: Int?
     var budgetID: String!
+    
+    let realm = try! Realm()
     
     // MARK: View Setup
     
@@ -216,7 +219,14 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
             transactionLabel.font = transactionLabel.font.withSize(64)
         }
         
-        // TODO: Update db balance
+        let budgetsRealm = realm.objects(RealmBudget.self)
+        for object in budgetsRealm {
+            if object.id == budgetID {
+                try! realm.write {
+                    object.balance = balance
+                }
+            }
+        }
     }
     
     // MARK: Transaction Change Button

@@ -12,6 +12,7 @@ import RealmSwift
 protocol TransportUpDelegate {
     func transportUp(string: String)
     func reloadItems()
+    func refreshPageView()
 }
 
 class BudgetVC: UIViewController, BudgetDelegate, CategoriesBeenManaged {
@@ -43,6 +44,7 @@ class BudgetVC: UIViewController, BudgetDelegate, CategoriesBeenManaged {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        BudgetVC.delegateUp?.refreshPageView()
         BudgetVC.delegateUp?.reloadItems()
     }
     
@@ -207,30 +209,42 @@ extension BudgetVC {
     
     func createTransaction(number: Float, budgetID: String) {
         
-        // TODO: Transactions are added to DB here and balance of budget item changed
-        
-        var newTransaction: Transaction!
-        
         if let category = selectedCategoryCell {
             
             if category.categoryType == CategoryType.spending {
                 print("id-\(budgetID): Spent \(number) on \(category.titleLabel.text!)")
-                newTransaction = Transaction(transactionID: UUID().uuidString, transactionAmount: number, categoryID: category.categoryID, date: Date(), budgetFromID: budgetID, budgetToID: nil)
+                try! realm.write {
+                    realm.add(RealmTransaction(id: UUID().uuidString, transactionAmount: number, categoryID: category.categoryID, date: NSDate(), fromBudget: budgetID, toBudget: nil))
+                }
             }
             else if category.categoryType == CategoryType.earning {
                 print("id-\(budgetID): Earned \(number) from \(category.titleLabel.text!)")
-                newTransaction = Transaction(transactionID: UUID().uuidString, transactionAmount: number, categoryID: category.categoryID, date: Date(), budgetFromID: budgetID, budgetToID: nil)
+                try! realm.write {
+                    realm.add(RealmTransaction(id: UUID().uuidString, transactionAmount: number, categoryID: category.categoryID, date: NSDate(), fromBudget: budgetID, toBudget: nil))
+                }
             }
             else if category.categoryType == CategoryType.budget {
                 print("id-\(budgetID): Transfered \(number) from/to \(category.titleLabel.text!)")
+                let budgetsRealm = realm.objects(RealmBudget.self)
                 
-                // TODO: Transfers
+                for object in budgetsRealm {
+                    if object.id == category.categoryID {
+                        try! realm.write {
+                            realm.add(RealmTransaction(id: UUID().uuidString, transactionAmount: number, categoryID: category.categoryID, date: NSDate(), fromBudget: budgetID, toBudget: object.id))
+                            object.balance -= number
+                        }
+                    }
+                }
+                
+                BudgetVC.delegateUp?.refreshPageView()
                 
             }
             
         } else {
             print("id_\(budgetID): \(number) on/from smthng...")
-            Transaction(transactionID: UUID().uuidString, transactionAmount: number, categoryID: nil, date: Date(), budgetFromID: budgetID, budgetToID: nil)
+            try! realm.write {
+                realm.add(RealmTransaction(id: UUID().uuidString, transactionAmount: number, categoryID: nil, date: NSDate(), fromBudget: budgetID, toBudget: nil))
+            }
         }
         
         selectedCategoryPath = nil

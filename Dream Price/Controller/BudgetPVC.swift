@@ -90,6 +90,19 @@ class BudgetPVC: UIPageViewController, TransportDelegate, TransportUpDelegate {
         keyboardDelegate?.reloadItems()
     }
     
+    func refreshPageView() {
+        self.dataSource = nil
+        
+        self.pagesData.removeAll()
+        let realmBudgets = self.realm.objects(RealmBudget.self)
+        
+        for budget in realmBudgets {
+            self.pagesData.append(BudgetItem(budgetID: budget.id, type: BudgetItemType(rawValue: budget.type)!, balance: Float(budget.balance), name: budget.name))
+        }
+        
+        self.dataSource = self
+    }
+    
     // MARK: Page View
     
     func pageViewController(for index: Int) -> BudgetItemDataVC? {
@@ -112,6 +125,23 @@ class BudgetPVC: UIPageViewController, TransportDelegate, TransportUpDelegate {
 }
 
 extension BudgetPVC: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+    
+//    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+//        print("refreshing")
+//        if !completed { return }
+//        DispatchQueue.main.async() {
+//            self.dataSource = nil
+//
+//            self.pagesData.removeAll()
+//            let realmBudgets = self.realm.objects(RealmBudget.self)
+//
+//            for budget in realmBudgets {
+//                self.pagesData.append(BudgetItem(budgetID: budget.id, type: BudgetItemType(rawValue: budget.type)!, balance: Float(budget.balance), name: budget.name))
+//            }
+//
+//            self.dataSource = self
+//        }
+//    }
     
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         return currentIndex

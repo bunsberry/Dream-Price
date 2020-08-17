@@ -120,7 +120,7 @@ class EditTransactionVC: UIViewController, TransactionDelegate {
     }
     
     func rewriteBudget(id: String) {
-        data.budgetFromID = id
+        data.fromBudget = id
         let cell = tableView.cellForRow(at: IndexPath(row: 0, section: 1)) as! ETBudgetCell
         
         // TODO: Get title from id
@@ -204,7 +204,7 @@ extension EditTransactionVC: UITableViewDelegate, UITableViewDataSource {
         case IndexPath(row: 0, section: 1):
             let cell = tableView.dequeueReusableCell(withIdentifier: "transactionBudgetCell") as! ETBudgetCell
             
-            cell.titleLabel.text = data.budgetFromID
+            cell.titleLabel.text = data.fromBudget
             
             return cell
         case IndexPath(row: 1, section: 1):
