@@ -66,8 +66,8 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
         gradient.endPoint = CGPoint(x: 0.4, y: 1.0)
         gradient.frame = CGRect(x: 0.0,
                                 y: 0.0,
-                                width: self.view.frame.size.width * 0.75,
-                                height: self.view.frame.size.width * 0.75 / 2)
+                                width: self.view.frame.size.width * 0.85,
+                                height: self.view.frame.size.width * 0.85 / 2.25)
 
         self.budgetItemView.layer.insertSublayer(gradient, at: 0)
         

@@ -301,9 +301,13 @@ class HistoryVC: UITableViewController, HistoryDelegate {
                         if object.id == transaction.fromBudget {
                             if transaction.transactionAmount > 0 {
                                 // TODO: bold to/from
-                                cell.categoryLabel.text = "\(category.title) to \(object.name)"
+                                let targetString = "\(category.title) to \(object.name)"
+                                let range = NSMakeRange(category.title.count + 1, 4)
+                                cell.categoryLabel.attributedText = attributedString(from: targetString, nonBoldRange: range)
                             } else {
-                                cell.categoryLabel.text = "\(category.title) from \(object.name)"
+                                let targetString = "\(category.title) from \(object.name)"
+                                let range = NSMakeRange(category.title.count + 1, 6)
+                                cell.categoryLabel.attributedText = attributedString(from: targetString, nonBoldRange: range)
                             }
                         }
                     }
@@ -316,9 +320,13 @@ class HistoryVC: UITableViewController, HistoryDelegate {
             for object in budgetsRealm {
                 if object.id == transaction.fromBudget {
                     if transaction.transactionAmount > 0 {
-                        cell.categoryLabel.text = "to \(object.name)"
+                        let targetString = "to \(object.name)"
+                        let range = NSMakeRange(0, 3)
+                        cell.categoryLabel.attributedText = attributedString(from: targetString, nonBoldRange: range)
                     } else {
-                        cell.categoryLabel.text = "from \(object.name)"
+                        let targetString = "from \(object.name)"
+                        let range = NSMakeRange(0, 5)
+                        cell.categoryLabel.attributedText = attributedString(from: targetString, nonBoldRange: range)
                     }
                 }
             }
@@ -328,6 +336,22 @@ class HistoryVC: UITableViewController, HistoryDelegate {
         cell.budgetToID = transaction.toBudget
         
         return cell
+    }
+    
+    func attributedString(from string: String, nonBoldRange: NSRange?) -> NSAttributedString {
+        let fontSize = UIFont.systemFontSize
+        let attrs = [
+            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: fontSize),
+            NSAttributedString.Key.foregroundColor: UIColor.black
+        ]
+        let nonBoldAttribute = [
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize),
+        ]
+        let attrStr = NSMutableAttributedString(string: string, attributes: attrs)
+        if let range = nonBoldRange {
+            attrStr.setAttributes(nonBoldAttribute, range: range)
+        }
+        return attrStr
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
