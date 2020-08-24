@@ -147,7 +147,7 @@ class EditDreamsVC: UITableViewController, UITextFieldDelegate {
         
         let deleteAction = UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: .destructive, handler: {
             (alert: UIAlertAction!) -> Void in
-            // TODO: Deleting from database
+            
             EditDreamsVC.delegate?.dreamDeleted(dreamID: EditDreamsVC.dreamID, row: self.selectedRow)
             self.dismiss(animated: true, completion: nil)
         })

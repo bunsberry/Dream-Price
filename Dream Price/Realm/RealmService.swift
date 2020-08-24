@@ -19,7 +19,7 @@ class RealmService {
                 realm.add(object)
             }
         } catch {
-            post(error)
+            print("Trouble creating realm object")
         }
     }
     
@@ -31,21 +31,7 @@ class RealmService {
                 }
             }
         } catch {
-            post(error)
+            print("Trouble updating realm object")
         }
-    }
-    
-    func post(_ error: Error) {
-        NotificationCenter.default.post(name: .realmError, object: error)
-    }
-    
-    func observeRealmErrors(in vc: UIViewController, completion: @escaping (Error?) -> Void) {
-        NotificationCenter.default.addObserver(forName: .realmError, object: nil, queue: nil) { (notification) in
-            completion(notification.object as? Error)
-        }
-    }
-    
-    func stopObservingRealmErrors(in vc: UIViewController) {
-        NotificationCenter.default.removeObserver(vc, name: .realmError, object: nil)
     }
 }

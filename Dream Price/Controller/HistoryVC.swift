@@ -51,6 +51,7 @@ class HistoryVC: UITableViewController, HistoryDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         reloadTransactions()
+        tableView.reloadData()
     }
     
     // Loading from db and setting sections
@@ -197,6 +198,14 @@ class HistoryVC: UITableViewController, HistoryDelegate {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         generateSections()
+        
+        if sections.count == 0 {
+            tableView.setEmptyView(title: NSLocalizedString("No transactions", comment: ""),
+                                   message: NSLocalizedString("Add transactions", comment: ""))
+        } else {
+            tableView.restore()
+        }
+        
         return self.sections.count
     }
 

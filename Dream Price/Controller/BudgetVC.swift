@@ -95,6 +95,16 @@ class BudgetVC: UIViewController, BudgetDelegate, CategoriesBeenManaged {
                 for (index, object) in realm.objects(RealmBudget.self).enumerated() {
                     RealmService().create(RealmCategory(id: object.id, type: "budget", title: object.name, sortInt: index))
                 }
+                
+                let exampleDream1 = RealmDream(title: NSLocalizedString("New Phone", comment: ""),
+                                              description: NSLocalizedString("Mine's a bit old now...", comment: ""),
+                                              goal: 12000, type: "focusedDream", dateAdded: Date())
+                let exampleDream2 = RealmDream(title: NSLocalizedString("Trip to London", comment: ""),
+                                              description: NSLocalizedString("I wanna see Big Ben", comment: ""),
+                                              goal: 100000, type: "dream", dateAdded: Date())
+                
+                RealmService().create(exampleDream1)
+                RealmService().create(exampleDream2)
             }
             
             reloadCategoriesData()

@@ -29,7 +29,7 @@ class DreamsVC: UIViewController, UICollectionViewDelegate, UICollectionViewData
         super.viewWillAppear(animated)
         
         navigationController?.navigationBar.prefersLargeTitles = true
-        dreamCollection.reloadData()
+        reloadData()
     }
     
     func loadDreams() {

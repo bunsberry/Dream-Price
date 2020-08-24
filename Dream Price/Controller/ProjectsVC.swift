@@ -122,13 +122,13 @@ class ProjectsVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: Base.projectsID, for: indexPath) as! ProjectsCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ProjectsCell", for: indexPath) as! ProjectsCell
             return cell
         } else if indexPath.section == 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: Base.separatorID, for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SeparatorCell", for: indexPath)
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: Base.actionsID, for: indexPath) as! ActionsCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ActionsCell", for: indexPath) as! ActionsCell
             return cell
         }
     }

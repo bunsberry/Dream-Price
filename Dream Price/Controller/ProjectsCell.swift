@@ -36,7 +36,7 @@ extension ProjectsCell: UICollectionViewDelegate, UICollectionViewDataSource, UI
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.row == 0 {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Base.addProjectCellID, for: indexPath) as! AddProjectCVCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddProjectCell", for: indexPath) as! AddProjectCVCell
             
             cell.layer.backgroundColor = UIColor.clear.cgColor
             cell.layer.cornerRadius = cell.frame.width / 10
@@ -45,7 +45,7 @@ extension ProjectsCell: UICollectionViewDelegate, UICollectionViewDataSource, UI
             
             return cell
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Base.projectCID, for: indexPath) as! ProjectCVCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProjectCCell", for: indexPath) as! ProjectCVCell
             
             cell.name.text = projects[indexPath.row].name
             cell.details.text = projects[indexPath.row].details
