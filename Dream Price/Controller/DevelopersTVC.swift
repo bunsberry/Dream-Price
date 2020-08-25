@@ -22,7 +22,6 @@ class DevelopersTVC: UITableViewController {
         case IndexPath(row: 0, section: 0): destinationURL = URL(string: "https://twitter.com/DreamPriceApp")
         case IndexPath(row: 1, section: 0): destinationURL = URL(string: "https://google.com")
         case IndexPath(row: 0, section: 1): destinationURL = URL(string: "https://twitter.com/KostyaBunsberry")
-        case IndexPath(row: 0, section: 2): destinationURL = URL(string: "https://vk.com/georgefed")
         default: print("undefined index path")
         }
         

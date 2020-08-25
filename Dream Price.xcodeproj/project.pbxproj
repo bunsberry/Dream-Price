@@ -10,6 +10,7 @@
 		170E011224EADE8100632CA6 /* RealmDream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170E011124EADE8100632CA6 /* RealmDream.swift */; };
 		170E011424EAE16C00632CA6 /* Dream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170E011324EAE16C00632CA6 /* Dream.swift */; };
 		170E011624EAE18000632CA6 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170E011524EAE18000632CA6 /* Transaction.swift */; };
+		176354D824F55A5500277E45 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176354D724F55A5500277E45 /* Project.swift */; };
 		178AAD8824F4643900C2E735 /* EmptyTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178AAD8724F4643900C2E735 /* EmptyTableView.swift */; };
 		56D8D48F24C49BD200C3194D /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8D48E24C49BD200C3194D /* RealmService.swift */; };
 		56D8D49324C4D70F00C3194D /* RealmTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8D49224C4D70F00C3194D /* RealmTransaction.swift */; };
@@ -138,6 +139,7 @@
 		170E011124EADE8100632CA6 /* RealmDream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDream.swift; sourceTree = "<group>"; };
 		170E011324EAE16C00632CA6 /* Dream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dream.swift; sourceTree = "<group>"; };
 		170E011524EAE18000632CA6 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		176354D724F55A5500277E45 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		178AAD8724F4643900C2E735 /* EmptyTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EmptyTableView.swift; path = "Dream Price/Model/EmptyTableView.swift"; sourceTree = SOURCE_ROOT; };
 		56D8D48E24C49BD200C3194D /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		56D8D49224C4D70F00C3194D /* RealmTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RealmTransaction.swift; path = "Dream Price/RealmTransaction.swift"; sourceTree = SOURCE_ROOT; };
@@ -279,6 +281,7 @@
 				84C730FC24CF8F5F00FE003D /* Settings.swift */,
 				170E011324EAE16C00632CA6 /* Dream.swift */,
 				170E011524EAE18000632CA6 /* Transaction.swift */,
+				176354D724F55A5500277E45 /* Project.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -705,6 +708,7 @@
 				84C730FD24CF8F5F00FE003D /* Settings.swift in Sources */,
 				84899CDE24BE5375000B2B65 /* ManageCategoriesCell.swift in Sources */,
 				843D056F24BE026200DF7EFF /* CategoryCell.swift in Sources */,
+				176354D824F55A5500277E45 /* Project.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -108,6 +108,8 @@ class ProjectsVC: UITableViewController {
     // MARK: Table view setup
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        tableView.allowsSelection = false
+        
         if section == 0 || section == 1 {
             return 1
         } else {

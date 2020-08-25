@@ -10,13 +10,10 @@ import UIKit
 class ProjectCVCell: UICollectionViewCell {
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var details: UILabel!
+    @IBOutlet weak var budgetDifferenceLabel: UILabel!
+    @IBOutlet weak var budgetDifferenceView: UIView!
     
     override class func awakeFromNib() {
         super.awakeFromNib()
-    }
-    
-    public func configure(name: String, details: String) {
-        self.name.text = name
-        self.details.text = details
     }
 }
