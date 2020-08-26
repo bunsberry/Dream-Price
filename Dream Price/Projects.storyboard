@@ -230,17 +230,17 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="tVD-eK-g1U" kind="presentation" identifier="toSettings" id="oyb-Vw-osW"/>
-                        <segue destination="Hal-MT-SdW" kind="presentation" id="zwH-eE-ZK2"/>
+                        <segue destination="Hal-MT-SdW" kind="presentation" identifier="toProject" id="zwH-eE-ZK2"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XAh-2d-j20" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="168.11594202898553" y="144.64285714285714"/>
         </scene>
-        <!--View Controller-->
+        <!--ProjectVC-->
         <scene sceneID="INN-cy-gRr">
             <objects>
-                <viewController id="Hal-MT-SdW" sceneMemberID="viewController">
+                <viewController id="Hal-MT-SdW" customClass="ProjectVC" customModule="Dream_Price" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KWP-nS-wjY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -249,24 +249,84 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="108"/>
                                 <items>
                                     <navigationItem title="Проект" id="9fU-R9-7Dw">
-                                        <barButtonItem key="leftBarButtonItem" title="Править" id="Af4-Yz-koi"/>
-                                        <barButtonItem key="rightBarButtonItem" title="Готово" style="done" id="4hI-Np-Aum"/>
+                                        <barButtonItem key="leftBarButtonItem" title="Править" id="Af4-Yz-koi">
+                                            <connections>
+                                                <action selector="editActions:" destination="Hal-MT-SdW" id="53F-x8-8GX"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Готово" style="done" id="4hI-Np-Aum">
+                                            <connections>
+                                                <action selector="done:" destination="Hal-MT-SdW" id="0Ga-TQ-5ww"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jT3-Ui-0Pi">
+                                <rect key="frame" x="0.0" y="108" width="414" height="700"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="actionCell" rowHeight="40" id="ThK-8Q-YKw" customClass="ActionCell" customModule="Dream_Price" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="40"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ThK-8Q-YKw" id="xNd-eV-zkS">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="djk-C8-GLI">
+                                                    <rect key="frame" x="20" y="10" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="djk-C8-GLI" secondAttribute="height" multiplier="1:1" id="zmt-7R-sPr"/>
+                                                    </constraints>
+                                                    <state key="normal" image="UnCheckbox"/>
+                                                    <state key="selected" image="Checkbox"/>
+                                                    <connections>
+                                                        <action selector="checkmarkTapped:" destination="ThK-8Q-YKw" eventType="touchUpInside" id="deQ-LX-Bei"/>
+                                                    </connections>
+                                                </button>
+                                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="200" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Задача..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9qs-jZ-evu">
+                                                    <rect key="frame" x="50" y="0.0" width="364" height="40"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="9qs-jZ-evu" firstAttribute="top" secondItem="xNd-eV-zkS" secondAttribute="top" id="012-Ct-Nb7"/>
+                                                <constraint firstItem="9qs-jZ-evu" firstAttribute="leading" secondItem="djk-C8-GLI" secondAttribute="trailing" constant="10" id="31b-Eh-uGS"/>
+                                                <constraint firstAttribute="bottom" secondItem="djk-C8-GLI" secondAttribute="bottom" constant="10" id="5wB-Ew-HqL"/>
+                                                <constraint firstItem="djk-C8-GLI" firstAttribute="leading" secondItem="xNd-eV-zkS" secondAttribute="leading" constant="20" id="9jw-YD-5go"/>
+                                                <constraint firstAttribute="trailing" secondItem="9qs-jZ-evu" secondAttribute="trailing" id="P9g-Dj-2YW"/>
+                                                <constraint firstAttribute="bottom" secondItem="9qs-jZ-evu" secondAttribute="bottom" id="pC1-OY-5Ho"/>
+                                                <constraint firstItem="djk-C8-GLI" firstAttribute="top" secondItem="xNd-eV-zkS" secondAttribute="top" constant="10" id="ywO-h5-pow"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="checkmarkButton" destination="djk-C8-GLI" id="BJI-JU-kNS"/>
+                                            <outlet property="taskTextField" destination="9qs-jZ-evu" id="TBE-gX-OsR"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6ge-ek-gmM"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="6ge-ek-gmM" firstAttribute="trailing" secondItem="jT3-Ui-0Pi" secondAttribute="trailing" id="4jg-4L-fKk"/>
                             <constraint firstItem="Z3J-y2-jOd" firstAttribute="trailing" secondItem="6ge-ek-gmM" secondAttribute="trailing" id="Aj0-4S-Mea"/>
+                            <constraint firstItem="6ge-ek-gmM" firstAttribute="bottom" secondItem="jT3-Ui-0Pi" secondAttribute="bottom" id="G5m-aM-JsP"/>
                             <constraint firstItem="Z3J-y2-jOd" firstAttribute="top" secondItem="6ge-ek-gmM" secondAttribute="top" id="QUV-V0-LcZ"/>
                             <constraint firstItem="Z3J-y2-jOd" firstAttribute="leading" secondItem="6ge-ek-gmM" secondAttribute="leading" id="bAp-3v-2wh"/>
+                            <constraint firstItem="jT3-Ui-0Pi" firstAttribute="leading" secondItem="6ge-ek-gmM" secondAttribute="leading" id="rao-Qb-0mb"/>
+                            <constraint firstItem="jT3-Ui-0Pi" firstAttribute="top" secondItem="Z3J-y2-jOd" secondAttribute="bottom" id="y1A-FH-UzR"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="jT3-Ui-0Pi" id="BbJ-fr-ffS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i6N-ks-xxM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1235" y="317"/>
+            <point key="canvasLocation" x="1234.7826086956522" y="316.07142857142856"/>
         </scene>
         <!--Проекты-->
         <scene sceneID="60M-vG-jIG">
@@ -782,11 +842,13 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Checkbox" width="60" height="60"/>
         <image name="IconBlack" width="512" height="512"/>
         <image name="IconBlue" width="512" height="512"/>
         <image name="IconClassic" width="512" height="512"/>
         <image name="IconRed" width="512" height="512"/>
         <image name="IconYellow" width="512" height="512"/>
+        <image name="UnCheckbox" width="60" height="60"/>
         <image name="checkmark.square" catalog="system" width="128" height="114"/>
         <image name="globe" catalog="system" width="128" height="121"/>
         <image name="link" catalog="system" width="128" height="122"/>

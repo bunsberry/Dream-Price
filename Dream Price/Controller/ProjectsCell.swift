@@ -8,12 +8,19 @@
 import UIKit
 import RealmSwift
 
+protocol ProjectDelegate {
+    func openProject(id: String)
+    func newProject()
+}
+
 class ProjectsCell: UITableViewCell {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
     let realm = try! Realm()
     var projects: [Project] = [Project(name: "Приложение", details: "Мое первое инди!", isBudget: true, budget: 100, balance: 150, actions: [])]
+    
+    var delegate: ProjectDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -86,23 +93,6 @@ extension ProjectsCell: UICollectionViewDelegate, UICollectionViewDataSource, UI
                 }
             }
             
-//            let gradientLayer = CAGradientLayer()
-//
-//            gradientLayer.colors = [
-//                UIColor(red: 0.898, green: 0.506, blue: 0.506, alpha: 1).cgColor,
-//                UIColor(red: 0.792, green: 0.443, blue: 0.443, alpha: 1).cgColor
-//            ]
-//            gradientLayer.locations = [0, 1]
-//            gradientLayer.startPoint = CGPoint(x: 0.25, y: 0.5)
-//            gradientLayer.endPoint = CGPoint(x: 0.75, y: 0.5)
-//
-//            gradientLayer.transform = CATransform3DMakeAffineTransform(CGAffineTransform(a: 0, b: 1, c: -1, d: 0, tx: 1, ty: 0))
-//
-//            gradientLayer.bounds = cell.bounds.insetBy(dx: -0.5*cell.bounds.size.width, dy: -0.5*cell.bounds.size.height)
-//            gradientLayer.position = cell.center
-//
-//            cell.layer.backgroundColor = UIColor.clear.cgColor
-//            cell.layer.addSublayer(gradientLayer)
             let gradient: CAGradientLayer = CAGradientLayer()
             
             gradient.colors = [
@@ -132,5 +122,13 @@ extension ProjectsCell: UICollectionViewDelegate, UICollectionViewDataSource, UI
         let width = 178.0
         let height = 256.0
         return CGSize(width: width, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.row == projects.count {
+            delegate?.newProject()
+        } else {
+            delegate?.openProject(id: projects[indexPath.row].id)
+        }
     }
 }

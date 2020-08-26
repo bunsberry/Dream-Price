@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProjectsVC: UITableViewController {
+class ProjectsVC: UITableViewController, ProjectDelegate {
     
     var transactionCount = 0
     private let settingsButton = UIButton()
@@ -15,6 +15,14 @@ class ProjectsVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavBar()
+    }
+    
+    func newProject() {
+        // TODO: New project creation
+    }
+    
+    func openProject(id: String) {
+        performSegue(withIdentifier: "toProject", sender: nil)
     }
     
     // MARK: Navigation Bar Setup
@@ -125,6 +133,7 @@ class ProjectsVC: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProjectsCell", for: indexPath) as! ProjectsCell
+            cell.delegate = self
             return cell
         } else if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SeparatorCell", for: indexPath)
