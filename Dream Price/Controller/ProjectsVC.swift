@@ -11,6 +11,7 @@ class ProjectsVC: UITableViewController, ProjectDelegate {
     
     var transactionCount = 0
     private let settingsButton = UIButton()
+    let actions: [Action] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,11 +19,14 @@ class ProjectsVC: UITableViewController, ProjectDelegate {
     }
     
     func newProject() {
-        // TODO: New project creation
+        performSegue(withIdentifier: "toProject", sender: nil)
+        ProjectVC.isNewProject = false
     }
     
     func openProject(id: String) {
+        // TODO: transfer projectID
         performSegue(withIdentifier: "toProject", sender: nil)
+        ProjectVC.isNewProject = true
     }
     
     // MARK: Navigation Bar Setup
@@ -122,7 +126,11 @@ class ProjectsVC: UITableViewController, ProjectDelegate {
             return 1
         } else {
             // recent actions count
-            return 0
+            if actions.count != 0 {
+                return actions.count
+            } else {
+                return 1
+            }
         }
     }
     
@@ -139,8 +147,13 @@ class ProjectsVC: UITableViewController, ProjectDelegate {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SeparatorCell", for: indexPath)
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ActionsCell", for: indexPath) as! ActionsCell
-            return cell
+            if actions.count != 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ActionsCell", for: indexPath) as! ActionsCell
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "NoActionsCell", for: indexPath)
+                return cell
+            }
         }
     }
     

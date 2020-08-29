@@ -11,6 +11,7 @@
 		170E011424EAE16C00632CA6 /* Dream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170E011324EAE16C00632CA6 /* Dream.swift */; };
 		170E011624EAE18000632CA6 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170E011524EAE18000632CA6 /* Transaction.swift */; };
 		176354D824F55A5500277E45 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176354D724F55A5500277E45 /* Project.swift */; };
+		1766502124FA8E6300E8962A /* AddActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1766502024FA8E6300E8962A /* AddActionCell.swift */; };
 		177B612B24F6B3CB004A7D92 /* ProjectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177B612A24F6B3CB004A7D92 /* ProjectVC.swift */; };
 		177B612D24F6B453004A7D92 /* ActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177B612C24F6B453004A7D92 /* ActionCell.swift */; };
 		178AAD8824F4643900C2E735 /* EmptyTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178AAD8724F4643900C2E735 /* EmptyTableView.swift */; };
@@ -142,6 +143,7 @@
 		170E011324EAE16C00632CA6 /* Dream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dream.swift; sourceTree = "<group>"; };
 		170E011524EAE18000632CA6 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		176354D724F55A5500277E45 /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		1766502024FA8E6300E8962A /* AddActionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddActionCell.swift; sourceTree = "<group>"; };
 		177B612A24F6B3CB004A7D92 /* ProjectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectVC.swift; sourceTree = "<group>"; };
 		177B612C24F6B453004A7D92 /* ActionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionCell.swift; sourceTree = "<group>"; };
 		178AAD8724F4643900C2E735 /* EmptyTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EmptyTableView.swift; path = "Dream Price/Model/EmptyTableView.swift"; sourceTree = SOURCE_ROOT; };
@@ -310,6 +312,7 @@
 				840F2DAB24CECABA005CA412 /* ETBudgetPickerCell.swift */,
 				84C730FA24CF719D00FE003D /* ETDatePickerCell.swift */,
 				177B612C24F6B453004A7D92 /* ActionCell.swift */,
+				1766502024FA8E6300E8962A /* AddActionCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -706,6 +709,7 @@
 				170E011624EAE18000632CA6 /* Transaction.swift in Sources */,
 				84E38BF124C76AEC00FF5CC1 /* DashedBorder.swift in Sources */,
 				84961BCF24CCFF64007B73BA /* AppIconTVC.swift in Sources */,
+				1766502124FA8E6300E8962A /* AddActionCell.swift in Sources */,
 				84B4813724D34E0300223B5C /* CurrencyTVC.swift in Sources */,
 				8416E83F24C7E34600DB0C0C /* DreamCell.swift in Sources */,
 				8447A84124BCDBDE005F448B /* BudgetItemDataVC.swift in Sources */,

@@ -18,7 +18,8 @@ class ProjectsCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     
     let realm = try! Realm()
-    var projects: [Project] = [Project(name: "Приложение", details: "Мое первое инди!", isBudget: true, budget: 100, balance: 150, actions: [])]
+    var projects: [Project] = [Project(name: "Приложение", details: "Мое первое инди!", isBudget: true, budget: 100, balance: 150, actions: []),
+                               Project(name: "Повседневка", details: "", isBudget: false, budget: 0, balance: 0, actions: [])]
     
     var delegate: ProjectDelegate?
     
@@ -55,6 +56,7 @@ extension ProjectsCell: UICollectionViewDelegate, UICollectionViewDataSource, UI
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProjectCell", for: indexPath) as! ProjectCVCell
             
             if projects[indexPath.row].isBudget == false {
+                cell.budgetDifferenceLabel.text = ""
                 cell.budgetDifferenceLabel.textColor = .clear
                 cell.budgetDifferenceView.backgroundColor = .clear
             } else {
