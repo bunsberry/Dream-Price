@@ -11,10 +11,12 @@ struct Project {
     let id: String = UUID().uuidString
     var name: String = ""
     var details: String = ""
+    var isFinished: Bool = false
     var isBudget: Bool = false
     var budget: Float = 0
     var balance: Float = 0
     var actions: [Action] = []
+    var dateFinished: Date? = nil
 }
 
 struct Action {

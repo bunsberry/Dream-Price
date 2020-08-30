@@ -18,8 +18,11 @@ class ProjectsCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     
     let realm = try! Realm()
-    var projects: [Project] = [Project(name: "Приложение", details: "Мое первое инди!", isBudget: true, budget: 100, balance: 150, actions: []),
-                               Project(name: "Повседневка", details: "", isBudget: false, budget: 0, balance: 0, actions: [])]
+    var projects: [Project] = [Project(name: "Приложение", details: "Мое первое инди!", isFinished: false, isBudget: true, budget: 100, balance: 150, actions: []),
+                               Project(name: "Повседневка", details: "", isFinished: false, isBudget: false, budget: 0, balance: 0, actions: []),
+                               Project(name: "Завершенный проект", details: "", isFinished: true, isBudget: false, budget: 0, balance: 0, actions: [])]
+    
+    var projectsShown = [Project]()
     
     var delegate: ProjectDelegate?
     
@@ -29,6 +32,11 @@ class ProjectsCell: UITableViewCell {
         self.collectionView.dataSource = self
         
 //        projects = realm.objects(RealmProject.self)
+        for project in projects {
+            if project.isFinished == false {
+                projectsShown.append(project)
+            }
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -39,11 +47,11 @@ class ProjectsCell: UITableViewCell {
 extension ProjectsCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return projects.count + 1
+        return projectsShown.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.row == projects.count {
+        if indexPath.row == projectsShown.count {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddProjectCell", for: indexPath) as! AddProjectCVCell
             
             cell.layer.backgroundColor = UIColor.clear.cgColor
@@ -55,13 +63,13 @@ extension ProjectsCell: UICollectionViewDelegate, UICollectionViewDataSource, UI
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProjectCell", for: indexPath) as! ProjectCVCell
             
-            if projects[indexPath.row].isBudget == false {
+            if projectsShown[indexPath.row].isBudget == false {
                 cell.budgetDifferenceLabel.text = ""
                 cell.budgetDifferenceLabel.textColor = .clear
                 cell.budgetDifferenceView.backgroundColor = .clear
             } else {
                 cell.budgetDifferenceView.layer.cornerRadius = cell.budgetDifferenceView.frame.height / 3
-                let budgetDiff = projects[indexPath.row].balance - projects[indexPath.row].budget
+                let budgetDiff = projects[indexPath.row].balance - projectsShown[indexPath.row].budget
                 
                 let currencyFormatter = NumberFormatter()
                 currencyFormatter.numberStyle = .currency
@@ -113,8 +121,8 @@ extension ProjectsCell: UICollectionViewDelegate, UICollectionViewDataSource, UI
             cell.layer.insertSublayer(gradient, at: 0)
             
             cell.layer.cornerRadius = cell.frame.width / 10
-            cell.name.text = projects[indexPath.row].name
-            cell.details.text = projects[indexPath.row].details
+            cell.name.text = projectsShown[indexPath.row].name
+            cell.details.text = projectsShown[indexPath.row].details
             
             return cell
         }

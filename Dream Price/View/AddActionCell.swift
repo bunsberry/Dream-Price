@@ -18,5 +18,4 @@ class AddActionCell: UITableViewCell {
     @IBAction func addAction(_ sender: UIButton) {
         delegate?.addAction()
     }
-
 }

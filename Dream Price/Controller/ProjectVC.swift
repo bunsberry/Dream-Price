@@ -14,6 +14,8 @@ class ProjectVC: UIViewController, UITextViewDelegate, AddActionDelegate {
     @IBOutlet weak var detailsTextView: UITextView!
     
     public static var isNewProject: Bool = false
+    // TODO: Delegating project id
+    public static var projectID: String = UUID().uuidString
     
     var actions: [Action] = [Action(id: UUID().uuidString, projectID: "", text: "", completed: false, dateCompleted: nil)]
 
@@ -46,7 +48,50 @@ class ProjectVC: UIViewController, UITextViewDelegate, AddActionDelegate {
     }
     
     @IBAction func moreOptions(_ sender: UIButton) {
-        // menu with finish and delete project
+        let moreOptionsMenu = UIAlertController(title: NSLocalizedString("Project Options", comment: ""), message: nil, preferredStyle: .actionSheet)
+        
+        let finishAction = UIAlertAction(title: NSLocalizedString("Finish Project", comment: ""), style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            
+            let finishMenu = UIAlertController(title: NSLocalizedString("Project Options", comment: ""), message: nil, preferredStyle: .alert)
+            
+            let yes = UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default, handler: {
+                (alert: UIAlertAction!) -> Void in
+                // TODO: finish project and delegating
+                self.dismiss(animated: true, completion: nil)
+            })
+            let no = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .default, handler: nil)
+            
+            finishMenu.addAction(no)
+            finishMenu.addAction(yes)
+            
+            self.present(finishMenu, animated: true, completion: nil)
+        })
+        let deleteAction = UIAlertAction(title: NSLocalizedString("Delete Project", comment: ""), style: .default, handler: {
+            (alert: UIAlertAction!) -> Void in
+            
+            let deleteMenu = UIAlertController(title: NSLocalizedString("Project Options", comment: ""), message: nil, preferredStyle: .alert)
+            
+            let yes = UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default, handler: {
+                (alert: UIAlertAction!) -> Void in
+                // TODO: delete project and delegating
+                self.dismiss(animated: true, completion: nil)
+            })
+            let no = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .default, handler: nil)
+            
+            deleteMenu.addAction(no)
+            deleteMenu.addAction(yes)
+            
+            self.present(deleteMenu, animated: true, completion: nil)
+        })
+        
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel)
+        
+        moreOptionsMenu.addAction(finishAction)
+        moreOptionsMenu.addAction(deleteAction)
+        moreOptionsMenu.addAction(cancelAction)
+        
+        self.present(moreOptionsMenu, animated: true, completion: nil)
     }
     
     func textViewDidBeginEditing(_ textField: UITextView) {
@@ -72,15 +117,22 @@ class ProjectVC: UIViewController, UITextViewDelegate, AddActionDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         if textView == titleTextView {
-            // title saving
+            // project title saving
         } else {
-            // description saving
+            // project description saving
         }
     }
     
     func addAction() {
         print("added action")
         // TODO: creating action
+        if actions.count == 0 {
+            actions.append(Action(id: UUID().uuidString, projectID: ProjectVC.projectID, text: "", completed: false, dateCompleted: nil))
+            tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+        } else {
+            actions.append(Action(id: UUID().uuidString, projectID: ProjectVC.projectID, text: "", completed: false, dateCompleted: nil))
+            tableView.insertRows(at: [IndexPath(row: actions.count - 1, section: 0)], with: .automatic)
+        }
     }
 }
 
@@ -104,7 +156,18 @@ extension ProjectVC: UITableViewDataSource, UITableViewDelegate {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "actionCell") as! ActionCell
                 
                 cell.checkmarkButton.isSelected = actions[indexPath.row].completed
-                cell.taskTextField.text = actions[indexPath.row].text
+                if actions[indexPath.row].text.isEmpty {
+                    cell.taskTextView.textColor = .tertiaryLabel
+                    cell.taskTextView.text = "Type task here..."
+                } else {
+                    cell.taskTextView.textColor = .label
+                    cell.taskTextView.text = actions[indexPath.row].text
+                }
+                
+                cell.textDidChange = {
+                    self.tableView.beginUpdates()
+                    self.tableView.endUpdates()
+                }
                 
                 return cell
             }

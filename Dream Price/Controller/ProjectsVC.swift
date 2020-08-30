@@ -7,15 +7,28 @@
 
 import UIKit
 
-class ProjectsVC: UITableViewController, ProjectDelegate {
+class ProjectsVC: UITableViewController, ProjectDelegate, CompletedActionDelegate {
     
     var transactionCount = 0
     private let settingsButton = UIButton()
-    let actions: [Action] = []
+    
+    var actions: [Action] = [Action(id: UUID().uuidString, projectID: "", text: "Завершенное действие", completed: true, dateCompleted: Date()),
+                             Action(id: UUID().uuidString, projectID: "", text: "Завершенное действие", completed: true, dateCompleted: Date()),
+                             Action(id: UUID().uuidString, projectID: "", text: "Незавершенное действие", completed: false, dateCompleted: nil)]
+    var completedActions: [Action] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavBar()
+        
+        for action in actions {
+            if action.completed {
+                completedActions.append(action)
+            }
+        }
+        
+        // TODO: Add completed projects
+        completedActions.sort(by: { $0.dateCompleted! > $1.dateCompleted! })
     }
     
     func newProject() {
@@ -126,8 +139,8 @@ class ProjectsVC: UITableViewController, ProjectDelegate {
             return 1
         } else {
             // recent actions count
-            if actions.count != 0 {
-                return actions.count
+            if completedActions.count != 0 {
+                return completedActions.count
             } else {
                 return 1
             }
@@ -147,8 +160,17 @@ class ProjectsVC: UITableViewController, ProjectDelegate {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SeparatorCell", for: indexPath)
             return cell
         } else {
-            if actions.count != 0 {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "ActionsCell", for: indexPath) as! ActionsCell
+            if completedActions.count != 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "completedActionCell", for: indexPath) as! CompletedActionCell
+                
+                cell.textTextView.text = completedActions[indexPath.row].text
+                cell.completitionButton.isSelected = true
+                cell.actionID = completedActions[indexPath.row].id
+                cell.delegate = self
+                
+                tableView.beginUpdates()
+                tableView.endUpdates()
+                
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "NoActionsCell", for: indexPath)
@@ -159,13 +181,29 @@ class ProjectsVC: UITableViewController, ProjectDelegate {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            print("projects height")
             return 256.0
         } else if indexPath.section == 1 {
-            print("separator height")
             return 28.0
         } else {
-            return 64.0
+            if completedActions.count == 0 {
+                return 64
+            } else {
+                return UITableView.automaticDimension
+            }
+        }
+    }
+    
+    func removedCompletition(id: String) {
+        for (index, action) in completedActions.enumerated() {
+            if action.id == id {
+                completedActions.remove(at: index)
+                // realm delete object
+                if completedActions.count == 0 {
+                    tableView.reloadRows(at: [IndexPath(row: index, section: 2)], with: .automatic)
+                } else {
+                    tableView.deleteRows(at: [IndexPath(row: index, section: 2)], with: .automatic)
+                }
+            }
         }
     }
 }

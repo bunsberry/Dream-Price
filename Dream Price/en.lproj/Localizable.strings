@@ -6,6 +6,9 @@
   
 */
 
+"Yes" = "Yes";
+"No" = "No";
+
 "Work" = "💼 Work";
 "Coffee" = "☕️ Coffee";
 "Groceries" = "🥑 Groceries";
@@ -51,3 +54,11 @@
 
 "No transactions" = "There is no transactions yet";
 "Add transactions" = "You can add them on budget page";
+
+"Project Options" = "Project options:";
+"Finish Project" = "Finish project";
+"Delete Project" = "Delete project";
+
+"This will finish project" = "This action will finish the project and actions inside it. Are you sure?";
+"This will delete project" = "This action will delete the project and actions inside it. Are you sure?";
+
