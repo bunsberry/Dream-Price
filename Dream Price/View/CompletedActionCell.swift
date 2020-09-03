@@ -28,7 +28,6 @@ class CompletedActionCell: UITableViewCell {
             UIView.transition(with: sender, duration: 0.3, options: .transitionCrossDissolve, animations: {
                 sender.isSelected = false
             }, completion: { Void in
-                print(self.actionID)
                 self.delegate?.removedCompletition(id: self.actionID!)
             })
         }

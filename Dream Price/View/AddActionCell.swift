@@ -7,13 +7,15 @@
 
 import UIKit
 
-protocol AddActionDelegate {
+protocol ProjectEditDelegate {
     func addAction()
+    func deleteAction(id: String)
+    func isBudgetChangedTo(_ state: Bool)
 }
 
 class AddActionCell: UITableViewCell {
     
-    var delegate: AddActionDelegate?
+    var delegate: ProjectEditDelegate?
 
     @IBAction func addAction(_ sender: UIButton) {
         delegate?.addAction()

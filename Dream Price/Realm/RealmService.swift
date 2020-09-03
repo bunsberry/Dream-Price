@@ -2,7 +2,7 @@
 //  RealmService.swift
 //  Dream Price
 //
-//  Created by Georg on 19.07.2020.
+//  Created by Kostya Bunsberry on 19.07.2020.
 //
 
 import UIKit

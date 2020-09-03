@@ -16,6 +16,7 @@ class ProjectsVC: UITableViewController, ProjectDelegate, CompletedActionDelegat
                              Action(id: UUID().uuidString, projectID: "", text: "Завершенное действие", completed: true, dateCompleted: Date()),
                              Action(id: UUID().uuidString, projectID: "", text: "Незавершенное действие", completed: false, dateCompleted: nil)]
     var completedActions: [Action] = []
+    var chosenProjectID = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,14 +33,28 @@ class ProjectsVC: UITableViewController, ProjectDelegate, CompletedActionDelegat
     }
     
     func newProject() {
+        chosenProjectID = "new"
         performSegue(withIdentifier: "toProject", sender: nil)
-        ProjectVC.isNewProject = false
     }
     
     func openProject(id: String) {
-        // TODO: transfer projectID
+        chosenProjectID = id
         performSegue(withIdentifier: "toProject", sender: nil)
-        ProjectVC.isNewProject = true
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toProject" && chosenProjectID != "new" {
+            let vc = segue.destination as! ProjectVC
+            
+            vc.projectID = chosenProjectID
+            vc.isNewProject = false
+        } else if segue.identifier == "toProject" && chosenProjectID == "new" {
+            let vc = segue.destination as! ProjectVC
+            
+            // creating new project object
+            vc.projectID = UUID().uuidString
+            vc.isNewProject = true
+        }
     }
     
     // MARK: Navigation Bar Setup

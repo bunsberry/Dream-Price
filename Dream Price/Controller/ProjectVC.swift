@@ -7,29 +7,32 @@
 
 import UIKit
 
-class ProjectVC: UIViewController, UITextViewDelegate, AddActionDelegate {
+class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleTextView: UITextView!
     @IBOutlet weak var detailsTextView: UITextView!
+    @IBOutlet weak var doneButton: UIButton!
     
-    public static var isNewProject: Bool = false
-    // TODO: Delegating project id
-    public static var projectID: String = UUID().uuidString
+    var isNewProject: Bool!
+    var projectID: String!
+    var isBudget: Bool = false
     
     var actions: [Action] = [Action(id: UUID().uuidString, projectID: "", text: "", completed: false, dateCompleted: nil)]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if ProjectVC.isNewProject == true {
+        if isNewProject == true {
             titleTextView.text = "Title"
             detailsTextView.text = "Description..."
             titleTextView.textColor = .tertiaryLabel
             detailsTextView.textColor = .tertiaryLabel
+            doneButton.setTitle(NSLocalizedString("Save", comment: ""), for: .normal)
         } else {
             // TODO: getting data from DB
             // if db details is empty then
+            doneButton.setTitle(NSLocalizedString("Done", comment: ""), for: .normal)
             if detailsTextView.text == "Description..." {
                 detailsTextView.text = "Description..."
                 detailsTextView.textColor = .tertiaryLabel
@@ -38,13 +41,42 @@ class ProjectVC: UIViewController, UITextViewDelegate, AddActionDelegate {
         
         titleTextView.delegate = self
         detailsTextView.delegate = self
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView(frame: .zero)
     }
     
     @IBAction func done(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
+        if doneButton.title(for: .normal) == NSLocalizedString("Save", comment: "") {
+            print("saving")
+            if titleTextView.text != "" && titleTextView.textColor != .tertiaryLabel {
+                // TODO: Wrtiting to db cells data
+                isNewProject = false
+                if isBudget {
+                    tableView.beginUpdates()
+                    tableView.reloadRows(at: [IndexPath(row: 0, section: 0),
+                                              IndexPath(row: 1, section: 0)], with: .automatic)
+                    tableView.insertRows(at: [IndexPath(row: 2, section: 0),
+                                              IndexPath(row: 3, section: 0)], with: .automatic)
+                    tableView.endUpdates()
+                } else {
+                    tableView.beginUpdates()
+                    tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+                    tableView.insertRows(at: [IndexPath(row: 1, section: 0),
+                                              IndexPath(row: 2, section: 0)], with: .automatic)
+                    tableView.endUpdates()
+                }
+                
+                doneButton.setTitle(NSLocalizedString("Done", comment: ""), for: .normal)
+            } else {
+                let alert = UIAlertController(title: NSLocalizedString("Fill in all the required information", comment: ""), message: nil, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("Close", comment: ""), style: .cancel, handler: nil))
+                present(alert, animated: true, completion: nil)
+            }
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     @IBAction func moreOptions(_ sender: UIButton) {
@@ -125,62 +157,237 @@ class ProjectVC: UIViewController, UITextViewDelegate, AddActionDelegate {
     
     func addAction() {
         print("added action")
-        // TODO: creating action
+        // TODO: db creating action
         if actions.count == 0 {
-            actions.append(Action(id: UUID().uuidString, projectID: ProjectVC.projectID, text: "", completed: false, dateCompleted: nil))
-            tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+            actions.append(Action(id: UUID().uuidString, projectID: projectID, text: "", completed: false, dateCompleted: nil))
+            
+            tableView.separatorStyle = .singleLine
+            
+            var cell = ActionCell()
+            
+            if isBudget {
+                tableView.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .automatic)
+                cell = tableView.cellForRow(at: IndexPath(row: actions.count + 1, section: 0)) as! ActionCell
+            } else {
+                tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+                cell = tableView.cellForRow(at: IndexPath(row: actions.count, section: 0)) as! ActionCell
+            }
+            
+            cell.taskTextView.becomeFirstResponder()
         } else {
-            actions.append(Action(id: UUID().uuidString, projectID: ProjectVC.projectID, text: "", completed: false, dateCompleted: nil))
-            tableView.insertRows(at: [IndexPath(row: actions.count - 1, section: 0)], with: .automatic)
+            actions.append(Action(id: UUID().uuidString, projectID: projectID, text: "", completed: false, dateCompleted: nil))
+            
+            var cell = ActionCell()
+            
+            if isBudget {
+                tableView.insertRows(at: [IndexPath(row: actions.count + 1, section: 0)], with: .automatic)
+                cell = tableView.cellForRow(at: IndexPath(row: actions.count + 1, section: 0)) as! ActionCell
+            } else {
+                tableView.insertRows(at: [IndexPath(row: actions.count, section: 0)], with: .automatic)
+                cell = tableView.cellForRow(at: IndexPath(row: actions.count, section: 0)) as! ActionCell
+            }
+            
+            cell.taskTextView.becomeFirstResponder()
+        }
+    }
+    
+    func deleteAction(id: String) {
+        for (index, action) in actions.enumerated() {
+            if action.id == id {
+                actions.remove(at: index)
+                if actions.count == 0 {
+                    if isBudget {
+                        tableView.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .automatic)
+                    } else {
+                        tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+                    }
+                } else {
+                    if isBudget {
+                        tableView.deleteRows(at: [IndexPath(row: index + 2, section: 0)], with: .automatic)
+                    } else {
+                        tableView.deleteRows(at: [IndexPath(row: index + 1, section: 0)], with: .automatic)
+                    }
+                }
+            }
+        }
+    }
+    
+    func isBudgetChangedTo(_ state: Bool) {
+        isBudget = state
+        
+        // TODO: db change state
+        
+        if doneButton.title(for: .normal) == NSLocalizedString("Save", comment: "") {
+            if state {
+                tableView.insertRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+            } else {
+                tableView.deleteRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+            }
+        } else {
+            print(">.<")
+            if state {
+                tableView.insertRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+            } else {
+                tableView.deleteRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+            }
         }
     }
 }
 
 extension ProjectVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if actions.count == 0 {
-            tableView.separatorStyle = .none
-            return 2
+        
+        if isNewProject {
+            // Создание проекта
+            if isBudget {
+                return 2
+            } else {
+                return 1
+            }
         } else {
-            return actions.count + 1
+            // Открытие существующего проекта
+            if isBudget {
+                if actions.count == 0 {
+                    tableView.separatorStyle = .none
+                    return 4
+                } else {
+                    return actions.count + 3
+                }
+            } else {
+                if actions.count == 0 {
+                    tableView.separatorStyle = .none
+                    return 3
+                } else {
+                    return actions.count + 2
+                }
+            }
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if actions.count != 0 {
-            if indexPath.row == actions.count {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "addActionCell") as! AddActionCell
-                cell.delegate = self
-                return cell
-            } else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "actionCell") as! ActionCell
-                
-                cell.checkmarkButton.isSelected = actions[indexPath.row].completed
-                if actions[indexPath.row].text.isEmpty {
-                    cell.taskTextView.textColor = .tertiaryLabel
-                    cell.taskTextView.text = "Type task here..."
+        if isNewProject {
+            // New project cell
+            if isBudget {
+                if indexPath.row == 0 {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "isBudgetCell") as! ProjectIsBudbetCell
+                    
+                    cell.isBudgetSwitch.isOn = isBudget
+                    cell.delegate = self
+                    
+                    return cell
                 } else {
-                    cell.taskTextView.textColor = .label
-                    cell.taskTextView.text = actions[indexPath.row].text
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "budgetCell") as! ProjectBudbetCell
+                    return cell
                 }
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "isBudgetCell") as! ProjectIsBudbetCell
                 
-                cell.textDidChange = {
-                    self.tableView.beginUpdates()
-                    self.tableView.endUpdates()
-                }
+                cell.isBudgetSwitch.isOn = isBudget
+                cell.delegate = self
                 
                 return cell
             }
         } else {
-            if indexPath.row == 0 {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "noTasksCell")!
-                
-                return cell
+            // Saved project cells
+            if actions.count != 0 {
+                if isBudget {
+                    if indexPath.row == 0 {
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "isBudgetCell") as! ProjectIsBudbetCell
+                        
+                        cell.delegate = self
+                        cell.isBudgetSwitch.isOn = isBudget
+                        
+                        return cell
+                    } else if indexPath.row == 1 {
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "profitCell") as! ProjectProfitCell
+                        
+                        // TODO: Profit data insert
+                        
+                        return cell
+                    } else if indexPath.row == actions.count + 2 {
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "addActionCell") as! AddActionCell
+                        cell.delegate = self
+                        return cell
+                    } else {
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "actionCell") as! ActionCell
+                        
+                        cell.checkmarkButton.isSelected = actions[indexPath.row - 2].completed
+                        if actions[indexPath.row - 2].text.isEmpty {
+                            cell.taskTextView.textColor = .tertiaryLabel
+                            cell.taskTextView.text = "Type task here..."
+                        } else {
+                            cell.taskTextView.textColor = .label
+                            cell.taskTextView.text = actions[indexPath.row - 2].text
+                        }
+                        
+                        cell.actionID = actions[indexPath.row - 2].id
+                        cell.delegate = self
+                        
+                        cell.textDidChange = {
+                            self.tableView.beginUpdates()
+                            self.tableView.endUpdates()
+                        }
+                        
+                        return cell
+                    }
+                } else {
+                    if indexPath.row == 0 {
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "isBudgetCell") as! ProjectIsBudbetCell
+                        
+                        cell.delegate = self
+                        cell.isBudgetSwitch.isOn = isBudget
+                        
+                        return cell
+                    } else if indexPath.row == actions.count + 1 {
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "addActionCell") as! AddActionCell
+                        cell.delegate = self
+                        return cell
+                    } else {
+                        let cell = tableView.dequeueReusableCell(withIdentifier: "actionCell") as! ActionCell
+                        
+                        cell.checkmarkButton.isSelected = actions[indexPath.row - 1].completed
+                        if actions[indexPath.row - 1].text.isEmpty {
+                            cell.taskTextView.textColor = .tertiaryLabel
+                            cell.taskTextView.text = "Type task here..."
+                        } else {
+                            cell.taskTextView.textColor = .label
+                            cell.taskTextView.text = actions[indexPath.row - 1].text
+                        }
+                        
+                        cell.actionID = actions[indexPath.row - 1].id
+                        cell.delegate = self
+                        
+                        cell.textDidChange = {
+                            self.tableView.beginUpdates()
+                            self.tableView.endUpdates()
+                        }
+                        
+                        return cell
+                    }
+                }
             } else {
-                // add task cell
-                let cell = tableView.dequeueReusableCell(withIdentifier: "addActionCell") as! AddActionCell
-                cell.delegate = self
-                return cell
+                if indexPath.row == 0 {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "isBudgetCell") as! ProjectIsBudbetCell
+                    
+                    cell.delegate = self
+                    cell.isBudgetSwitch.isOn = isBudget
+                    
+                    return cell
+                } else if isBudget && indexPath.row == 1 {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "profitCell") as! ProjectProfitCell
+                    
+                    // TODO: get from db the profit
+                    
+                    return cell
+                } else if isBudget && indexPath.row == 2 || !isBudget && indexPath.row == 1 {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "noTasksCell")!
+                    
+                    return cell
+                } else {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "addActionCell") as! AddActionCell
+                    cell.delegate = self
+                    return cell
+                }
             }
         }
     }

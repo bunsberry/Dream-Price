@@ -2,25 +2,27 @@
 //  RealmProject.swift
 //  Dream Price
 //
-//  Created by Georg on 19.07.2020.
+//  Created by Kostya Bunsberry on 19.07.2020.
 //
 
 import Foundation
 import RealmSwift
 
-@objc class RealmProject: Object {
-    dynamic var id: String?
-    dynamic var name: String?
-    dynamic var details: String?
-    dynamic var budget: Float?
-    dynamic var balance: Float?
-    dynamic var actions = List<RealmAction>()
+class RealmProject: Object {
+    @objc dynamic var id: String = UUID().uuidString
+    @objc dynamic var name: String = ""
+    @objc dynamic var details: String = ""
+    @objc dynamic var isFinished: Bool = false
+    @objc dynamic var isBudget: Bool = false
+    @objc dynamic var budget: Float = 0
+    @objc dynamic var balance: Float = 0
+    @objc dynamic var dateFinished: Date? = nil
     
-    convenience init(id: String, name: String, details: String, budget: Float) {
+    convenience init(name: String, details: String, isBudget: Bool, budget: Float) {
         self.init()
-        self.id = id
         self.name = name
         self.details = details
+        self.isBudget = isBudget
         self.budget = budget
         self.balance = budget
     }

@@ -2,7 +2,7 @@
 //  ProjectsCell.swift
 //  Dream Price
 //
-//  Created by Georg on 19.07.2020.
+//  Created by Kostya Bunsberry on 19.07.2020.
 //
 
 import UIKit
@@ -135,7 +135,8 @@ extension ProjectsCell: UICollectionViewDelegate, UICollectionViewDataSource, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.row == projects.count {
+        if indexPath.item == projectsShown.count {
+            print("new project cell")
             delegate?.newProject()
         } else {
             delegate?.openProject(id: projects[indexPath.row].id)

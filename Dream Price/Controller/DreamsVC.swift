@@ -166,7 +166,6 @@ class DreamsVC: UIViewController, UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        print("Set size")
         return CGSize(width: self.view.frame.width - 40, height: 115)
     }
     
@@ -264,7 +263,6 @@ class DreamsVC: UIViewController, UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Selected at \(indexPath.row)")
         selectedDreamToEdit = indexPath.row
         performSegue(withIdentifier: "toEditDream", sender: nil)
         EditDreamsVC.delegate = self

@@ -14,6 +14,8 @@ class ActionCell: UITableViewCell, UITextViewDelegate {
     var actionID: String!
     
     var textDidChange: (() -> Void)? = nil
+    
+    var delegate: ProjectEditDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -45,6 +47,23 @@ class ActionCell: UITableViewCell, UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         // TODO: db saving
         textDidChange?()
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let  char = text.cString(using: String.Encoding.utf8)!
+        let isBackSpace = strcmp(char, "\\b")
+
+        if (isBackSpace == -92) && textView.text.isEmpty {
+            print("should be removed")
+            delegate?.deleteAction(id: actionID)
+            return false
+        }
+        return true
+//        if text == "\r" {
+//            print("should be removed")
+//            return false
+//        }
+//        return true
     }
     
     @IBAction func checkmarkTapped(_ sender: UIButton) {
