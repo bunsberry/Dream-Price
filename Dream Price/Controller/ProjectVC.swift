@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
     
@@ -17,8 +18,11 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
     var isNewProject: Bool!
     var projectID: String!
     var isBudget: Bool = false
+    var projectObject = Project()
     
     var actions: [Action] = []
+    
+    let realm = try! Realm()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,13 +34,30 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
             detailsTextView.textColor = .tertiaryLabel
             doneButton.setTitle(NSLocalizedString("Save", comment: ""), for: .normal)
         } else {
-            // TODO: getting data from DB
-            // if db details is empty then
-            doneButton.setTitle(NSLocalizedString("Done", comment: ""), for: .normal)
-            if detailsTextView.text == "Description..." {
+            projectObject.id = projectID
+            
+            let projects = realm.objects(RealmProject.self)
+            for project in projects {
+                if project.id == projectObject.id {
+                    projectObject = Project(id: projectObject.id, name: project.name, details: project.details,
+                                            isFinished: project.isFinished, isBudget: project.isBudget,
+                                            budget: project.budget, balance: project.balance,
+                                            dateFinished: project.dateFinished as Date?)
+                }
+            }
+            
+            print(projectObject)
+            
+            titleTextView.text = projectObject.name
+            if projectObject.details == "" {
                 detailsTextView.text = "Description..."
                 detailsTextView.textColor = .tertiaryLabel
+            } else {
+                detailsTextView.text = projectObject.details
+                detailsTextView.textColor = .label
             }
+            
+            doneButton.setTitle(NSLocalizedString("Done", comment: ""), for: .normal)
         }
         
         titleTextView.delegate = self
@@ -48,44 +69,97 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
     }
     
     @IBAction func done(_ sender: UIButton) {
-        if doneButton.title(for: .normal) == NSLocalizedString("Save", comment: "") {
-            if titleTextView.text != "" && titleTextView.textColor != .tertiaryLabel {
-                if isBudget == true {
+        
+        // technicaly i need only color but i guess it's okay to double check
+        if titleTextView.text == "" || titleTextView.textColor == .tertiaryLabel {
+            // Alert
+            let alert = UIAlertController(title: NSLocalizedString("Fill in all the required information", comment: ""),
+                                          message: nil, preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Close", comment: ""), style: .cancel, handler: nil))
+            
+            present(alert, animated: true, completion: nil)
+        } else {
+            if isNewProject {
+                // Save
+                if projectObject.isBudget {
                     let budgetCell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! ProjectBudbetCell
                     
                     if budgetCell.budgetTextField.text != "" {
-                        // TODO: Wrtiting to db cells data
-                        isNewProject = false
-                        if isBudget {
-                            tableView.beginUpdates()
-                            tableView.reloadRows(at: [IndexPath(row: 0, section: 0),
-                                                      IndexPath(row: 1, section: 0)], with: .automatic)
-                            tableView.insertRows(at: [IndexPath(row: 2, section: 0),
-                                                      IndexPath(row: 3, section: 0)], with: .automatic)
-                            tableView.endUpdates()
-                        } else {
-                            tableView.beginUpdates()
-                            tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
-                            tableView.insertRows(at: [IndexPath(row: 1, section: 0),
-                                                      IndexPath(row: 2, section: 0)], with: .automatic)
-                            tableView.endUpdates()
-                        }
                         
+                        isNewProject = false
+                        
+                        projectObject.name = titleTextView.text
+                        if detailsTextView.textColor != UIColor.tertiaryLabel { projectObject.details = detailsTextView.text }
+                        
+                        tableView.beginUpdates()
+                        tableView.reloadRows(at: [IndexPath(row: 0, section: 0),
+                                                  IndexPath(row: 1, section: 0)], with: .automatic)
+                        tableView.insertRows(at: [IndexPath(row: 2, section: 0),
+                                                  IndexPath(row: 3, section: 0)], with: .automatic)
+                        tableView.endUpdates()
+                            
                         doneButton.setTitle(NSLocalizedString("Done", comment: ""), for: .normal)
+                        
+                        let newProject = RealmProject(name: projectObject.name, details: projectObject.details, isBudget: projectObject.isBudget, budget: projectObject.budget)
+                        newProject.id = projectObject.id
+                        
+                        try! realm.write {
+                            realm.add(newProject)
+                        }
                     } else {
-                        let alert = UIAlertController(title: NSLocalizedString("Fill in all the required information", comment: ""), message: nil, preferredStyle: .alert)
+                        // Alert
+                        let alert = UIAlertController(title: NSLocalizedString("Fill in all the required information", comment: ""),
+                                                      message: nil, preferredStyle: .alert)
+                        
                         alert.addAction(UIAlertAction(title: NSLocalizedString("Close", comment: ""), style: .cancel, handler: nil))
+                        
                         present(alert, animated: true, completion: nil)
+                    }
+                } else {
+                    isNewProject = false
+                    
+                    projectObject.name = titleTextView.text
+                    if detailsTextView.textColor != UIColor.tertiaryLabel { projectObject.details = detailsTextView.text }
+                    
+                    tableView.beginUpdates()
+                    tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+                    tableView.insertRows(at: [IndexPath(row: 1, section: 0),
+                                              IndexPath(row: 2, section: 0)], with: .automatic)
+                    tableView.endUpdates()
+                        
+                    doneButton.setTitle(NSLocalizedString("Done", comment: ""), for: .normal)
+                    
+                    let newProject = RealmProject(name: projectObject.name, details: projectObject.details, isBudget: projectObject.isBudget, budget: projectObject.budget)
+                    newProject.id = projectObject.id
+                    try! realm.write {
+                        realm.add(newProject)
                     }
                 }
             } else {
-                let alert = UIAlertController(title: NSLocalizedString("Fill in all the required information", comment: ""), message: nil, preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: NSLocalizedString("Close", comment: ""), style: .cancel, handler: nil))
-                present(alert, animated: true, completion: nil)
+                print("done pressed")
+                // Done
+                projectObject.name = titleTextView.text
+                if detailsTextView.textColor != UIColor.tertiaryLabel {
+                    projectObject.details = detailsTextView.text
+                } else { projectObject.details = "" }
+                
+                let projects = realm.objects(RealmProject.self)
+                for project in projects {
+                    if project.id == projectObject.id {
+                        print("found da shit")
+                        try! realm.write {
+                            project.name = projectObject.name
+                            project.details = projectObject.details
+                            project.isBudget = projectObject.isBudget
+                        }
+                    }
+                }
+                
+                self.dismiss(animated: true, completion: nil)
             }
-        } else {
-            self.dismiss(animated: true, completion: nil)
         }
+        
     }
     
     @IBAction func moreOptions(_ sender: UIButton) {
@@ -173,7 +247,7 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
             
             var cell = ActionCell()
             
-            if isBudget {
+            if projectObject.isBudget {
                 tableView.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .automatic)
                 cell = tableView.cellForRow(at: IndexPath(row: actions.count + 1, section: 0)) as! ActionCell
             } else {
@@ -187,7 +261,7 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
             
             var cell = ActionCell()
             
-            if isBudget {
+            if projectObject.isBudget {
                 tableView.insertRows(at: [IndexPath(row: actions.count + 1, section: 0)], with: .automatic)
                 cell = tableView.cellForRow(at: IndexPath(row: actions.count + 1, section: 0)) as! ActionCell
             } else {
@@ -204,13 +278,13 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
             if action.id == id {
                 actions.remove(at: index)
                 if actions.count == 0 {
-                    if isBudget {
+                    if projectObject.isBudget {
                         tableView.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .automatic)
                     } else {
                         tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
                     }
                 } else {
-                    if isBudget {
+                    if projectObject.isBudget {
                         tableView.deleteRows(at: [IndexPath(row: index + 2, section: 0)], with: .automatic)
                     } else {
                         tableView.deleteRows(at: [IndexPath(row: index + 1, section: 0)], with: .automatic)
@@ -221,9 +295,7 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
     }
     
     func isBudgetChangedTo(_ state: Bool) {
-        isBudget = state
-        
-        // TODO: db change state
+        projectObject.isBudget = state
         
         if doneButton.title(for: .normal) == NSLocalizedString("Save", comment: "") {
             if state {
@@ -239,6 +311,11 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
             }
         }
     }
+    
+    func budgetNumChangedTo(_ num: Float) {
+        projectObject.budget = num
+        projectObject.balance = num
+    }
 }
 
 extension ProjectVC: UITableViewDataSource, UITableViewDelegate {
@@ -246,14 +323,14 @@ extension ProjectVC: UITableViewDataSource, UITableViewDelegate {
         
         if isNewProject {
             // Создание проекта
-            if isBudget {
+            if projectObject.isBudget {
                 return 2
             } else {
                 return 1
             }
         } else {
             // Открытие существующего проекта
-            if isBudget {
+            if projectObject.isBudget {
                 if actions.count == 0 {
                     tableView.separatorStyle = .none
                     return 4
@@ -274,22 +351,25 @@ extension ProjectVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if isNewProject {
             // New project cell
-            if isBudget {
+            if projectObject.isBudget {
                 if indexPath.row == 0 {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "isBudgetCell") as! ProjectIsBudbetCell
                     
-                    cell.isBudgetSwitch.isOn = isBudget
+                    cell.isBudgetSwitch.isOn = projectObject.isBudget
                     cell.delegate = self
                     
                     return cell
                 } else {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "budgetCell") as! ProjectBudbetCell
+                    
+                    cell.delegate = self
+                    
                     return cell
                 }
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "isBudgetCell") as! ProjectIsBudbetCell
                 
-                cell.isBudgetSwitch.isOn = isBudget
+                cell.isBudgetSwitch.isOn = projectObject.isBudget
                 cell.delegate = self
                 
                 return cell
@@ -297,18 +377,52 @@ extension ProjectVC: UITableViewDataSource, UITableViewDelegate {
         } else {
             // Saved project cells
             if actions.count != 0 {
-                if isBudget {
+                if projectObject.isBudget {
                     if indexPath.row == 0 {
                         let cell = tableView.dequeueReusableCell(withIdentifier: "isBudgetCell") as! ProjectIsBudbetCell
                         
                         cell.delegate = self
-                        cell.isBudgetSwitch.isOn = isBudget
+                        cell.isBudgetSwitch.isOn = projectObject.isBudget
                         
                         return cell
                     } else if indexPath.row == 1 {
                         let cell = tableView.dequeueReusableCell(withIdentifier: "profitCell") as! ProjectProfitCell
                         
-                        // TODO: Profit data insert
+                        let formatter = NumberFormatter()
+                        formatter.numberStyle = NumberFormatter.Style.currency
+                        formatter.currencySymbol = ""
+                        formatter.locale = Locale.current
+                        
+                        if Settings.shared.recordCentsOn! {
+                            formatter.minimumFractionDigits = 2
+                            formatter.maximumFractionDigits = 2
+                        } else {
+                            formatter.minimumFractionDigits = 0
+                            formatter.maximumFractionDigits = 0
+                        }
+                        
+                        let profit = projectObject.budget - projectObject.balance
+                        if profit > 0 {
+                            cell.profitView.backgroundColor = .green
+                            cell.profitLabel.text = "+\(formatter.string(from: NSNumber(value: profit)))"
+                        } else if profit < 0 {
+                            cell.profitView.backgroundColor = .red
+                            cell.profitLabel.text = formatter.string(from: NSNumber(value: profit))
+                        } else {
+                            cell.profitView.backgroundColor = .tertiaryLabel
+                            cell.profitLabel.text = formatter.string(from: NSNumber(value: 0))
+                        }
+                        
+                        cell.profitView.layer.cornerRadius = cell.profitView.frame.height / 4
+                        
+                        if let localeIdentifier = Settings.shared.chosenLocaleIdentifier {
+                            cell.profitCurrencyLabel.text = " \(String(describing: Locale.init(identifier: localeIdentifier).currencySymbol!))"
+                        } else {
+                            if var localeCurrency = Locale.current.currencySymbol {
+                                if localeCurrency == "RUB" { localeCurrency = "₽" }
+                                cell.profitCurrencyLabel.text = " \(localeCurrency)"
+                            }
+                        }
                         
                         return cell
                     } else if indexPath.row == actions.count + 2 {
@@ -342,7 +456,7 @@ extension ProjectVC: UITableViewDataSource, UITableViewDelegate {
                         let cell = tableView.dequeueReusableCell(withIdentifier: "isBudgetCell") as! ProjectIsBudbetCell
                         
                         cell.delegate = self
-                        cell.isBudgetSwitch.isOn = isBudget
+                        cell.isBudgetSwitch.isOn = projectObject.isBudget
                         
                         return cell
                     } else if indexPath.row == actions.count + 1 {
@@ -377,16 +491,50 @@ extension ProjectVC: UITableViewDataSource, UITableViewDelegate {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "isBudgetCell") as! ProjectIsBudbetCell
                     
                     cell.delegate = self
-                    cell.isBudgetSwitch.isOn = isBudget
+                    cell.isBudgetSwitch.isOn = projectObject.isBudget
                     
                     return cell
-                } else if isBudget && indexPath.row == 1 {
+                } else if projectObject.isBudget && indexPath.row == 1 {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "profitCell") as! ProjectProfitCell
                     
-                    // TODO: get from db the profit
+                    let formatter = NumberFormatter()
+                    formatter.numberStyle = NumberFormatter.Style.currency
+                    formatter.currencySymbol = ""
+                    formatter.locale = Locale.current
+                    
+                    if Settings.shared.recordCentsOn! {
+                        formatter.minimumFractionDigits = 2
+                        formatter.maximumFractionDigits = 2
+                    } else {
+                        formatter.minimumFractionDigits = 0
+                        formatter.maximumFractionDigits = 0
+                    }
+                    
+                    let profit = projectObject.budget - projectObject.balance
+                    if profit > 0 {
+                        cell.profitView.backgroundColor = .green
+                        cell.profitLabel.text = "+\(formatter.string(from: NSNumber(value: profit)) ?? "0")"
+                    } else if profit < 0 {
+                        cell.profitView.backgroundColor = .red
+                        cell.profitLabel.text = formatter.string(from: NSNumber(value: profit))
+                    } else {
+                        cell.profitView.backgroundColor = .tertiaryLabel
+                        cell.profitLabel.text = formatter.string(from: NSNumber(value: 0))
+                    }
+                    
+                    cell.profitView.layer.cornerRadius = cell.profitView.frame.height / 4
+                    
+                    if let localeIdentifier = Settings.shared.chosenLocaleIdentifier {
+                        cell.profitCurrencyLabel.text = " \(String(describing: Locale.init(identifier: localeIdentifier).currencySymbol!))"
+                    } else {
+                        if var localeCurrency = Locale.current.currencySymbol {
+                            if localeCurrency == "RUB" { localeCurrency = "₽" }
+                            cell.profitCurrencyLabel.text = " \(localeCurrency)"
+                        }
+                    }
                     
                     return cell
-                } else if isBudget && indexPath.row == 2 || !isBudget && indexPath.row == 1 {
+                } else if projectObject.isBudget && indexPath.row == 2 || !isBudget && indexPath.row == 1 {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "noTasksCell")!
                     
                     return cell

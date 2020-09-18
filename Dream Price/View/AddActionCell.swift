@@ -11,6 +11,7 @@ protocol ProjectEditDelegate {
     func addAction()
     func deleteAction(id: String)
     func isBudgetChangedTo(_ state: Bool)
+    func budgetNumChangedTo(_ num: Float)
 }
 
 class AddActionCell: UITableViewCell {

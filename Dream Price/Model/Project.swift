@@ -8,7 +8,7 @@
 import Foundation
 
 struct Project {
-    let id: String = UUID().uuidString
+    var id: String = UUID().uuidString
     var name: String = ""
     var details: String = ""
     var isFinished: Bool = false

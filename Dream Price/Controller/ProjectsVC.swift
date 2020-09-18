@@ -43,6 +43,7 @@ class ProjectsVC: UITableViewController, ProjectDelegate, CompletedActionDelegat
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // todo: db
         if segue.identifier == "toProject" && chosenProjectID != "new" {
             let vc = segue.destination as! ProjectVC
             

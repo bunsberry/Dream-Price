@@ -18,9 +18,6 @@ class ProjectsCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     
     let realm = try! Realm()
-    var projects: [Project] = [Project(name: "Приложение", details: "Мое первое инди!", isFinished: false, isBudget: true, budget: 100, balance: 150),
-                               Project(name: "Повседневка", details: "", isFinished: false, isBudget: false, budget: 0, balance: 0),
-                               Project(name: "Завершенный проект", details: "", isFinished: true, isBudget: false, budget: 0, balance: 0)]
     
     var projectsShown = [Project]()
     
@@ -31,12 +28,15 @@ class ProjectsCell: UITableViewCell {
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         
-//        projects = realm.objects(RealmProject.self)
+        let projects = realm.objects(RealmProject.self)
         for project in projects {
             if project.isFinished == false {
-                projectsShown.append(project)
+                projectsShown.append(Project(id: project.id, name: project.name, details: project.details,
+                                             isFinished: project.isFinished, isBudget: project.isBudget,
+                                             budget: project.budget, balance: project.balance, dateFinished: nil))
             }
         }
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -69,7 +69,7 @@ extension ProjectsCell: UICollectionViewDelegate, UICollectionViewDataSource, UI
                 cell.budgetDifferenceView.backgroundColor = .clear
             } else {
                 cell.budgetDifferenceView.layer.cornerRadius = cell.budgetDifferenceView.frame.height / 3
-                let budgetDiff = projects[indexPath.row].balance - projectsShown[indexPath.row].budget
+                let budgetDiff = projectsShown[indexPath.row].balance - projectsShown[indexPath.row].budget
                 
                 let currencyFormatter = NumberFormatter()
                 currencyFormatter.numberStyle = .currency
@@ -139,7 +139,7 @@ extension ProjectsCell: UICollectionViewDelegate, UICollectionViewDataSource, UI
             print("new project cell")
             delegate?.newProject()
         } else {
-            delegate?.openProject(id: projects[indexPath.row].id)
+            delegate?.openProject(id: projectsShown[indexPath.row].id)
         }
     }
 }
