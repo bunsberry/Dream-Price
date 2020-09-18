@@ -12,9 +12,9 @@ class ProjectsVC: UITableViewController, ProjectDelegate, CompletedActionDelegat
     var transactionCount = 0
     private let settingsButton = UIButton()
     
-    var actions: [Action] = [Action(id: UUID().uuidString, projectID: "", text: "Завершенное действие", completed: true, dateCompleted: Date()),
-                             Action(id: UUID().uuidString, projectID: "", text: "Завершенное действие", completed: true, dateCompleted: Date()),
-                             Action(id: UUID().uuidString, projectID: "", text: "Незавершенное действие", completed: false, dateCompleted: nil)]
+    var actions: [Action] = [Action(id: UUID().uuidString, projectID: "", text: "Завершенное действие", isCompleted: true, dateCompleted: Date()),
+                             Action(id: UUID().uuidString, projectID: "", text: "Завершенное действие", isCompleted: true, dateCompleted: Date()),
+                             Action(id: UUID().uuidString, projectID: "", text: "Незавершенное действие", isCompleted: false, dateCompleted: nil)]
     var completedActions: [Action] = []
     var chosenProjectID = String()
     
@@ -23,7 +23,7 @@ class ProjectsVC: UITableViewController, ProjectDelegate, CompletedActionDelegat
         setupNavBar()
         
         for action in actions {
-            if action.completed {
+            if action.isCompleted {
                 completedActions.append(action)
             }
         }

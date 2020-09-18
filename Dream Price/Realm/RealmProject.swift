@@ -16,7 +16,7 @@ class RealmProject: Object {
     @objc dynamic var isBudget: Bool = false
     @objc dynamic var budget: Float = 0
     @objc dynamic var balance: Float = 0
-    @objc dynamic var dateFinished: Date? = nil
+    @objc dynamic var dateFinished: NSDate? = nil
     
     convenience init(name: String, details: String, isBudget: Bool, budget: Float) {
         self.init()

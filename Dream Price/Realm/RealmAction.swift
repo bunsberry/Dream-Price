@@ -10,14 +10,16 @@ import RealmSwift
 
 class RealmAction: Object {
     @objc dynamic var id: String = UUID().uuidString
-    @objc dynamic var name: String = ""
+    @objc dynamic var projectID: String = ""
+    @objc dynamic var text: String = ""
     @objc dynamic var isCompleted: Bool = false
     @objc dynamic var dateCompleted: NSDate?
     
-    convenience init(id: String, name: String, isCompleted: Bool, dateCompleted: Date?) {
+    convenience init(id: String, projectID: String, text: String, isCompleted: Bool, dateCompleted: Date?) {
         self.init()
         self.id = id
-        self.name = name
+        self.projectID = projectID
+        self.text = text
         self.isCompleted = isCompleted
         self.dateCompleted = dateCompleted as NSDate?
     }

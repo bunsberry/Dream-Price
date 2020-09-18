@@ -14,7 +14,6 @@ class ProjectIsBudbetCell: UITableViewCell {
     var delegate: ProjectEditDelegate?
     
     @IBAction func isBudgetChanged(_ sender: UISwitch) {
-        print("switch value changed")
         delegate?.isBudgetChangedTo(sender.isOn)
     }
 

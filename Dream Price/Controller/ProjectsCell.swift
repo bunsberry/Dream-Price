@@ -18,9 +18,9 @@ class ProjectsCell: UITableViewCell {
     @IBOutlet weak var collectionView: UICollectionView!
     
     let realm = try! Realm()
-    var projects: [Project] = [Project(name: "Приложение", details: "Мое первое инди!", isFinished: false, isBudget: true, budget: 100, balance: 150, actions: []),
-                               Project(name: "Повседневка", details: "", isFinished: false, isBudget: false, budget: 0, balance: 0, actions: []),
-                               Project(name: "Завершенный проект", details: "", isFinished: true, isBudget: false, budget: 0, balance: 0, actions: [])]
+    var projects: [Project] = [Project(name: "Приложение", details: "Мое первое инди!", isFinished: false, isBudget: true, budget: 100, balance: 150),
+                               Project(name: "Повседневка", details: "", isFinished: false, isBudget: false, budget: 0, balance: 0),
+                               Project(name: "Завершенный проект", details: "", isFinished: true, isBudget: false, budget: 0, balance: 0)]
     
     var projectsShown = [Project]()
     

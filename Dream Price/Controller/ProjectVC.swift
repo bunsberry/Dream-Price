@@ -18,7 +18,7 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
     var projectID: String!
     var isBudget: Bool = false
     
-    var actions: [Action] = [Action(id: UUID().uuidString, projectID: "", text: "", completed: false, dateCompleted: nil)]
+    var actions: [Action] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,26 +49,35 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
     
     @IBAction func done(_ sender: UIButton) {
         if doneButton.title(for: .normal) == NSLocalizedString("Save", comment: "") {
-            print("saving")
             if titleTextView.text != "" && titleTextView.textColor != .tertiaryLabel {
-                // TODO: Wrtiting to db cells data
-                isNewProject = false
-                if isBudget {
-                    tableView.beginUpdates()
-                    tableView.reloadRows(at: [IndexPath(row: 0, section: 0),
-                                              IndexPath(row: 1, section: 0)], with: .automatic)
-                    tableView.insertRows(at: [IndexPath(row: 2, section: 0),
-                                              IndexPath(row: 3, section: 0)], with: .automatic)
-                    tableView.endUpdates()
-                } else {
-                    tableView.beginUpdates()
-                    tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
-                    tableView.insertRows(at: [IndexPath(row: 1, section: 0),
-                                              IndexPath(row: 2, section: 0)], with: .automatic)
-                    tableView.endUpdates()
+                if isBudget == true {
+                    let budgetCell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as! ProjectBudbetCell
+                    
+                    if budgetCell.budgetTextField.text != "" {
+                        // TODO: Wrtiting to db cells data
+                        isNewProject = false
+                        if isBudget {
+                            tableView.beginUpdates()
+                            tableView.reloadRows(at: [IndexPath(row: 0, section: 0),
+                                                      IndexPath(row: 1, section: 0)], with: .automatic)
+                            tableView.insertRows(at: [IndexPath(row: 2, section: 0),
+                                                      IndexPath(row: 3, section: 0)], with: .automatic)
+                            tableView.endUpdates()
+                        } else {
+                            tableView.beginUpdates()
+                            tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+                            tableView.insertRows(at: [IndexPath(row: 1, section: 0),
+                                                      IndexPath(row: 2, section: 0)], with: .automatic)
+                            tableView.endUpdates()
+                        }
+                        
+                        doneButton.setTitle(NSLocalizedString("Done", comment: ""), for: .normal)
+                    } else {
+                        let alert = UIAlertController(title: NSLocalizedString("Fill in all the required information", comment: ""), message: nil, preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: NSLocalizedString("Close", comment: ""), style: .cancel, handler: nil))
+                        present(alert, animated: true, completion: nil)
+                    }
                 }
-                
-                doneButton.setTitle(NSLocalizedString("Done", comment: ""), for: .normal)
             } else {
                 let alert = UIAlertController(title: NSLocalizedString("Fill in all the required information", comment: ""), message: nil, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: NSLocalizedString("Close", comment: ""), style: .cancel, handler: nil))
@@ -85,7 +94,7 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
         let finishAction = UIAlertAction(title: NSLocalizedString("Finish Project", comment: ""), style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
             
-            let finishMenu = UIAlertController(title: NSLocalizedString("Project Options", comment: ""), message: nil, preferredStyle: .alert)
+            let finishMenu = UIAlertController(title: NSLocalizedString("Are you sure?", comment: ""), message: nil, preferredStyle: .alert)
             
             let yes = UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default, handler: {
                 (alert: UIAlertAction!) -> Void in
@@ -102,7 +111,7 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
         let deleteAction = UIAlertAction(title: NSLocalizedString("Delete Project", comment: ""), style: .default, handler: {
             (alert: UIAlertAction!) -> Void in
             
-            let deleteMenu = UIAlertController(title: NSLocalizedString("Project Options", comment: ""), message: nil, preferredStyle: .alert)
+            let deleteMenu = UIAlertController(title: NSLocalizedString("Are you sure?", comment: ""), message: nil, preferredStyle: .alert)
             
             let yes = UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default, handler: {
                 (alert: UIAlertAction!) -> Void in
@@ -156,10 +165,9 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
     }
     
     func addAction() {
-        print("added action")
         // TODO: db creating action
         if actions.count == 0 {
-            actions.append(Action(id: UUID().uuidString, projectID: projectID, text: "", completed: false, dateCompleted: nil))
+            actions.append(Action(id: UUID().uuidString, projectID: projectID, text: "", isCompleted: false, dateCompleted: nil))
             
             tableView.separatorStyle = .singleLine
             
@@ -175,7 +183,7 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
             
             cell.taskTextView.becomeFirstResponder()
         } else {
-            actions.append(Action(id: UUID().uuidString, projectID: projectID, text: "", completed: false, dateCompleted: nil))
+            actions.append(Action(id: UUID().uuidString, projectID: projectID, text: "", isCompleted: false, dateCompleted: nil))
             
             var cell = ActionCell()
             
@@ -224,7 +232,6 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
                 tableView.deleteRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
             }
         } else {
-            print(">.<")
             if state {
                 tableView.insertRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
             } else {
@@ -311,7 +318,7 @@ extension ProjectVC: UITableViewDataSource, UITableViewDelegate {
                     } else {
                         let cell = tableView.dequeueReusableCell(withIdentifier: "actionCell") as! ActionCell
                         
-                        cell.checkmarkButton.isSelected = actions[indexPath.row - 2].completed
+                        cell.checkmarkButton.isSelected = actions[indexPath.row - 2].isCompleted
                         if actions[indexPath.row - 2].text.isEmpty {
                             cell.taskTextView.textColor = .tertiaryLabel
                             cell.taskTextView.text = "Type task here..."
@@ -345,7 +352,7 @@ extension ProjectVC: UITableViewDataSource, UITableViewDelegate {
                     } else {
                         let cell = tableView.dequeueReusableCell(withIdentifier: "actionCell") as! ActionCell
                         
-                        cell.checkmarkButton.isSelected = actions[indexPath.row - 1].completed
+                        cell.checkmarkButton.isSelected = actions[indexPath.row - 1].isCompleted
                         if actions[indexPath.row - 1].text.isEmpty {
                             cell.taskTextView.textColor = .tertiaryLabel
                             cell.taskTextView.text = "Type task here..."

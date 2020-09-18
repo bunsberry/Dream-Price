@@ -15,7 +15,6 @@ struct Project {
     var isBudget: Bool = false
     var budget: Float = 0
     var balance: Float = 0
-    var actions: [Action] = []
     var dateFinished: Date? = nil
 }
 
@@ -23,6 +22,6 @@ struct Action {
     var id: String = UUID().uuidString
     var projectID: String!
     var text: String!
-    var completed: Bool = false
+    var isCompleted: Bool = false
     var dateCompleted: Date?
 }
