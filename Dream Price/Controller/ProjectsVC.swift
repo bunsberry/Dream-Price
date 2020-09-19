@@ -18,6 +18,8 @@ class ProjectsVC: UITableViewController, ProjectDelegate, CompletedActionDelegat
     var completedActions: [Action] = []
     var chosenProjectID = String()
     
+    var delegateToCell: ProjectTransferDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavBar()
@@ -32,6 +34,12 @@ class ProjectsVC: UITableViewController, ProjectDelegate, CompletedActionDelegat
         completedActions.sort(by: { $0.dateCompleted! > $1.dateCompleted! })
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        delegateToCell?.appearReload()
+    }
+    
     func newProject() {
         chosenProjectID = "new"
         performSegue(withIdentifier: "toProject", sender: nil)
@@ -42,6 +50,12 @@ class ProjectsVC: UITableViewController, ProjectDelegate, CompletedActionDelegat
         performSegue(withIdentifier: "toProject", sender: nil)
     }
     
+    func reloadProjects(isNew: Bool, isRemoved: Bool, id: String?) {
+        print("first delegate goes by")
+        print(isNew)
+        delegateToCell?.reloadProjects(isNew: isNew, isRemoved: isRemoved, id: id)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // todo: db
         if segue.identifier == "toProject" && chosenProjectID != "new" {
@@ -49,12 +63,14 @@ class ProjectsVC: UITableViewController, ProjectDelegate, CompletedActionDelegat
             
             vc.projectID = chosenProjectID
             vc.isNewProject = false
+            vc.delegate = self
         } else if segue.identifier == "toProject" && chosenProjectID == "new" {
             let vc = segue.destination as! ProjectVC
             
             // creating new project object
             vc.projectID = UUID().uuidString
             vc.isNewProject = true
+            vc.delegate = self
         }
     }
     
@@ -170,7 +186,10 @@ class ProjectsVC: UITableViewController, ProjectDelegate, CompletedActionDelegat
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProjectsCell", for: indexPath) as! ProjectsCell
+            
             cell.delegate = self
+            self.delegateToCell = cell
+            
             return cell
         } else if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SeparatorCell", for: indexPath)

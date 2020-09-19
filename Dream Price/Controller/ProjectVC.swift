@@ -16,11 +16,13 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
     @IBOutlet weak var doneButton: UIButton!
     
     var isNewProject: Bool!
+    var wasNewProject: Bool = false
     var projectID: String!
     var isBudget: Bool = false
     var projectObject = Project()
     
     var actions: [Action] = []
+    var delegate: ProjectDelegate?
     
     let realm = try! Realm()
 
@@ -46,8 +48,6 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
                 }
             }
             
-            print(projectObject)
-            
             titleTextView.text = projectObject.name
             if projectObject.details == "" {
                 detailsTextView.text = "Description..."
@@ -70,7 +70,6 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
     
     @IBAction func done(_ sender: UIButton) {
         
-        // technicaly i need only color but i guess it's okay to double check
         if titleTextView.text == "" || titleTextView.textColor == .tertiaryLabel {
             // Alert
             let alert = UIAlertController(title: NSLocalizedString("Fill in all the required information", comment: ""),
@@ -87,6 +86,7 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
                     
                     if budgetCell.budgetTextField.text != "" {
                         
+                        wasNewProject = isNewProject
                         isNewProject = false
                         
                         projectObject.name = titleTextView.text
@@ -101,8 +101,7 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
                             
                         doneButton.setTitle(NSLocalizedString("Done", comment: ""), for: .normal)
                         
-                        let newProject = RealmProject(name: projectObject.name, details: projectObject.details, isBudget: projectObject.isBudget, budget: projectObject.budget)
-                        newProject.id = projectObject.id
+                        let newProject = RealmProject(id: projectObject.id, name: projectObject.name, details: projectObject.details, isBudget: projectObject.isBudget, budget: projectObject.budget)
                         
                         try! realm.write {
                             realm.add(newProject)
@@ -117,6 +116,7 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
                         present(alert, animated: true, completion: nil)
                     }
                 } else {
+                    wasNewProject = isNewProject
                     isNewProject = false
                     
                     projectObject.name = titleTextView.text
@@ -130,8 +130,8 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
                         
                     doneButton.setTitle(NSLocalizedString("Done", comment: ""), for: .normal)
                     
-                    let newProject = RealmProject(name: projectObject.name, details: projectObject.details, isBudget: projectObject.isBudget, budget: projectObject.budget)
-                    newProject.id = projectObject.id
+                    let newProject = RealmProject(id: projectObject.id, name: projectObject.name, details: projectObject.details, isBudget: projectObject.isBudget, budget: projectObject.budget)
+                    
                     try! realm.write {
                         realm.add(newProject)
                     }
@@ -147,7 +147,6 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
                 let projects = realm.objects(RealmProject.self)
                 for project in projects {
                     if project.id == projectObject.id {
-                        print("found da shit")
                         try! realm.write {
                             project.name = projectObject.name
                             project.details = projectObject.details
@@ -155,7 +154,8 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
                         }
                     }
                 }
-                
+                print("in the end wasNew = \(wasNewProject)")
+                delegate?.reloadProjects(isNew: wasNewProject, isRemoved: false, id: projectID)
                 self.dismiss(animated: true, completion: nil)
             }
         }
@@ -173,6 +173,19 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
             let yes = UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default, handler: {
                 (alert: UIAlertAction!) -> Void in
                 // TODO: finish project and delegating
+                
+                let projects = self.realm.objects(RealmProject.self)
+                for project in projects {
+                    if project.id == self.projectObject.id {
+                        try! self.realm.write {
+                            project.isFinished = true
+                            project.dateFinished = NSDate()
+                        }
+                    }
+                }
+
+                self.projectObject.dateFinished = Date()
+                self.delegate?.reloadProjects(isNew: false, isRemoved: true, id: self.projectID)
                 self.dismiss(animated: true, completion: nil)
             })
             let no = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .default, handler: nil)
@@ -189,7 +202,17 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
             
             let yes = UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default, handler: {
                 (alert: UIAlertAction!) -> Void in
-                // TODO: delete project and delegating
+                
+                let projects = self.realm.objects(RealmProject.self)
+                for project in projects {
+                    if project.id == self.projectObject.id {
+                        try! self.realm.write {
+                            self.realm.delete(project)
+                        }
+                    }
+                }
+                
+                self.delegate?.reloadProjects(isNew: false, isRemoved: true, id: self.projectID)
                 self.dismiss(animated: true, completion: nil)
             })
             let no = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .default, handler: nil)

@@ -9,7 +9,7 @@ import Foundation
 import RealmSwift
 
 class RealmProject: Object {
-    @objc dynamic var id: String = UUID().uuidString
+    @objc dynamic var id: String = ""
     @objc dynamic var name: String = ""
     @objc dynamic var details: String = ""
     @objc dynamic var isFinished: Bool = false
@@ -18,8 +18,9 @@ class RealmProject: Object {
     @objc dynamic var balance: Float = 0
     @objc dynamic var dateFinished: NSDate? = nil
     
-    convenience init(name: String, details: String, isBudget: Bool, budget: Float) {
+    convenience init(id: String, name: String, details: String, isBudget: Bool, budget: Float) {
         self.init()
+        self.id = id
         self.name = name
         self.details = details
         self.isBudget = isBudget

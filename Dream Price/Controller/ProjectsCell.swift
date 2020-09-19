@@ -11,9 +11,15 @@ import RealmSwift
 protocol ProjectDelegate {
     func openProject(id: String)
     func newProject()
+    func reloadProjects(isNew: Bool, isRemoved: Bool, id: String?)
 }
 
-class ProjectsCell: UITableViewCell {
+protocol ProjectTransferDelegate {
+    func reloadProjects(isNew: Bool, isRemoved: Bool, id: String?)
+    func appearReload()
+}
+
+class ProjectsCell: UITableViewCell, ProjectTransferDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -28,6 +34,12 @@ class ProjectsCell: UITableViewCell {
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         
+        reloadData()
+    }
+    
+    func reloadData() {
+        projectsShown.removeAll()
+        
         let projects = realm.objects(RealmProject.self)
         for project in projects {
             if project.isFinished == false {
@@ -36,11 +48,48 @@ class ProjectsCell: UITableViewCell {
                                              budget: project.budget, balance: project.balance, dateFinished: nil))
             }
         }
-        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    
+    func appearReload() {
+        reloadData()
+        collectionView.reloadData()
+    }
+    
+    func reloadProjects(isNew: Bool, isRemoved: Bool, id: String?) {
+        print("final delegate is reached")
+        print(isNew)
+        reloadData()
+        
+        if isNew {
+            collectionView.insertItems(at: [IndexPath(item: projectsShown.count - 1, section: 0)])
+        } else {
+            var place: Int = -1
+            print("id is \(id!)")
+            
+            print(projectsShown.count)
+            for (index, project) in projectsShown.enumerated() {
+                print("for id is \(project.id)")
+                if project.id == id! {
+                    place = index
+                }
+            }
+            
+            print("place is \(place)")
+            
+            if place != -1 {
+                if isRemoved {
+                    collectionView.deleteItems(at: [IndexPath(item: place, section: 0)])
+                } else {
+                    collectionView.reloadItems(at: [IndexPath(item: place, section: 0)])
+                }
+            } else {
+                print("removed a new project")
+            }
+        }
     }
 }
 
