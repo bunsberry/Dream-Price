@@ -13,7 +13,7 @@ class Settings {
     
     private let kRecordCentsOn = "Settings.kRecordCentsOn"
     private let kChosenLocaleIdentifier = "Settings.kChosenLocaleIdentifier"
-    private let kIsFirstLaunch = "Settings.kIsFirstLaunch"
+    private let kHaveAlreadyLaunched = "Settings.kHaveAlreadyLaunched"
     
     var recordCentsOn: Bool? {
         get { return UserDefaults.standard.bool(forKey: kRecordCentsOn) }
@@ -25,9 +25,9 @@ class Settings {
         set { UserDefaults.standard.set(newValue, forKey: kChosenLocaleIdentifier) }
     }
     
-    var isFirstLaunch: Bool? {
-        get { return UserDefaults.standard.bool(forKey: kIsFirstLaunch) }
-        set { UserDefaults.standard.set(newValue, forKey: kIsFirstLaunch) }
+    var haveAlreadyLaunched: Bool? {
+        get { return UserDefaults.standard.bool(forKey: kHaveAlreadyLaunched) }
+        set { UserDefaults.standard.set(newValue, forKey: kHaveAlreadyLaunched) }
     }
     
 }

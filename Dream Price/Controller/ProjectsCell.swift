@@ -11,11 +11,11 @@ import RealmSwift
 protocol ProjectDelegate {
     func openProject(id: String)
     func newProject()
-    func reloadProjects(isNew: Bool, isRemoved: Bool, id: String?)
+    func reloadProjects(isNew: Bool, isRemoved: Bool, isFinished: Bool, id: String?)
 }
 
 protocol ProjectTransferDelegate {
-    func reloadProjects(isNew: Bool, isRemoved: Bool, id: String?)
+    func reloadProjects(isNew: Bool, isRemoved: Bool, isFinished: Bool, id: String?)
     func appearReload()
 }
 
@@ -59,29 +59,47 @@ class ProjectsCell: UITableViewCell, ProjectTransferDelegate {
         collectionView.reloadData()
     }
     
-    func reloadProjects(isNew: Bool, isRemoved: Bool, id: String?) {
-        print("final delegate is reached")
-        print(isNew)
+    func reloadProjects(isNew: Bool, isRemoved: Bool, isFinished: Bool, id: String?) {
         reloadData()
         
         if isNew {
             collectionView.insertItems(at: [IndexPath(item: projectsShown.count - 1, section: 0)])
         } else {
             var place: Int = -1
-            print("id is \(id!)")
             
-            print(projectsShown.count)
             for (index, project) in projectsShown.enumerated() {
-                print("for id is \(project.id)")
                 if project.id == id! {
                     place = index
                 }
             }
             
-            print("place is \(place)")
-            
             if place != -1 {
-                if isRemoved {
+                if isRemoved || isFinished {
+                    projectsShown.remove(at: place)
+                    
+                    if isRemoved {
+                        // deleting
+                        let projects = realm.objects(RealmProject.self)
+                        for project in projects {
+                            if project.id == id {
+                                try! realm.write {
+                                    realm.delete(project)
+                                }
+                            }
+                        }
+                    } else {
+                        // finishing
+                        let projects = realm.objects(RealmProject.self)
+                        for project in projects {
+                            if project.id == id {
+                                try! realm.write {
+                                    project.isFinished = true
+                                    project.dateFinished = NSDate()
+                                }
+                            }
+                        }
+                    }
+                    
                     collectionView.deleteItems(at: [IndexPath(item: place, section: 0)])
                 } else {
                     collectionView.reloadItems(at: [IndexPath(item: place, section: 0)])
@@ -185,7 +203,6 @@ extension ProjectsCell: UICollectionViewDelegate, UICollectionViewDataSource, UI
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.item == projectsShown.count {
-            print("new project cell")
             delegate?.newProject()
         } else {
             delegate?.openProject(id: projectsShown[indexPath.row].id)

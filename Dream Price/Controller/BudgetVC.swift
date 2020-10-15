@@ -48,6 +48,18 @@ class BudgetVC: UIViewController, BudgetDelegate, CategoriesBeenManaged {
         BudgetVC.delegateUp?.reloadItems()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if let haveLaunched = Settings.shared.haveAlreadyLaunched {
+            print("have launched: \(haveLaunched)")
+            if haveLaunched == false {
+                performSegue(withIdentifier: "toOnboarding", sender: nil)
+                Settings.shared.haveAlreadyLaunched = true
+            }
+        }
+    }
+    
     // MARK: Buttons setup
     
     func buttonsSetup() {

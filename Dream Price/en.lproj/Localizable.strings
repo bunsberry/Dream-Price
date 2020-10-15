@@ -51,7 +51,7 @@
 "New Phone" = "New Phone";
 "Mine's a bit old now..." = "Mine's a bit old now...";
 
-"DreamsTitle" = "Dreams";
+"DreamsPageTitle" = "Dreams";
 
 "No transactions" = "There is no transactions yet";
 "Add transactions" = "You can add them on budget page";
@@ -63,3 +63,16 @@
 "This will finish project" = "This action will finish the project and actions inside it. Are you sure?";
 "This will delete project" = "This action will delete the project and actions inside it. Are you sure?";
 
+// Onboarding
+
+"WelcomeTitle" = "Welcome to Dream Price!";
+"WelcomeText" = "Here you can monitor your budgeting, reach your goals and more...";
+
+"BudgetTitle" = "Monitor your budgets!";
+"BudgetText" = "You can save your expenses and earnings to control your money turnover";
+
+"DreamsTitle" = "Reach your Dreams!";
+"DreamsText" = "Focus on your long or short-term money goals and reach them";
+
+"ProjectsTitle" = "Make your projects profitable!";
+"ProjectsText" = "Set and complete tasks for your projects, you can track the project profit too";

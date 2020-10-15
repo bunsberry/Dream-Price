@@ -6,15 +6,15 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ProjectsVC: UITableViewController, ProjectDelegate, CompletedActionDelegate {
     
     var transactionCount = 0
     private let settingsButton = UIButton()
     
-    var actions: [Action] = [Action(id: UUID().uuidString, projectID: "", text: "Завершенное действие", isCompleted: true, dateCompleted: Date()),
-                             Action(id: UUID().uuidString, projectID: "", text: "Завершенное действие", isCompleted: true, dateCompleted: Date()),
-                             Action(id: UUID().uuidString, projectID: "", text: "Незавершенное действие", isCompleted: false, dateCompleted: nil)]
+    let realm = try! Realm()
+    
     var completedActions: [Action] = []
     var chosenProjectID = String()
     
@@ -23,21 +23,38 @@ class ProjectsVC: UITableViewController, ProjectDelegate, CompletedActionDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavBar()
-        
-        for action in actions {
-            if action.isCompleted {
-                completedActions.append(action)
-            }
-        }
-        
-        // TODO: Add completed projects
-        completedActions.sort(by: { $0.dateCompleted! > $1.dateCompleted! })
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        super.viewWillAppear(animated)
+        
+        completedActions.removeAll()
+        
+        let actions = realm.objects(RealmAction.self)
+        for action in actions {
+            if action.isCompleted {
+                completedActions.append(Action(id: action.id, projectID: action.projectID, text: action.text, isCompleted: action.isCompleted, dateCompleted: action.dateCompleted as Date?))
+            }
+        }
         
         delegateToCell?.appearReload()
+    }
+    
+    func reloadCompletedActions() {
+        completedActions.removeAll()
+        
+        let actions = realm.objects(RealmAction.self)
+        for action in actions {
+            if action.isCompleted {
+                completedActions.append(Action(id: action.id, projectID: action.projectID, text: action.text, isCompleted: action.isCompleted, dateCompleted: action.dateCompleted as Date?))
+            }
+        }
+        
+        if completedActions.count > 1 {
+            completedActions.sort(by: { $0.dateCompleted! > $1.dateCompleted! })
+        }
+        
+        tableView.reloadSections(IndexSet(integer: 2), with: .automatic)
     }
     
     func newProject() {
@@ -50,14 +67,13 @@ class ProjectsVC: UITableViewController, ProjectDelegate, CompletedActionDelegat
         performSegue(withIdentifier: "toProject", sender: nil)
     }
     
-    func reloadProjects(isNew: Bool, isRemoved: Bool, id: String?) {
+    func reloadProjects(isNew: Bool, isRemoved: Bool, isFinished: Bool, id: String?) {
         print("first delegate goes by")
-        print(isNew)
-        delegateToCell?.reloadProjects(isNew: isNew, isRemoved: isRemoved, id: id)
+        reloadCompletedActions()
+        delegateToCell?.reloadProjects(isNew: isNew, isRemoved: isRemoved, isFinished: isFinished, id: id)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // todo: db
         if segue.identifier == "toProject" && chosenProjectID != "new" {
             let vc = segue.destination as! ProjectVC
             
@@ -67,7 +83,6 @@ class ProjectsVC: UITableViewController, ProjectDelegate, CompletedActionDelegat
         } else if segue.identifier == "toProject" && chosenProjectID == "new" {
             let vc = segue.destination as! ProjectVC
             
-            // creating new project object
             vc.projectID = UUID().uuidString
             vc.isNewProject = true
             vc.delegate = self
@@ -229,10 +244,21 @@ class ProjectsVC: UITableViewController, ProjectDelegate, CompletedActionDelegat
     }
     
     func removedCompletition(id: String) {
+        
+        let actions = realm.objects(RealmAction.self)
+        for action in actions {
+            if action.id == id {
+                try! realm.write {
+                    action.isCompleted = false
+                    action.dateCompleted = nil
+                }
+            }
+        }
+        
         for (index, action) in completedActions.enumerated() {
             if action.id == id {
                 completedActions.remove(at: index)
-                // realm delete object
+                
                 if completedActions.count == 0 {
                     tableView.reloadRows(at: [IndexPath(row: index, section: 2)], with: .automatic)
                 } else {

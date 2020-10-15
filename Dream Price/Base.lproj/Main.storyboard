@@ -282,6 +282,7 @@
                         <outlet property="doneButton" destination="lqn-AO-Xd0" id="rom-TE-bGc"/>
                         <outlet property="removeButton" destination="OkX-JA-pnK" id="9Wd-5v-IAk"/>
                         <segue destination="Xvb-eF-EW8" kind="show" identifier="toCategoriesManage" id="kqz-JU-UxU"/>
+                        <segue destination="OiL-vR-V5V" kind="presentation" identifier="toOnboarding" id="vTs-9w-IFU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -568,6 +569,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mHy-On-t55" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="733" y="260"/>
+        </scene>
+        <!--Onboarding-->
+        <scene sceneID="BKO-l0-fXO">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Onboarding" id="OiL-vR-V5V" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yCF-Dd-hCi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1299" y="490"/>
         </scene>
         <!--Projects-->
         <scene sceneID="pf3-Z3-WZI">

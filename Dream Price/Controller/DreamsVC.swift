@@ -98,7 +98,7 @@ class DreamsVC: UIViewController, UICollectionViewDelegate, UICollectionViewData
     private func setupNavBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        title = NSLocalizedString("DreamsTitle", comment: "")
+        title = NSLocalizedString("DreamsPageTitle", comment: "")
         let addButtonImage = UIImage(systemName: "plus.circle")
         addButton.setTitle("", for: .normal)
         addButton.setImage(addButtonImage?.withTintColor(.label, renderingMode:.alwaysOriginal), for: .normal)

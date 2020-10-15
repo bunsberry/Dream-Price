@@ -21,7 +21,7 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
     var isBudget: Bool = false
     var projectObject = Project()
     
-    var actions: [Action] = []
+    var actions = [Action]()
     var delegate: ProjectDelegate?
     
     let realm = try! Realm()
@@ -30,6 +30,8 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
         super.viewDidLoad()
         
         if isNewProject == true {
+            projectObject.id = projectID
+            
             titleTextView.text = "Title"
             detailsTextView.text = "Description..."
             titleTextView.textColor = .tertiaryLabel
@@ -37,6 +39,8 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
             doneButton.setTitle(NSLocalizedString("Save", comment: ""), for: .normal)
         } else {
             projectObject.id = projectID
+            
+            // getting project data from db
             
             let projects = realm.objects(RealmProject.self)
             for project in projects {
@@ -47,6 +51,17 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
                                             dateFinished: project.dateFinished as Date?)
                 }
             }
+            
+            // getting actions from db
+            
+            let actions = realm.objects(RealmAction.self)
+            for action in actions {
+                if action.projectID == projectObject.id {
+                    self.actions.append(Action(id: action.id, projectID: action.projectID, text: action.text, isCompleted: action.isCompleted, dateCompleted: action.dateCompleted as Date?))
+                }
+            }
+            
+            // setting project stuff on front
             
             titleTextView.text = projectObject.name
             if projectObject.details == "" {
@@ -137,7 +152,6 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
                     }
                 }
             } else {
-                print("done pressed")
                 // Done
                 projectObject.name = titleTextView.text
                 if detailsTextView.textColor != UIColor.tertiaryLabel {
@@ -154,12 +168,11 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
                         }
                     }
                 }
-                print("in the end wasNew = \(wasNewProject)")
-                delegate?.reloadProjects(isNew: wasNewProject, isRemoved: false, id: projectID)
+                
+                delegate?.reloadProjects(isNew: wasNewProject, isRemoved: false, isFinished: false, id: projectID)
                 self.dismiss(animated: true, completion: nil)
             }
         }
-        
     }
     
     @IBAction func moreOptions(_ sender: UIButton) {
@@ -172,20 +185,9 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
             
             let yes = UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default, handler: {
                 (alert: UIAlertAction!) -> Void in
-                // TODO: finish project and delegating
-                
-                let projects = self.realm.objects(RealmProject.self)
-                for project in projects {
-                    if project.id == self.projectObject.id {
-                        try! self.realm.write {
-                            project.isFinished = true
-                            project.dateFinished = NSDate()
-                        }
-                    }
-                }
 
                 self.projectObject.dateFinished = Date()
-                self.delegate?.reloadProjects(isNew: false, isRemoved: true, id: self.projectID)
+                self.delegate?.reloadProjects(isNew: false, isRemoved: false, isFinished: true, id: self.projectObject.id)
                 self.dismiss(animated: true, completion: nil)
             })
             let no = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .default, handler: nil)
@@ -203,16 +205,16 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
             let yes = UIAlertAction(title: NSLocalizedString("Yes", comment: ""), style: .default, handler: {
                 (alert: UIAlertAction!) -> Void in
                 
-                let projects = self.realm.objects(RealmProject.self)
-                for project in projects {
-                    if project.id == self.projectObject.id {
+                let actions = self.realm.objects(RealmAction.self)
+                for action in actions {
+                    if action.projectID == self.projectObject.id {
                         try! self.realm.write {
-                            self.realm.delete(project)
+                            self.realm.delete(action)
                         }
                     }
                 }
                 
-                self.delegate?.reloadProjects(isNew: false, isRemoved: true, id: self.projectID)
+                self.delegate?.reloadProjects(isNew: false, isRemoved: true, isFinished: false, id: self.projectObject.id)
                 self.dismiss(animated: true, completion: nil)
             })
             let no = UIAlertAction(title: NSLocalizedString("No", comment: ""), style: .default, handler: nil)
@@ -253,18 +255,15 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
         }
     }
     
-    func textViewDidChange(_ textView: UITextView) {
-        if textView == titleTextView {
-            // project title saving
-        } else {
-            // project description saving
-        }
-    }
-    
     func addAction() {
-        // TODO: db creating action
+        let newAction = RealmAction(id: UUID().uuidString, projectID: projectObject.id, text: "", isCompleted: false, dateCompleted: nil)
+        
+        try! realm.write {
+            realm.add(newAction.self)
+        }
+        
         if actions.count == 0 {
-            actions.append(Action(id: UUID().uuidString, projectID: projectID, text: "", isCompleted: false, dateCompleted: nil))
+            actions.append(Action(id: newAction.id, projectID: newAction.id, text: "", isCompleted: false, dateCompleted: nil))
             
             tableView.separatorStyle = .singleLine
             
@@ -280,7 +279,7 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
             
             cell.taskTextView.becomeFirstResponder()
         } else {
-            actions.append(Action(id: UUID().uuidString, projectID: projectID, text: "", isCompleted: false, dateCompleted: nil))
+            actions.append(Action(id: newAction.id, projectID: newAction.id, text: "", isCompleted: false, dateCompleted: nil))
             
             var cell = ActionCell()
             
@@ -299,6 +298,14 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
     func deleteAction(id: String) {
         for (index, action) in actions.enumerated() {
             if action.id == id {
+                let actionsRealm = realm.objects(RealmAction.self)
+                for action in actionsRealm {
+                    if action.id == id {
+                        try! realm.write {
+                            realm.delete(action)
+                        }
+                    }
+                }
                 actions.remove(at: index)
                 if actions.count == 0 {
                     if projectObject.isBudget {
@@ -427,10 +434,10 @@ extension ProjectVC: UITableViewDataSource, UITableViewDelegate {
                         let profit = projectObject.budget - projectObject.balance
                         if profit > 0 {
                             cell.profitView.backgroundColor = .green
-                            cell.profitLabel.text = "+\(formatter.string(from: NSNumber(value: profit)))"
+                            cell.profitLabel.text = "+\(formatter.string(from: NSNumber(value: profit)) ?? "0")"
                         } else if profit < 0 {
                             cell.profitView.backgroundColor = .red
-                            cell.profitLabel.text = formatter.string(from: NSNumber(value: profit))
+                            cell.profitLabel.text = formatter.string(from: NSNumber(value: profit)) ?? "0"
                         } else {
                             cell.profitView.backgroundColor = .tertiaryLabel
                             cell.profitLabel.text = formatter.string(from: NSNumber(value: 0))

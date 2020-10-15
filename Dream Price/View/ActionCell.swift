@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ActionCell: UITableViewCell, UITextViewDelegate {
     
@@ -16,6 +17,7 @@ class ActionCell: UITableViewCell, UITextViewDelegate {
     var textDidChange: (() -> Void)? = nil
     
     var delegate: ProjectEditDelegate?
+    let realm = try! Realm()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -45,7 +47,16 @@ class ActionCell: UITableViewCell, UITextViewDelegate {
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        // TODO: db saving
+        let actions = realm.objects(RealmAction.self)
+        
+        for action in actions {
+            if action.id == actionID {
+                try! realm.write {
+                    action.text = textView.text
+                }
+            }
+        }
+        
         textDidChange?()
     }
     
@@ -54,25 +65,32 @@ class ActionCell: UITableViewCell, UITextViewDelegate {
         let isBackSpace = strcmp(char, "\\b")
 
         if (isBackSpace == -92) && textView.text.isEmpty {
-            print("should be removed")
             delegate?.deleteAction(id: actionID)
             return false
         }
         return true
-//        if text == "\r" {
-//            print("should be removed")
-//            return false
-//        }
-//        return true
     }
     
     @IBAction func checkmarkTapped(_ sender: UIButton) {
-        // TODO: db write that it's done
+        var dateCompleted: Date? = nil
+        
         if sender.isSelected {
             sender.isSelected = false
+            dateCompleted =  nil
         } else {
             sender.isSelected = true
+            dateCompleted = Date()
+        }
+        
+        let actions = realm.objects(RealmAction.self)
+        
+        for action in actions {
+            if action.id == actionID {
+                try! realm.write {
+                    action.isCompleted = sender.isSelected
+                    action.dateCompleted = dateCompleted as NSDate?
+                }
+            }
         }
     }
-
 }
