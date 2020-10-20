@@ -1,0 +1,111 @@
+
+/* Class = "UILabel"; text = "Main"; ObjectID = "0Ar-Ng-du6"; */
+"0Ar-Ng-du6.text" = "Main";
+
+/* Class = "UITabBarItem"; title = "Dreams"; ObjectID = "3sZ-cQ-nQE"; */
+"3sZ-cQ-nQE.title" = "Träume";
+
+/* Class = "UILabel"; text = "/"; ObjectID = "4e7-bg-a0G"; */
+"4e7-bg-a0G.text" = "/";
+
+/* Class = "UILabel"; text = "Main"; ObjectID = "8JK-51-pJM"; */
+"8JK-51-pJM.text" = "Main";
+
+/* Class = "UITableViewSection"; headerTitle = "Title"; ObjectID = "8oi-Sl-fTg"; */
+"8oi-Sl-fTg.headerTitle" = "Titel";
+
+/* Class = "UITextField"; placeholder = "Add description..."; ObjectID = "9g7-p2-cgz"; */
+"9g7-p2-cgz.placeholder" = "Beschreibung hinzufügen...";
+
+/* Class = "UILabel"; text = "Description"; ObjectID = "9r7-Y7-fSk"; */
+"9r7-Y7-fSk.text" = "Beschreibung";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "Bce-cD-FjU"; */
+"Bce-cD-FjU.text" = "Titel";
+
+/* Class = "UIBarButtonItem"; title = "Назад"; ObjectID = "HQS-dN-Vso"; */
+"HQS-dN-Vso.title" = "Zurück";
+
+/* Class = "UITextField"; placeholder = "Add title..."; ObjectID = "HUq-Q1-MaZ"; */
+"HUq-Q1-MaZ.placeholder" = "Titel hinzufügen...";
+
+/* Class = "UILabel"; text = "7 000 $"; ObjectID = "Ike-tI-F9Y"; */
+"Ike-tI-F9Y.text" = "7 000";
+
+/* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "KMw-lY-Ks4"; */
+"KMw-lY-Ks4.title" = "Stornieren";
+
+/* Class = "UITableViewSection"; headerTitle = "Description (optional)"; ObjectID = "W2U-oL-uwu"; */
+"W2U-oL-uwu.headerTitle" = "Beschreibung (optional)";
+
+/* Class = "UINavigationItem"; title = "New Dream"; ObjectID = "Xay-22-ej1"; */
+"Xay-22-ej1.title" = "Neuer Traum";
+
+/* Class = "UITableViewSection"; headerTitle = "Goal"; ObjectID = "Y3e-Dy-8S2"; */
+"Y3e-Dy-8S2.headerTitle" = "Tor";
+
+/* Class = "UILabel"; text = "Friday, 20 June"; ObjectID = "Y4H-5k-bgh"; */
+"Y4H-5k-bgh.text" = "Freitag, 20 Juni";
+
+/* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "YAR-VI-yDN"; */
+"YAR-VI-yDN.title" = "Stornieren";
+
+/* Class = "UITableViewSection"; headerTitle = "Goal"; ObjectID = "Zaq-co-qFZ"; */
+"Zaq-co-qFZ.headerTitle" = "Tor";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "a6q-PU-cxp"; */
+"a6q-PU-cxp.text" = "Titel";
+
+/* Class = "UILabel"; text = "7 000 000 $"; ObjectID = "bBF-QY-KmV"; */
+"bBF-QY-KmV.text" = "7 000 000";
+
+/* Class = "UITextField"; placeholder = "Add goal..."; ObjectID = "bTg-wG-fXj"; */
+"bTg-wG-fXj.placeholder" = "Ziel hinzufügen...";
+
+/* Class = "UILabel"; text = "Secondary"; ObjectID = "cNT-az-Vfo"; */
+"cNT-az-Vfo.text" = "Sekundär";
+
+/* Class = "UILabel"; text = "Friday, 20 June"; ObjectID = "dfy-tu-tNT"; */
+"dfy-tu-tNT.text" = "Freitag, 20 Juni";
+
+/* Class = "UILabel"; text = "Secondary"; ObjectID = "eQC-an-f88"; */
+"eQC-an-f88.text" = "Sekundär";
+
+/* Class = "UITableViewSection"; headerTitle = "Description (optional)"; ObjectID = "hqd-PW-Ak7"; */
+"hqd-PW-Ak7.headerTitle" = "Beschreibung (optional)";
+
+/* Class = "UITableViewSection"; headerTitle = "Title"; ObjectID = "lf5-oC-MLw"; */
+"lf5-oC-MLw.headerTitle" = "Titel";
+
+/* Class = "UITableViewSection"; headerTitle = "Type"; ObjectID = "m1D-b1-kEn"; */
+"m1D-b1-kEn.headerTitle" = "Art";
+
+/* Class = "UINavigationItem"; title = "Dream"; ObjectID = "mnf-QQ-fW5"; */
+"mnf-QQ-fW5.title" = "Traum";
+
+/* Class = "UITextField"; placeholder = "Add title..."; ObjectID = "nOb-q9-ngH"; */
+"nOb-q9-ngH.placeholder" = "Titel hinzufügen...";
+
+/* Class = "UIBarButtonItem"; title = "Назад"; ObjectID = "ond-Ex-yy2"; */
+"ond-Ex-yy2.title" = "Zurück";
+
+/* Class = "UITabBarItem"; title = "Dreams"; ObjectID = "qpx-1Q-jzv"; */
+"qpx-1Q-jzv.title" = "Träume";
+
+/* Class = "UITextField"; placeholder = "Add goal..."; ObjectID = "rzY-J9-oh6"; */
+"rzY-J9-oh6.placeholder" = "Ziel hinzufügen...";
+
+/* Class = "UILabel"; text = "Description"; ObjectID = "sNJ-bH-IOg"; */
+"sNJ-bH-IOg.text" = "Beschreibung";
+
+/* Class = "UITableViewSection"; headerTitle = "Type"; ObjectID = "vb5-Ol-Wjb"; */
+"vb5-Ol-Wjb.headerTitle" = "Art";
+
+/* Class = "UITextField"; placeholder = "Add desription..."; ObjectID = "xYl-wX-Y99"; */
+"xYl-wX-Y99.placeholder" = "Beschreibung hinzufügen...";
+
+/* Class = "UILabel"; text = "100 $"; ObjectID = "ykj-z6-7Nh"; */
+"ykj-z6-7Nh.text" = "100";
+
+// Delete button
+"hIt-S8-jNq.normalTitle" = "Löschen";

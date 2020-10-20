@@ -1,0 +1,30 @@
+
+/* Class = "WKInterfaceLabel"; text = "Личный Счет"; ObjectID = "25N-o0-9fj"; */
+"25N-o0-9fj.text" = "Личный Счет";
+
+/* Class = "WKInterfaceButton"; title = "Далее"; ObjectID = "6zc-bf-chp"; */
+"6zc-bf-chp.title" = "Далее";
+
+/* Class = "WKInterfaceController"; title = "Dream Price"; ObjectID = "AgC-eL-Hgc"; */
+"AgC-eL-Hgc.title" = "Dream Price";
+
+/* Class = "WKInterfaceLabel"; text = "0 ₽"; ObjectID = "AkP-KF-4k8"; */
+"AkP-KF-4k8.text" = "0 ₽";
+
+/* Class = "WKInterfaceLabel"; text = "Alert Label"; ObjectID = "IdU-wH-bcW"; */
+"IdU-wH-bcW.text" = "Alert Label";
+
+/* Class = "WKInterfaceLabel"; text = "Label"; ObjectID = "RPj-MS-eyH"; */
+"RPj-MS-eyH.text" = "Label";
+
+/* Class = "WKInterfaceController"; title = "Категория"; ObjectID = "XgM-cV-bQB"; */
+"XgM-cV-bQB.title" = "Категория";
+
+/* Class = "WKInterfaceButton"; title = "Готово"; ObjectID = "atG-hi-8TX"; */
+"atG-hi-8TX.title" = "Готово";
+
+/* Class = "WKInterfaceLabel"; text = "Прокрутите Digital Crown, чтобы изменить значение транзакции"; ObjectID = "mfz-zl-jHY"; */
+"mfz-zl-jHY.text" = "Прокрутите Digital Crown, чтобы изменить значение транзакции";
+
+/* Class = "WKInterfaceLabel"; text = "Личный Счет"; ObjectID = "uvs-kI-h9y"; */
+"uvs-kI-h9y.text" = "Личный Счет";

@@ -1,0 +1,75 @@
+
+/* Class = "UITextField"; placeholder = "Geben Sie neue Kategorie hier ..."; ObjectID = "1UB-ef-9B9"; */
+"1ub-ef-9B9.placeholder" = "Geben Sie neue Kategorie hier ...";
+
+/* Class = "UIButton"; normalTitle = "8"; ObjectID = "2mf-J0-ECY"; */
+"2mf-J0-eCy.normalTitle" = "8";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "3MP-gz-bos"; */
+"3Mp-gz-bOS.text" = "0";
+
+/* Class = "UIButton"; normalTitle = "6"; ObjectID = "3of-yy-B3F"; */
+"3oF-yy-b3f.normalTitle" = "6";
+
+/* Class = "UILabel"; text = "Persönliches Konto"; ObjectID = "54q-tt-1VC"; */
+"54q-tt-1Vc.text" = "Persönliches Konto";
+
+/* Class = "UITextField"; placeholder = "Geben Sie neue Kategorie hier ..."; ObjectID = "5V9-hL-BBE"; */
+"5v9-hL-BBE.placeholder" = "Geben Sie neue Kategorie hier ...";
+
+/* Class = "UITabBarItem"; title = "Artikel"; ObjectID = "CLv-r4-fft"; */
+"CLv-r4-FfT.title" = "Artikel";
+
+/* Class = "UITabBarItem"; title = "Budget"; ObjectID = "DPl-dS-WVM"; */
+"DPl-dS-Wvm.title" = "Budget";
+
+/* Class = "UIButton"; normalTitle = "7"; ObjectID = "If7-8T-8q7"; */
+"If7-8T-8q7.normalTitle" = "7";
+
+/* Class = "UIButton"; normalTitle = "5"; ObjectID = "Jrz-JX-6DD"; */
+"Jrz-jx-6dD.normalTitle" = "5";
+
+/* Class = "UIButton"; normalTitle = "0"; ObjectID = "LNn-Gm-TaH"; */
+"LNn-gM-TaH.normalTitle" = "0";
+
+/* Class = "UIButton"; normalTitle = "2"; ObjectID = "MUO-ag-yw8"; */
+"MUO-aG-yw8.normalTitle" = "2";
+
+/* Class = "UINavigationItem"; title = "Kategorien"; ObjectID = "Q1L-IR-DRN"; */
+"Q1L-IR-drN.title" = "Kategorien";
+
+/* Class = "UILabel"; text = "Bilanz: 25 543 ₽"; ObjectID = "TZj-JM-ILX"; */
+"TZj-JM-iLx.text" = "Bilanz: 25 543";
+
+/* Class = "UIButton"; normalTitle = "4"; ObjectID = "Vn1-eX-GXP"; */
+"Vn1-eX-gxP.normalTitle" = "4";
+
+/* Class = "UITabBarItem"; title = "Artikel"; ObjectID = "Won-Z7-YNS"; */
+"Won-z7-YNS.title" = "Artikel";
+
+/* Class = "UIButton"; normalTitle = "1"; ObjectID = "BKE-J5-AOW"; */
+"bKE-J5-AOW.normalTitle" = "1";
+
+/* Class = "UILabel"; text = " $"; ObjectID = "FFD-ek-4 ZI"; */
+"fFd-ek-4zl.text" = " $";
+
+/* Class = "UIButton"; normalTitle = "9"; ObjectID = "fP9-7P-Vyf"; */
+"fP9-7P-vYF.normalTitle" = "9";
+
+/* Class = "UIButton"; normalTitle = "Mehr..."; ObjectID = "hY0-ox-B1H"; */
+"hY0-ox-B1H.normalTitle" = " ";
+
+/* Class = "UILabel"; text = "Etikette"; ObjectID = "LMC-fj-Ab3"; */
+"lMc-fj-Ab3.text" = "Etikette";
+
+/* Class = "UIButton"; normalTitle = " "; ObjectID = "ULS-mm-fLF"; */
+"uls-mm-fLF.normalTitle" = " ";
+
+/* Class = "UITextField"; text = "Kategorie"; ObjectID = "VSV-zc-IA0"; */
+"vSv-zc-IA0.text" = "Kategorie";
+
+/* Class = "UITabBarItem"; title = "Artikel"; ObjectID = "Ybj-Al-t98"; */
+"ybj-Al-t98.title" = "Artikel";
+
+/* Class = "UIButton"; normalTitle = "3"; ObjectID = "Yon-8F-FPN"; */
+"yoN-8F-fPN.normalTitle" = "3";

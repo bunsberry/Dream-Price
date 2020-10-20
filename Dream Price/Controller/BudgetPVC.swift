@@ -46,6 +46,18 @@ class BudgetPVC: UIPageViewController, TransportDelegate, TransportUpDelegate {
             pagesData.append(BudgetItem(budgetID: budget.id, type: BudgetItemType(rawValue: budget.type)!, balance: Float(budget.balance), name: budget.name))
         }
         
+        let realmProjects = realm.objects(RealmProject.self)
+        
+        for project in realmProjects {
+            print("is project")
+            if project.isBudget == true {
+                print("project is budget")
+                pagesData.append(BudgetItem(budgetID: project.id, type: BudgetItemType(rawValue: "project")!, balance: project.balance, name: project.name))
+            }
+        }
+        
+        print("pagesData.count = \(pagesData.count)")
+        
         self.dataSource = self
         self.delegate = self
         
@@ -100,6 +112,14 @@ class BudgetPVC: UIPageViewController, TransportDelegate, TransportUpDelegate {
             self.pagesData.append(BudgetItem(budgetID: budget.id, type: BudgetItemType(rawValue: budget.type)!, balance: Float(budget.balance), name: budget.name))
         }
         
+        let realmProjects = self.realm.objects(RealmProject.self)
+        
+        for project in realmProjects {
+            if project.isBudget == true {
+                self.pagesData.append(BudgetItem(budgetID: project.id, type: BudgetItemType(rawValue: "project")!, balance: Float(project.balance), name: project.name))
+            }
+        }
+        
         self.dataSource = self
     }
     
@@ -148,6 +168,7 @@ extension BudgetPVC: UIPageViewControllerDataSource, UIPageViewControllerDelegat
     }
     
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
+        print(pagesData.count)
         return pagesData.count
     }
     

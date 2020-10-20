@@ -1,0 +1,30 @@
+
+/* Class = "UITextField"; placeholder = "0"; ObjectID = "0HL-BH-UEj"; */
+"0hL-BH-Uej.placeholder" = "0";
+
+/* Class = "UITextField"; placeholder = "Geben Sie in der Transaktion Kategorie"; ObjectID = "BYE-0y-J1t"; */
+"BYe-0y-J1t.placeholder" = "Geben Sie in der Transaktion Kategorie";
+
+/* Class = "UITextField"; placeholder = "Beschreibung..."; ObjectID = "PWK-gd-Vpm"; */
+"PWK-gd-Vpm.placeholder" = "Beschreibung...";
+
+/* Class = "UILabel"; text = "-100 $"; ObjectID = "R1I-I0-SXR"; */
+"R1I-I0-SXr.text" = "-100 $";
+
+/* Class = "UIButton"; normalTitle = "Löschen"; ObjectID = "BKP-gl-Ha1"; */
+"bKP-gL-Ha1.normalTitle" = "Löschen";
+
+/* Class = "UIBarButtonItem"; title = "Сохранить"; ObjectID = "pKI-en-3PO"; */
+"pKI-eN-3Po.title" = "speichern";
+
+/* Class = "UINavigationItem"; title = "Geschichte"; ObjectID = "uau-vj-EYV"; */
+"uAu-vj-eYV.title" = "Geschichte";
+
+/* Class = "UINavigationItem"; title = "Transaktion"; ObjectID = "UWT-h7-Vuh"; */
+"uwT-h7-vuH.title" = "Transaktion";
+
+/* Class = "UITabBarItem"; title = "Geschichte"; ObjectID = "WPI-Qb-4yg"; */
+"wPI-Qm-4yg.title" = "Geschichte";
+
+/* Class = "UILabel"; text = "Lebensmittel"; ObjectID = "ZKM-XZ-OK7"; */
+"zKm-XZ-OK7.text" = "Lebensmittel";

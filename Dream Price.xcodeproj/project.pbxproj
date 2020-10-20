@@ -23,6 +23,7 @@
 		17A93A7024FFDEC9000C6439 /* ProjectBudbetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A93A6F24FFDEC9000C6439 /* ProjectBudbetCell.swift */; };
 		17A93A7224FFDEDC000C6439 /* ProjectProfitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A93A7124FFDEDC000C6439 /* ProjectProfitCell.swift */; };
 		17B5A31824FB829C005F2E12 /* CompletedActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B5A31724FB829C005F2E12 /* CompletedActionCell.swift */; };
+		17EE8571253EE28C00EC2641 /* Projects.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17EE8573253EE28C00EC2641 /* Projects.storyboard */; };
 		56D8D48F24C49BD200C3194D /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8D48E24C49BD200C3194D /* RealmService.swift */; };
 		56D8D49324C4D70F00C3194D /* RealmTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8D49224C4D70F00C3194D /* RealmTransaction.swift */; };
 		56D8D49524C4D7E400C3194D /* RealmCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D8D49424C4D7E400C3194D /* RealmCategory.swift */; };
@@ -40,7 +41,6 @@
 		8416E83F24C7E34600DB0C0C /* DreamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8416E83E24C7E34600DB0C0C /* DreamCell.swift */; };
 		8416E84124C7E36200DB0C0C /* FocusedDreamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8416E84024C7E36200DB0C0C /* FocusedDreamCell.swift */; };
 		8416E84224C7F7A400DB0C0C /* Dreams.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8416E84424C7F7A400DB0C0C /* Dreams.storyboard */; };
-		841BDABF24BCC4330096BF68 /* Projects.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 841BDABE24BCC4330096BF68 /* Projects.storyboard */; };
 		843688BB24BCC0A500793B2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843688BA24BCC0A500793B2B /* AppDelegate.swift */; };
 		843688BD24BCC0A500793B2B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843688BC24BCC0A500793B2B /* SceneDelegate.swift */; };
 		843688C224BCC0A500793B2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 843688C024BCC0A500793B2B /* Main.storyboard */; };
@@ -161,6 +161,16 @@
 		17A93A6F24FFDEC9000C6439 /* ProjectBudbetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectBudbetCell.swift; sourceTree = "<group>"; };
 		17A93A7124FFDEDC000C6439 /* ProjectProfitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectProfitCell.swift; sourceTree = "<group>"; };
 		17B5A31724FB829C005F2E12 /* CompletedActionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedActionCell.swift; sourceTree = "<group>"; };
+		17EE8572253EE28C00EC2641 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Projects.storyboard; sourceTree = "<group>"; };
+		17EE8575253EE29200EC2641 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Projects.strings; sourceTree = "<group>"; };
+		17EE8577253EE2D700EC2641 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Projects.strings; sourceTree = "<group>"; };
+		17EE857E253EE5E300EC2641 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
+		17EE857F253EE5E300EC2641 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Dreams.strings; sourceTree = "<group>"; };
+		17EE8580253EE5E400EC2641 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/History.strings; sourceTree = "<group>"; };
+		17EE8581253EE5E400EC2641 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Projects.strings; sourceTree = "<group>"; };
+		17EE8582253EE5E400EC2641 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		17EE8583253EE5E400EC2641 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Interface.strings; sourceTree = "<group>"; };
+		17EE8584253EE5E500EC2641 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		56D8D48E24C49BD200C3194D /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		56D8D49224C4D70F00C3194D /* RealmTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RealmTransaction.swift; path = "Dream Price/RealmTransaction.swift"; sourceTree = SOURCE_ROOT; };
 		56D8D49424C4D7E400C3194D /* RealmCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RealmCategory.swift; path = "Dream Price/RealmCategory.swift"; sourceTree = SOURCE_ROOT; };
@@ -181,7 +191,6 @@
 		8416E84324C7F7A400DB0C0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Dreams.storyboard; sourceTree = "<group>"; };
 		8416E84624C7F7AA00DB0C0C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Dreams.strings; sourceTree = "<group>"; };
 		8416E84824C7F7AE00DB0C0C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Dreams.strings; sourceTree = "<group>"; };
-		841BDABE24BCC4330096BF68 /* Projects.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Projects.storyboard; sourceTree = "<group>"; };
 		843688B724BCC0A500793B2B /* Dream Price.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dream Price.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		843688BA24BCC0A500793B2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		843688BC24BCC0A500793B2B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -415,7 +424,7 @@
 				1796E14E251A05EE000B73E0 /* Onboarding.storyboard */,
 				8416E84424C7F7A400DB0C0C /* Dreams.storyboard */,
 				843CBCEC24C508E6005E8562 /* History.storyboard */,
-				841BDABE24BCC4330096BF68 /* Projects.storyboard */,
+				17EE8573253EE28C00EC2641 /* Projects.storyboard */,
 				843688C324BCC0A800793B2B /* Assets.xcassets */,
 				843688C524BCC0A800793B2B /* LaunchScreen.storyboard */,
 				843688C824BCC0A800793B2B /* Info.plist */,
@@ -563,6 +572,7 @@
 				en,
 				Base,
 				ru,
+				de,
 			);
 			mainGroup = 843688AE24BCC0A500793B2B;
 			productRefGroup = 843688B824BCC0A500793B2B /* Products */;
@@ -595,7 +605,7 @@
 				84B4812E24D33BD600223B5C /* AppIconYellow@2x.png in Resources */,
 				84B4813324D33BD600223B5C /* AppIconBlack@3x.png in Resources */,
 				8416E84224C7F7A400DB0C0C /* Dreams.storyboard in Resources */,
-				841BDABF24BCC4330096BF68 /* Projects.storyboard in Resources */,
+				17EE8571253EE28C00EC2641 /* Projects.storyboard in Resources */,
 				1796E14F251A05EE000B73E0 /* Onboarding.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -780,12 +790,24 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		17EE8573253EE28C00EC2641 /* Projects.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				17EE8572253EE28C00EC2641 /* Base */,
+				17EE8575253EE29200EC2641 /* en */,
+				17EE8577253EE2D700EC2641 /* ru */,
+				17EE8581253EE5E400EC2641 /* de */,
+			);
+			name = Projects.storyboard;
+			sourceTree = "<group>";
+		};
 		8416E84424C7F7A400DB0C0C /* Dreams.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				8416E84324C7F7A400DB0C0C /* Base */,
 				8416E84624C7F7AA00DB0C0C /* en */,
 				8416E84824C7F7AE00DB0C0C /* ru */,
+				17EE857F253EE5E300EC2641 /* de */,
 			);
 			name = Dreams.storyboard;
 			sourceTree = "<group>";
@@ -796,6 +818,7 @@
 				843688C124BCC0A500793B2B /* Base */,
 				843CBCE624C50807005E8562 /* ru */,
 				843CBCE924C508C5005E8562 /* en */,
+				17EE857E253EE5E300EC2641 /* de */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -805,6 +828,7 @@
 			children = (
 				843688C624BCC0A800793B2B /* Base */,
 				843CBCE724C50807005E8562 /* ru */,
+				17EE8582253EE5E400EC2641 /* de */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -815,6 +839,7 @@
 				843CBCEB24C508E6005E8562 /* Base */,
 				843CBCEE24C50911005E8562 /* ru */,
 				843CBCF024C50935005E8562 /* en */,
+				17EE8580253EE5E400EC2641 /* de */,
 			);
 			name = History.storyboard;
 			sourceTree = "<group>";
@@ -824,6 +849,7 @@
 			children = (
 				843CBCF424C51142005E8562 /* en */,
 				843CBCF624C5114B005E8562 /* ru */,
+				17EE8584253EE5E500EC2641 /* de */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -832,6 +858,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				84FD159E24C61A1F003CEF78 /* Base */,
+				17EE8583253EE5E400EC2641 /* de */,
 			);
 			name = Interface.storyboard;
 			sourceTree = "<group>";

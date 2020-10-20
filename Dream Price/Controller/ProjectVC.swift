@@ -431,12 +431,12 @@ extension ProjectVC: UITableViewDataSource, UITableViewDelegate {
                             formatter.maximumFractionDigits = 0
                         }
                         
-                        let profit = projectObject.budget - projectObject.balance
+                        let profit = projectObject.balance - projectObject.budget
                         if profit > 0 {
-                            cell.profitView.backgroundColor = .green
+                            cell.profitView.backgroundColor = UIColor(red: 0.45, green: 0.792, blue: 0.443, alpha: 1)
                             cell.profitLabel.text = "+\(formatter.string(from: NSNumber(value: profit)) ?? "0")"
                         } else if profit < 0 {
-                            cell.profitView.backgroundColor = .red
+                            cell.profitView.backgroundColor = UIColor(red: 0.898, green: 0.506, blue: 0.506, alpha: 1)
                             cell.profitLabel.text = formatter.string(from: NSNumber(value: profit)) ?? "0"
                         } else {
                             cell.profitView.backgroundColor = .tertiaryLabel
@@ -540,13 +540,13 @@ extension ProjectVC: UITableViewDataSource, UITableViewDelegate {
                         formatter.maximumFractionDigits = 0
                     }
                     
-                    let profit = projectObject.budget - projectObject.balance
+                    let profit = projectObject.balance - projectObject.budget
                     if profit > 0 {
-                        cell.profitView.backgroundColor = .green
+                        cell.profitView.backgroundColor = UIColor(red: 0.45, green: 0.792, blue: 0.443, alpha: 1)
                         cell.profitLabel.text = "+\(formatter.string(from: NSNumber(value: profit)) ?? "0")"
                     } else if profit < 0 {
-                        cell.profitView.backgroundColor = .red
-                        cell.profitLabel.text = formatter.string(from: NSNumber(value: profit))
+                        cell.profitView.backgroundColor = UIColor(red: 0.898, green: 0.506, blue: 0.506, alpha: 1)
+                        cell.profitLabel.text = formatter.string(from: NSNumber(value: profit)) ?? "0"
                     } else {
                         cell.profitView.backgroundColor = .tertiaryLabel
                         cell.profitLabel.text = formatter.string(from: NSNumber(value: 0))

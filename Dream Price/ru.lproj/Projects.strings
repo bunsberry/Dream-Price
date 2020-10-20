@@ -1,0 +1,144 @@
+
+/* Class = "UILabel"; text = "App Twitter"; ObjectID = "3Jy-fz-dMx"; */
+"3Jy-fz-dMx.text" = "Твиттер Приложения";
+
+/* Class = "UITableViewSection"; headerTitle = "Extra"; ObjectID = "3m2-vR-Bq1"; */
+"3m2-vR-Bq1.headerTitle" = "Дополнительно";
+
+/* Class = "UILabel"; text = "Create project"; ObjectID = "4dS-oN-kJO"; */
+"4dS-oN-kJO.text" = "Создать проект";
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet"; ObjectID = "59A-sD-az0"; */
+"59A-sD-az0.text" = "Lorem ipsum dolor sit er elit lamet";
+
+/* Class = "UILabel"; text = "+"; ObjectID = "76i-gN-gK7"; */
+"76i-gN-gK7.text" = "+";
+
+/* Class = "UINavigationItem"; title = "Разработчики"; ObjectID = "AJd-0b-z6D"; */
+"AJd-0b-z6D.title" = "Разработчики";
+
+/* Class = "UILabel"; text = "Описание проекта"; ObjectID = "Bfa-0C-nrt"; */
+"Bfa-0C-nrt.text" = "Описание проекта";
+
+/* Class = "UITableViewSection"; headerTitle = "General"; ObjectID = "Dl9-hZ-m1T"; */
+"Dl9-hZ-m1T.headerTitle" = "Основные";
+
+/* Class = "UILabel"; text = "There are no added tasks"; ObjectID = "F4b-ZG-C9Q"; */
+"F4b-ZG-C9Q.text" = "Пока нет добавленных задач";
+
+/* Class = "UILabel"; text = "$"; ObjectID = "G3k-VN-pt7"; */
+"G3k-VN-pt7.text" = "₽";
+
+/* Class = "UITextField"; placeholder = "Initial budget"; ObjectID = "GYw-jK-iy4"; */
+"GYw-jK-iy4.placeholder" = "Начальный бюджет";
+
+/* Class = "UIBarButtonItem"; title = "Back"; ObjectID = "Gid-Uw-pFn"; */
+"Gid-Uw-pFn.title" = "Назад";
+
+/* Class = "UITableViewSection"; headerTitle = "Костя Бансберри"; ObjectID = "HeV-3c-d6F"; */
+"HeV-3c-d6F.headerTitle" = "Костя Бансберри";
+
+/* Class = "UILabel"; text = "There are no recently completed tasks"; ObjectID = "IMV-Dr-gTl"; */
+"IMV-Dr-gTl.text" = "Пока нет завершенных задач";
+
+/* Class = "UILabel"; text = "Желтая"; ObjectID = "Id1-Sc-omY"; */
+"Id1-Sc-omY.text" = "Желтая";
+
+/* Class = "UILabel"; text = "Developers"; ObjectID = "JPH-sZ-4P7"; */
+"JPH-sZ-4P7.text" = "Разработчики";
+
+/* Class = "UITextView"; text = "Project Title"; ObjectID = "JcX-uC-RC6"; */
+"JcX-uC-RC6.text" = "Заголовок проекта";
+
+/* Class = "UILabel"; text = "You can add them by clicking \"Add task\" button"; ObjectID = "KMY-lo-gXH"; */
+"KMY-lo-gXH.text" = "Вы можете их добавить, нажав кнопку \"Добавить задачу\"";
+
+/* Class = "UILabel"; text = "Tasks will appear here when completed"; ObjectID = "Lhl-9K-47V"; */
+"Lhl-9K-47V.text" = "Задачи появятся здесь, когда станут завершенными";
+
+/* Class = "UINavigationItem"; title = "Валюта"; ObjectID = "OAw-C9-Mvc"; */
+"OAw-C9-Mvc.title" = "Валюта";
+
+/* Class = "UITextView"; text = "Description..."; ObjectID = "P88-Fk-rcg"; */
+"P88-Fk-rcg.text" = "Описание проекта...";
+
+/* Class = "UILabel"; text = "Currency"; ObjectID = "QNc-UJ-hCF"; */
+"QNc-UJ-hCF.text" = "Валюта";
+
+/* Class = "UILabel"; text = "App Icon"; ObjectID = "RJP-i4-Yvs"; */
+"RJP-i4-Yvs.text" = "Иконка приложения";
+
+/* Class = "UILabel"; text = "±0 $"; ObjectID = "SLE-8H-J9T"; */
+"SLE-8H-J9T.text" = "±0 ₽";
+
+/* Class = "UINavigationItem"; title = "Иконка приложения"; ObjectID = "TAM-Hl-yXl"; */
+"TAM-Hl-yXl.title" = "Иконка приложения";
+
+/* Class = "UINavigationItem"; title = "Projects"; ObjectID = "TOT-e9-Upr"; */
+"TOT-e9-Upr.title" = "Проекты";
+
+/* Class = "UILabel"; text = "Оставить отзыв"; ObjectID = "Tat-lb-8wO"; */
+"Tat-lb-8wO.text" = "Оставить отзыв";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "V6U-Ih-1lT"; */
+"V6U-Ih-1lT.text" = "Заголовок";
+
+/* Class = "UILabel"; text = "Project profit:"; ObjectID = "ZSI-lA-hYQ"; */
+"ZSI-lA-hYQ.text" = "Профит проекта:";
+
+/* Class = "UIButton"; normalTitle = "Add task..."; ObjectID = "ajL-DW-ZdQ"; */
+"ajL-DW-ZdQ.normalTitle" = "Добавить задачу...";
+
+/* Class = "UILabel"; text = "Count Cents"; ObjectID = "amH-da-4QX"; */
+"amH-da-4QX.text" = "Учитывать копейки";
+
+/* Class = "UILabel"; text = "Is account:"; ObjectID = "b6W-rd-zch"; */
+"b6W-rd-zch.text" = "Является счетом:";
+
+/* Class = "UILabel"; text = "Название проекта"; ObjectID = "bOC-Lk-Nia"; */
+"bOC-Lk-Nia.text" = "Название проекта";
+
+/* Class = "UIButton"; normalTitle = "Done"; ObjectID = "c3d-0A-o6L"; */
+"c3d-0A-o6L.normalTitle" = "Готово";
+
+/* Class = "UILabel"; text = "Developer Twitter"; ObjectID = "hTB-Ml-lkl"; */
+"hTB-Ml-lkl.text" = "Твиттер разработчика";
+
+/* Class = "UILabel"; text = "App Website"; ObjectID = "iaY-ke-OOW"; */
+"iaY-ke-OOW.text" = "Сайт приложения";
+
+/* Class = "UILabel"; text = "Recent"; ObjectID = "irF-Yr-Xuj"; */
+"irF-Yr-Xuj.text" = "Недавние";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "ivm-te-wsd"; */
+"ivm-te-wsd.title" = "Настройки";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "jGL-Fs-XmL"; */
+"jGL-Fs-XmL.text" = "0";
+
+/* Class = "UILabel"; text = "Черная"; ObjectID = "kOb-rX-oIp"; */
+"kOb-rX-oIp.text" = "Черная";
+
+/* Class = "UILabel"; text = "Фиолетовая"; ObjectID = "nA6-gl-0xM"; */
+"nA6-gl-0xM.text" = "Фиолетовая";
+
+/* Class = "UITableViewSection"; headerTitle = "Dream Price"; ObjectID = "p4X-Np-60H"; */
+"p4X-Np-60H.headerTitle" = "Dream Price";
+
+/* Class = "UIBarButtonItem"; title = "Готово"; ObjectID = "tj0-Wd-VOf"; */
+"tj0-Wd-VOf.title" = "Готово";
+
+/* Class = "UITabBarItem"; title = "Проекты"; ObjectID = "toT-uo-Uy7"; */
+"toT-uo-Uy7.title" = "Проекты";
+
+/* Class = "UILabel"; text = "Красная"; ObjectID = "wNm-73-G32"; */
+"wNm-73-G32.text" = "Красная";
+
+/* Class = "UITableViewSection"; headerTitle = "Appearance"; ObjectID = "ycq-wa-Ep5"; */
+"ycq-wa-Ep5.headerTitle" = "Внешний вид";
+
+/* Class = "UILabel"; text = "Классика"; ObjectID = "zge-hk-LJ2"; */
+"zge-hk-LJ2.text" = "Классика";
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet"; ObjectID = "zzV-5Y-Vzr"; */
+"zzV-5Y-Vzr.text" = "Lorem ipsum dolor sit er elit lamet";

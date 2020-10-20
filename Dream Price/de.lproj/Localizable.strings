@@ -1,0 +1,78 @@
+/*
+  Localizable.strings
+  Dream Price
+
+  Created by Kostya Bunsberry on 20.07.2020.
+  
+*/
+
+"Yes" = "Ja";
+"No" = "Nein";
+
+"Work" = "💼 Arbeit";
+"Coffee" = "☕️ Kaffee";
+"Groceries" = "🥑 Lebensmittel";
+"App" = "📱 App";
+"Dream" = "🌙 Traum";
+
+"Personal Account" = "Brieftasche";
+"Balance: " = "Balance:";
+
+"Edit" = "Bearbeiten";
+"Done" = "Erledigt";
+"Save" = "Speichern";
+"Cancel" = "Stornieren";
+"Delete" = "Löschen";
+"Close" = "Schließen";
+
+"Spending" = "Ausgabe";
+"Earning" = "Earning";
+"Spendings" = "Spendings";
+"Earnings" = "Verdienste";
+
+"Sort by:" = "Sortieren nach:";
+"Day" = "Tag";
+"Month" = "Monat";
+
+"Are you sure?" = "Bist du sicher?";
+
+"Category" = "Kategorie";
+"Description" = "Beschreibung";
+"Budget" = "Budget";
+"Amount" = "Menge";
+"Date" = "Datum";
+
+"Something went wrong..." = "Etwas ist schief gelaufen...";
+"Fill in all the required information" = "Füllen Sie alle erforderlichen Informationen";
+"Dismiss" = "Entlassen";
+
+"Trip to London" = "Reise nach London";
+"I wanna see Big Ben" = "Ich will Big Ben sehen";
+"New Phone" = "Neues Telefon";
+"Mine's a bit old now..." = "Mine ist ein bisschen alt jetzt ...";
+
+"DreamsPageTitle" = "Träume";
+
+"No transactions" = "Es gibt keine Transaktionen noch";
+"Add transactions" = "Sie können sie auf Budget Seite hinzufügen";
+
+"Project Options" = "Projektoptionen:";
+"Finish Project" = "Fertig Projekt";
+"Delete Project" = "Projekt löschen";
+
+"This will finish project" = "Diese Aktion wird das Projekt und Aktionen im Innern beenden. Bist du sicher?";
+"This will delete project" = "Diese Aktion wird das Projekt und Aktionen innerhalb löschen. Bist du sicher?";
+
+// Onboarding
+
+"WelcomeTitle" = "Willkommen bei Dream Preis!";
+"WelcomeText" = "Hier können Sie Ihre Budgetierung überwachen, Ihre Ziele erreichen und mehr ...";
+
+"BudgetTitle" = "Überwachen Sie Ihre Budgets!";
+"BudgetText" = "Sie können Ihre Ausgaben und Einnahmen sparen Ihr Geld Umsatz steuern";
+
+"DreamsTitle" = "Erreiche deine Träume!";
+"DreamsText" = "Konzentrieren Sie sich auf einen langen oder kurzfristigen Geld Ziele und erreichen sie";
+
+"ProjectsTitle" = "Machen Sie Ihre Projekte profitabel!";
+"ProjectsText" = "Set und vollständige Aufgaben für Ihre Projekte, können Sie das Projekt Gewinn verfolgen zu";

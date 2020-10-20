@@ -129,6 +129,14 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
                 updateBalance(balanceFloat: object.balance)
             }
         }
+        
+        let projectsRealm = realm.objects(RealmProject.self)
+        for object in projectsRealm {
+            if object.id == budgetID {
+                updateBalance(balanceFloat: object.balance)
+            }
+        }
+        
         codeAmount += ""
     }
     
@@ -230,6 +238,15 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
         
         let budgetsRealm = realm.objects(RealmBudget.self)
         for object in budgetsRealm {
+            if object.id == budgetID {
+                try! realm.write {
+                    object.balance = balance
+                }
+            }
+        }
+        
+        let projectsRealm = realm.objects(RealmProject.self)
+        for object in projectsRealm {
             if object.id == budgetID {
                 try! realm.write {
                     object.balance = balance
