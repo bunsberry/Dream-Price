@@ -294,10 +294,25 @@ class HistoryVC: UITableViewController, HistoryDelegate {
         if let categoryID = transaction.categoryID {
             let categoriesRealm = realm.objects(RealmCategory.self)
             let budgetsRealm = realm.objects(RealmBudget.self)
+            let projectsRealm = realm.objects(RealmProject.self)
             
             for category in categoriesRealm {
                 if category.id == categoryID {
                     for object in budgetsRealm {
+                        if object.id == transaction.fromBudget {
+                            if transaction.transactionAmount > 0 {
+                                let targetString = "\(category.title) to \(object.name)"
+                                let range = NSMakeRange(category.title.count + 1, 4)
+                                cell.categoryLabel.attributedText = attributedString(from: targetString, nonBoldRange: range)
+                            } else {
+                                let targetString = "\(category.title) from \(object.name)"
+                                let range = NSMakeRange(category.title.count + 1, 6)
+                                cell.categoryLabel.attributedText = attributedString(from: targetString, nonBoldRange: range)
+                            }
+                        }
+                    }
+                    
+                    for object in projectsRealm {
                         if object.id == transaction.fromBudget {
                             if transaction.transactionAmount > 0 {
                                 let targetString = "\(category.title) to \(object.name)"
@@ -315,8 +330,23 @@ class HistoryVC: UITableViewController, HistoryDelegate {
             
         } else {
             let budgetsRealm = realm.objects(RealmBudget.self)
+            let projectsRealm = realm.objects(RealmProject.self)
             
             for object in budgetsRealm {
+                if object.id == transaction.fromBudget {
+                    if transaction.transactionAmount > 0 {
+                        let targetString = "to \(object.name)"
+                        let range = NSMakeRange(0, 3)
+                        cell.categoryLabel.attributedText = attributedString(from: targetString, nonBoldRange: range)
+                    } else {
+                        let targetString = "from \(object.name)"
+                        let range = NSMakeRange(0, 5)
+                        cell.categoryLabel.attributedText = attributedString(from: targetString, nonBoldRange: range)
+                    }
+                }
+            }
+            
+            for object in projectsRealm {
                 if object.id == transaction.fromBudget {
                     if transaction.transactionAmount > 0 {
                         let targetString = "to \(object.name)"

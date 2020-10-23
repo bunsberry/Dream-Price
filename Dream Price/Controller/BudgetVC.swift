@@ -46,13 +46,13 @@ class BudgetVC: UIViewController, BudgetDelegate, CategoriesBeenManaged {
         
         BudgetVC.delegateUp?.refreshPageView()
         BudgetVC.delegateUp?.reloadItems()
+        updateCategories(transaction: BudgetVC.currentTransaction, id: currentBudgetID)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         if let haveLaunched = Settings.shared.haveAlreadyLaunched {
-            print("have launched: \(haveLaunched)")
             if haveLaunched == false {
                 performSegue(withIdentifier: "toOnboarding", sender: nil)
                 Settings.shared.haveAlreadyLaunched = true
@@ -234,22 +234,31 @@ extension BudgetVC {
         if let category = selectedCategoryCell {
             
             if category.categoryType == CategoryType.spending {
-                print("id-\(budgetID): Spent \(number) on \(category.titleLabel.text!)")
                 try! realm.write {
                     realm.add(RealmTransaction(id: UUID().uuidString, transactionAmount: number, categoryID: category.categoryID, date: NSDate(), fromBudget: budgetID, toBudget: nil))
                 }
             }
             else if category.categoryType == CategoryType.earning {
-                print("id-\(budgetID): Earned \(number) from \(category.titleLabel.text!)")
                 try! realm.write {
                     realm.add(RealmTransaction(id: UUID().uuidString, transactionAmount: number, categoryID: category.categoryID, date: NSDate(), fromBudget: budgetID, toBudget: nil))
                 }
             }
             else if category.categoryType == CategoryType.budget {
-                print("id-\(budgetID): Transfered \(number) from/to \(category.titleLabel.text!)")
+                // check
+                
                 let budgetsRealm = realm.objects(RealmBudget.self)
+                let projectsRealm = realm.objects(RealmProject.self)
                 
                 for object in budgetsRealm {
+                    if object.id == category.categoryID {
+                        try! realm.write {
+                            realm.add(RealmTransaction(id: UUID().uuidString, transactionAmount: number, categoryID: category.categoryID, date: NSDate(), fromBudget: budgetID, toBudget: object.id))
+                            object.balance -= number
+                        }
+                    }
+                }
+                
+                for object in projectsRealm {
                     if object.id == category.categoryID {
                         try! realm.write {
                             realm.add(RealmTransaction(id: UUID().uuidString, transactionAmount: number, categoryID: category.categoryID, date: NSDate(), fromBudget: budgetID, toBudget: object.id))
@@ -263,7 +272,6 @@ extension BudgetVC {
             }
             
         } else {
-            print("id_\(budgetID): \(number) on/from smthng...")
             try! realm.write {
                 realm.add(RealmTransaction(id: UUID().uuidString, transactionAmount: number, categoryID: nil, date: NSDate(), fromBudget: budgetID, toBudget: nil))
             }
@@ -298,5 +306,9 @@ extension BudgetVC {
     
     func categoriesBeenManaged() {
         updateCategories(transaction: BudgetVC.currentTransaction, id: currentBudgetID)
+    }
+    
+    func forceReloadBudgets() {
+        // todo: removing a page
     }
 }

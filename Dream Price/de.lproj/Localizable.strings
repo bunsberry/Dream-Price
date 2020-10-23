@@ -60,6 +60,11 @@
 "Finish Project" = "Fertig Projekt";
 "Delete Project" = "Projekt löschen";
 
+"Description..." = "Beschreibung...";
+"Title" = "Titel";
+
+"Type task here..." = "Geben Sie hier die Aufgabe ein...";
+
 "This will finish project" = "Diese Aktion wird das Projekt und Aktionen im Innern beenden. Bist du sicher?";
 "This will delete project" = "Diese Aktion wird das Projekt und Aktionen innerhalb löschen. Bist du sicher?";
 

@@ -188,6 +188,8 @@ class EditTransactionVC: UIViewController, TransactionDelegate {
             let transactionsRealm = self.realm.objects(RealmTransaction.self)
             let budgetsRealm = self.realm.objects(RealmBudget.self)
             
+            // TODO: Projects
+            
             for object in transactionsRealm {
                 if object.id == self.data.transactionID {
                     if self.startData.transactionAmount > 0 {
@@ -351,6 +353,12 @@ extension EditTransactionVC: UITableViewDelegate, UITableViewDataSource {
             
             let budgetsRealm = realm.objects(RealmBudget.self)
             for object in budgetsRealm {
+                if object.id == data.fromBudget {
+                    cell.titleLabel.text = object.name
+                }
+            }
+            let projectsRealm = realm.objects(RealmProject.self)
+            for object in projectsRealm {
                 if object.id == data.fromBudget {
                     cell.titleLabel.text = object.name
                 }

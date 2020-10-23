@@ -25,11 +25,16 @@ class ETBudgetPickerCell: UITableViewCell, UIPickerViewDataSource, UIPickerViewD
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        
         budgets.removeAll()
+        
         let budgetsRealm = realm.objects(RealmBudget.self)
+        let projectsRealm = realm.objects(RealmProject.self)
+        
         for object in budgetsRealm {
             budgets.append(BudgetItem(budgetID: object.id, type: BudgetItemType(rawValue: object.type)!, balance: object.balance, name: object.name))
+        }
+        for object in projectsRealm {
+            budgets.append(BudgetItem(budgetID: object.id, type: .project, balance: object.balance, name: object.name))
         }
         
         return budgets.count

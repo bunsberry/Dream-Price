@@ -32,8 +32,8 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
         if isNewProject == true {
             projectObject.id = projectID
             
-            titleTextView.text = "Title"
-            detailsTextView.text = "Description..."
+            titleTextView.text = NSLocalizedString("Title", comment: "")
+            detailsTextView.text = NSLocalizedString("Description...", comment: "")
             titleTextView.textColor = .tertiaryLabel
             detailsTextView.textColor = .tertiaryLabel
             doneButton.setTitle(NSLocalizedString("Save", comment: ""), for: .normal)
@@ -65,7 +65,7 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
             
             titleTextView.text = projectObject.name
             if projectObject.details == "" {
-                detailsTextView.text = "Description..."
+                detailsTextView.text = NSLocalizedString("Description...", comment: "")
                 detailsTextView.textColor = .tertiaryLabel
             } else {
                 detailsTextView.text = projectObject.details
@@ -244,12 +244,24 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView == titleTextView {
             if textView.text.isEmpty {
-                textView.text = "Title"
+                textView.text = NSLocalizedString("Title", comment: "")
                 textView.textColor = .tertiaryLabel
             }
+            
+            if projectObject.isBudget {
+                let realmCategories = realm.objects(RealmCategory.self)
+                for object in realmCategories {
+                    if object.id == projectObject.id {
+                        try! realm.write {
+                            object.title = textView.text
+                        }
+                    }
+                }
+            }
+            
         } else {
             if textView.text.isEmpty {
-                textView.text = "Description..."
+                textView.text = NSLocalizedString("Description...", comment: "")
                 textView.textColor = .tertiaryLabel
             }
         }
@@ -338,6 +350,28 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
                 tableView.insertRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
             } else {
                 tableView.deleteRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
+            }
+        }
+        
+        let realmCategories = realm.objects(RealmCategory.self)
+        
+        if state {
+            var sortInt = 0
+            
+            for object in realmCategories {
+                if object.type == "budget" {
+                    sortInt += 1
+                }
+            }
+            
+            RealmService().create(RealmCategory(id: projectObject.id, type: CategoryType.budget.rawValue, title: titleTextView.text, sortInt: sortInt))
+        } else {
+            for object in realmCategories {
+                if object.id == projectObject.id {
+                    try! realm.write {
+                        realm.delete(object)
+                    }
+                }
             }
         }
     }
@@ -465,7 +499,7 @@ extension ProjectVC: UITableViewDataSource, UITableViewDelegate {
                         cell.checkmarkButton.isSelected = actions[indexPath.row - 2].isCompleted
                         if actions[indexPath.row - 2].text.isEmpty {
                             cell.taskTextView.textColor = .tertiaryLabel
-                            cell.taskTextView.text = "Type task here..."
+                            cell.taskTextView.text = NSLocalizedString("Type task here...", comment: "")
                         } else {
                             cell.taskTextView.textColor = .label
                             cell.taskTextView.text = actions[indexPath.row - 2].text
