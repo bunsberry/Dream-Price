@@ -313,6 +313,16 @@ extension DreamsVC: AddDreamDelegate, EditDreamDelegate {
         
         let dreamsRealm = realm.objects(RealmDream.self)
         
+        if dream.type == .focusedDream {
+            for object in dreamsRealm {
+                if object.type == DreamType.focusedDream.rawValue {
+                    try! realm.write {
+                        object.type = DreamType.dream.rawValue
+                    }
+                }
+            }
+        }
+        
         for object in dreamsRealm {
             if object.id == dream.dreamID {
                 try! realm.write {

@@ -458,7 +458,6 @@ extension EditTransactionVC: UITableViewDelegate, UITableViewDataSource {
             
             return cell
         default:
-            print("Section was never found")
             let cell = tableView.dequeueReusableCell(withIdentifier: "transactionCategoryCell") as! ETCategoryCell
             
             return cell
@@ -472,7 +471,6 @@ extension EditTransactionVC: UITableViewDelegate, UITableViewDataSource {
             datePickerIndexPath = nil
         } else {
             if datePickerIndexPath != nil {
-                print("case 3")
                 tableView.deleteRows(at: [datePickerIndexPath!], with: .fade)
             }
             datePickerIndexPath = calculatePickerIndexPath(indexPathSelected: indexPath)

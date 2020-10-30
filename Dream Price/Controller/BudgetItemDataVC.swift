@@ -121,8 +121,6 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
     }
     
     func reloadItems() {
-        print("reloading balance")
-        
         let budgetsRealm = realm.objects(RealmBudget.self)
         for object in budgetsRealm {
             if object.id == budgetID {

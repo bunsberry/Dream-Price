@@ -68,7 +68,6 @@ class ProjectsVC: UITableViewController, ProjectDelegate, CompletedActionDelegat
     }
     
     func reloadProjects(isNew: Bool, isRemoved: Bool, isFinished: Bool, id: String?) {
-        print("first delegate goes by")
         reloadCompletedActions()
         delegateToCell?.reloadProjects(isNew: isNew, isRemoved: isRemoved, isFinished: isFinished, id: id)
     }

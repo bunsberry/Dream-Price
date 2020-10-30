@@ -9,7 +9,7 @@ import Foundation
 import RealmSwift
 
 class RealmDream: Object {
-    @objc dynamic var id: String = ""
+    @objc dynamic var id: String = UUID().uuidString
     @objc dynamic var title: String = ""
     @objc dynamic var descript: String = ""
     @objc dynamic var goal: Float = 0.0

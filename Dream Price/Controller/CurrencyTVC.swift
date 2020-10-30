@@ -29,8 +29,6 @@ class CurrencyTVC: UITableViewController {
         default:
             starterIndexPath = IndexPath(row: 0, section: 0)
         }
-        
-        print(starterIndexPath)
     }
 
     // MARK: - Table view data source

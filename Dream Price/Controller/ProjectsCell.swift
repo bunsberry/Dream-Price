@@ -104,9 +104,7 @@ class ProjectsCell: UITableViewCell, ProjectTransferDelegate {
                 } else {
                     collectionView.reloadItems(at: [IndexPath(item: place, section: 0)])
                 }
-            } else {
-                print("removed a new project")
-            }
+            } else {}
         }
     }
 }

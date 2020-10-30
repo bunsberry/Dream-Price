@@ -50,14 +50,10 @@ class BudgetPVC: UIPageViewController, TransportDelegate, TransportUpDelegate {
         let realmProjects = realm.objects(RealmProject.self)
         
         for project in realmProjects {
-            print("is project")
             if project.isBudget == true {
-                print("project is budget")
                 pagesData.append(BudgetItem(budgetID: project.id, type: BudgetItemType(rawValue: "project")!, balance: project.balance, name: project.name))
             }
         }
-        
-        print("pagesData.count = \(pagesData.count)")
         
         self.dataSource = self
         self.delegate = self
@@ -104,8 +100,6 @@ class BudgetPVC: UIPageViewController, TransportDelegate, TransportUpDelegate {
     }
     
     func refreshPageView() {
-        print("refreshing pageView")
-        
         let realmRefreshed = try! Realm()
         self.dataSource = nil
         self.delegate = nil
@@ -157,7 +151,6 @@ extension BudgetPVC: UIPageViewControllerDataSource, UIPageViewControllerDelegat
     }
     
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        print(pagesData.count)
         return pagesData.count
     }
     

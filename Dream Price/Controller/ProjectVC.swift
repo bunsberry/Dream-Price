@@ -227,7 +227,7 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
         
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel)
         
-        moreOptionsMenu.addAction(finishAction)
+//        moreOptionsMenu.addAction(finishAction)
         moreOptionsMenu.addAction(deleteAction)
         moreOptionsMenu.addAction(cancelAction)
         
@@ -352,28 +352,6 @@ class ProjectVC: UIViewController, UITextViewDelegate, ProjectEditDelegate {
                 tableView.deleteRows(at: [IndexPath(row: 1, section: 0)], with: .automatic)
             }
         }
-        
-//        let realmCategories = realm.objects(RealmCategory.self)
-//
-//        if state {
-//            var sortInt = 0
-//
-//            for object in realmCategories {
-//                if object.type == "budget" {
-//                    sortInt += 1
-//                }
-//            }
-//
-//            RealmService().create(RealmCategory(id: projectObject.id, type: CategoryType.budget.rawValue, title: titleTextView.text, sortInt: sortInt))
-//        } else {
-//            for object in realmCategories {
-//                if object.id == projectObject.id {
-//                    try! realm.write {
-//                        realm.delete(object)
-//                    }
-//                }
-//            }
-//        }
     }
     
     func budgetNumChangedTo(_ num: Float) {
