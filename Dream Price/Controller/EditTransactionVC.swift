@@ -187,14 +187,13 @@ class EditTransactionVC: UIViewController, TransactionDelegate {
             
             let transactionsRealm = self.realm.objects(RealmTransaction.self)
             let budgetsRealm = self.realm.objects(RealmBudget.self)
-            
-            // TODO: Projects
+            let projectsRealm = self.realm.objects(RealmProject.self)
             
             for object in transactionsRealm {
                 if object.id == self.data.transactionID {
                     if self.startData.transactionAmount > 0 {
+                        
                         for budget in budgetsRealm {
-                            
                             if self.startData.fromBudget == budget.id {
                                 try! self.realm.write {
                                     budget.balance -= self.startData.transactionAmount
@@ -209,9 +208,26 @@ class EditTransactionVC: UIViewController, TransactionDelegate {
                                 }
                             }
                         }
-                    } else {
-                        for budget in budgetsRealm {
+                        
+                        for project in projectsRealm {
+                            if self.startData.fromBudget == project.id {
+                                try! self.realm.write {
+                                    project.balance -= self.startData.transactionAmount
+                                }
+                            }
                             
+                            if let toBudget = self.startData.toBudget {
+                                if project.id == toBudget {
+                                    try! self.realm.write {
+                                        project.balance += self.startData.transactionAmount
+                                    }
+                                }
+                            }
+                        }
+                        
+                    } else {
+                        
+                        for budget in budgetsRealm {
                             if self.startData.fromBudget == budget.id {
                                 try! self.realm.write {
                                     budget.balance -= self.startData.transactionAmount
@@ -222,6 +238,22 @@ class EditTransactionVC: UIViewController, TransactionDelegate {
                                 if budget.id == toBudget {
                                     try! self.realm.write {
                                         budget.balance += self.startData.transactionAmount
+                                    }
+                                }
+                            }
+                        }
+                        
+                        for project in projectsRealm {
+                            if self.startData.fromBudget == project.id {
+                                try! self.realm.write {
+                                    project.balance -= self.startData.transactionAmount
+                                }
+                            }
+                            
+                            if let toBudget = self.startData.toBudget {
+                                if project.id == toBudget {
+                                    try! self.realm.write {
+                                        project.balance += self.startData.transactionAmount
                                     }
                                 }
                             }
@@ -233,6 +265,7 @@ class EditTransactionVC: UIViewController, TransactionDelegate {
                     }
                 }
             }
+            
             self.historyDelegate?.reloadTransactions()
             self.dismiss(animated: true, completion: nil)
         })

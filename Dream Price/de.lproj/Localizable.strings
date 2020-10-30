@@ -71,13 +71,5 @@
 // Onboarding
 
 "WelcomeTitle" = "Willkommen bei Dream Preis!";
-"WelcomeText" = "Hier können Sie Ihre Budgetierung überwachen, Ihre Ziele erreichen und mehr ...";
-
-"BudgetTitle" = "Überwachen Sie Ihre Budgets!";
-"BudgetText" = "Sie können Ihre Ausgaben und Einnahmen sparen Ihr Geld Umsatz steuern";
-
-"DreamsTitle" = "Erreiche deine Träume!";
-"DreamsText" = "Konzentrieren Sie sich auf einen langen oder kurzfristigen Geld Ziele und erreichen sie";
-
-"ProjectsTitle" = "Machen Sie Ihre Projekte profitabel!";
-"ProjectsText" = "Set und vollständige Aufgaben für Ihre Projekte, können Sie das Projekt Gewinn verfolgen zu";
+"WelcomeText" = "Hier können Sie Ihre Budgetierung überwachen, Ihre Ziele erreichen und Ihre Projekte rentabel machen.";
+"WelcomeButton" = "Lasst uns beginnen!";

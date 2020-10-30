@@ -9,21 +9,19 @@ import UIKit
 
 class OnboardingPageVC: UIViewController {
 
-    @IBOutlet weak var emojiImageView: UIImageView!
     @IBOutlet weak var headlineLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
-    
-    var emojiImage: UIImage?
-    var headlineLabelText: String?
-    var descriptionLabelText: String?
-    
-    var index: Int?
+    @IBOutlet weak var dismissButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        headlineLabel.text = headlineLabelText
-        descriptionLabel.text = descriptionLabelText
-        emojiImageView.image = emojiImage
+        headlineLabel.text = NSLocalizedString("WelcomeTitle", comment: "")
+        descriptionLabel.text = NSLocalizedString("WelcomeText", comment: "")
+        dismissButton.setTitle(NSLocalizedString("WelcomeButton", comment: ""), for: .normal)
+    }
+    
+    @IBAction func dimsissOnboarding() {
+        dismiss(animated: true, completion: nil)
     }
 }

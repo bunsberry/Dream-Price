@@ -71,13 +71,5 @@
 // Onboarding
 
 "WelcomeTitle" = "Welcome to Dream Price!";
-"WelcomeText" = "Here you can monitor your budgeting, reach your goals and more...";
-
-"BudgetTitle" = "Monitor your budgets!";
-"BudgetText" = "You can save your expenses and earnings to control your money turnover";
-
-"DreamsTitle" = "Reach your Dreams!";
-"DreamsText" = "Focus on your long or short-term money goals and reach them";
-
-"ProjectsTitle" = "Make your projects profitable!";
-"ProjectsText" = "Set and complete tasks for your projects, you can track the project profit too";
+"WelcomeText" = "Here you can monitor your budgeting, reach your goals and make your projects profitable.";
+"WelcomeButton" = "Let's Start!";
