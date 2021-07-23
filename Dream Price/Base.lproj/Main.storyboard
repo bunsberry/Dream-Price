@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17147" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Zf8-sz-Nrz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Zf8-sz-Nrz">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17120"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -42,14 +42,14 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="category" id="tAH-xO-FZb" customClass="CategoryCell" customModule="Dream_Price" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="15" width="85" height="50"/>
+                                        <rect key="frame" x="0.0" y="17" width="79" height="46"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="2zd-IU-MTf">
-                                            <rect key="frame" x="0.0" y="0.0" width="85" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="79" height="46"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lMc-fj-Ab3">
-                                                    <rect key="frame" x="24.000000000000004" y="16" width="37.333333333333343" height="18"/>
+                                                    <rect key="frame" x="24" y="16" width="31" height="14.333333333333336"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -73,14 +73,14 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="manageCategories" id="xhc-O2-in8" customClass="ManageCategoriesCell" customModule="Dream_Price" customModuleProvider="target">
-                                        <rect key="frame" x="95" y="15" width="49.999999999999986" height="50"/>
+                                        <rect key="frame" x="89" y="16.666666666666668" width="48" height="47"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="EcC-EU-3wR">
-                                            <rect key="frame" x="0.0" y="0.0" width="49.999999999999986" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="48" height="47"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hY0-ox-B1H">
-                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="48" height="47"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <inset key="contentEdgeInsets" minX="20" minY="16" maxX="20" maxY="16"/>
                                                     <state key="normal" title="+">
@@ -298,13 +298,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance: 25 543 ₽" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TZj-JM-iLx">
-                                <rect key="frame" x="0.0" y="62.333333333333336" width="414" height="20.333333333333336"/>
+                                <rect key="frame" x="0.0" y="65.666666666666671" width="414" height="17"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Personal Account" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="54q-tt-1Vc">
-                                <rect key="frame" x="0.0" y="263.33333333333331" width="414" height="21"/>
+                                <rect key="frame" x="0.0" y="263.33333333333331" width="414" height="17"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -313,7 +313,7 @@
                                 <rect key="frame" x="31" y="94.666666666666671" width="352" height="156.66666666666663"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" $" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fFd-ek-4zl">
-                                        <rect key="frame" x="197.33333333333334" y="74.333333333333329" width="23.333333333333343" height="33.666666666666671"/>
+                                        <rect key="frame" x="197.33333333333334" y="77.333333333333329" width="21" height="30"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -405,7 +405,7 @@
                                 <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="newCategoryCell" rowHeight="43.666667938232422" id="tS5-Bw-KV3" customClass="NewCategoryCell" customModule="Dream_Price" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.333332061767578" width="414" height="43.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="49" width="414" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tS5-Bw-KV3" id="0Zs-CY-6vV">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
@@ -430,7 +430,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="newEarningCell" rowHeight="43.666667938232422" id="URE-Ba-EMz" customClass="NewEarningCell" customModule="Dream_Price" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="99" width="414" height="43.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="92.666667938232422" width="414" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="URE-Ba-EMz" id="Cr1-iq-ed4">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
@@ -458,7 +458,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" showsReorderControl="YES" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="categoryCell" rowHeight="43.666667938232422" id="qbY-zK-dZF" customClass="EditableCategoryCell" customModule="Dream_Price" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="142.66666793823242" width="414" height="43.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="136.33333587646484" width="414" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qbY-zK-dZF" id="LGW-HK-cFH">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
@@ -611,7 +611,7 @@
     <resources>
         <image name="checkmark.circle.fill" catalog="system" width="128" height="121"/>
         <image name="creditcard" catalog="system" width="128" height="88"/>
-        <image name="delete.left.fill" catalog="system" width="128" height="104"/>
+        <image name="delete.left.fill" catalog="system" width="32" height="32"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
