@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		170B31462743EBDC00518AD4 /* Stats.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 170B31452743EBDC00518AD4 /* Stats.storyboard */; };
+		170B31482743EE3F00518AD4 /* StatsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170B31472743EE3F00518AD4 /* StatsVC.swift */; };
 		170E011224EADE8100632CA6 /* RealmDream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170E011124EADE8100632CA6 /* RealmDream.swift */; };
 		170E011424EAE16C00632CA6 /* Dream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170E011324EAE16C00632CA6 /* Dream.swift */; };
 		170E011624EAE18000632CA6 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170E011524EAE18000632CA6 /* Transaction.swift */; };
@@ -144,6 +146,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		170B31452743EBDC00518AD4 /* Stats.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Stats.storyboard; sourceTree = "<group>"; };
+		170B31472743EE3F00518AD4 /* StatsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsVC.swift; sourceTree = "<group>"; };
 		170E011124EADE8100632CA6 /* RealmDream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDream.swift; sourceTree = "<group>"; };
 		170E011324EAE16C00632CA6 /* Dream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dream.swift; sourceTree = "<group>"; };
 		170E011524EAE18000632CA6 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
@@ -314,6 +318,8 @@
 		841BDAB924BCC3570096BF68 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				56D8D49E24C4E38700C3194D /* ProjectCVCell.swift */,
+				56D8D4A624C4E70700C3194D /* AddProjectCVCell.swift */,
 				843D056E24BE026100DF7EFF /* CategoryCell.swift */,
 				84899CDD24BE5375000B2B65 /* ManageCategoriesCell.swift */,
 				84B35FA424C1FE48008FD1CE /* TransactionCell.swift */,
@@ -344,7 +350,6 @@
 			isa = PBXGroup;
 			children = (
 				8416E83A24C7E23F00DB0C0C /* AddDreamsVC.swift */,
-				56D8D4A624C4E70700C3194D /* AddProjectCVCell.swift */,
 				84961BCE24CCFF64007B73BA /* AppIconTVC.swift */,
 				8447A84024BCDBDE005F448B /* BudgetItemDataVC.swift */,
 				8447A83C24BCD990005F448B /* BudgetPVC.swift */,
@@ -358,11 +363,11 @@
 				84B35FA024C1E9AD008FD1CE /* HistoryVC.swift */,
 				84E4C73B24BEF882006E3D0A /* ManageCategoriesVC.swift */,
 				1796E150251A0D09000B73E0 /* OnboardingPageVC.swift */,
-				56D8D49E24C4E38700C3194D /* ProjectCVCell.swift */,
 				56D8D49A24C4E20D00C3194D /* ProjectsCell.swift */,
 				8447A83424BCCB04005F448B /* ProjectsVC.swift */,
 				177B612A24F6B3CB004A7D92 /* ProjectVC.swift */,
 				84C53E3C24CCFC4B0043CEB8 /* SettingsTVC.swift */,
+				170B31472743EE3F00518AD4 /* StatsVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -426,6 +431,7 @@
 				843688C524BCC0A800793B2B /* LaunchScreen.storyboard */,
 				843688C824BCC0A800793B2B /* Info.plist */,
 				843CBCF524C51142005E8562 /* Localizable.strings */,
+				170B31452743EBDC00518AD4 /* Stats.storyboard */,
 			);
 			path = "Dream Price";
 			sourceTree = "<group>";
@@ -600,6 +606,7 @@
 				84B4813124D33BD600223B5C /* AppIconRed@2x.png in Resources */,
 				84B4812D24D33BD600223B5C /* AppIconBlack@2x.png in Resources */,
 				84B4812E24D33BD600223B5C /* AppIconYellow@2x.png in Resources */,
+				170B31462743EBDC00518AD4 /* Stats.storyboard in Resources */,
 				84B4813324D33BD600223B5C /* AppIconBlack@3x.png in Resources */,
 				8416E84224C7F7A400DB0C0C /* Dreams.storyboard in Resources */,
 				17EE8571253EE28C00EC2641 /* Projects.storyboard in Resources */,
@@ -698,6 +705,7 @@
 				56D8D4A324C4E42600C3194D /* RealmAction.swift in Sources */,
 				56D8D48F24C49BD200C3194D /* RealmService.swift in Sources */,
 				843D057124BE03C800DF7EFF /* CategoryCollectionVC.swift in Sources */,
+				170B31482743EE3F00518AD4 /* StatsVC.swift in Sources */,
 				8416E83D24C7E2BB00DB0C0C /* EditDreamsVC.swift in Sources */,
 				8416E83B24C7E23F00DB0C0C /* AddDreamsVC.swift in Sources */,
 				843B29BB24C49F7B00A7E87A /* ETDeleteCell.swift in Sources */,

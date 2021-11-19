@@ -58,9 +58,6 @@ class BudgetPVC: UIPageViewController, TransportDelegate, TransportUpDelegate {
         self.dataSource = self
         self.delegate = self
         
-        BudgetItemDataVC.delegate = self
-        BudgetVC.delegateUp = self
-        
         for (index, page) in pagesData.enumerated() {
             if page.type == .personal {
                 starterIndex = index
@@ -70,6 +67,7 @@ class BudgetPVC: UIPageViewController, TransportDelegate, TransportUpDelegate {
         if let vc = self.pageViewController(for: starterIndex) {
             self.setViewControllers([vc], direction: .forward, animated: true, completion: nil)
             keyboardDelegate = vc
+            vc.delegate = self
         }
     }
     
@@ -138,6 +136,7 @@ class BudgetPVC: UIPageViewController, TransportDelegate, TransportUpDelegate {
         vc.budgetID = pagesData[index].budgetID
         
         self.currentIndex = index
+        vc.delegate = self
         
         return vc
     }

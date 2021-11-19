@@ -301,11 +301,11 @@ class HistoryVC: UITableViewController, HistoryDelegate {
                     for object in budgetsRealm {
                         if object.id == transaction.fromBudget {
                             if transaction.transactionAmount > 0 {
-                                let targetString = "\(category.title) to \(object.name)"
+                                let targetString = category.title + NSLocalizedString("to", comment: "") + object.name
                                 let range = NSMakeRange(category.title.count + 1, 4)
                                 cell.categoryLabel.attributedText = attributedString(from: targetString, nonBoldRange: range)
                             } else {
-                                let targetString = "\(category.title) from \(object.name)"
+                                let targetString = category.title + NSLocalizedString("from", comment: "") + object.name
                                 let range = NSMakeRange(category.title.count + 1, 6)
                                 cell.categoryLabel.attributedText = attributedString(from: targetString, nonBoldRange: range)
                             }
@@ -315,11 +315,11 @@ class HistoryVC: UITableViewController, HistoryDelegate {
                     for object in projectsRealm {
                         if object.id == transaction.fromBudget {
                             if transaction.transactionAmount > 0 {
-                                let targetString = "\(category.title) to \(object.name)"
+                                let targetString = category.title + NSLocalizedString("to", comment: "") + object.name
                                 let range = NSMakeRange(category.title.count + 1, 4)
                                 cell.categoryLabel.attributedText = attributedString(from: targetString, nonBoldRange: range)
                             } else {
-                                let targetString = "\(category.title) from \(object.name)"
+                                let targetString = category.title + NSLocalizedString("from", comment: "") + object.name
                                 let range = NSMakeRange(category.title.count + 1, 6)
                                 cell.categoryLabel.attributedText = attributedString(from: targetString, nonBoldRange: range)
                             }
@@ -335,11 +335,11 @@ class HistoryVC: UITableViewController, HistoryDelegate {
             for object in budgetsRealm {
                 if object.id == transaction.fromBudget {
                     if transaction.transactionAmount > 0 {
-                        let targetString = "to \(object.name)"
+                        let targetString = NSLocalizedString("to", comment: "") + object.name
                         let range = NSMakeRange(0, 3)
                         cell.categoryLabel.attributedText = attributedString(from: targetString, nonBoldRange: range)
                     } else {
-                        let targetString = "from \(object.name)"
+                        let targetString = NSLocalizedString("from", comment: "") + object.name
                         let range = NSMakeRange(0, 5)
                         cell.categoryLabel.attributedText = attributedString(from: targetString, nonBoldRange: range)
                     }
@@ -349,17 +349,19 @@ class HistoryVC: UITableViewController, HistoryDelegate {
             for object in projectsRealm {
                 if object.id == transaction.fromBudget {
                     if transaction.transactionAmount > 0 {
-                        let targetString = "to \(object.name)"
+                        let targetString = NSLocalizedString("to", comment: "") + object.name
                         let range = NSMakeRange(0, 3)
                         cell.categoryLabel.attributedText = attributedString(from: targetString, nonBoldRange: range)
                     } else {
-                        let targetString = "from \(object.name)"
+                        let targetString = NSLocalizedString("from", comment: "") + object.name
                         let range = NSMakeRange(0, 5)
                         cell.categoryLabel.attributedText = attributedString(from: targetString, nonBoldRange: range)
                     }
                 }
             }
         }
+        
+        cell.categoryLabel.textColor = .label
         
         cell.budgetFromID = transaction.fromBudget
         cell.budgetToID = transaction.toBudget

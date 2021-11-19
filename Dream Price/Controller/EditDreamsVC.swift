@@ -17,10 +17,10 @@ public var selectedDreamToEdit = 0
 
 class EditDreamsVC: UITableViewController, UITextFieldDelegate {
     
-    static public var delegate: EditDreamDelegate?
+    public var delegate: EditDreamDelegate?
     
     var selectedRow = 0
-    static public var dreamID = ""
+    public var dreamID = ""
     
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var descriptionField: UITextField!
@@ -111,7 +111,7 @@ class EditDreamsVC: UITableViewController, UITextFieldDelegate {
     }
     
     @IBAction func cancel(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func EditDream(_ sender: Any) {
@@ -128,11 +128,11 @@ class EditDreamsVC: UITableViewController, UITextFieldDelegate {
                 sum = Float(sumField.text!)!
             }
             
-            let dream = Dream(dreamID: EditDreamsVC.dreamID, type: sw(), title: nameField.text!, description: descriptionField.text!, balance: 0, goal: sum, dateAdded: dreamsList[selectedRow].dateAdded)
+            let dream = Dream(dreamID: self.dreamID, type: sw(), title: nameField.text!, description: descriptionField.text!, balance: 0, goal: sum, dateAdded: dreamsList[selectedRow].dateAdded)
             
-            EditDreamsVC.delegate?.dreamEdited(dream: dream, row: selectedRow)
+            self.delegate?.dreamEdited(dream: dream, row: selectedRow)
             
-            dismiss(animated: true, completion: nil)
+            self.navigationController?.popViewController(animated: true)
         } else {
             let alertController = UIAlertController(title: NSLocalizedString("Something went wrong...", comment: ""), message: NSLocalizedString("Fill in all the required information", comment: ""), preferredStyle: .alert)
             
@@ -148,8 +148,8 @@ class EditDreamsVC: UITableViewController, UITextFieldDelegate {
         let deleteAction = UIAlertAction(title: NSLocalizedString("Delete", comment: ""), style: .destructive, handler: {
             (alert: UIAlertAction!) -> Void in
             
-            EditDreamsVC.delegate?.dreamDeleted(dreamID: EditDreamsVC.dreamID, row: self.selectedRow)
-            self.dismiss(animated: true, completion: nil)
+            self.delegate?.dreamDeleted(dreamID: self.dreamID, row: self.selectedRow)
+            self.navigationController?.popViewController(animated: true)
         })
         
         let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel)

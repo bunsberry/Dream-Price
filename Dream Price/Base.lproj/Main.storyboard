@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Zf8-sz-Nrz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Zf8-sz-Nrz">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -45,7 +45,7 @@
                                         <rect key="frame" x="0.0" y="17" width="79" height="46"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="2zd-IU-MTf">
-                                            <rect key="frame" x="0.0" y="0.0" width="79" height="46"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="79" height="46.333333333333343"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lMc-fj-Ab3">
@@ -401,7 +401,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="44" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Eeh-OU-zSH">
-                                <rect key="frame" x="0.0" y="56" width="414" height="752"/>
+                                <rect key="frame" x="0.0" y="56" width="414" height="786"/>
                                 <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="newCategoryCell" rowHeight="43.666667938232422" id="tS5-Bw-KV3" customClass="NewCategoryCell" customModule="Dream_Price" customModuleProvider="target">
@@ -542,6 +542,7 @@
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="E8w-fS-Lfj"/>
                         <segue destination="Shk-A0-CLq" kind="relationship" relationship="viewControllers" id="O9G-jL-Xr9"/>
+                        <segue destination="dGr-Mv-Yx0" kind="relationship" relationship="viewControllers" id="oak-6Q-3gc"/>
                         <segue destination="eLO-8P-vTN" kind="relationship" relationship="viewControllers" id="Cxk-2p-3xK"/>
                         <segue destination="IKk-5r-fW3" kind="relationship" relationship="viewControllers" id="JAQ-YI-gHQ"/>
                     </connections>
@@ -569,6 +570,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mHy-On-t55" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="733" y="260"/>
+        </scene>
+        <!--Stats-->
+        <scene sceneID="ukm-Nb-Q2d">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Stats" id="dGr-Mv-Yx0" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="1Ym-ne-0kT"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="U05-UA-Srp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="737" y="337"/>
         </scene>
         <!--Onboarding-->
         <scene sceneID="BKO-l0-fXO">
@@ -611,7 +622,7 @@
     <resources>
         <image name="checkmark.circle.fill" catalog="system" width="128" height="121"/>
         <image name="creditcard" catalog="system" width="128" height="88"/>
-        <image name="delete.left.fill" catalog="system" width="32" height="32"/>
+        <image name="delete.left.fill" catalog="system" width="128" height="104"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

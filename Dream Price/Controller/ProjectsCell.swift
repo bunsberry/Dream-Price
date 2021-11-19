@@ -135,7 +135,7 @@ extension ProjectsCell: UICollectionViewDelegate, UICollectionViewDataSource, UI
                 cell.budgetDifferenceView.layer.cornerRadius = 0
             } else {
                 cell.budgetDifferenceView.layer.cornerRadius = 6
-                cell.budgetDifferenceView.layer.backgroundColor = UIColor.systemBackground.cgColor
+                cell.budgetDifferenceView.backgroundColor = .white
                 let budgetDiff = projectsShown[indexPath.row].balance - projectsShown[indexPath.row].budget
                 
                 let currencyFormatter = NumberFormatter()

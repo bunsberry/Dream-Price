@@ -23,9 +23,9 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var budgetItemNameLabel: UILabel!
     
-    public static var currentTransaction = "-"
+    public var currentTransaction = "-"
     
-    public static var delegate: TransportDelegate?
+    public var delegate: TransportDelegate?
     
     var balance: Float = 0
     var nameLabelText: String!
@@ -76,7 +76,7 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
         self.budgetItemView.layer.shadowRadius = CGFloat(12)
         self.budgetItemView.layer.shadowOpacity = 0.25
         
-        BudgetItemDataVC.delegate?.transportCurrentState(symbol: "-", id: budgetID)
+        self.delegate?.transportCurrentState(symbol: "-", id: budgetID)
         
     }
     
@@ -169,14 +169,14 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
             
             if codeAmount == "0" {
                 codeAmount = action
-                BudgetItemDataVC.delegate?.transportButtons(enabled: 1)
+                self.delegate?.transportButtons(enabled: 1)
             } else {
                 codeAmount += action
             }
         case "-":
             if codeAmount.count == 1 {
                 codeAmount =  "0"
-                BudgetItemDataVC.delegate?.transportButtons(enabled: 0)
+                self.delegate?.transportButtons(enabled: 0)
             } else {
                 codeAmount.removeLast()
             }
@@ -187,13 +187,13 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
                 if changeTransactionButton.title(for: .normal) == "-" {
                     balance -= Float(transactionLabel.text!)!
                     updateBalance(balanceFloat: balance)
-                    BudgetItemDataVC.delegate?.transportTransactionData(number: -Float(transactionLabel.text!)!, budgetID: self.budgetID)
+                    self.delegate?.transportTransactionData(number: -Float(transactionLabel.text!)!, budgetID: self.budgetID)
                 } else {
                     balance += Float(transactionLabel.text!)!
                     updateBalance(balanceFloat: balance)
-                    BudgetItemDataVC.delegate?.transportTransactionData(number: Float(transactionLabel.text!)!, budgetID: self.budgetID)
+                    self.delegate?.transportTransactionData(number: Float(transactionLabel.text!)!, budgetID: self.budgetID)
                 }
-                BudgetItemDataVC.delegate?.transportButtons(enabled: 0)
+                self.delegate?.transportButtons(enabled: 0)
                 
                 UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
                     
@@ -258,13 +258,13 @@ class BudgetItemDataVC: UIViewController, KeyboardDelegate {
     @IBAction func changeTransaction(_ sender: Any) {
         
         if changeTransactionButton.title(for: .normal) == "-" {
-            BudgetItemDataVC.currentTransaction = "+"
+            self.currentTransaction = "+"
         } else {
-            BudgetItemDataVC.currentTransaction = "-"
+            self.currentTransaction = "-"
         }
                 
-        changeTransactionButton.setTitle(BudgetItemDataVC.currentTransaction, for: .normal)
-        BudgetItemDataVC.delegate?.transportCurrentState(symbol: BudgetItemDataVC.currentTransaction, id: budgetID)
+        changeTransactionButton.setTitle(self.currentTransaction, for: .normal)
+        self.delegate?.transportCurrentState(symbol: self.currentTransaction, id: budgetID)
     }
     
 }

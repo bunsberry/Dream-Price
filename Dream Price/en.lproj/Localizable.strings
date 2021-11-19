@@ -13,7 +13,7 @@
 "Coffee" = "☕️ Coffee";
 "Groceries" = "🥑 Groceries";
 "App" = "📱 App";
-"Dream" = "🌙 Dream";
+"Dream" = "⭐️ Dream";
 
 "Personal Account" = "Wallet";
 "Balance: " = "Balance: ";
@@ -35,6 +35,9 @@
 "Month" = "Month";
 
 "Are you sure?" = "Are you sure?";
+
+"from" = " from ";
+"to" = " to ";
 
 "Category" = "Category";
 "Description" = "Description";

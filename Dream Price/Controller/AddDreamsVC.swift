@@ -13,7 +13,7 @@ protocol AddDreamDelegate {
 
 class AddDreamsVC: UITableViewController, UITextFieldDelegate {
     
-    static public var delegate: AddDreamDelegate?
+    public var delegate: AddDreamDelegate?
     
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var descriptionField: UITextField!
@@ -94,7 +94,7 @@ class AddDreamsVC: UITableViewController, UITextFieldDelegate {
     }
     
     @IBAction func cancel(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
     
@@ -112,8 +112,8 @@ class AddDreamsVC: UITableViewController, UITextFieldDelegate {
             }
             
             let newDream = Dream(dreamID: UUID().uuidString, type: sw(), title: nameField.text!, description: descriptionField.text!, balance: 0, goal: sum, dateAdded: Date())
-            AddDreamsVC.delegate?.dreamAdded(newDream: newDream)
-            dismiss(animated: true, completion: nil)
+            self.delegate?.dreamAdded(newDream: newDream)
+            self.navigationController?.popViewController(animated: true)
         } else {
             let alertController = UIAlertController(title: NSLocalizedString("Something went wrong...", comment: ""), message: NSLocalizedString("Fill in all the required information", comment: ""), preferredStyle: .alert)
                 alertController.addAction(UIAlertAction(title: NSLocalizedString("Dismiss", comment: ""), style: .default))

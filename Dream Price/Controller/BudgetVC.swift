@@ -23,10 +23,10 @@ class BudgetVC: UIViewController, BudgetDelegate, CategoriesBeenManaged {
     public var selectedCategoryPath: IndexPath?
     public var selectedCategoryCell: CategoryCell?
 
-    public static var currentTransaction: String = "-"
+    public var currentTransaction: String = "-"
     var currentBudgetID: String = ""
     
-    public static var delegateUp: TransportUpDelegate?
+    public var delegateUp: TransportUpDelegate?
     
     @IBOutlet weak var budgetsViewContainer: UIView!
     @IBOutlet weak var categoriesCollectionView: UICollectionView!
@@ -44,9 +44,9 @@ class BudgetVC: UIViewController, BudgetDelegate, CategoriesBeenManaged {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        BudgetVC.delegateUp?.refreshPageView()
-        BudgetVC.delegateUp?.reloadItems()
-        updateCategories(transaction: BudgetVC.currentTransaction, id: currentBudgetID)
+        self.delegateUp?.refreshPageView()
+        self.delegateUp?.reloadItems()
+        updateCategories(transaction: self.currentTransaction, id: currentBudgetID)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -128,6 +128,7 @@ class BudgetVC: UIViewController, BudgetDelegate, CategoriesBeenManaged {
                 }
             }
             
+            self.delegateUp = vc
             vc.budgetDelegate = self
         }
     }
@@ -137,7 +138,7 @@ class BudgetVC: UIViewController, BudgetDelegate, CategoriesBeenManaged {
     func updateCategories(transaction: String, id: String) {
         
         currentBudgetID = id
-        BudgetVC.currentTransaction = transaction
+        self.currentTransaction = transaction
         
         categoriesShown.removeAll()
         categories.removeAll()
@@ -267,7 +268,7 @@ extension BudgetVC {
                     }
                 }
                 
-                BudgetVC.delegateUp?.refreshPageView()
+                self.delegateUp?.refreshPageView()
                 
             }
             
@@ -283,7 +284,7 @@ extension BudgetVC {
     }
     
     func sendAction(action: String) {
-        BudgetVC.delegateUp?.transportUp(string: action)
+        self.delegateUp?.transportUp(string: action)
     }
     
     func disableButtons() {
@@ -305,7 +306,7 @@ extension BudgetVC {
     }
     
     func categoriesBeenManaged() {
-        updateCategories(transaction: BudgetVC.currentTransaction, id: currentBudgetID)
+        updateCategories(transaction: self.currentTransaction, id: currentBudgetID)
     }
     
     func forceReloadBudgets() {

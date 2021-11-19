@@ -240,6 +240,14 @@ extension ManageCategoriesVC: UITableViewDataSource, UITableViewDelegate {
                 if category.categoryID == sections[indexPath.section][indexPath.row].categoryID {
                     categories.remove(at: index)
                     
+                    for transaction in realm.objects(RealmTransaction.self) {
+                        if transaction.categoryID == category.categoryID {
+                            try! realm.write {
+                                transaction.categoryID = nil
+                            }
+                        }
+                    }
+                    
                     for object in realm.objects(RealmCategory.self) {
                         if object.id == category.categoryID {
                             try! realm.write {

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17147" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Fjo-mS-lp6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Fjo-mS-lp6">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17120"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,25 +17,26 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="rur-Wu-tKr">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <color key="sectionIndexColor" systemColor="labelColor"/>
                         <color key="sectionIndexBackgroundColor" systemColor="systemBackgroundColor"/>
                         <color key="sectionIndexTrackingBackgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="transactionCell" id="gqq-9I-ifs" customClass="TransactionCell" customModule="Dream_Price" customModuleProvider="target">
-                                <rect key="frame" x="20" y="55.5" width="374" height="64.5"/>
+                                <rect key="frame" x="20" y="49.5" width="374" height="61"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gqq-9I-ifs" id="sXq-Ho-lVq">
-                                    <rect key="frame" x="0.0" y="0.0" width="343" height="64.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="344.5" height="61"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-100$" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R1I-I0-SXr">
-                                            <rect key="frame" x="10" y="20" width="53.5" height="24.5"/>
+                                            <rect key="frame" x="10" y="20" width="46" height="21"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                             <color key="textColor" systemColor="systemRedColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zKm-XZ-OK7">
-                                            <rect key="frame" x="71.5" y="22.5" width="70" height="20"/>
+                                            <rect key="frame" x="64" y="20" width="78" height="21.5"/>
                                             <attributedString key="attributedText">
                                                 <fragment content="Groceries">
                                                     <attributes>
@@ -86,16 +88,18 @@
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dzc-dz-UjZ">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="barTintColor" systemColor="systemGroupedBackgroundColor"/>
                                 <items>
                                     <navigationItem title="Transaction" id="uwT-h7-vuH">
                                         <barButtonItem key="leftBarButtonItem" style="done" systemItem="cancel" id="5Im-eN-ykT">
-                                            <color key="tintColor" red="0.45098039215686275" green="0.792156862745098" blue="0.44313725490196076" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <color key="tintColor" name="AccentColor"/>
                                             <connections>
                                                 <action selector="cancel:" destination="hTp-3l-Pca" id="mCW-9K-aiD"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="save" id="pKI-eN-3Po">
-                                            <color key="tintColor" red="0.45098039220000002" green="0.79215686269999996" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <color key="tintColor" name="AccentColor"/>
                                             <connections>
                                                 <action selector="save:" destination="hTp-3l-Pca" id="G5s-N9-Xvh"/>
                                             </connections>
@@ -108,14 +112,14 @@
                                 <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="transactionCategoryCell" id="KLB-GB-c0n" customClass="ETCategoryCell" customModule="Dream_Price" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.5" width="414" height="43"/>
+                                        <rect key="frame" x="0.0" y="49.5" width="414" height="39.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KLB-GB-c0n" id="F4f-hx-fC2">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="39.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqX-1W-RRJ">
-                                                    <rect key="frame" x="20" y="11" width="374" height="21"/>
+                                                    <rect key="frame" x="20" y="11" width="374" height="17.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -133,14 +137,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="transactionBudgetCell" id="4u1-BZ-XSY" customClass="ETBudgetCell" customModule="Dream_Price" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="98.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="89" width="414" height="39.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4u1-BZ-XSY" id="Z8v-2V-6vC">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="39.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Budget Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jSn-Qb-bNV">
-                                                    <rect key="frame" x="20" y="11" width="374" height="21.5"/>
+                                                    <rect key="frame" x="20" y="11" width="374" height="17.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -158,7 +162,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="transactionCostCell" id="wfQ-83-tJT" customClass="ETNumberCell" customModule="Dream_Price" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="142" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="128.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wfQ-83-tJT" id="FFQ-ov-abm">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -190,14 +194,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="transactionDateCell" id="dEw-Qe-puS" customClass="ETDateCell" customModule="Dream_Price" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="185.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="172" width="414" height="39.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dEw-Qe-puS" id="82M-jJ-VUc">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="39.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12 Jun 2020" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pbs-16-TjJ">
-                                                    <rect key="frame" x="20" y="11" width="374" height="21.5"/>
+                                                    <rect key="frame" x="20" y="11" width="374" height="17.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -215,7 +219,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="transactionDatePickerCell" id="A65-Md-GMt" customClass="ETDatePickerCell" customModule="Dream_Price" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="229" width="414" height="216.5"/>
+                                        <rect key="frame" x="0.0" y="211.5" width="414" height="216.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="A65-Md-GMt" id="NZx-H7-55m">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="216.5"/>
@@ -243,7 +247,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="transactionDeleteCell" id="ykb-jF-co2" customClass="ETDeleteCell" customModule="Dream_Price" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="445.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="428" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ykb-jF-co2" id="Psi-xC-w9A">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -275,7 +279,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="transactionPickerCell" id="Y7g-AN-eqa" customClass="ETPickerCell" customModule="Dream_Price" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="489.5" width="414" height="150.5"/>
+                                        <rect key="frame" x="0.0" y="472" width="414" height="150.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Y7g-AN-eqa" id="jnU-rP-1Tt">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="150.5"/>
@@ -300,7 +304,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="transactionBudgetPickerCell" id="QJF-nv-6Wb" customClass="ETBudgetPickerCell" customModule="Dream_Price" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="640" width="414" height="150.5"/>
+                                        <rect key="frame" x="0.0" y="622.5" width="414" height="150.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="QJF-nv-6Wb" id="h0Q-n0-wt3">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="150.5"/>
@@ -329,7 +333,7 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Z43-UB-rto"/>
-                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemGroupedBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="HKR-3i-HlK" firstAttribute="leading" secondItem="Z43-UB-rto" secondAttribute="leading" id="5z4-Vn-CEA"/>
                             <constraint firstItem="dzc-dz-UjZ" firstAttribute="trailing" secondItem="Z43-UB-rto" secondAttribute="trailing" id="6fn-cZ-XEU"/>
@@ -371,11 +375,11 @@
     </scenes>
     <resources>
         <image name="list.bullet" catalog="system" width="128" height="88"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="secondarySystemBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

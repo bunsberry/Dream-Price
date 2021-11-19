@@ -66,6 +66,18 @@ class DreamsVC: UIViewController, UICollectionViewDelegate, UICollectionViewData
             self.dreamCollection.reloadData()
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toAdd" {
+            let vc = segue.destination as! AddDreamsVC
+            vc.delegate = self
+        } else {
+            let vc = segue.destination as! EditDreamsVC
+            vc.delegate = self
+            vc.dreamID = dreamsList[selectedDreamToEdit].dreamID
+        }
+    }
+    
     // MARK: Navigation Bar Setup
     
     private var addButton = UIButton()
@@ -155,8 +167,7 @@ class DreamsVC: UIViewController, UICollectionViewDelegate, UICollectionViewData
     // MARK: Add Dream Button Action
     
     @objc func addDream(sender: UIButton!) {
-        performSegue(withIdentifier: "toAddDream", sender: nil)
-        AddDreamsVC.delegate = self
+        performSegue(withIdentifier: "toAdd", sender: nil)
     }
     
     // MARK: Collection View Setup
@@ -166,6 +177,9 @@ class DreamsVC: UIViewController, UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if dreamsList[indexPath.row].description.isEmpty {
+            return CGSize(width: self.view.frame.width - 40, height: 100)
+        }
         return CGSize(width: self.view.frame.width - 40, height: 115)
     }
     
@@ -201,8 +215,18 @@ class DreamsVC: UIViewController, UICollectionViewDelegate, UICollectionViewData
             dateFormatter.locale = Locale.init(identifier: "ru_RU")
         }
         
+        let gradient: CAGradientLayer = CAGradientLayer()
+        
+        gradient.colors = [UIColor(red: 0.506, green: 0.616, blue: 0.898, alpha: 1).cgColor, UIColor(red: 0.443, green: 0.541, blue: 0.792, alpha: 1).cgColor]
+        gradient.cornerRadius = 10
+        gradient.locations = [0.0 , 1.0]
+        gradient.startPoint = CGPoint(x: 0.6, y: 0.0)
+        gradient.endPoint = CGPoint(x: 0.4, y: 1.0)
+        
         if dreamsList[indexPath.row].type == .focusedDream {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "focusedCell", for: indexPath) as! FocusedDreamCell
+            
+            cell.layer.cornerRadius = 10
             
             cell.backgroundColor = .clear
             cell.titleLabel.text = dreamsList[indexPath.row].title
@@ -214,15 +238,6 @@ class DreamsVC: UIViewController, UICollectionViewDelegate, UICollectionViewData
             
             cell.progressView.progress = dreamsList[indexPath.row].balance / dreamsList[indexPath.row].goal
             
-            cell.contentView.layer.cornerRadius = 10
-            
-            let gradient: CAGradientLayer = CAGradientLayer()
-            
-            gradient.colors = [UIColor(red: 0.506, green: 0.616, blue: 0.898, alpha: 1).cgColor, UIColor(red: 0.443, green: 0.541, blue: 0.792, alpha: 1).cgColor]
-            gradient.cornerRadius = 10
-            gradient.locations = [0.0 , 1.0]
-            gradient.startPoint = CGPoint(x: 0.6, y: 0.0)
-            gradient.endPoint = CGPoint(x: 0.4, y: 1.0)
             gradient.frame = CGRect(x: 0.0,
                                     y: 0.0,
                                     width: cell.frame.size.width,
@@ -235,6 +250,8 @@ class DreamsVC: UIViewController, UICollectionViewDelegate, UICollectionViewData
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dreamCell", for: indexPath) as! DreamCell
             
+            cell.layer.cornerRadius = 10
+            
             cell.backgroundColor = .clear
             cell.titleLabel.text = dreamsList[indexPath.row].title
             cell.descriptionLabel.text = dreamsList[indexPath.row].description
@@ -242,15 +259,6 @@ class DreamsVC: UIViewController, UICollectionViewDelegate, UICollectionViewData
             cell.dateLabel.text = dateFormatter.string(from: dreamsList[indexPath.row].dateAdded)
             cell.priceLabel.text = "\(currencyFormatter.string(from: NSNumber(value: dreamsList[indexPath.row].goal)) ?? "0")"
             
-            cell.contentView.layer.cornerRadius = 10
-            
-            let gradient: CAGradientLayer = CAGradientLayer()
-            
-            gradient.colors = [UIColor(red: 0.506, green: 0.616, blue: 0.898, alpha: 1).cgColor, UIColor(red: 0.443, green: 0.541, blue: 0.792, alpha: 1).cgColor]
-            gradient.cornerRadius = 10
-            gradient.locations = [0.0 , 1.0]
-            gradient.startPoint = CGPoint(x: 0.6, y: 0.0)
-            gradient.endPoint = CGPoint(x: 0.4, y: 1.0)
             gradient.frame = CGRect(x: 0.0,
                                     y: 0.0,
                                     width: cell.frame.size.width,
@@ -264,9 +272,7 @@ class DreamsVC: UIViewController, UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedDreamToEdit = indexPath.row
-        performSegue(withIdentifier: "toEditDream", sender: nil)
-        EditDreamsVC.delegate = self
-        EditDreamsVC.dreamID = dreamsList[indexPath.row].dreamID
+        performSegue(withIdentifier: "toEdit", sender: nil)
     }
 }
 
